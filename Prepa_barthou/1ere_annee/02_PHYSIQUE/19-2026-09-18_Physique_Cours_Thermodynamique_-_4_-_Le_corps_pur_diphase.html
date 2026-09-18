@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physique — Thermodynamique 4 : Le corps pur diphasé</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.85rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+table{border-collapse:collapse; width:100%; margin:.8rem 0; font-size:.92rem;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left;}
+th{background:var(--gray-bg);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.45rem;} h2{font-size:1.1rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Diagramme d'état d'un corps pur</a></li>
+  <li class="top"><a href="#s2">2. Courbe de vaporisation, pression de vapeur saturante</a></li>
+  <li class="top"><a href="#s3">3. Réseau d'isothermes d'Andrews</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Thermodynamique 4 — Le corps pur diphasé</h1>
+<div class="meta">Physique — Résumé de cours · PCSI · Prépa Barthou (Pau) · mis au propre le 18/09/2026</div>
+</header>
+
+<section id="s1">
+<h2>1. Diagramme d'état d'un corps pur</h2>
+<div class="block def">
+<span class="label">Définition 1</span>
+Dans le diagramme $(P,T)$ d'un corps pur, trois courbes séparent les trois états :
+<ul>
+<li>$S\leftrightarrow L$ : <strong>courbe de fusion</strong> ;</li>
+<li>$S\leftrightarrow G$ : <strong>courbe de sublimation</strong> ;</li>
+<li>$L\leftrightarrow G$ : <strong>courbe de vaporisation</strong>.</li>
+</ul>
+Le <strong>point triple</strong> est le point unique où coexistent les trois phases. Au-delà du <strong>point critique</strong>, on ne peut plus différencier liquide et gaz.
+</div>
+<figure>
+<svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<line x1="50" y1="210" x2="300" y2="210" stroke="#333" stroke-width="1.2"/><text x="295" y="225" font-size="11">T</text>
+<line x1="50" y1="210" x2="50" y2="20" stroke="#333" stroke-width="1.2"/><text x="30" y="20" font-size="11">P</text>
+<path d="M80 210 L110 60" stroke="#3b6fd8" stroke-width="1.8" fill="none"/><text x="60" y="90" font-size="10" fill="#3b6fd8">S↔L (fusion)</text>
+<path d="M80 210 Q 150 190 220 100" stroke="#c0392b" stroke-width="1.8" fill="none"/><text x="180" y="170" font-size="10" fill="#c0392b">L↔G (vaporisation)</text>
+<path d="M50 210 Q 65 205 80 210" stroke="#2fa365" stroke-width="1.8" fill="none"/>
+<path d="M50 208 L 80 210" stroke="#2fa365" stroke-width="1.8" fill="none"/>
+<text x="45" y="200" font-size="9" fill="#2fa365">S↔G (sublim.)</text>
+<circle cx="80" cy="210" r="3.5" fill="#333"/><text x="65" y="222" font-size="10">t (triple)</text>
+<circle cx="220" cy="100" r="3.5" fill="#c98a12"/><text x="225" y="95" font-size="10">c (critique)</text>
+<text x="130" y="100" font-size="12">S</text><text x="130" y="180" font-size="12">L</text><text x="230" y="180" font-size="12">G</text>
+</svg>
+<figcaption>Fig. 1 — Diagramme d'état $(P,T)$ : point triple $t$ et point critique $c$. Pour l'eau, la courbe de fusion a une pente négative (cas particulier).</figcaption>
+</figure>
+<div class="block remark">
+<span class="label">Remarque — cas de l'eau</span>
+$T_{triple}=273{,}16\,\text{K}$ ; $P_{triple}=4{,}58\,\text{mmHg}=610\,\text{Pa}$. $T_{critique}=647{,}3\,\text{K}$ ; $P_{critique}=218\,\text{atm}$.
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Courbe de vaporisation, pression de vapeur saturante</h2>
+<div class="block def">
+<span class="label">Définition 2</span>
+La courbe de vaporisation est aussi appelée « courbe de pression de vapeur saturante ». La <strong>pression de vapeur saturante</strong> $P_{sat}(T)$ est la pression à laquelle un corps pur est diphasé (coexistence liquide-gaz) ; elle n'est fonction que de la température.
+</div>
+<table>
+<tr><th>$T$</th><th>$P_{sat}$</th></tr>
+<tr><td>273,16 K</td><td>0,46 cmHg</td></tr>
+<tr><td>10 °C</td><td>0,92 cmHg</td></tr>
+<tr><td>20 °C</td><td>1,75 cmHg</td></tr>
+<tr><td>100 °C</td><td>1 atm</td></tr>
+<tr><td>647,3 K</td><td>218 atm</td></tr>
+</table>
+</section>
+
+<section id="s3">
+<h2>3. Réseau d'isothermes d'Andrews</h2>
+<div class="block def">
+<span class="label">Définition 3</span>
+Dans le diagramme $(P,v)$ ($v$ = volume massique, m$^3$·kg$^{-1}$), la <strong>courbe de saturation</strong> délimite le domaine liquide+gaz. Sa partie gauche est la <strong>courbe d'ébullition</strong>, sa partie droite la <strong>courbe de rosée</strong>.
+</div>
+<figure>
+<svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<line x1="40" y1="210" x2="330" y2="210" stroke="#333" stroke-width="1.2"/><text x="325" y="225" font-size="10">v</text>
+<line x1="40" y1="210" x2="40" y2="20" stroke="#333" stroke-width="1.2"/><text x="20" y="20" font-size="10">P</text>
+<path d="M90 40 C 60 100, 60 160, 90 195 L 170 100 C 200 70, 250 70, 280 100 L 280 195 C 300 150, 300 90, 280 40" fill="#f2ecfd" fill-opacity="0.5" stroke="none"/>
+<path d="M90 195 C 110 130, 150 105, 170 100" stroke="#3b6fd8" stroke-width="1.8" fill="none"/>
+<path d="M170 100 C 220 90, 260 130, 280 195" stroke="#c0392b" stroke-width="1.8" fill="none"/>
+<circle cx="170" cy="100" r="3.5" fill="#c98a12"/><text x="175" y="95" font-size="10">Critique</text>
+<line x1="40" y1="150" x2="300" y2="150" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/>
+<circle cx="105" cy="150" r="3" fill="#333"/><text x="95" y="165" font-size="9">A</text>
+<circle cx="150" cy="150" r="3" fill="#333"/><text x="150" y="165" font-size="9">D</text>
+<circle cx="250" cy="150" r="3" fill="#333"/><text x="250" y="165" font-size="9">B</text>
+<text x="65" y="40" font-size="11">Liquide</text><text x="280" y="40" font-size="11">Gaz</text><text x="150" y="130" font-size="11">Liquide + Gaz</text>
+<text x="60" y="205" font-size="9">v_liq</text><text x="260" y="205" font-size="9">v_vap</text>
+</svg>
+<figcaption>Fig. 2 — Réseau d'isothermes d'Andrews : palier de changement d'état (A→B) à $T$ fixée ; $D$ est un état diphasé intermédiaire.</figcaption>
+</figure>
+<div class="block theorem">
+<span class="label">Théorème 1 — Point critique</span>
+$$\left(\frac{\partial P}{\partial v}\right)_{T_c} = \left(\frac{\partial^2P}{\partial v^2}\right)_{T_c} = 0$$
+</div>
+<div class="block theorem">
+<span class="label">Théorème 2 — Loi des moments (théorème des moments, ou « règle du bras de levier »)</span>
+$$x_{vap} = \frac{v-v_{liq}}{v_{vap}-v_{liq}} = \frac{AD}{AB} \qquad \left(x_{vap}=\frac{m_{vap}}{m_{totale}}\right)$$
+</div>
+<div class="block theorem">
+<span class="label">Théorème 3 — Fonctions d'état massiques d'un système diphasé</span>
+Au point $D$ (corps pur diphasé), avec $x_{liq}+x_{vap}=1$ :
+$$u = x_{vap}u_{vap} + (1-x_{vap})u_{liq} \qquad s = x_{vap}s_{vap} + (1-x_{vap})s_{liq} \qquad h = x_{vap}h_{vap} + (1-x_{vap})h_{liq}$$
+</div>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Qu'est-ce que le point triple d'un corps pur (Définition 1) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+C'est le point unique du diagramme $(P,T)$ où les trois phases (solide, liquide, gazeuse) coexistent simultanément.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Que représente la pression de vapeur saturante $P_{sat}(T)$ (Définition 2) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+C'est la pression à laquelle un corps pur est diphasé (liquide-gaz en coexistence) à une température $T$ donnée. Elle est une fonction uniquement de $T$ : c'est exactement la courbe de vaporisation du diagramme $(P,T)$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. On a $1\,\text{kg}$ d'eau à $100\,°\text{C}$ sous 1 atm, avec $v_{liq}=1{,}04\times10^{-3}\,\text{m}^3/\text{kg}$ et $v_{vap}=1{,}67\,\text{m}^3/\text{kg}$. Si le volume massique mesuré est $v=0{,}5\,\text{m}^3/\text{kg}$, calculer $x_{vap}$ (Théorème 2).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$x_{vap}=\dfrac{v-v_{liq}}{v_{vap}-v_{liq}}=\dfrac{0{,}5-0{,}00104}{1{,}67-0{,}00104}\approx\dfrac{0{,}499}{1{,}669}\approx0{,}299$ soit environ $30\%$ de vapeur (en masse).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Pour le même système (question 3), avec $u_{liq}=419\,\text{kJ/kg}$ et $u_{vap}=2507\,\text{kJ/kg}$, calculer l'énergie interne massique $u$ (Théorème 3).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$u=x_{vap}u_{vap}+(1-x_{vap})u_{liq}=0{,}299\times2507+0{,}701\times419\approx749{,}6+293{,}7\approx1043\,\text{kJ/kg}$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi ne peut-on plus distinguer liquide et gaz au-delà du point critique (Définition 1) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Sur le diagramme d'Andrews (Fig. 2), le palier de changement d'état (à volume constant en pression) se rétrécit à mesure que $T$ augmente, jusqu'à disparaître exactement au point critique ($v_{liq}=v_{vap}$) : au-delà, il n'existe plus de discontinuité de propriétés entre les deux phases, qui se confondent en un unique « fluide supercritique ».</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passerait-il si l'on refroidissait de la vapeur d'eau à pression constante $P<P_{triple}$ (donc en dessous de la pression du point triple) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+À une pression inférieure à celle du point triple, la phase liquide n'existe pas (Fig. 1) : en refroidissant la vapeur à cette pression, on passerait directement de l'état gazeux à l'état solide en traversant la courbe de sublimation $S\leftrightarrow G$, sans jamais passer par l'état liquide — c'est le principe de la lyophilisation ou de la formation de neige carbonique (CO$_2$) à pression atmosphérique.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : la pente négative de la courbe de fusion de l'eau (Remarque du §1) est-elle une propriété générale de tous les corps purs ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — c'est au contraire une exception (le cas général étant une pente positive) : elle traduit le fait que la glace est moins dense que l'eau liquide (le volume massique diminue à la fusion pour l'eau, alors qu'il augmente pour la plupart des corps). Confondre l'eau avec le cas général mènerait à des prédictions fausses (par exemple sur l'effet de la pression sur la température de fusion) pour la plupart des autres substances.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : au point $D$ diphasé (Théorème 3), peut-on utiliser directement une seule valeur de température ou de pression pour caractériser tout le système ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Oui, mais attention : $T$ et $P$ sont uniques et communes aux deux phases en équilibre (ce sont des variables intensives, égales dans tout le système à l'équilibre), contrairement aux fonctions d'état massiques extensives ($u$, $s$, $h$, Théorème 3) qui, elles, diffèrent entre les deux phases et nécessitent la pondération par $x_{vap}$ pour caractériser le mélange global — confondre les deux catégories de grandeurs est une erreur fréquente.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : reliez le Théorème 1 (condition au point critique) et le réseau d'isothermes (Fig. 2) pour expliquer pourquoi le palier de changement d'état devient un simple point d'inflexion à $T=T_c$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Pour $T<T_c$, l'isotherme présente un palier horizontal $A$-$B$ (à $P=P_{sat}(T)$ constante) séparé par une portion croissante puis décroissante de la courbe réelle du gaz (modélisée par Van der Waals) : ce palier correspond à la coexistence liquide-gaz. À mesure que $T\to T_c^-$, $v_{liq}\to v_{vap}$ et le palier se rétrécit. Exactement à $T=T_c$, le palier se réduit à un unique point où la tangente à l'isotherme est horizontale ($\partial P/\partial v=0$) et où cette tangente horizontale est elle-même un point d'inflexion ($\partial^2P/\partial v^2=0$, Théorème 1) : c'est la disparition du palier de changement d'état, cohérente avec la question 5.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : à partir de la loi des moments (Théorème 2) et des fonctions d'état massiques (Théorème 3), montrer que l'enthalpie massique de vaporisation $\ell_{vap}=h_{vap}-h_{liq}$ (chaleur latente) peut s'obtenir à partir de la mesure de $h$ pour deux valeurs différentes de $x_{vap}$ à la même température.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+D'après le Théorème 3, $h=x_{vap}h_{vap}+(1-x_{vap})h_{liq}=h_{liq}+x_{vap}(h_{vap}-h_{liq})=h_{liq}+x_{vap}\,\ell_{vap}$ : $h$ est une fonction <strong>affine</strong> de $x_{vap}$ à $T$ fixée. En mesurant $h$ pour deux valeurs de $x_{vap}$ (par exemple $x_1$ et $x_2$) à la même température, on obtient deux équations $h_1=h_{liq}+x_1\ell_{vap}$ et $h_2=h_{liq}+x_2\ell_{vap}$, dont la différence donne directement $\ell_{vap}=(h_2-h_1)/(x_2-x_1)$ — c'est le principe de la mesure calorimétrique de la chaleur latente de vaporisation.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Le corps pur diphasé » (résumé de cours, Prépa Barthou, Pau)</li>
+<li>Programme officiel de Physique-Chimie, CPGE 1<sup>re</sup> année (filière PCSI), bloc « Corps pur sous plusieurs phases » : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+<li>H-Prépa Physique 1<sup>re</sup> année (Hachette Éducation) — chapitre « Changements d'état du corps pur »</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>

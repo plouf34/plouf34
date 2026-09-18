@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physique — Thermodynamique 2 : Le premier principe</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.85rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+table{border-collapse:collapse; width:100%; margin:.8rem 0; font-size:.92rem;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left;}
+th{background:var(--gray-bg);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.45rem;} h2{font-size:1.1rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Vocabulaire</a></li>
+  <li class="top"><a href="#s2">2. Travail des forces pressantes</a></li>
+  <li class="top"><a href="#s3">3. Le premier principe</a></li>
+  <li class="top"><a href="#s4">4. Capacités thermiques</a></li>
+  <li class="top"><a href="#s5">5. Détentes remarquables</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Thermodynamique 2 — Le premier principe</h1>
+<div class="meta">Physique — Résumé de cours · PCSI · Prépa Barthou (Pau) · mis au propre le 18/09/2026</div>
+</header>
+
+<section id="s1">
+<h2>1. Vocabulaire</h2>
+<div class="block def">
+<span class="label">Définition 1</span>
+Un système $\Sigma$ est l'ensemble des corps contenus dans une surface fermée. Il est dit :
+<ul>
+<li><strong>isolé</strong> s'il n'échange ni énergie, ni matière avec l'extérieur ;</li>
+<li><strong>fermé</strong> s'il n'échange pas de matière avec l'extérieur (mais peut échanger de l'énergie).</li>
+</ul>
+</div>
+<div class="block def">
+<span class="label">Définition 2 — Grandeurs extensives et intensives</span>
+Un paramètre d'état $p$ est <strong>extensif</strong> s'il est proportionnel à la quantité de matière (ou au volume) du système ; il est <strong>intensif</strong> dans le cas contraire.
+</div>
+<div class="block def">
+<span class="label">Définition 3 — Transformation réversible</span>
+Un système $\Sigma$ subit une transformation <strong>réversible</strong> si, à chaque instant, il est en équilibre interne ($p_{intensif,\Sigma}=\text{cte}$ dans tout le système, pour tout paramètre intensif) et externe ($p_{intensif,\Sigma}=p_{intensif,ext}$). Pratiquement, la transformation doit être très lente : le système passe alors par une succession continue d'états d'équilibre internes et externes.
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Travail des forces pressantes</h2>
+<div class="block theorem">
+<span class="label">Théorème 1</span>
+$$\delta W = -p_{ext}\,dV \qquad (p_{ext}=\text{pression extérieure})$$
+Si la transformation élémentaire est réversible : $\delta W=-p\,dV$ ($p=p_{ext}=$ pression du système $\Sigma$). Dans les deux cas : $W_{i\to f}=\displaystyle\int_{i\to f}\delta W$.
+</div>
+<figure>
+<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<rect x="60" y="60" width="140" height="120" fill="#e9f1fd" stroke="#333" stroke-width="1.5"/>
+<rect x="60" y="30" width="140" height="30" fill="#ccc" stroke="#333" stroke-width="1.5"/>
+<line x1="130" y1="30" x2="130" y2="15" stroke="#333" stroke-width="6"/>
+<text x="105" y="120" font-size="13">Gaz (p, V)</text>
+<line x1="220" y1="90" x2="260" y2="90" stroke="#c0392b" stroke-width="1.6" marker-end="url(aP1)"/><text x="225" y="80" font-size="10" fill="#c0392b">p_ext</text>
+<line x1="130" y1="15" x2="130" y2="-15" stroke="#333" stroke-width="0"/>
+</svg>
+<figcaption>Fig. 1 — Piston mobile : le travail des forces pressantes correspond à l'action de la pression extérieure sur le piston lors d'un déplacement $dV$.</figcaption>
+</figure>
+</section>
+
+<section id="s3">
+<h2>3. Le premier principe</h2>
+<div class="block theorem">
+<span class="label">Théorème 2 — Premier principe</span>
+Le scalaire $E$, appelé « énergie », est une fonction d'état du système ; $E$ se conserve si le système est isolé : $\Delta E=0$ si le système est isolé. Si le système n'est pas isolé, la variation d'énergie est la somme de deux termes : le transfert thermique $Q$ à travers la surface délimitant le système, et le travail $W$ des forces extérieures non conservatives :
+$$\Delta E = W + Q \qquad \text{(si le système n'est pas isolé)}$$
+</div>
+<div class="block theorem">
+<span class="label">Théorème 3 — Bilan énergétique</span>
+$$\Delta E = \Delta(U+E_{mécanique}) = W+Q$$
+avec $U$ = énergie interne du système, $E_{mécanique}$ = énergie cinétique macroscopique + énergie potentielle dont dérivent les forces extérieures. Pour un système macroscopiquement au repos :
+$$\Delta U = W+Q$$
+</div>
+<div class="block remark">
+<span class="label">Remarque</span>
+$U$ est une fonction d'état, mais $W$ et $Q$, individuellement, n'en sont pas : $dU=\delta W+\delta Q$. $W$ et $Q$ sont comptés positifs s'ils sont effectivement <strong>reçus</strong> par le système (négatifs s'ils sont effectivement cédés).
+</div>
+</section>
+
+<section id="s4">
+<h2>4. Capacités thermiques</h2>
+<div class="block def">
+<span class="label">Définition 4 — Enthalpie et capacités thermiques</span>
+Soit $H=U+pV$ l'enthalpie du système. On définit :
+$$C_v = \left(\frac{\partial U}{\partial T}\right)_V \quad (\text{à volume constant}) \qquad C_p = \left(\frac{\partial H}{\partial T}\right)_p \quad (\text{à pression constante})$$
+$$C_v = m\,c_v = n\,c_{vm} \qquad C_p = m\,c_p = n\,c_{pm}$$
+avec $m$ = masse (kg), $n$ = nombre de moles, $c_v,c_p$ = chaleurs massiques (J·K$^{-1}$·kg$^{-1}$), $c_{vm},c_{pm}$ = chaleurs molaires (J·K$^{-1}$·mol$^{-1}$).
+</div>
+<div class="block theorem">
+<span class="label">Théorème 4 — Relation de Mayer (gaz parfait)</span>
+$$C_p - C_v = nR \iff c_{pm}-c_{vm}=R \iff c_p-c_v=\frac{R}{M}$$
+</div>
+<div class="block theorem">
+<span class="label">Théorème 5 — Expressions en fonction de $\gamma$</span>
+$$\gamma = \frac{C_p}{C_v}=\frac{c_p}{c_v}=\frac{c_{pm}}{c_{vm}}$$
+$$C_p = \frac{\gamma nR}{\gamma-1} \qquad C_v = \frac{nR}{\gamma-1} \qquad c_{pm}=\frac{\gamma R}{\gamma-1} \qquad c_{vm}=\frac{R}{\gamma-1}$$
+</div>
+<table>
+<tr><th>Gaz parfait</th><th>$c_{vm}$</th><th>$c_{pm}$</th><th>$\gamma$</th></tr>
+<tr><td>Monoatomique</td><td>$3R/2$</td><td>$5R/2$</td><td>$5/3\approx1{,}67$</td></tr>
+<tr><td>Diatomique</td><td>$5R/2$</td><td>$7R/2$</td><td>$7/5=1{,}4$</td></tr>
+</table>
+<div class="block remark">
+<span class="label">Remarque — phase condensée</span>
+Pour une phase condensée (solide, liquide), toute transformation peut être assimilée à une transformation isobare et isochore simultanément : $c\approx c_v\approx c_p$ (J·K$^{-1}$·kg$^{-1}$).
+</div>
+</section>
+
+<section id="s5">
+<h2>5. Détentes remarquables</h2>
+<div class="block theorem">
+<span class="label">Théorème 6 — Détente de Joule–Gay-Lussac</span>
+La détente de Joule–Gay-Lussac est une détente iso-$U$, irréversible. Elle est isotherme pour un gaz parfait (première loi de Joule) ; pour un gaz réel, elle s'accompagne généralement d'un refroidissement. Elle permet de mesurer le coefficient $a$ de Van der Waals.
+</div>
+<div class="block theorem">
+<span class="label">Théorème 7 — Détente de Joule-Thomson</span>
+La détente de Joule-Thomson est une détente isenthalpique, irréversible. Elle est isotherme pour un gaz parfait (deuxième loi de Joule) ; pour un gaz réel, elle s'accompagne généralement d'un refroidissement. Elle permet de mesurer le coefficient $b$ de Van der Waals.
+</div>
+<div class="block remark">
+<span class="label">Remarque — les deux lois de Joule</span>
+Un gaz suit la <strong>première loi de Joule</strong> quand son énergie interne ne dépend que de $T$. Un gaz suit la <strong>deuxième loi de Joule</strong> quand son enthalpie ne dépend que de $T$. Un gaz parfait vérifie les deux lois simultanément.
+</div>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Donner la définition d'une transformation réversible (Définition 3).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+C'est une transformation où le système reste, à chaque instant, en équilibre interne (chaque paramètre intensif uniforme dans tout le système) et en équilibre externe (chaque paramètre intensif du système égal à celui de l'extérieur) — pratiquement, une transformation infiniment lente.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Énoncer le premier principe pour un système isolé, puis pour un système non isolé (Théorème 2).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Pour un système isolé, $\Delta E=0$ (l'énergie se conserve). Pour un système non isolé, $\Delta E=W+Q$, où $W$ est le travail des forces extérieures non conservatives et $Q$ le transfert thermique reçu.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Un gaz parfait monoatomique ($n=1\,\text{mol}$) reçoit $Q=500\,\text{J}$ à volume constant. Calculer $\Delta T$ (Définition 4, Théorème 5).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+À volume constant, $W=0$ (pas de travail des forces pressantes, $\delta W=-p\,dV=0$ si $dV=0$, Théorème 1), donc $\Delta U=Q$ (Théorème 3). Avec $C_v=nc_{vm}=1\times\frac32R=\frac32\times8{,}314\approx12{,}47\,\text{J/K}$ : $\Delta T=Q/C_v=500/12{,}47\approx40{,}1\,\text{K}$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Un gaz parfait diatomique ($n=2\,\text{mol}$) subit une transformation isobare avec $\Delta T=50\,\text{K}$. Calculer $Q$ (Théorème 5, Définition 4).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+À pression constante, $Q=\Delta H=C_p\Delta T$ (par définition de $C_p$, Définition 4). $C_p=n c_{pm}=2\times\frac72R=7\times8{,}314\approx58{,}2\,\text{J/K}$. Donc $Q=58{,}2\times50\approx2910\,\text{J}$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi $W$ et $Q$ ne sont-ils pas des fonctions d'état, alors que $U$ l'est (Remarque du §3) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$W$ et $Q$ dépendent du <strong>chemin</strong> suivi entre l'état initial et l'état final (par exemple, une même variation d'énergie interne peut être obtenue par des combinaisons différentes de travail et de chaleur, selon que la transformation est réversible ou non, rapide ou lente) : ce ne sont que des <strong>formes de transfert d'énergie</strong>, pas des propriétés intrinsèques de l'état du système. $U$, en revanche, ne dépend que de l'état (i, f) du système, pas du chemin parcouru.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passerait-il si l'on comprimait rapidement (donc de façon irréversible) un gaz au lieu de le faire lentement, pour la même variation de volume $\Delta V$ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le travail reçu $W=-\int p_{ext}dV$ (Théorème 1) dépendrait alors de $p_{ext}$ (pression réellement exercée de l'extérieur), qui peut différer fortement de la pression interne $p$ du gaz lors d'une compression rapide (le gaz n'a pas le temps de s'équilibrer) : le travail réellement reçu serait donc différent de celui calculé avec $-\int p\,dV$ (valable seulement en réversible, Théorème 1) — c'est une source d'erreur fréquente de confondre les deux expressions.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : peut-on utiliser $\delta W=-p\,dV$ (avec $p$ = pression du système) pour une détente de Joule–Gay-Lussac (Théorème 6, détente dans le vide) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — cette formule n'est valable que pour une transformation <strong>réversible</strong> (Théorème 1). La détente de Joule–Gay-Lussac est brutale et irréversible (détente dans le vide, $p_{ext}=0$) : c'est $\delta W=-p_{ext}dV=0$ qui s'applique (et non $-p\,dV$ avec la pression interne, qui serait non nulle) — c'est justement pour cela que $W=0$ dans cette détente, ce qui, combiné à $Q=0$ (système isolé), donne $\Delta U=0$ (iso-$U$).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : dire que $c\approx c_v\approx c_p$ pour une phase condensée (Remarque du §4) signifie-t-il que $C_p-C_v=0$ exactement, contredisant la relation de Mayer (Théorème 4) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non, il n'y a pas de contradiction : la relation de Mayer $C_p-C_v=nR$ (Théorème 4) n'est valable que pour un <strong>gaz parfait</strong>. Pour une phase condensée, cette relation ne s'applique pas ; l'approximation $c_v\approx c_p$ est une approximation <em>différente</em>, justifiée par la très faible compressibilité des solides/liquides (leur volume varie très peu avec $p$ ou $T$), qui rend les transformations isobares et isochores presque indiscernables en pratique.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : reliez le Théorème 3 ($\Delta U=W+Q$) et le Théorème 1 ($\delta W=-p\,dV$) pour établir que $\Delta H=Q$ lors d'une transformation isobare réversible.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+En réversible, $\delta W=-p\,dV$ (Théorème 1), donc $dU=-p\,dV+\delta Q$ (Théorème 3, système au repos). Si la transformation est isobare ($p=$cte$=p_i=p_f$), on peut écrire $-p\,dV=-d(pV)$ (puisque $p$ est constant), donc $dU+d(pV)=\delta Q$, soit $d(U+pV)=\delta Q$, soit $dH=\delta Q$ (Définition 4, $H=U+pV$). En intégrant : $\Delta H=Q$ — c'est exactement la relation utilisée dans les questions 4 et le lien direct entre $C_p$ et $Q$ à pression constante.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : à partir des deux lois de Joule (Remarque du §5) et des détentes de Joule–Gay-Lussac / Joule-Thomson (Théorèmes 6, 7), expliquer pourquoi ces deux détentes permettent de <em>distinguer expérimentalement</em> un gaz réel d'un gaz parfait.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Pour un gaz parfait, les deux détentes (iso-$U$ et isenthalpique) sont isothermes, car $U$ et $H$ d'un gaz parfait ne dépendent que de $T$ (les deux lois de Joule) : si $U$ (ou $H$) ne varie pas pendant la détente, $T$ non plus. Pour un gaz réel, $U$ et $H$ dépendent aussi du volume/de la pression (via les interactions intermoléculaires, coefficients $a$ et $b$ de Van der Waals) : une détente iso-$U$ ou isenthalpique modifie alors nécessairement $T$ (refroidissement observé en pratique, Théorèmes 6, 7) — l'écart mesuré à l'isothermie est donc directement une signature expérimentale de l'écart du gaz réel au modèle du gaz parfait, et permet d'en mesurer quantitativement les coefficients $a$ et $b$.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Le premier principe de la thermodynamique » (résumé de cours, Prépa Barthou, Pau)</li>
+<li>Programme officiel de Physique-Chimie, CPGE 1<sup>re</sup> année (filière PCSI), bloc « Premier principe » : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+<li>H-Prépa Physique 1<sup>re</sup> année (Hachette Éducation) — chapitre « Premier principe de la thermodynamique »</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>
