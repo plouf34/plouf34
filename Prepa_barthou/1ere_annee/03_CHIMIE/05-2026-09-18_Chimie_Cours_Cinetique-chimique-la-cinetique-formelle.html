@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie — Cinétique chimique : la cinétique formelle</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.7rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:270px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.82rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.12rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+table{border-collapse:collapse; margin:1rem 0; width:100%;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.9rem; vertical-align:middle;}
+th{background:#f3f2ee;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.3rem;} h2{font-size:1.05rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} table{font-size:.76rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Vitesse d'une réaction</a></li>
+  <li class="top"><a href="#s2">2. Loi de vitesse, ordre d'une réaction</a></li>
+  <li class="top"><a href="#s3">3. Influence de la température</a></li>
+  <li class="top"><a href="#s4">4. Influence de la pression</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Cinétique chimique — La cinétique formelle</h1>
+<div class="meta">Chimie — Résumé de cours · PCSI · Sainte-Geneviève (Versailles), S. Falcou · mis au propre le 18/09/2026</div>
+</header>
+<p>Deux aspects seront étudiés : macroscopique (lois de vitesse — objet de ce chapitre) et microscopique (mécanismes réactionnels).</p>
+
+<section id="s1">
+<h2>1. Définition de la vitesse d'une réaction</h2>
+<div class="block remark">
+<span class="label">Notion de vitesse</span>
+Une réaction peut avoir lieu si elle est <strong>thermodynamiquement possible</strong>, mais ce n'est pas suffisant : il faut aussi qu'elle soit <strong>cinétiquement possible</strong> (les deux conditions sont nécessaires). Certaines réactions thermodynamiquement possibles sont infiniment lentes sans amorçage/catalyse (ex. mélange tonnant $2H_2+O_2\to2H_2O$) ; d'autres sont quasi instantanées (acide-base, précipitation, complexation).
+</div>
+<div class="block def">
+<span class="label">Définition 1 — cadre : réacteur fermé, composition uniforme</span>
+<strong>Réacteur fermé</strong> : aucun réactif/produit n'est ajouté ou ôté. <strong>Composition uniforme</strong> : la concentration de chaque espèce est identique en tout point (bonne agitation).
+</div>
+<div class="block theorem">
+<span class="label">Vitesses de disparition/apparition</span>
+$$v_A^{app}=\frac1V\frac{dn_A}{dt} \qquad v_A^{disp}=-\frac1V\frac{dn_A}{dt}$$
+(grandeurs intensives, en mol·L⁻¹·s⁻¹ ; si $V$ constant : $v_A^{app}=d[A]/dt$).
+</div>
+<div class="block theorem">
+<span class="label">Vitesse de réaction</span>
+Pour $\sum_i\nu_iA_i=0$ :
+$$v=\frac1{\nu_i}\frac1V\frac{dn_{A_i}}{dt}=\frac1V\frac{d\xi}{dt}\qquad\left(=\frac1{\nu_i}\frac{d[A_i]}{dt}=\frac{d\xi_V}{dt}\ \text{si }V\text{ constant}\right)$$
+Indépendante de l'espèce choisie, mais associée à l'écriture précise de l'équation (multiplier les $\nu_i$ par 2 divise $v$ par 2). Unités : $\mathrm{mol\cdot m^{-3}\cdot s^{-1}}$ (SI) ou $\mathrm{mol\cdot L^{-1}\cdot s^{-1}}$ (usuelle).
+</div>
+<h3>Méthodes de suivi expérimental</h3>
+<div class="block remark">
+<span class="label">Méthode chimique (par dosage d'un prélèvement)</span>
+Nécessite de stopper la réaction dans la prise d'essai : <strong>trempe</strong> (refroidissement) et <strong>dilution</strong>, car une baisse de température ou de concentration diminue (en général) la vitesse de réaction. Méthode destructive.
+</div>
+<div class="block remark">
+<span class="label">Méthodes physiques (mesure <em>in situ</em>, non destructives)</span>
+<strong>Conductimétrie</strong> (réactions avec ions) : conductivité $\sigma=\sum_i\lambda_i^0(M_i^{z_i+})c_i$ (solutions diluées), mesurée via la conductance $G=\sigma/K$ ($K$ = constante de cellule). <strong>Spectrophotométrie d'absorption moléculaire</strong> (produits absorbant dans le visible/UV proche) : loi de Beer-Lambert $A=\mathrm{DO}=\log(I_0/I)=\varepsilon\ell c$ (additive si plusieurs espèces absorbent : $A=\sum_i\varepsilon_i\ell c_i$), valable pour $A\lesssim1{,}2$.
+</div>
+<div class="block remark">
+<span class="label">Détermination de la vitesse par pente de tangente</span>
+La concentration d'un produit (ex. [I₂]) mesurée en fonction du temps donne, par tracé des tangentes à différents instants, la vitesse $v=d[I_2]/dt$ à chaque instant. On observe en général que la vitesse <strong>diminue</strong> avec le temps (sauf réactions autocatalytiques : phase d'accélération initiale, puis diminution nécessaire car $v\to0$ à $t\to\infty$).
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Loi de vitesse, ordre d'une réaction</h2>
+<div class="block def">
+<span class="label">Définition 2 — ordre d'une réaction</span>
+Une réaction admet un ordre si sa vitesse s'écrit $v=k\prod_i[A_i]^{a_i}$ ($a_i$ = ordre partiel par rapport à $A_i$ ; $\sum_ia_i$ = ordre global ; $k$ = constante cinétique, indépendante des concentrations mais dépendant de $T$, du solvant, d'un catalyseur). <strong>Attention</strong> : il n'y a pas de relation entre les ordres partiels et les coefficients stœchiométriques de l'équation-bilan. Certaines réactions n'admettent pas d'ordre (ex. $\mathrm{H_2+Br_2\to2HBr}$, loi de vitesse en $[H_2][Br_2]^{1/2}/(0{,}12+[HBr]/[Br_2])$) ; il peut exister un <strong>ordre initial</strong> sans ordre courant.
+</div>
+
+<h3>a) Méthode différentielle</h3>
+<p>Pour $A+2B\to C$ en conditions initiales <strong>stœchiométriques</strong> (donc $[B]=2[A]$ à chaque instant), avec l'hypothèse $v=k[A]^a[B]^b$ : $v=2^bk[A]^{a+b}$, soit $\log v=(a+b)\log[A]+b\log2+\log k$. On mesure $[A](t)$, on en déduit $v$ par tangentes, puis on trace $\log v=f(\log[A])$ : une droite valide l'existence d'un ordre (pente = ordre global $a+b$).</p>
+
+<h3>b) Méthode d'intégration</h3>
+<div class="block demo">
+<span class="label">Exemple traité — SN1 : (CH₃)₃CCl + OH⁻ → (CH₃)₃COH + Cl⁻</span>
+Conditions stœchiométriques ($[A]=[\mathrm{OH^-}]=a$, suivi par dosage acido-basique). Données expérimentales $[A](t)$ (0,5 à 8h). On teste successivement les hypothèses d'ordre 1, 2 et 0.
+</div>
+<div class="block theorem">
+<span class="label">Ordre 1 : $-d[A]/dt=k[A]$</span>
+Équation à variables séparables : $\displaystyle\int_{[A]_0}^{[A]}\frac{d[A]}{[A]}=-k\int_0^t dt$, d'où
+$$\ln[A]=\ln[A]_0-kt \qquad [A]=[A]_0e^{-kt}$$
+On trace $\ln[A]=f(t)$ : une droite (pente $-k$) valide l'ordre 1. Sur l'exemple : droite obtenue, $k=0{,}145\,\mathrm{h^{-1}}$ — <strong>la réaction admet un ordre 1</strong>.
+</div>
+<div class="block theorem">
+<span class="label">Ordre 2 : $-d[A]/dt=k[A]^2$</span>
+$$\frac{1}{[A]}=kt+\frac{1}{[A]_0}$$
+On trace $1/[A]=f(t)$ : sur l'exemple, points non alignés — <strong>la réaction n'admet pas d'ordre 2</strong>.
+</div>
+<div class="block theorem">
+<span class="label">Ordre 0 : $-d[A]/dt=k$</span>
+$$[A]=-kt+[A]_0$$
+Sur l'exemple, points non alignés — <strong>la réaction n'admet pas d'ordre 0</strong>.
+</div>
+<div class="block remark">
+<span class="label">Généralisation et mise en garde</span>
+Pour un ordre $n\neq1$ quelconque : $\dfrac{1}{[A]^{n-1}}=(n-1)kt+\dfrac{1}{[A]_0^{n-1}}$. Ne pas avoir validé une hypothèse d'ordre ne prouve pas que la réaction n'admet pas d'ordre : cela prouve seulement que la valeur testée n'est pas la bonne — cette méthode ne permet donc pas de conclure qu'une réaction n'a pas d'ordre (il faudrait tester toutes les valeurs).
+</div>
+
+<h3>c) Méthode des temps de demi-réaction</h3>
+<div class="block def">
+<span class="label">Définition 3 — temps de demi-réaction $t_{1/2}$</span>
+Temps au bout duquel la moitié du réactif initial est consommée.
+</div>
+<div class="block theorem">
+<span class="label">Ordre 1</span>
+$$t_{1/2}=\frac{\ln2}{k}$$
+indépendant de la concentration initiale. On étudie $t_{1/2}$ pour différentes $[A]_0$ : s'il ne varie pas, la réaction admet un ordre 1 ; sinon, elle n'est pas d'ordre 1 (inutile alors de tester l'hypothèse d'ordre 1 par une autre méthode).
+</div>
+<div class="block theorem">
+<span class="label">Ordre $n\neq1$</span>
+$$\frac{2^{n-1}-1}{[A]_0^{n-1}}=2(n-1)kt_{1/2} \qquad\text{soit}\qquad \ln t_{1/2}=(1-n)\ln[A]_0+\ln\frac{2^{n-1}-1}{n-1}-\ln2k$$
+Si $n$ est pressenti : tracer $t_{1/2}=f(1/[A]_0^{n-1})$ (droite ⇒ ordre $n$ validé, pente $=1/[2(n-1)k]$). Sans idée de $n$ : tracer $\ln t_{1/2}=f(\ln[A]_0)$ (droite ⇒ un ordre $n$ existe, pente $=1-n$).
+</div>
+
+<h3>d) Méthode d'isolement (ou de dégénérescence de l'ordre, méthode d'Ostwald)</h3>
+<div class="block theorem">
+<span class="label">Principe</span>
+Pour $\alpha A+\beta B+\gamma C\to...$, hypothèse $v=k[A]^a[B]^b[C]^c$. On réalise l'expérience avec B et C en <strong>large excès</strong> par rapport à A : leurs concentrations varient peu ($[B]\approx[B]_0$, $[C]\approx[C]_0$), donc $v\approx k[B]_0^b[C]_0^c[A]^a=k'[A]^a$ (constante apparente $k'$). On applique alors une des méthodes précédentes pour déterminer $a$ et $k'$, puis on répète la méthode (B isolé, puis C) pour déterminer $b,c$.
+</div>
+
+<h3>e) Méthode des vitesses initiales</h3>
+<div class="block theorem">
+<span class="label">Principe</span>
+Utilisable pour des réactions pas trop rapides ; donne les ordres <strong>initiaux</strong> (potentiellement différents des ordres courants). Hypothèse $v_0=k_0[A]_0^{a_0}[B]_0^{b_0}$, soit $\log v_0=a_0\log[A]_0+b_0\log[B]_0+\log k_0$. On mesure $v_0$ pour différentes $[A]_0$ ($[B]_0$ fixé), puis pour différentes $[B]_0$ ($[A]_0$ fixé) : deux tracés $\log v_0=f(\log[A]_0)$ et $\log v_0=f(\log[B]_0)$, chaque pente donnant un ordre initial, chaque ordonnée à l'origine donnant $k_0$.
+</div>
+</section>
+
+<section id="s3">
+<h2>3. Influence de la température sur la vitesse de réaction</h2>
+<div class="block theorem">
+<span class="label">Loi d'Arrhénius</span>
+En général, une élévation de 10°C multiplie la vitesse par un facteur 1,5 à 3. Loi empirique :
+$$k=A\exp\!\left(-\frac{E_a}{RT}\right) \qquad \ln k = \ln A - \frac{E_a}{RT}$$
+($A$ = facteur préexponentiel, mêmes unités que $k$ ; $E_a$ = énergie d'activation, en J·mol⁻¹ ou kJ·mol⁻¹). Sous forme différentielle (si $E_a$ non constante) : $\dfrac{d\ln k}{dT}=\dfrac{E_a}{RT^2}$.
+</div>
+<div class="block demo">
+<span class="label">Vérification expérimentale</span>
+On mesure $k(T)$ à plusieurs températures et on trace $\ln k=f(1/T)$ : une droite valide la loi d'Arrhénius, de pente $-E_a/R$ et d'ordonnée à l'origine $\ln A$. Exemple traité ($\mathrm{CH_3I+C_2H_5ONa}\rightleftharpoons\mathrm{CH_3OC_2H_5+NaI}$, ordre global 2) : droite obtenue, $\ln A=26{,}47$, pente $-9905$, d'où $E_a=32\,\mathrm{kJ\cdot mol^{-1}}$.
+</div>
+<div class="block correction">
+<span class="label">⚠️ Remarque — énergie d'activation apparemment négative</span>
+La réaction $2\,\mathrm{NO}+\mathrm{O_2}\to2\,\mathrm{NO_2}$ a une vitesse qui <strong>diminue</strong> quand la température augmente, ce qui correspondrait formellement à $E_a<0$ dans la loi d'Arrhénius — un résultat qui semble contredire l'interprétation microscopique usuelle de $E_a$ (barrière d'énergie à franchir). Le document source annonce que l'explication réside dans l'interprétation microscopique des mécanismes réactionnels (traitée dans un chapitre ultérieur : mécanisme à plusieurs étapes dont l'une, un équilibre rapide défavorisé par la température, contrôle la vitesse globale).
+</div>
+</section>
+
+<section id="s4">
+<h2>4. Influence de la pression en phase gazeuse</h2>
+<p>Pour une réaction en phase gazeuse homogène admettant un ordre, $v=k[A]^a=k(p_A/RT)^a=k'p_A^a$ avec $k'=k/(RT)^a$ : la pression partielle est donc un facteur cinétique (augmenter $p_A$, par ajout de A ou diminution du volume à composition constante, augmente la vitesse). On peut aussi définir une vitesse par rapport à la pression, $v_p=\dfrac{1}{\nu_i}\dfrac{dP_i}{dt}=RTv$.</p>
+<div class="block demo">
+<span class="label">Exemple — décomposition thermique du méthoxyméthane</span>
+$\mathrm{CH_3OCH_3\to CH_4+CO+H_2}$, en isochore isotherme. Sous hypothèse d'ordre 1, le suivi de la pression totale $P=(3n_0-2n)RT/V=3P_0-2[\mathrm{CH_3OCH_3}]RT$ permet de retrouver la loi $\ln(3P_0-P)=\ln(2P_0)-kt$ : tracer $\ln(3P_0-P)=f(t)$ et obtenir une droite valide l'hypothèse mécanistique d'ordre 1.
+</div>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Quelle différence y a-t-il entre l'ordre partiel d'une réaction et le coefficient stœchiométrique de l'espèce correspondante dans l'équation-bilan ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Ce sont deux notions sans relation nécessaire (§2, Définition 2, Attention) : l'ordre partiel est une grandeur expérimentale déterminée par la loi de vitesse observée, alors que le coefficient stœchiométrique ne traduit qu'un bilan de matière de l'équation globale.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Pourquoi utilise-t-on une trempe et/ou une dilution lors d'un dosage par prélèvement en cinétique ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Pour stopper (ou fortement ralentir) la réaction dans la prise d'essai avant de la doser, puisqu'une baisse de température et une baisse de concentration diminuent en général la vitesse de réaction (§1, Méthode chimique) — sans cela, la réaction continuerait pendant le dosage et fausserait la mesure de concentration à l'instant $t$ voulu.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Pour une réaction d'ordre 1 de constante k=0,145 h⁻¹, calculer le temps de demi-réaction.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$t_{1/2}=\ln2/k=0{,}693/0{,}145\approx4{,}78\,\mathrm{h}$ (§2c, Ordre 1).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Quelle droite doit-on tracer pour vérifier qu'une réaction suit la loi d'Arrhénius, et que représente sa pente ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$\ln k=f(1/T)$ : une droite valide la loi ; sa pente vaut $-E_a/R$ (§3, Vérification expérimentale).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi la méthode d'isolement (Ostwald) nécessite-t-elle de mettre tous les réactifs sauf un en large excès ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Pour que la concentration des réactifs en excès varie de façon négligeable au cours de l'expérience (§2d) : leur contribution à la loi de vitesse devient alors une constante apparente $k'$, et la loi de vitesse hypothétique se réduit à une dépendance en la seule concentration du réactif isolé (non en excès) — ce qui permet d'appliquer les méthodes à une seule variable (différentielle, intégration, temps de demi-réaction) pour déterminer son ordre partiel.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Piège classique : si le tracé de 1/[A]=f(t) pour une réaction ne donne pas une droite, peut-on conclure que cette réaction n'admet aucun ordre ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — piège explicitement signalé (§2b, Remarque) : cela prouve seulement que l'hypothèse testée (ordre 2) n'est pas la bonne, pas que la réaction n'admet pas d'ordre du tout. Il faudrait tester d'autres valeurs d'ordre (1, 0, demi-entiers...) avant de conclure à l'absence d'ordre — la méthode d'intégration ne permet jamais, seule, d'affirmer qu'une réaction n'a pas d'ordre.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : la constante cinétique k dépend-elle de la concentration des réactifs ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — c'est un piège fréquent de confondre $k$ (constante cinétique, indépendante des concentrations, ne dépendant que de la température, du solvant, d'un catalyseur) avec la vitesse $v$ elle-même (qui, elle, dépend explicitement des concentrations via $v=k\prod_i[A_i]^{a_i}$, §2, Définition 2). C'est précisément parce que $k$ ne dépend pas des concentrations que la loi d'Arrhénius peut être étudiée en la faisant varier uniquement avec $T$ (§3).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Que se passerait-il pour le tracé ln[A]=f(t) d'une réaction si celle-ci était en réalité d'ordre 2 et non d'ordre 1 comme supposé ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le tracé $\ln[A]=f(t)$ ne donnerait pas une droite (courbe incurvée), puisque la relation linéaire $\ln[A]=\ln[A]_0-kt$ n'est valable que sous l'hypothèse d'ordre 1 (§2b) ; l'obtention d'une courbe (et non d'une droite) invaliderait alors l'hypothèse d'ordre 1, comme observé dans l'exemple du §2b pour l'hypothèse d'ordre 2 appliquée à tort (points non alignés sur 1/[A]=f(t)).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : pourquoi la méthode des temps de demi-réaction permet-elle de conclure qu'une réaction n'est pas d'ordre 1 sans avoir besoin de tester les autres valeurs d'ordre par une autre méthode ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que pour un ordre 1, $t_{1/2}=\ln2/k$ (§2c) est une caractéristique universelle : il ne dépend <strong>jamais</strong> de la concentration initiale, quelle que soit la valeur de $[A]_0$ choisie pour une nouvelle expérience. Si l'on observe expérimentalement que $t_{1/2}$ varie avec $[A]_0$, cela contredit directement et sans ambiguïté cette propriété structurelle de l'ordre 1 — la conclusion « la réaction n'est pas d'ordre 1 » est donc immédiate et certaine (contrairement à la méthode d'intégration, §2b, où une droite non obtenue pour un ordre testé ne permet pas de conclure définitivement sur les autres ordres possibles), ce qui rend inutile de perdre du temps à tester l'hypothèse d'ordre 1 par une autre méthode (Remarque, §2c).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : reliez la remarque sur l'énergie d'activation apparemment négative de la réaction NO + O₂ (§3) à la notion de facteur cinétique (température, §3, et pression, §4) — pourquoi cette anomalie suggère-t-elle que cette réaction ne se déroule pas en un seul acte élémentaire ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La loi d'Arrhénius avec $E_a>0$ traduit, au niveau microscopique, l'existence d'une unique barrière d'énergie à franchir, dont le franchissement est d'autant plus probable que la température est élevée (agitation thermique croissante) — d'où une vitesse croissante avec $T$ pour un acte élémentaire simple. Observer expérimentalement l'inverse (vitesse décroissante avec $T$) pour $2\,\mathrm{NO}+\mathrm{O_2}\to2\,\mathrm{NO_2}$ est incompatible avec ce schéma à une seule étape : cela suggère fortement que la réaction procède en réalité par un <strong>mécanisme à plusieurs actes élémentaires</strong> (annoncé explicitement comme sujet d'un chapitre ultérieur, §3, Remarque), où au moins une étape intermédiaire (par exemple un équilibre rapide favorisé aux basses températures) contrôle la vitesse globale observée d'une façon qui inverse la tendance naïvement attendue d'une loi d'Arrhénius à une seule étape — illustrant que la cinétique formelle macroscopique (ce chapitre) ne suffit pas toujours à interpréter physiquement une loi de vitesse sans recourir à l'étude microscopique des mécanismes.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Cinétique chimique — La cinétique formelle », S. Falcou, PCSI1 Sainte-Geneviève (Versailles), 2015-2016</li>
+<li>Programme officiel de Physique-Chimie, CPGE 1<sup>re</sup> année (filière PCSI), thème « Transformation de la matière », bloc cinétique chimique : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>
