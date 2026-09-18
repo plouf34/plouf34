@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physique — Électricité 2 : Les régimes transitoires (1)</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.85rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+.chain{margin:.7rem 0; padding-left:.3rem;}
+.chain .step{display:flex; align-items:baseline; gap:.6rem; margin:.25rem 0; flex-wrap:wrap;}
+.chain .step .why{color:#7a7a72; font-size:.82rem; font-style:italic;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.45rem;} h2{font-size:1.1rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Continuité de $i$ et de $q$</a></li>
+  <li class="top"><a href="#s2">2. Puissance électrocinétique — bilan d'énergie</a></li>
+  <li class="top"><a href="#s3">3. Circuit RC série — Circuit RL série</a></li>
+  <li class="top"><a href="#s4">4. Portrait de phase</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Électricité 2 — Les régimes transitoires (1)</h1>
+<div class="meta">Physique — Résumé de cours · PCSI · Prépa Barthou (Pau) · mis au propre le 18/09/2026</div>
+</header>
+
+<section id="s1">
+<h2>1. Continuité de $i$ et de $q$</h2>
+<div class="block theorem">
+<span class="label">Propriété 1</span>
+Le courant $i(t)$ qui circule dans une bobine est continu, car l'énergie $E_L=\dfrac12 Li^2$ qu'elle stocke est continue.<br>
+La charge $q(t)$ d'un condensateur est continue, car l'énergie $E_C=\dfrac12\dfrac{q^2}{C}$ qu'il stocke est continue.
+</div>
+<div class="block remark">
+<span class="label">Remarque</span>
+Une énergie physique ne peut pas subir de discontinuité (cela exigerait une puissance infinie, $P=dE/dt\to\infty$) : c'est ce principe, plus général que la seule électrocinétique, qui justifie ici la continuité de $i$ (bobine) et de $q$ (condensateur).
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Puissance électrocinétique — bilan d'énergie</h2>
+<div class="block def">
+<span class="label">Définition 1</span>
+$$P_{\text{dipôle}} = u\,i = \frac{dE_{\text{dipôle}}}{dt}, \qquad P_{\text{récepteur}}>0,\quad P_{\text{générateur}}<0$$
+</div>
+<div class="block theorem">
+<span class="label">Propriété 2 — bilan d'énergie</span>
+Faire un bilan d'énergie entre $t_1$ et $t_2$ revient à écrire, pour tous les dipôles du circuit :
+$$\left\{\int_{t_1}^{t_2} P_{\text{dipôle 1}}\,dt\right\} + \left\{\int_{t_1}^{t_2} P_{\text{dipôle 2}}\,dt\right\} + \dots = 0$$
+soit, puisque $P_{\text{dipôle}}=\dfrac{dW_{\text{dipôle}}}{dt}$ :
+$$W_{\text{dipôle 1}}(t_1\to t_2) + W_{\text{dipôle 2}}(t_1\to t_2) + \dots = 0$$
+</div>
+</section>
+
+<section id="s3">
+<h2>3. Circuit RC série — Circuit RL série</h2>
+<figure>
+<svg viewBox="0 0 520 160" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<g transform="translate(0,0)">
+<text x="110" y="18" text-anchor="middle" font-size="12" font-weight="700">Circuit RC série</text>
+<line x1="30" y1="40" x2="30" y2="130" stroke="#333" stroke-width="1.6"/><circle cx="30" cy="85" r="16" fill="none" stroke="#333" stroke-width="1.3"/><text x="30" y="89" text-anchor="middle" font-size="10">E</text>
+<line x1="30" y1="40" x2="90" y2="40" stroke="#333" stroke-width="1.6"/>
+<rect x="80" y="28" width="45" height="24" fill="#eaf2fd" stroke="#3b6fd8"/><text x="102" y="45" text-anchor="middle" font-size="10">R</text>
+<line x1="125" y1="40" x2="180" y2="40" stroke="#333" stroke-width="1.6"/>
+<line x1="180" y1="40" x2="180" y2="70" stroke="#333" stroke-width="1.6"/>
+<line x1="160" y1="70" x2="160" y2="100" stroke="#3b6fd8" stroke-width="2"/><line x1="200" y1="70" x2="200" y2="100" stroke="#3b6fd8" stroke-width="2"/><text x="210" y="88" font-size="10">C</text>
+<line x1="180" y1="100" x2="180" y2="130" stroke="#333" stroke-width="1.6"/>
+<line x1="30" y1="130" x2="180" y2="130" stroke="#333" stroke-width="1.6"/>
+</g>
+<g transform="translate(280,0)">
+<text x="110" y="18" text-anchor="middle" font-size="12" font-weight="700">Circuit RL série</text>
+<line x1="30" y1="40" x2="30" y2="130" stroke="#333" stroke-width="1.6"/><circle cx="30" cy="85" r="16" fill="none" stroke="#333" stroke-width="1.3"/><text x="30" y="89" text-anchor="middle" font-size="10">E</text>
+<line x1="30" y1="40" x2="90" y2="40" stroke="#333" stroke-width="1.6"/>
+<rect x="80" y="28" width="45" height="24" fill="#eaf2fd" stroke="#3b6fd8"/><text x="102" y="45" text-anchor="middle" font-size="10">R</text>
+<line x1="125" y1="40" x2="180" y2="40" stroke="#333" stroke-width="1.6"/>
+<line x1="180" y1="40" x2="180" y2="70" stroke="#333" stroke-width="1.6"/>
+<path d="M160 85 q5 -15 10 0 q5 -15 10 0 q5 -15 10 0" stroke="#3b6fd8" stroke-width="1.8" fill="none" transform="rotate(90,180,85)"/>
+<text x="210" y="88" font-size="10">L</text>
+<line x1="180" y1="100" x2="180" y2="130" stroke="#333" stroke-width="1.6"/>
+<line x1="30" y1="130" x2="180" y2="130" stroke="#333" stroke-width="1.6"/>
+</g>
+</svg>
+<figcaption>Fig. 1 — Circuit RC série et circuit RL série, alimentés par un échelon de f.é.m. $E$.</figcaption>
+</figure>
+
+<div class="block theorem">
+<span class="label">Théorème 1 — circuit RC série</span>
+$$\frac{dq}{dt} + \frac{q}{\tau} = \frac{E}{R}, \qquad \tau = RC$$
+Solution : $q(t) = q_{\text{part}} + q_{\text{ssm}}(t) = EC + Ae^{-t/\tau}$ ($\tau$ = constante de temps ; $A$ se calcule avec $q(t=0)$).
+</div>
+<div class="block theorem">
+<span class="label">Théorème 2 — circuit RL série</span>
+$$\frac{di}{dt} + \frac{i}{\tau} = \frac{E}{L}, \qquad \tau = \frac{L}{R}$$
+Solution : $i(t) = i_{\text{part}} + i_{\text{ssm}}(t) = \dfrac{E}{R} + Ae^{-t/\tau}$ ($A$ se calcule avec $i(t=0)=0$).
+</div>
+</section>
+
+<section id="s4">
+<h2>4. Portrait de phase</h2>
+<div class="block def">
+<span class="label">Définition 2</span>
+Le portrait de phase d'une grandeur $x(t)$ est le graphe de $\dot x$ en fonction de $x(t)$ ($\dot x$ en ordonnée, $x$ en abscisse).
+</div>
+<p><strong>Exemple — circuit RC série</strong> (cas $q(0)=0$) :
+$$\dot q + \frac{q}{\tau} = \frac{E}{R} \ \Longrightarrow\ \dot q = -\frac{q}{\tau}+\frac{E}{R} \ \Longrightarrow\ \dot q = f(q)\ \text{est une droite}$$</p>
+<figure>
+<svg viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<line x1="40" y1="190" x2="300" y2="190" stroke="#333" stroke-width="1.3" marker-end="url(#aF1)"/><line x1="40" y1="190" x2="40" y2="20" stroke="#333" stroke-width="1.3" marker-end="url(#aF1)"/>
+<text x="300" y="205" font-size="12" text-anchor="middle">q</text><text x="25" y="20" font-size="12">$\dot q$</text>
+<line x1="40" y1="40" x2="240" y2="190" stroke="#3b6fd8" stroke-width="2.2"/>
+<text x="15" y="45" font-size="11" text-anchor="end">E/R</text>
+<text x="240" y="205" font-size="11" text-anchor="middle">EC = q(∞)</text>
+<line x1="240" y1="190" x2="240" y2="182" stroke="#333"/>
+<defs><marker id="aF1" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 2 — Portrait de phase du circuit RC série ($q(0)=0$) : droite de $\dot q(0)=E/R$ à $q(\infty)=EC$ (où $\dot q=0$).</figcaption>
+</figure>
+<div class="block remark">
+<span class="label">Remarque — vérification du schéma</span>
+Le portrait de phase relie une grandeur à sa dérivée temporelle. Si le lien est linéaire, le portrait est une droite (c'est le cas ici, cf. équation ci-dessus) ; si la grandeur admet une valeur asymptotique (ici $q(\infty)=EC$), le portrait converge vers le point correspondant sur l'axe des abscisses ($\dot q=0$) — ce que la Fig. 2 respecte bien.
+</div>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Pourquoi le courant dans une bobine ne peut-il pas subir de discontinuité ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que l'énergie stockée $E_L=\tfrac12 Li^2$ est une fonction continue du temps (une discontinuité d'énergie exigerait une puissance infinie, $P=dE/dt$) : $i$ devant apparaître au carré dans $E_L$, sa continuité découle directement de celle de $E_L$ (Propriété 1).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Qu'est-ce qu'un « portrait de phase » ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+C'est le graphe de la dérivée temporelle d'une grandeur $x(t)$ en fonction de $x(t)$ lui-même, $\dot x$ en ordonnée et $x$ en abscisse (Définition 2) — il donne une image géométrique de l'évolution du système sans référence explicite au temps.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Un circuit RC série a $R=2\,\text{k}\Omega$, $C=5\,\mu\text{F}$, $E=10\,\text{V}$. Calculer $\tau$ et $q(\infty)$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$\tau=RC=2000\times5\times10^{-6}=10\,\text{ms}$ ; $q(\infty)=EC=10\times5\times10^{-6}=5\times10^{-5}\,\text{C}$ (Théorème 1).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Pour un circuit RL série avec $E=6\,\text{V}$, $R=3\,\Omega$, $L=0{,}6\,\text{H}$, donner $\tau$ et la valeur finale de $i(t)$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$\tau = L/R = 0{,}6/3 = 0{,}2\,\text{s}$ ; $i(\infty)=E/R=6/3=2\,\text{A}$ (Théorème 2).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi la pente à l'origine du portrait de phase (Fig. 2) vaut-elle exactement $E/R$, sans avoir besoin de résoudre l'équation différentielle ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que le portrait de phase EST l'équation différentielle elle-même, réécrite sous forme $\dot q=f(q)$ : en $q=0$ (condition initiale $q(0)=0$), il suffit d'évaluer $\dot q = -q/\tau+E/R$ en $q=0$ pour obtenir directement $\dot q(0)=E/R$, sans intégrer quoi que ce soit.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passerait-il sur le portrait de phase (Fig. 2) si la condition initiale était $q(0)=EC$ (le condensateur déjà chargé à sa valeur finale) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le point de départ du portrait de phase coïnciderait avec le point d'arrivée $(EC,0)$ : $\dot q(0)=-EC/\tau+E/R=-E/R+E/R=0$ (puisque $EC/\tau=EC/(RC)=E/R$). Le système serait donc déjà à l'équilibre, $q(t)=EC$ pour tout $t$ — pas d'évolution transitoire.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : la solution $q(t)=EC+Ae^{-t/\tau}$ (Théorème 1) contient-elle une erreur de signe si $A$ est positif et que le condensateur se charge (donc $q$ croît) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non, pas d'erreur : si $q(0)=0$, alors $0=EC+A \Rightarrow A=-EC$ (négatif), et $q(t)=EC(1-e^{-t/\tau})$ croît bien de 0 vers $EC$. Le signe de $A$ dépend uniquement de la condition initiale choisie — ce n'est pas une constante universellement positive ou négative, contrairement à ce qu'on pourrait supposer à tort.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : peut-on appliquer le bilan d'énergie (Propriété 2) à un intervalle $[t_1,t_2]$ quelconque, même si le régime n'est pas encore établi (transitoire) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Oui — le bilan d'énergie (Propriété 2) découle directement de $P_{\text{dipôle}}=dW_{\text{dipôle}}/dt$ pour chaque dipôle, une relation valable à tout instant, y compris en régime transitoire. On intègre simplement chaque puissance entre $t_1$ et $t_2$ sans supposer de régime permanent.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : comparez les équations différentielles des circuits RC et RL série (Théorèmes 1 et 2) — quelle est la structure mathématique commune, et qu'est-ce qui change physiquement ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Les deux équations ont la même forme $\dot x+x/\tau=\text{cte}$ (1<sup>er</sup> ordre linéaire à coefficients constants), donnant la même famille de solutions (exponentielle décroissante vers une valeur d'équilibre). Ce qui change est la nature physique de $x$ (charge $q$ pour le RC, courant $i$ pour le RL) et l'expression de $\tau$ ($RC$ pour le RC, $L/R$ pour le RL) — le RC et le RL sont donc mathématiquement les deux visages d'un même phénomène de relaxation du premier ordre.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : reliez la continuité de $q(t)$ (Propriété 1, §1) au choix de la condition initiale $q(0)=0$ utilisée dans le portrait de phase (Fig. 2) — que se passerait-il physiquement si $q$ pouvait être discontinue à $t=0$ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La continuité de $q(t)$ garantit que la valeur juste après la fermeture du circuit (à $t=0^+$) est identique à la valeur juste avant ($t=0^-$) : si le condensateur était initialement déchargé, $q(0^+)=q(0^-)=0$, ce qui justifie physiquement la condition initiale utilisée. Si $q$ pouvait être discontinue, un courant infini $i=dq/dt$ serait nécessaire à $t=0$ pour produire ce saut instantané de charge — physiquement impossible avec une puissance finie (cf. §1).</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Les régimes transitoires (1) » (résumé de cours, Prépa Barthou, Pau)</li>
+<li>Programme officiel de Physique-Chimie, CPGE 1<sup>re</sup> année (filière PCSI), bloc « Régimes transitoires des circuits linéaires du premier ordre » : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+<li>H-Prépa Physique 1<sup>re</sup> année (Hachette Éducation) — chapitre « Régimes transitoires RC et RL »</li>
+<li>Document 1/2 de ce diptyque : <em>01-2026-09-18_Physique_Cours_Electricite_-_1_-_Les_dipoles.html</em></li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>

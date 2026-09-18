@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physique — Électricité 4 : Régime sinusoïdal</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.85rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+table{border-collapse:collapse; margin:1rem 0; width:100%;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.9rem;}
+th{background:#f3f2ee;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.45rem;} h2{font-size:1.1rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Impédance complexe</a></li>
+  <li class="top"><a href="#s2">2. Correspondance temporel — complexe</a></li>
+  <li class="top"><a href="#s3">3. Diagramme de Fresnel</a></li>
+  <li class="top"><a href="#s4">4. Deux exemples de diagramme de Fresnel</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Électricité 4 — Régime sinusoïdal</h1>
+<div class="meta">Physique — Résumé de cours · PCSI · Prépa Barthou (Pau) · mis au propre le 18/09/2026</div>
+</header>
+
+<section id="s1">
+<h2>1. Impédance complexe</h2>
+<div class="block def">
+<span class="label">Définition 1</span>
+En représentation complexe, on associe à chaque dipôle une <strong>impédance complexe</strong> $\underline Z$ :
+$$\underline{Z_R} = R \qquad \underline{Z_L} = jL\omega \qquad \underline{Z_C} = \frac{1}{jC\omega}$$
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Correspondance temporel — complexe</h2>
+<div class="block theorem">
+<span class="label">Théorème 1</span>
+$$u(t) = U\cos(\omega t+\varphi) \ \Longleftrightarrow\ \underline{u}(t) = Ue^{j(\omega t+\varphi)} = \underline U e^{j\omega t}, \qquad \underline U = Ue^{j\varphi}$$
+<table>
+<tr><th>Domaine temporel</th><th>Domaine complexe</th></tr>
+<tr><td>$\dfrac{du(t)}{dt}$</td><td>$j\omega\,\underline u(t)$</td></tr>
+<tr><td>$\dfrac{d^2u(t)}{dt^2}$</td><td>$-\omega^2\,\underline u(t)$</td></tr>
+<tr><td>$\displaystyle\int u(t)\,dt$</td><td>$\dfrac{\underline u(t)}{j\omega}$</td></tr>
+<tr><td>$u(t) = \text{cte}$ (continu)</td><td>$\omega=0$</td></tr>
+</table>
+</div>
+</section>
+
+<section id="s3">
+<h2>3. Diagramme de Fresnel</h2>
+<div class="block remark">
+<span class="label">Rappels</span>
+La partie réelle « $a$ » du nombre complexe $z=a+jb$ est la projection de $z$ sur l'axe des réels. Le nombre complexe $z$ est représenté par un vecteur dans le plan complexe : $A\cos(\omega t)$ est la partie réelle (projection) de $Ae^{j\omega t}$.<br><br>
+Tracer le diagramme de Fresnel associé à $A_1\cos(\omega t+\varphi_1)+A_2\cos(\omega t+\varphi_2)+A_3\cos(\omega t+\varphi_3)=0$ consiste à tracer, dans le plan complexe, la somme vectorielle des vecteurs associés :
+$$A_1 e^{j(\omega t+\varphi_1)} + A_2 e^{j(\omega t+\varphi_2)} + A_3 e^{j(\omega t+\varphi_3)} = \vec 0$$
+</div>
+</section>
+
+<section id="s4">
+<h2>4. Deux exemples de diagramme de Fresnel</h2>
+
+<h3>Circuit 1 — RLC série (loi des mailles)</h3>
+<figure>
+<svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<line x1="20" y1="80" x2="60" y2="80" stroke="#333" stroke-width="1.6"/>
+<rect x="60" y="65" width="45" height="30" fill="#eaf2fd" stroke="#3b6fd8"/><text x="82" y="83" text-anchor="middle" font-size="10">R</text>
+<line x1="105" y1="80" x2="130" y2="80" stroke="#333" stroke-width="1.6"/>
+<path d="M130 80 q7 -14 14 0 q7 -14 14 0 q7 -14 14 0" stroke="#3b6fd8" stroke-width="1.6" fill="none"/><text x="158" y="60" font-size="10">L</text>
+<line x1="172" y1="80" x2="200" y2="80" stroke="#333" stroke-width="1.6"/>
+<line x1="200" y1="60" x2="200" y2="100" stroke="#3b6fd8" stroke-width="2"/><line x1="215" y1="60" x2="215" y2="100" stroke="#3b6fd8" stroke-width="2"/><text x="222" y="83" font-size="10">C</text>
+<line x1="20" y1="30" x2="20" y2="100" stroke="#333" stroke-width="1.6"/><text x="0" y="65" font-size="10">U</text>
+<line x1="215" y1="80" x2="260" y2="80" stroke="#333" stroke-width="1.6" marker-end="url(#aF4)"/><text x="240" y="70" font-size="10">I</text>
+<defs><marker id="aF4" markerWidth="6" markerHeight="6" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 1 — Circuit RLC série ; l'intensité $I$ commune aux dipôles est choisie comme origine des phases.</figcaption>
+</figure>
+<div class="block theorem">
+<span class="label">Théorème 2</span>
+$$\underline{U}_{Total} = \underline{U}_R+\underline{U}_L+\underline{U}_C = R\underline I + jL\omega \underline I + \frac{1}{jC\omega}\underline I = \underline Z_{Total}\,\underline I, \qquad \underline Z_{Total} = R+j\left(L\omega-\frac{1}{C\omega}\right)$$
+</div>
+<p>En choisissant $I(t)=I_{max}\cos(\omega t)$ (origine des phases sur $I$) et $U_{Total}(t)=U_{max}\cos(\omega t+\phi)$, $\phi$ est le déphasage de la tension totale par rapport à l'intensité.</p>
+<figure>
+<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<line x1="30" y1="180" x2="270" y2="180" stroke="#999" stroke-dasharray="3,2"/><text x="275" y="184" font-size="10">I (origine des phases)</text>
+<line x1="30" y1="180" x2="130" y2="180" stroke="#0f2b4c" stroke-width="2" marker-end="url(#aF5)"/><text x="80" y="195" font-size="10">U_R</text>
+<line x1="130" y1="180" x2="130" y2="60" stroke="#c0392b" stroke-width="2" marker-end="url(#aF5)"/><text x="135" y="70" font-size="10">U_L</text>
+<line x1="130" y1="180" x2="130" y2="230" stroke="#2fa365" stroke-width="2" marker-end="url(#aF5)" transform="translate(0,-70)"/>
+<line x1="130" y1="110" x2="130" y2="180" stroke="#2fa365" stroke-width="2" marker-start="url(#aF5)"/><text x="135" y="150" font-size="10">U_C</text>
+<line x1="30" y1="180" x2="130" y2="110" stroke="#7c4fd6" stroke-width="2.4" marker-end="url(#aF5)"/><text x="45" y="140" font-size="10" fill="#7c4fd6">U_Total</text>
+<defs><marker id="aF5" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 2 — Diagramme de Fresnel du circuit 1, cas $L\omega<1/(C\omega)$ (donc $\phi<0$) : $U_C$ domine $U_L$, la tension totale est en retard sur le courant.</figcaption>
+</figure>
+
+<h3>Circuit 2 — RLC parallèle (loi des nœuds)</h3>
+<figure>
+<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<line x1="30" y1="30" x2="30" y2="120" stroke="#333" stroke-width="1.6"/><circle cx="30" cy="75" r="16" fill="none" stroke="#333" stroke-width="1.3"/><text x="30" y="79" text-anchor="middle" font-size="10">e</text>
+<line x1="30" y1="30" x2="240" y2="30" stroke="#333" stroke-width="1.6"/>
+<line x1="30" y1="120" x2="240" y2="120" stroke="#333" stroke-width="1.6"/>
+<rect x="85" y="60" width="24" height="30" fill="#eaf2fd" stroke="#3b6fd8"/><text x="97" y="55" text-anchor="middle" font-size="9">R</text><line x1="97" y1="30" x2="97" y2="60" stroke="#333"/><line x1="97" y1="90" x2="97" y2="120" stroke="#333"/>
+<line x1="150" y1="30" x2="150" y2="65" stroke="#3b6fd8" stroke-width="2"/><line x1="140" y1="65" x2="160" y2="65" stroke="#3b6fd8" stroke-width="2"/><line x1="140" y1="80" x2="160" y2="80" stroke="#3b6fd8" stroke-width="2"/><line x1="150" y1="80" x2="150" y2="120" stroke="#333"/><text x="150" y="55" text-anchor="middle" font-size="9">C</text>
+<path d="M195 60 q7 -12 14 0 q7 -12 14 0" stroke="#3b6fd8" stroke-width="1.4" fill="none"/><text x="205" y="52" font-size="9">L</text><line x1="205" y1="30" x2="205" y2="60" stroke="#333"/><line x1="220" y1="60" x2="220" y2="120" stroke="#333"/>
+</svg>
+<figcaption>Fig. 3 — Circuit RLC parallèle alimenté par $e(t)$ ; la tension $e(t)$, commune aux dipôles, est choisie comme origine des phases.</figcaption>
+</figure>
+<div class="block theorem">
+<span class="label">Théorème 3</span>
+$$\underline I_{Total} = \underline I_R+\underline I_L+\underline I_C = \frac{\underline e}{R}+\frac{\underline e}{jL\omega}+\underline e\,jC\omega = \frac{\underline e}{\underline Z_{Total}}, \qquad \frac{1}{\underline Z_{Total}} = \frac1R+\frac{1}{jL\omega}+jC\omega$$
+</div>
+<p>En choisissant $e(t)=U_{max}\cos(\omega t)$ (origine des phases) et $I_{Total}(t)=I_{max}\cos(\omega t+\phi)$, $\phi$ est ici le déphasage de l'intensité totale par rapport à la tension $e(t)$.</p>
+<div class="block remark">
+<span class="label">Remarque</span>
+Cas $C\omega<1/(L\omega)$ (branche inductive dominante) $\Rightarrow \phi<0$ : le courant total est en retard sur la tension $e(t)$, symétrique du cas du circuit 1.
+</div>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Pourquoi l'impédance d'un condensateur $Z_C=1/(jC\omega)$ diminue-t-elle quand la fréquence augmente ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que $|Z_C|=1/(C\omega)$ (Définition 1) : à haute fréquence, le condensateur se charge et se décharge trop vite pour accumuler une tension importante à courant donné, il oppose donc de moins en moins de résistance au passage du courant alternatif — comportement caractéristique d'un condensateur (« passe-haut » en courant).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Que devient l'impédance d'une bobine en régime continu ($\omega=0$) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$Z_L=jL\omega=0$ (Définition 1, avec $\omega=0$) : en régime continu établi, la bobine se comporte comme un simple fil (impédance nulle), cohérent avec le fait que $u=Ldi/dt=0$ si $i$ est constant.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Un RLC série a $R=50\,\Omega$, $L\omega=80\,\Omega$, $1/(C\omega)=30\,\Omega$. Calculer le module et l'argument de $Z_{Total}$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$Z_{Total}=50+j(80-30)=50+50j$. $|Z_{Total}|=\sqrt{50^2+50^2}=50\sqrt2\approx70{,}7\,\Omega$. $\text{arg}(Z_{Total})=\arctan(50/50)=\pi/4=45°$ (Théorème 2).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Pour le même circuit qu'à la question 3, la tension totale est-elle en avance ou en retard sur le courant ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Puisque $L\omega>1/(C\omega)$ (80>30), la partie imaginaire de $Z_{Total}$ est positive, $\phi=+45°>0$ : la tension totale est en <strong>avance</strong> sur le courant (circuit à dominante inductive) — cas opposé à celui illustré en Fig. 2.</div>
+</div>
+
+<div class="quiz-image-q"></div>
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi choisit-on l'intensité comme origine des phases pour un circuit série (Fig. 1-2), mais la tension pour un circuit parallèle (Fig. 3) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+On choisit comme référence la grandeur <strong>commune</strong> à tous les dipôles du montage : en série, c'est le courant (même intensité dans toute la maille) ; en parallèle, c'est la tension (même tension aux bornes de chaque branche). Ce choix simplifie l'écriture car il évite d'introduire un déphasage supplémentaire sur la grandeur de référence elle-même.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passerait-il sur le diagramme de Fresnel du circuit 1 (Fig. 2) si $L\omega=1/(C\omega)$ exactement ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$U_L$ et $U_C$ seraient de même norme et de sens opposés (Théorème 2, partie imaginaire nulle) : ils s'annuleraient exactement dans le diagramme de Fresnel, laissant $U_{Total}=U_R$, colinéaire à $I$ — c'est la condition de résonance en intensité du circuit RLC série ($\phi=0$).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : peut-on additionner directement les impédances $Z_C=1/(jC\omega)$ et $Z_L=jL\omega$ comme deux nombres réels ordinaires ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+On peut les additionner, mais il faut respecter l'algèbre des nombres complexes : $Z_L+Z_C = jL\omega+\dfrac{1}{jC\omega}=jL\omega-\dfrac{j}{C\omega}=j\left(L\omega-\dfrac{1}{C\omega}\right)$ (Théorème 2) — le piège est d'oublier que $1/j=-j$, ce qui inverserait le signe de la contribution capacitive si on l'omettait.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : dans la correspondance temporel-complexe (Théorème 1), pourquoi $d^2u/dt^2$ correspond-il à $-\omega^2\underline u$ et non à $+\omega^2\underline u$ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que dériver deux fois revient à multiplier deux fois par $j\omega$ : $(j\omega)^2=j^2\omega^2=-\omega^2$ (puisque $j^2=-1$). Oublier ce carré de $j$ (et donc le signe moins) est une erreur très fréquente lors du passage en notation complexe pour les équations du second ordre.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : reliez la notion de portrait de phase (chapitres précédents, régime transitoire) et celle de diagramme de Fresnel (ce chapitre, régime sinusoïdal forcé) — que représentent-ils tous les deux géométriquement ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Les deux sont des représentations géométriques d'une évolution temporelle sans tracer explicitement le temps : le portrait de phase relie une grandeur à sa dérivée (utile en régime transitoire, où l'évolution n'est pas sinusoïdale), tandis que le diagramme de Fresnel représente chaque grandeur sinusoïdale par un vecteur tournant à la pulsation commune $\omega$, dont on ne trace que l'amplitude et la phase relative (utile en régime sinusoïdal forcé établi, où toutes les grandeurs oscillent à la même fréquence).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : à partir de $Z_{Total}=R+j(L\omega-1/(C\omega))$ (circuit 1) et $1/Z_{Total}=1/R+1/(jL\omega)+jC\omega$ (circuit 2), montrez que les rôles de $L$ et $C$ s'échangent entre le circuit série et le circuit parallèle.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+En série, l'impédance de $L$ ($jL\omega$) s'additionne directement, tandis que celle de $C$ contribue par son inverse ($1/(jC\omega)$) : $C$ devient donc « dominant à basse fréquence » (grande impédance) et $L$ « dominant à haute fréquence ». En parallèle, c'est l'<strong>admittance</strong> ($1/Z$) qui s'additionne : celle de $L$ ($1/(jL\omega)$) est alors défavorisée à haute fréquence, celle de $C$ ($jC\omega$) à basse fréquence — exactement l'inverse du cas série. Cette dualité série/parallèle, réel/imaginaire est au cœur de la théorie des filtres (chapitre suivant).</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Régime sinusoïdal » (résumé de cours, Prépa Barthou, Pau)</li>
+<li>Programme officiel de Physique-Chimie, CPGE 1<sup>re</sup> année (filière PCSI), bloc « Circuits linéaires en régime sinusoïdal forcé » : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+<li>H-Prépa Physique 1<sup>re</sup> année (Hachette Éducation) — chapitre « Représentation complexe, impédances »</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>
