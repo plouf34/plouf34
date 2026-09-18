@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie — Structure de l'atome et classification périodique</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.75rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.84rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.13rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+table{border-collapse:collapse; margin:1rem 0; width:100%;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.9rem; vertical-align:middle;}
+th{background:#f3f2ee;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.35rem;} h2{font-size:1.05rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} table{font-size:.76rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. L'atome</a></li>
+  <li class="top"><a href="#s2">2. Quantification de l'énergie</a></li>
+  <li class="top"><a href="#s3">3. Configuration électronique</a></li>
+  <li class="top"><a href="#s4">4. Classification périodique</a></li>
+  <li class="top"><a href="#s5">5. Évolution de propriétés (χ, rayon)</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Structure de l'atome et classification périodique</h1>
+<div class="meta">Chimie — Résumé de cours · PCSI · Sainte-Geneviève (Versailles), S. Falcou · mis au propre le 18/09/2026</div>
+</header>
+
+<section id="s1">
+<h2>1. L'atome</h2>
+<div class="block def">
+<span class="label">Définition 1 — atome</span>
+L'atome est neutre, composé de $Z$ protons (charge $+e$, $m_p\approx1{,}6726\times10^{-27}\,\mathrm{kg}$), $A-Z$ neutrons (neutres, $m_n\approx1{,}6749\times10^{-27}\,\mathrm{kg}$) et $Z$ électrons (charge $-e$, $m_e\approx9{,}1095\times10^{-31}\,\mathrm{kg}$). $Z$ est le <strong>nombre de charge</strong> (numéro atomique), $A$ le <strong>nombre de masse</strong>.
+</div>
+<p>Charge élémentaire $e\approx1{,}6\times10^{-19}\,\mathrm{C}$. Constante d'Avogadro $N_A=6{,}023\times10^{23}\,\mathrm{mol^{-1}}$ ; Faraday $F=N_A\,e\approx96400\,\mathrm{C\cdot mol^{-1}}$. Unité de masse atomique $u=\tfrac{1}{12}m(^{12}\mathrm{C})=1{,}6606\times10^{-27}\,\mathrm{kg}$.</p>
+<div class="block remark">
+<span class="label">Ordres de grandeur</span>
+Noyau : rayon $\sim10^{-14}\,\mathrm{m}$. Atome (nuage électronique) : rayon $\sim10^{-10}\,\mathrm{m}$ (1 angström). Les atomes sont donc essentiellement constitués de vide (à l'échelle de la Terre, l'atome correspondrait à ~200 fois la distance Terre-Lune). Les électrons ($m_e\approx m_p/2000$) ont une masse négligeable devant celle des nucléons :
+$$m_{atome}\approx Z\,m_p+(A-Z)\,m_n\approx A\,m_p$$
+d'où l'appellation « nombre de masse » pour $A$, et $N_A\,m_p\approx1\,\mathrm{g}$, donc la masse molaire atomique est numériquement voisine de $A$ en g·mol⁻¹.
+</div>
+<div class="block def">
+<span class="label">Définition 2 — élément, nucléide, isotopes</span>
+$Z$ définit un <strong>élément chimique</strong> ; le couple $(A,Z)$ définit un <strong>nucléide</strong>, noté $^A_Z\mathrm{X}$. Deux nucléides de même élément ($Z$ identique) et de $A$ différent sont des <strong>isotopes</strong>.
+</div>
+<p>Sur ~92 éléments naturels et ~1500 nucléides connus (dont ~300 naturels), l'uranium ($Z=92$) est l'élément naturel le plus lourd. Exemple : l'hydrogène a trois isotopes — $^1_1\mathrm{H}$, $^2_1\mathrm{H}\equiv\mathrm{D}$ (deutérium, non radioactif), $^3_1\mathrm{H}\equiv\mathrm{T}$ (tritium, radioactif). Abondances isotopiques naturelles : H 99,985 % / D 0,015 % ; $^{12}\mathrm{C}$ 98,89 % / $^{13}\mathrm{C}$ 1,11 % ; $^{35}\mathrm{Cl}$ 75,8 % / $^{37}\mathrm{Cl}$ 24,2 %.</p>
+<div class="block remark">
+<span class="label">Stabilité des noyaux</span>
+Quand le nombre de protons augmente, la répulsion électrostatique finit par l'emporter sur l'interaction forte : les noyaux stables nécessitent $N=Z$ pour les noyaux légers ($Z<20$) et $N\geqslant Z$ au-delà. Un noyau instable tend à revenir vers sa zone de stabilité : émission $\beta^-$ (noyau léger, $N>Z$), $\beta^+$ ($N<Z$), ou $\alpha$ (noyau lourd). Au-delà de $Z=92$, les noyaux sont généralement très instables ; l'élément le plus lourd synthétisé à ce jour possède 118 protons. Les éléments « super-lourds » ($>110$ protons) sont formés par fusion de deux noyaux plus légers ; leur très grande instabilité (fission avant détection directe) a conduit le GANIL (Grand Accélérateur National d'Ions Lourds, CEA/CNRS) à mettre en évidence, via le détecteur Indra, des temps de fission $>10^{-18}\,\mathrm{s}$ pour des noyaux à 120 et 124 protons, suffisamment longs pour signer sans ambiguïté leur formation.
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Quantification de l'énergie des atomes</h2>
+<div class="block def">
+<span class="label">Définition 3 — grandeur quantifiée</span>
+Dire qu'une grandeur est <strong>quantifiée</strong> signifie qu'elle ne peut pas prendre toutes les valeurs possibles, mais seulement certaines (éventuellement en nombre infini, réparties de façon discrète).
+</div>
+<h3>Ondes électromagnétiques, absorption et émission</h3>
+<p>Une onde électromagnétique (champs électrique et magnétique couplés se propageant dans l'espace) est caractérisée par sa longueur d'onde dans le vide $\lambda_0$, sa période $T$ ou sa fréquence $\nu=1/T$, reliées par $\lambda_0=cT=c/\nu$ ($c\approx3\times10^8\,\mathrm{m\cdot s^{-1}}$).</p>
+<figure>
+<svg viewBox="0 0 620 140" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11">
+<line x1="10" y1="120" x2="610" y2="120" stroke="#333" stroke-width="1.4"/>
+<line x1="10" y1="120" x2="10" y2="20" stroke="#333" stroke-width="1.4"/>
+<line x1="45" y1="30" x2="90" y2="30" stroke="#333"/><text x="67" y="20" text-anchor="middle">γ</text>
+<line x1="90" y1="30" x2="150" y2="30" stroke="#333"/><text x="120" y="20" text-anchor="middle">X</text>
+<line x1="150" y1="30" x2="230" y2="30" stroke="#3b6fd8" stroke-width="3"/><text x="190" y="20" text-anchor="middle">UV</text>
+<line x1="230" y1="30" x2="280" y2="30" stroke="#2fa365" stroke-width="3"/><text x="255" y="20" text-anchor="middle">Vis.</text>
+<line x1="280" y1="30" x2="380" y2="30" stroke="#c98a12" stroke-width="3"/><text x="330" y="20" text-anchor="middle">IR</text>
+<line x1="380" y1="30" x2="470" y2="30" stroke="#333"/><text x="425" y="20" text-anchor="middle">radar</text>
+<line x1="470" y1="30" x2="560" y2="30" stroke="#333"/><text x="515" y="20" text-anchor="middle">ondes hertziennes</text>
+<text x="45" y="45" font-size="9">0,01nm</text><text x="150" y="45" font-size="9">10nm</text><text x="230" y="45" font-size="9">0,4µm</text><text x="280" y="45" font-size="9">0,8µm</text><text x="380" y="45" font-size="9">0,4mm</text><text x="470" y="45" font-size="9">1m</text>
+<text x="590" y="45" font-size="9">λ</text>
+</svg>
+<figcaption>Fig. 1 — Domaines des ondes électromagnétiques (γ, X : transitions nucléaires/électrons de cœur ; UV-visible-IR : électrons de valence, vibrations ; radio : courants haute fréquence). Le domaine visible (400-770 nm) est très étroit comparé à l'ensemble du spectre.</figcaption>
+</figure>
+<div class="block theorem">
+<span class="label">Dualité onde-corpuscule</span>
+La lumière peut être vue comme une onde ou comme un flux de particules sans masse, les <strong>photons</strong>, d'énergie $E=h\nu$ ($h=6{,}63\times10^{-34}\,\mathrm{J\cdot s}$, constante de Planck). Unité adaptée à l'échelle atomique : l'électron-volt, $1\,\mathrm{eV}=1{,}6\times10^{-19}\,\mathrm{J}$. Plus généralement, la longueur d'onde de de Broglie associée à toute particule de quantité de mouvement $p$ est $\lambda=h/p$.
+</div>
+<p>Exemple : un photon de $\lambda_0=500\,\mathrm{nm}$ a une énergie $E=hc/\lambda_0=6{,}63\times10^{-34}\times3\times10^8/500\times10^{-9}\approx3{,}98\times10^{-19}\,\mathrm{J}\approx2{,}49\,\mathrm{eV}$.</p>
+<div class="block theorem">
+<span class="label">Principe de conservation de l'énergie (émission/absorption)</span>
+L'énergie du photon émis ou absorbé par la matière est exactement égale à la différence d'énergie entre les deux niveaux énergétiques entre lesquels a lieu la transition :
+$$\Delta E=|E_n-E_m|=h\nu=\frac{hc}{\lambda}$$
+</div>
+<h3>Spectre d'émission de l'atome d'hydrogène</h3>
+<p>Un échantillon de $\mathrm{H_2}$ excité par décharge électrique ($\mathrm{H_2(g)}\to2\,\mathrm{H^*(g)}$) émet des photons dont le spectre présente des raies dans l'UV, le visible et l'IR (4 raies visibles seulement, série de Balmer, $n=2$). Chaque série de raies (Lyman $n=1$, Balmer $n=2$, Paschen $n=3$, Brackett $n=4$, Pfund $n=5$) vérifie :</p>
+$$\sigma=\frac1\lambda=R_H\left(\frac{1}{n^2}-\frac{1}{n'^2}\right)\qquad n'>n,\ n,n'\in\mathbb{N}^*$$
+<div class="block correction">
+<span class="label">⚠️ Correction — valeur de la constante de Rydberg $R_H$</span>
+Le document source indique $R_H=1{,}09\,\mathrm{cm^{-1}}$, ce qui est erroné de cinq ordres de grandeur (probable coquille de mise en forme d'un exposant). La valeur correcte de la constante de Rydberg pour l'hydrogène est $R_H\approx1{,}097\times10^{7}\,\mathrm{m^{-1}}=1{,}097\times10^{5}\,\mathrm{cm^{-1}}$ (source : CODATA ; cette valeur redonne bien, par exemple, la raie $H_\alpha$ à 656,2 nm avec $n=2,n'=3$).
+</div>
+<div class="block remark">
+<span class="label">Remarques</span>
+La mécanique classique ne permet pas d'interpréter ce résultat (elle prédirait un continuum d'énergies) : il faut la mécanique quantique. Un spectre d'absorption de l'hydrogène gazeux à basse température ne présente que la série de Lyman (une seule série de raies noires), $\sigma=R_H(1-1/n'^2)$.
+</div>
+<h3>Énergie de l'hydrogène et des hydrogénoïdes</h3>
+<div class="block theorem">
+<span class="label">Propriété 1 — quantification de l'énergie</span>
+L'énergie de l'atome d'hydrogène (référence $E_\infty=0$) est quantifiée par le nombre quantique principal $n\in\mathbb{N}^*$ :
+$$E_n=-\frac{R_y}{n^2}=-\frac{E_0}{n^2}=-\frac{13{,}6}{n^2}\,\mathrm{eV}\qquad R_y=2{,}18\times10^{-18}\,\mathrm{J}$$
+État fondamental ($n=1$) : $-13{,}6\,\mathrm{eV}$ ; premier état excité ($n=2$) : $-3{,}40\,\mathrm{eV}$ ; deuxième état excité ($n=3$) : $-1{,}51\,\mathrm{eV}$.
+</div>
+<p>Pour un <strong>atome hydrogénoïde</strong> (noyau de charge $Ze$ et un seul électron, ex. $\mathrm{He^+}$, $\mathrm{Li^{2+}}$) : $E_n=-R_yZ^2/n^2$. Exemple : énergie d'ionisation de l'hydrogénoïde du carbone $\mathrm{C^{5+}}$ ($Z=6$, état fondamental) : $EI=E_\infty-E_1=E_0Z^2=489{,}6\,\mathrm{eV}$.</p>
+</section>
+
+<section id="s3">
+<h2>3. Configuration électronique d'un atome</h2>
+<h3>Nombres quantiques</h3>
+<table>
+<tr><th>Nombre</th><th>Nom</th><th>Valeurs</th></tr>
+<tr><td>$n$</td><td>principal</td><td>$n\in\mathbb{N}^*$</td></tr>
+<tr><td>$l$</td><td>secondaire (azimutal)</td><td>$0\leqslant l<n$, entier</td></tr>
+<tr><td>$m$</td><td>tertiaire (magnétique)</td><td>$-l\leqslant m\leqslant l$, entier</td></tr>
+<tr><td>$m_s$</td><td>magnétique de spin</td><td>$+\tfrac12$ ou $-\tfrac12$</td></tr>
+</table>
+<p>Une <strong>orbitale atomique</strong> (OA), notée $nx_m$ ($x$ = lettre dépendant de $l$), dépend de $(n,l,m)$. Correspondance niveau/sous-niveau : $n=1,2,3,4,5,6\to$ K,L,M,N,O,P ; $l=0,1,2,3,4\to$ s,p,d,f,g.</p>
+<div class="block remark">
+<span class="label">Remarque</span>
+L'énergie d'un électron ne dépend que de $n$ pour l'hydrogène et les hydrogénoïdes (systèmes à un électron) : il y a alors $n^2$ orbitales dégénérées de même énergie $-R_yZ^2/n^2$. Pour un atome polyélectronique, l'énergie dépend de $(n,l)$.
+</div>
+<h3>Règles de remplissage des OA</h3>
+<div class="block theorem">
+<span class="label">Règle de Klechkowsky</span>
+Dans un atome polyélectronique à l'état fondamental, les sous-couches se remplissent par $(n+l)$ croissant ; pour deux valeurs égales de $(n+l)$, c'est la sous-couche de $n$ le plus petit qui se remplit en premier.
+</div>
+<p>Ordre d'énergie croissante qui en résulte : $1s,2s,2p,3s,3p,4s,3d,4p,5s,4d,5p,6s,...$ — noter l'interpénétration : $4s$ (n+l=4) est plus basse en énergie que $3d$ (n+l=5).</p>
+<div class="block theorem">
+<span class="label">Principe d'exclusion de Pauli</span>
+Deux électrons d'un même atome ne peuvent pas être dans le même état quantique $(n,l,m,m_s)$. Conséquence : au maximum 2 électrons par orbitale atomique (les deux valeurs de $m_s$) ; au maximum $2(2l+1)$ électrons par niveau $(n,l)$ — soit 2 pour $ns$, 6 pour $np$, 10 pour $nd$, 14 pour $nf$.
+</div>
+<div class="block theorem">
+<span class="label">Règle de Hund</span>
+Lorsqu'on dispose de plusieurs orbitales dégénérées de même énergie, les électrons sont placés de façon à occuper le maximum d'orbitales atomiques ($m$ différents) avec des spins parallèles (même $m_s$), avant appariement.
+</div>
+<div class="block remark">
+<span class="label">Conséquence expérimentale</span>
+La présence d'électrons célibataires confère des propriétés magnétiques particulières : une espèce sans électron célibataire est <strong>diamagnétique</strong>, avec au moins un électron célibataire elle est <strong>paramagnétique</strong>.
+</div>
+<h3>Applications, exceptions</h3>
+<p>Exemples de configurations fondamentales : Azote N (Z=7) $1s^22s^22p^3$ ; Fer Fe (Z=26) $1s^22s^22p^63s^23p^64s^23d^6$. Pour les ions, on ajoute/retire des électrons à partir de la configuration de l'atome ; pour les métaux du bloc d, ce sont les électrons $ns$ qui partent en premier (ex. $\mathrm{Fe^{2+}}$ : $[\mathrm{Ar}]3d^6$, pas $4s^23d^4$), bien qu'ils soient énergétiquement plus bas, car ils sont plus externes.</p>
+<div class="block correction">
+<span class="label">⚠️ Exceptions à la règle de Klechkowsky</span>
+Des interactions électron-électron non prises en compte par la règle de Klechkowsky favorisent l'obtention d'un sous-groupe d'OA dégénérées vide, à moitié rempli ou complètement rempli (énergie d'appariement déstabilisante évitée). Exemples : Chrome Cr (Z=24) attendu $4s^23d^4$, réel $4s^13d^5$ ; Cuivre Cu (Z=29) attendu $4s^23d^9$, réel $4s^13d^{10}$ ; Palladium Pd (Z=46, promotion de 2 électrons) réel $5s^04d^{10}$ ; Lanthane La et Gadolinium Gd (promotion s/f→d). Ces exceptions se multiplient quand $Z$ augmente (niveaux de plus en plus proches en énergie).
+</div>
+<h3>Électrons de cœur et de valence</h3>
+<div class="block def">
+<span class="label">Définition 4</span>
+Les <strong>électrons de valence</strong> (plus haute énergie, plus externes) interviennent dans la réactivité chimique et la formation des liaisons ; les <strong>électrons de cœur</strong> (plus proches du noyau, plus liés) n'y participent pas. En général, les électrons de valence occupent le(s) niveau(x) de $n$ le plus élevé et, en cas d'interpénétration, les niveaux remplis après le premier niveau de $n$ maximal (sauf sous-couche $d$ complète, qui reste électrons de cœur).
+</div>
+<p>Exemples : Carbone (Z=6) $1s^22s^22p^2$, cœur $1s^2$, valence $2s^22p^2$. Titane (Z=22) $1s^22s^22p^63s^23p^64s^23d^2$, cœur $1s^22s^22p^63s^23p^6$, valence $4s^23d^2$. Brome (Z=35), cœur $...3d^{10}$ (sous-couche d complète), valence $4s^24p^5$.</p>
+</section>
+
+<section id="s4">
+<h2>4. Classification périodique</h2>
+<p>Moseley (1887-1913) fut le premier à utiliser $Z$ comme variable de classement. Mendeleïev (1834-1907), en classant les éléments connus suivant la périodicité de leurs propriétés chimiques, put prédire l'existence d'éléments alors non découverts.</p>
+<div class="block theorem">
+<span class="label">Structure en blocs</span>
+Le tableau se répartit en 5 blocs, nommés d'après la dernière OA remplie dans la configuration fondamentale : bloc s (H, He, colonnes 1-2), bloc p (colonnes 13-18), bloc d (colonnes 3-12, à partir de la 3<sup>e</sup> ligne), bloc f (lanthanides, actinides, inséré entre s et d). Chaque ligne (période) débute par le remplissage d'une sous-couche $ns$ et finit par $np$ (si elle existe).
+</div>
+<div class="block def">
+<span class="label">Définition 5 — élément de transition</span>
+Un élément de transition est caractérisé par un sous-niveau $d$ partiellement rempli, à l'état atomique ou dans un état d'oxydation usuel (ex. Sc, $[\mathrm{Ar}]4s^23d^1$, est un élément de transition ; Zn, $[\mathrm{Ar}]4s^23d^{10}$, existant aussi sous forme $\mathrm{Zn^{2+}}\,[\mathrm{Ar}]3d^{10}$, n'en est pas un). Ils forment souvent plusieurs cations (Fe²⁺/Fe³⁺), sont souvent paramagnétiques, et interviennent dans de nombreux processus biologiques via la formation de complexes (ex. hémoglobine, transport de l'O₂).
+</div>
+<h3>Quelques familles</h3>
+<table>
+<tr><th>Colonne</th><th>Famille</th><th>Propriété clé</th></tr>
+<tr><td>1 (Li, Na, K, Rb, Cs, Fr)</td><td>alcalins</td><td>1 e⁻ de valence, métaux réducteurs, électropositifs ($\mathrm{Na(s)\to Na^+(aq)+e^-}$), réagissent avec l'eau (formation de $\mathrm{H_2}$)</td></tr>
+<tr><td>2 (Ca, Sr, Ba, Ra)</td><td>alcalino-terreux</td><td>—</td></tr>
+<tr><td>3-12 (majorité)</td><td>éléments de transition</td><td>bloc d</td></tr>
+<tr><td>17 (F, Cl, Br, I, At)</td><td>halogènes</td><td>1 e⁻ manquant, forts oxydants, électronégatifs ($\mathrm{Cl+e^-\to Cl^-}$), corps simples diatomiques $\mathrm{X_2}$</td></tr>
+<tr><td>18 (He, Ne, Ar, Kr...)</td><td>gaz nobles</td><td>couches complètes, très inertes chimiquement (rare contre-exemple : $\mathrm{XeO_4}$)</td></tr>
+</table>
+<div class="block remark">
+<span class="label">Remarque — l'hydrogène</span>
+H n'appartient pas à la famille des alcalins (ce n'est pas un métal) : il forme le proton $\mathrm{H^+}$ ($1s^0$) et l'ion hydrure $\mathrm{H^-}$ (très basique, $1s^2=[\mathrm{He}]$).
+</div>
+</section>
+
+<section id="s5">
+<h2>5. Évolution de quelques propriétés dans la classification</h2>
+<h3>Électronégativité</h3>
+<div class="block def">
+<span class="label">Définition 6 — électronégativité</span>
+L'électronégativité $\chi$ (concept qualitatif, non mesurable directement) traduit l'affinité d'un atome pour les électrons. Si $\chi_A>\chi_B$ dans une liaison A–B, les électrons de liaison sont attirés vers A : la liaison est polarisée ($A^{-\delta}-B^{+\delta}$). Si $\chi_A=\chi_B$, liaison covalente non polaire ; si le transfert est complet, liaison ionique.
+</div>
+<p>Plusieurs échelles (cohérentes entre elles) : Pauling (référence historique, via les énergies de liaison AA/BB/AB — utilisée en chimie organique), Mulliken, Allred-Rochow (via la charge effective $Z^*$). Le fluor est l'élément le plus électronégatif de la classification, puis O, Cl, Br, I.</p>
+<div class="block theorem">
+<span class="label">Tendance générale</span>
+$\chi$ augmente le long d'une <strong>ligne</strong> (période) et diminue le long d'une <strong>colonne</strong> (pour les électrons $ns,np$). Pour le bloc d, énergie d'ionisation et affinité électronique sont faibles : l'électronégativité (Mulliken) des métaux de transition est faible et varie peu.
+</div>
+<h3>Rayon atomique, rayon ionique</h3>
+<p>Pour l'hydrogène : $r=n^2a_0$ ($a_0=52{,}9\,\mathrm{pm}$, rayon de Bohr). Pour un hydrogénoïde : $r=\dfrac{n^2}{Z}a_0$.</p>
+<div class="block theorem">
+<span class="label">Modèle de Slater (atomes polyélectroniques)</span>
+Chaque électron est modélisé comme plongé dans le champ d'un noyau de <strong>charge effective</strong> $Z^*=Z-\sigma$ ($\sigma$ = constante d'écran, due aux électrons situés entre le noyau et l'électron considéré). Règles de Slater pour $\sigma$ (contribution d'un électron écranté par un électron d'un groupe donné) :
+</div>
+<table>
+<tr><th>Électron étudié</th><th>couches $n'<n-1$</th><th>couche $n-1$</th><th>même couche $n$, s/p</th><th>même couche, d</th><th>même couche, f</th></tr>
+<tr><td>1s</td><td>—</td><td>—</td><td>0,30</td><td>—</td><td>—</td></tr>
+<tr><td>ns, np</td><td>1</td><td>0,85</td><td>0,35</td><td>0</td><td>0</td></tr>
+<tr><td>nd</td><td>1</td><td>1</td><td>1</td><td>0,35</td><td>0</td></tr>
+<tr><td>nf</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0,35</td></tr>
+</table>
+<p>Exemple, phosphore (Z=15, $1s^22s^22p^63s^23p^3$) : $\sigma_{1s}=0{,}30\Rightarrow Z^*_{1s}=14{,}70$ ; $\sigma_{2s,2p}=2\times0{,}85+7\times0{,}35=4{,}15\Rightarrow Z^*_{2s,2p}=10{,}85$ ; $\sigma_{3s,3p}=2\times1+8\times0{,}85+4\times0{,}35=10{,}20\Rightarrow Z^*_{3s,3p}=4{,}8$.</p>
+<div class="block theorem">
+<span class="label">Rayon de l'orbitale de Slater et énergie</span>
+$$r=\frac{n^2}{Z^*}a_0 \qquad E_n=-E_0\frac{(Z-\sigma)^2}{n^{*2}}$$
+avec $n^*$ le nombre quantique apparent ($n^*=1{,}0$ ; $2{,}0$ ; $3{,}0$ ; $3{,}7$ ; $4{,}0$ ; $4{,}2$ pour $n=1$ à 6). Quand $Z^*$ augmente, l'orbitale se contracte ; plus $n$ est grand, plus l'orbitale est diffuse.
+</div>
+<div class="block remark">
+<span class="label">Tendances du rayon atomique</span>
+Sur une <strong>ligne</strong> ($n$ fixé) : $Z^*$ augmente $\Rightarrow$ $r$ diminue (contraction des OA). Sur une <strong>colonne</strong> : $n$ augmente de 1, $Z$ augmente de 2/8/18 mais $\sigma$ aussi (d'une fraction de 2/8/18), donc $Z^*$ augmente aussi — le modèle de Slater justifie mal la tendance observée expérimentalement (augmentation de $r$ dans une colonne, due aux OA de plus en plus diffuses). Le passage d'une fin de ligne à un début de ligne suivante correspond à une brusque augmentation de $r$.
+</div>
+<div class="block theorem">
+<span class="label">Rayon ionique</span>
+Les <strong>anions</strong> sont plus gros que l'atome correspondant ($\sigma$ augmente donc $Z^*$ diminue, à $n$ constant). Les <strong>cations</strong> sont plus petits que l'atome correspondant ($\sigma$ diminue donc $Z^*$ augmente). Plus la charge est élevée (en valeur absolue), plus l'effet est marqué.
+</div>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Quelle est la différence entre un élément chimique et un nucléide ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Un élément chimique est défini par le seul numéro atomique $Z$ ; un nucléide est défini par le couple $(A,Z)$ (Définition 2). Deux nucléides de même élément mais de $A$ différent (donc de même $Z$) sont des isotopes.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Pourquoi dit-on que l'énergie de l'atome d'hydrogène est « quantifiée » ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce qu'elle ne peut prendre que certaines valeurs discrètes $E_n=-13{,}6/n^2\,\mathrm{eV}$ ($n\in\mathbb{N}^*$), et non un continuum de valeurs (Définition 3, Propriété 1) — ce qui se manifeste expérimentalement par un spectre de raies (et non un spectre continu).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Donner la configuration électronique fondamentale du calcium (Z=20) et identifier ses électrons de valence.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$1s^22s^22p^63s^23p^64s^2$ (règle de Klechkowsky). Électrons de valence : $4s^2$ (électrons de cœur : $1s^22s^22p^63s^23p^6$).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Calculer, à l'aide des règles de Slater, la charge effective $Z^*$ ressentie par un électron 1s de l'atome d'hélium (Z=2, configuration $1s^2$).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Un seul autre électron, dans la même couche 1s : $\sigma=0{,}30$ (table des règles de Slater, ligne « 1s »). $Z^*=Z-\sigma=2-0{,}30=1{,}70$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi les gaz nobles sont-ils particulièrement inertes chimiquement ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Leurs sous-couches (et donc leur couche électronique) sont toutes complètes, ce qui leur confère une stabilité particulière (Section 4, Quelques familles) : ils n'ont donc pas tendance à perdre ou gagner des électrons pour former des ions ou des molécules — ils perdraient ce facteur favorable en le faisant.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Piège classique : pourquoi la configuration électronique de l'ion Fe²⁺ (Z=26) est-elle $[\mathrm{Ar}]3d^6$ et non $[\mathrm{Ar}]4s^23d^4$, alors que la sous-couche 4s est remplie avant la 3d par la règle de Klechkowsky ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La règle de Klechkowsky s'applique au <strong>remplissage</strong> (ordre énergétique de construction), mais lors de l'ionisation, ce sont les électrons $ns$ qui partent en premier, car bien que plus bas en énergie, ils sont plus <strong>externes</strong> (plus loin du noyau) que les électrons $(n-1)d$ (Section 3, Applications). C'est un piège classique de confondre ordre de remplissage et ordre d'arrachement des électrons.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : le chrome (Z=24) a-t-il pour configuration fondamentale $[\mathrm{Ar}]4s^23d^4$ comme le prédirait naïvement la règle de Klechkowsky ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non : la configuration réelle est $[\mathrm{Ar}]4s^13d^5$ (Correction, Section 3). Les interactions électron-électron, non prises en compte par la règle de Klechkowsky, favorisent l'obtention d'une sous-couche à moitié remplie ($3d^5$) au prix de la promotion d'un électron 4s, car le gain énergétique associé compense le coût de la promotion — un piège classique fréquemment testé sur Cr et Cu.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Que se passerait-il pour le rayon atomique si, contrairement à la réalité physique, les électrons de valence n'écrantaient absolument aucune charge nucléaire supplémentaire lorsqu'on ajoute un électron sur une même ligne ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$Z^*$ augmenterait encore plus fortement qu'avec l'écran partiel réel ($\sigma=0{,}35$ par électron de même couche, table de Slater), donc le rayon $r=n^2a_0/Z^*$ diminuerait encore davantage le long de la ligne : la contraction observée expérimentalement serait exagérée. C'est justement parce que l'écran n'est que partiel (et non total) que $Z^*$ n'augmente que modérément sur une ligne, d'où une contraction réelle mais progressive du rayon atomique.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : pourquoi un cation est-il toujours plus petit que l'atome neutre correspondant, alors qu'un anion est toujours plus gros ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Dans les deux cas, c'est la variation de la charge effective $Z^*=Z-\sigma$ ressentie par les électrons restants qui gouverne le rayon $r=n^2a_0/Z^*$ (à $n$ constant) : retirer un électron (cation) diminue le nombre d'électrons qui écrantent le noyau, donc $\sigma$ diminue et $Z^*$ augmente, contractant l'orbitale ; ajouter un électron (anion) augmente $\sigma$, donc $Z^*$ diminue, dilatant l'orbitale (Section 5, Rayon ionique). Le principe unificateur est que le rayon dépend de la charge <strong>effective</strong> vue par les électrons, pas seulement du nombre de protons du noyau.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : reliez la règle de Hund (répartition des électrons dans des orbitales dégénérées) à l'existence d'espèces paramagnétiques — pourquoi un atome ayant, par la règle de Hund, plusieurs électrons célibataires dans une sous-couche $p$ ou $d$ incomplète est-il nécessairement paramagnétique ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La règle de Hund impose de répartir d'abord les électrons dans le maximum d'orbitales disponibles avec des spins parallèles avant d'apparier deux électrons dans la même orbitale (Section 3, Règle de Hund) : dès qu'une sous-couche dégénérée n'est ni vide ni complètement remplie, cette règle produit nécessairement des électrons non appariés (célibataires), tant qu'il reste des orbitales vides du même niveau à occuper avant que l'appariement ne devienne obligatoire. Or, par définition, une espèce est paramagnétique si et seulement si elle possède au moins un électron célibataire (Remarque, Section 3) : toute sous-couche partiellement remplie (ni vide ni pleine) produit donc, via la règle de Hund, une espèce paramagnétique — c'est le lien direct entre configuration électronique fondamentale et propriété magnétique macroscopique observable expérimentalement.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Structure de l'atome et classification périodique », S. Falcou, PCSI1 Sainte-Geneviève (Versailles), 2013-2014</li>
+<li>Programme officiel de Physique-Chimie, CPGE 1<sup>re</sup> année (filière PCSI), thème « Constitution et transformations de la matière », bloc architecture de la matière : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+<li>CODATA (constantes fondamentales, valeur de la constante de Rydberg $R_H$) — Correction du §2</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>
