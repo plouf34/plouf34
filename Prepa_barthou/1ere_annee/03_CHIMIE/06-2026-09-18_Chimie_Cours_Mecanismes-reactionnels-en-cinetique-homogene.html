@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie — Mécanismes réactionnels en cinétique homogène</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.65rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:270px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.82rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.12rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+table{border-collapse:collapse; margin:1rem 0; width:100%;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.9rem; vertical-align:middle;}
+th{background:#f3f2ee;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.25rem;} h2{font-size:1.05rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} table{font-size:.76rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Mécanismes</a></li>
+  <li class="top"><a href="#s2">2. AEQS et étape cinétiquement déterminante</a></li>
+  <li class="top"><a href="#s3">3. Exemples de détermination de loi cinétique</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Cinétique chimique — Mécanismes réactionnels en cinétique homogène, loi de vitesse associée</h1>
+<div class="meta">Chimie — Résumé de cours · PCSI · Sainte-Geneviève (Versailles), S. Falcou · mis au propre le 18/09/2026</div>
+</header>
+<div class="block remark">
+<span class="label">Introduction</span>
+Pour des réactions faisant intervenir le même nombre de réactifs et de produits, la loi de vitesse n'a pas toujours la même forme (ex. deux substitutions nucléophiles sur des dérivés halogénés voisins, $v_1=k[A][\mathrm{Cl^-}]$ contre $v_2=k'[A']$) : au niveau microscopique, le <strong>mécanisme réactionnel</strong> diffère. En général, l'équation-bilan d'une réaction ne représente pas son déroulement à l'échelle moléculaire.
+</div>
+
+<section id="s1">
+<h2>1. Mécanismes</h2>
+<div class="block def">
+<span class="label">Définition 1 — acte élémentaire, mécanisme, molécularité</span>
+Un <strong>acte élémentaire</strong> (ou processus/réaction élémentaire) est une réaction se déroulant en une seule étape au niveau moléculaire, sans formation d'espèce intermédiaire. Un <strong>mécanisme</strong> est un ensemble de processus élémentaires successifs rendant compte de la transformation des réactifs en produits. La <strong>molécularité</strong> d'un acte élémentaire est le nombre d'entités participant en tant que réactifs à ce processus.
+</div>
+<div class="block theorem">
+<span class="label">Loi de Van't Hoff</span>
+Tout acte élémentaire admet un ordre global égal à sa molécularité ; les ordres partiels par rapport à chaque réactif sont égaux aux coefficients stœchiométriques de ces réactifs. La molécularité d'une réaction élémentaire est toujours faible (1, 2, parfois 3) : contrairement à l'écriture d'un bilan réactionnel (non unique, à un facteur multiplicatif près), celle d'un acte élémentaire est <strong>unique</strong> (les coefficients indiquent le nombre réel de participants au choc) — il serait donc aberrant d'y utiliser des coefficients fractionnaires.
+</div>
+<p>Pour qu'un mécanisme soit complet, il faut donner, avec les équations des actes élémentaires, les mouvements électroniques associés (flèche courbe pleine pour un doublet, demi-flèche pour un électron célibataire ; charges entourées).</p>
+
+<h3>Profil énergétique d'un acte élémentaire, état de transition</h3>
+<p>Exemple étudié (réaction extrêmement simple) : $\mathrm{H_\alpha+H_\beta{-}H_\gamma\to H_\alpha{-}H_\beta+H_\gamma}$. Expérimentalement, il faut une énergie de 0,38 eV (37 kJ·mol⁻¹) pour que la transformation ait lieu, bien que réactifs et produits soient au même niveau d'énergie : le système passe par un état intermédiaire plus haut en énergie.</p>
+<figure>
+<svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
+<line x1="30" y1="190" x2="400" y2="190" stroke="#333" stroke-width="1.2" marker-end="url(#aMc)"/>
+<line x1="30" y1="190" x2="30" y2="15" stroke="#333" stroke-width="1.2" marker-end="url(#aMc)"/>
+<text x="215" y="210" text-anchor="middle">coordonnée de réaction</text>
+<text x="15" y="100" transform="rotate(-90,15,100)">énergie potentielle</text>
+<path d="M 45,150 Q 130,155 175,50 Q 200,30 225,50 Q 270,155 355,150" fill="none" stroke="#3b6fd8" stroke-width="2"/>
+<text x="200" y="28" text-anchor="middle" font-weight="700">état de transition (complexe activé)</text>
+<line x1="200" y1="55" x2="200" y2="150" stroke="#8b2e2e" stroke-dasharray="3,2"/>
+<text x="210" y="110" fill="#8b2e2e">E_a</text>
+<text x="45" y="168" font-size="11">réactifs</text><text x="330" y="168" font-size="11">produits</text>
+</svg>
+<figcaption>Fig. 1 — Profil énergétique symétrique de l'échange H + H₂ → H₂ + H : l'état de transition (complexe activé, structure postulée non observable car de durée de vie nulle) est au sommet de la barrière ; la différence d'énergie avec les réactifs est la barrière énergétique (ou d'activation) $E_a$.</figcaption>
+<defs xmlns="http://www.w3.org/2000/svg"><marker id="aMc" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
+</figure>
+<div class="block remark">
+<span class="label">Coordonnée de réaction et surface d'énergie potentielle</span>
+Le système est décrit par plusieurs paramètres géométriques (ex. deux distances et un angle pour la réaction H+H₂) ; la mécanique quantique impose ici un angle de 180° pour la réaction. L'énergie potentielle en fonction des deux distances définit une <strong>surface d'énergie potentielle</strong> (représentée par des courbes de niveau) ; le chemin suivi par le système (chemin réactionnel) est celui demandant le moins d'énergie, passant par un <strong>col</strong> énergétique. La <strong>coordonnée de réaction</strong> est l'abscisse curviligne le long de ce chemin réactionnel.
+</div>
+
+<h3>Intermédiaire réactionnel</h3>
+<div class="block def">
+<span class="label">Définition 2</span>
+Un <strong>intermédiaire réactionnel</strong> est une espèce chimique formée au cours d'une réaction mais n'apparaissant pas dans le bilan réactionnel. Contrairement à l'état de transition (durée de vie nulle, jamais observable), un intermédiaire réactionnel a une durée de vie non nulle (puits de potentiel relatif) : il est a priori observable ou détectable par des tests expérimentaux. Les intermédiaires réactionnels peuvent être des molécules, des ions ou des <strong>radicaux</strong> (espèce possédant au moins un électron célibataire, neutre ou chargée).
+</div>
+<div class="block demo">
+<span class="label">Mise en évidence historique — miroirs de Paneth</span>
+Un courant de diazote entraîne du plomb tétraméthyle $\mathrm{Pb(CH_3)_4}$ gazeux à travers un tube ; un four chauffe localement le gaz. Au niveau du four : $\mathrm{Pb(CH_3)_4\to Pb+4\,CH_3^\bullet}$ (dépôt de miroir de plomb métallique observé). En aval, les radicaux méthyle se recombinent : $2\,\mathrm{CH_3^\bullet}\to\mathrm{C_2H_6}$ (éthane recueilli dans un piège à azote liquide). En déplaçant le four vers l'aval, le premier miroir de plomb disparaît (les radicaux méthyle produits par le nouveau chauffage attaquent et redissolvent le plomb déjà déposé : $\mathrm{Pb+4\,CH_3^\bullet\to Pb(CH_3)_4}$), preuve directe de l'existence de radicaux méthyle à durée de vie courte mais non nulle.
+</div>
+<div class="block theorem">
+<span class="label">Validité d'un mécanisme</span>
+Un mécanisme postulé doit être validé par deux types d'expériences : mise en évidence des intermédiaires réactionnels (techniques spectroscopiques RPE/RMN, ou pièges permettant de les identifier — cf. Paneth) et accord avec la loi cinétique expérimentale.
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Approximation de l'état quasi-stationnaire (AEQS) et étape cinétiquement déterminante (ECD)</h2>
+<h3>Étude mathématique A → B → C (réactions consécutives)</h3>
+<p>Mécanisme $A\xrightarrow{k_1}B\xrightarrow{k_2}C$, avec $[A]_0=a_0$, $[B]_0=[C]_0=0$. Résolution du système différentiel :</p>
+$$[A]=a_0e^{-k_1t} \qquad [B]=\frac{k_1a_0}{k_2-k_1}\left(e^{-k_1t}-e^{-k_2t}\right) \qquad [C]=a_0-\frac{a_0}{k_2-k_1}\left(k_2e^{-k_1t}-k_1e^{-k_2t}\right)$$
+<div class="block theorem">
+<span class="label">Cas limites — étape cinétiquement déterminante</span>
+Si $k_2\ll k_1$ (B s'accumule) : aux temps longs, $[B]\approx a_0e^{-k_2t}$, $[C]\approx a_0(1-e^{-k_2t})$ — tout se passe comme si $A\to C$ directement avec la constante $k_2$ : c'est l'étape <strong>2</strong> qui limite la vitesse (étape cinétiquement déterminante, ECD). Si $k_2\gg k_1$ (B ne s'accumule pas, quasiment nul et constant après une brève période d'induction) : $[C]\approx a_0(1-e^{-k_1t})$ — c'est l'étape <strong>1</strong> qui est l'ECD. Si $k_1\approx k_2$, B s'accumule transitoirement (maximum intermédiaire).
+</div>
+<div class="block remark">
+<span class="label">Remarque</span>
+Contrairement à ce qui est vrai pour une réaction globale simple, les vitesses de disparition de A et d'apparition de C ne sont pas toujours égales pour un mécanisme à plusieurs étapes ; elles ne coïncident que dans le cas où la deuxième étape est beaucoup plus rapide que la première.
+</div>
+<h3>Cas d'un intermédiaire réactionnel haut en énergie</h3>
+<div class="block theorem">
+<span class="label">Principe de Bodenstein — Approximation de l'État Quasi-Stationnaire (AEQS)</span>
+Si un intermédiaire réactionnel $I$ possède une réactivité très grande (formation lente devant sa consommation) et qu'on s'intéresse à la cinétique loin de l'état initial, alors :
+$$\frac{d[I]}{dt}=0$$
+</div>
+<div class="block correction">
+<span class="label">⚠️ Remarque — domaine de validité</span>
+L'AEQS ne s'applique <strong>pas</strong> à tous les intermédiaires réactionnels, mais seulement à ceux de durée de vie très courte (carbocations, carbanions, radicaux, espèces instables) — cela s'applique à tous les mécanismes hauts en énergie, pas seulement aux réactions consécutives du cas précédent.
+</div>
+<div class="block theorem">
+<span class="label">Approximation de l'Étape Cinétiquement Déterminante (ECD)</span>
+La vitesse d'une réaction est imposée par la dernière étape lente d'un mécanisme (cette étape est l'ECD). On ne peut appliquer directement $v=v_{ECD}$ que si l'ECD et l'étape précédente sont <strong>consécutives</strong> ; sinon, seule l'AEQS est applicable.
+</div>
+</section>
+
+<section id="s3">
+<h2>3. Exemples de détermination de loi cinétique à partir du mécanisme</h2>
+<h3>Réaction en séquence ouverte : réaction par stades</h3>
+<div class="block def">
+<span class="label">Définition 3</span>
+Dans un mécanisme <strong>par stades</strong>, le passage des réactifs aux produits a lieu par une succession de processus élémentaires (réversibles ou non) se déroulant toujours dans le même ordre.
+</div>
+<div class="block demo">
+<span class="label">Exemple — décomposition thermique du peroxyde de ditertiobutyle</span>
+Mécanisme : (1) $\mathrm{Me_3COOCMe_3}\xrightarrow{k_1}2\,\mathrm{Me_3CO^\bullet}$ ; (2) $\mathrm{Me_3CO^\bullet}\xrightarrow{k_2}\mathrm{(CH_3)_2CO}+\mathrm{CH_3^\bullet}$ ; (3) $2\,\mathrm{CH_3^\bullet}\xrightarrow{k_3}\mathrm{C_2H_6}$. Ordre courant global expérimental : 1. AEQS sur les radicaux (hauts en énergie) : $d[\mathrm{CH_3}]/dt=0=v_2-2v_3$ et $d[\mathrm{Me_3CO}]/dt=0=2v_1-v_2$, d'où (combinaisons linéaires) $v_3=v_1$ et $v_2=2v_1$, soit $[\mathrm{CH_3}]=\sqrt{k_1[\mathrm{Me_3COOCMe_3}]/k_3}$. Quelle que soit l'espèce choisie pour définir la vitesse de réaction : $v=k_1[\mathrm{Me_3COOCMe_3}]$ — pas d'accumulation d'intermédiaire, cohérent avec l'AEQS (l'étape (1) crée 2 radicaux, (3) en consomme 2 : $v_3=v_1$).
+</div>
+
+<h3>Réaction en séquence fermée : réaction en chaîne</h3>
+<div class="block def">
+<span class="label">Définition 4</span>
+Dans un mécanisme <strong>en chaîne</strong>, le passage des réactifs aux produits a lieu par une succession de processus élémentaires dont certains peuvent se répéter indépendamment des premiers et derniers processus. Structure générale : <strong>amorçage</strong>, <strong>propagation</strong> (cycle répétable), <strong>rupture</strong> (inhibition possible si une étape de propagation est inversée).
+</div>
+<div class="block demo">
+<span class="label">Exemple — synthèse thermique de HBr</span>
+Bilan $\mathrm{H_2+Br_2\to2\,HBr}$. Mécanisme : amorçage $\mathrm{Br_2+M^*\to2\,Br+M}$ ($k_1$) ; propagation $\mathrm{Br+H_2\to HBr+H}$ ($k_2$), $\mathrm{HBr+H\to Br+H_2}$ ($k_{-2}$, inhibition), $\mathrm{H+Br_2\to HBr+Br}$ ($k_3$) ; rupture $\mathrm{2\,Br+M\to Br_2+M^*}$ ($k_{-1}$). En appliquant l'AEQS à H et Br (hauts en énergie) puis combinaisons linéaires, on obtient :
+$$v=k_3[\mathrm{Br_2}][H]=k_2k_3\left(\frac{k_1}{k_{-1}}\right)^{1/2}\frac{[H_2][\mathrm{Br_2}]^{1/2}}{k_3+k_{-2}[\mathrm{HBr}]/[\mathrm{Br_2}]}$$
+Résultat en accord avec l'ordre initial expérimental (1 pour H₂, 0,5 pour Br₂) et la loi de vitesse sans ordre courant donnée dans le chapitre précédent. Le bilan (majeur) s'obtient par combinaison linéaire des étapes de propagation seules : (2)+(3) = $\mathrm{H_2+Br_2\to2\,HBr}$.
+</div>
+<div class="block remark">
+<span class="label">Longueur de chaîne (hors programme)</span>
+$L=v_p/v_a$ (rapport vitesse de propagation / vitesse d'amorçage) : nombre moyen de cycles de propagation entre un amorçage et une rupture.
+</div>
+<div class="block remark">
+<span class="label">Molécularité de la rupture : pourquoi trimoléculaire ?</span>
+Pour la recombinaison $2\,\mathrm{Br}\to\mathrm{Br_2}$ (bimoléculaire naïvement), l'énergie de la liaison Br–Br nouvellement formée doit être évacuée ; si elle reste dans les vibrations de cette liaison, celle-ci se redissocie immédiatement : la recombinaison bimoléculaire n'est pas efficace. Il faut donc l'intervention d'une troisième molécule M pour capter l'excédent d'énergie, rendant l'étape trimoléculaire. (Ce problème ne se pose pas pour la recombinaison $2\,\mathrm{CH_3^\bullet}\to\mathrm{C_2H_6}$ de l'exemple précédent : l'énergie libérée par la formation de la liaison C–C peut se répartir dans les nombreuses vibrations/rotations internes de la molécule d'éthane formée.)
+</div>
+
+<h3>Cas d'un pré-équilibre rapide avant l'ECD</h3>
+<div class="block demo">
+<span class="label">Exemple — oxydation du monoxyde d'azote</span>
+Bilan $2\,\mathrm{NO}+\mathrm{O_2}\to2\,\mathrm{NO_2}$. Mécanisme : pré-équilibre rapide exothermique $\mathrm{NO+NO}\underset{k_{-1}}{\overset{k_1}{\rightleftharpoons}}\mathrm{N_2O_2}$ (constante $K_1$), puis étape lente (ECD) $\mathrm{N_2O_2+O_2}\xrightarrow{k_2}2\,\mathrm{NO_2}$. L'équilibre étant atteint en permanence, $v_1=v_{-1}$ soit $k_1[\mathrm{NO}]^2=k_{-1}[\mathrm{N_2O_2}]$, et $v=\tfrac12 d[\mathrm{NO_2}]/dt=k_2[\mathrm{N_2O_2}][\mathrm{O_2}]$, d'où :
+$$v=\frac{k_2k_1}{k_{-1}}[\mathrm{NO}]^2[\mathrm{O_2}]$$
+</div>
+<div class="block correction">
+<span class="label">⚠️ Remarque — ne jamais définir une vitesse par rapport à une espèce d'un équilibre rapide</span>
+Une espèce engagée dans un équilibre rapide a, par définition, une vitesse nette de disparition/apparition quasi nulle (l'équilibre étant permanent) : définir la vitesse de réaction par rapport à elle donnerait artificiellement une vitesse nulle. Il faut définir la vitesse par rapport à une espèce du bilan (ici NO₂).
+</div>
+<div class="block theorem">
+<span class="label">Résolution de l'anomalie du chapitre précédent (énergie d'activation apparemment négative)</span>
+Comme $v_1=v_{-1}$ à l'équilibre : $K_1=k_1/k_{-1}=\dfrac{A_1}{A_{-1}}\exp\!\left(-\dfrac{E_{a1}-E_{a,-1}}{RT}\right)$ (donc $E_{a,-1}>E_{a1}$, car l'équilibre est exothermique et $K_1$ diminue quand $T$ augmente, loi de modération). La constante cinétique globale $k=k_2k_1/k_{-1}$ vaut donc $A_2\dfrac{A_1}{A_{-1}}\exp\!\left(-\dfrac{E_{a1}+E_{a2}-E_{a,-1}}{RT}\right)$ : l'énergie d'activation <strong>apparente</strong> de la réaction globale est $E_{a1}+E_{a2}-E_{a,-1}$, qui peut être <strong>négative</strong> si $E_{a,-1}>E_{a1}+E_{a2}$ — expliquant ainsi rigoureusement pourquoi la vitesse de cette réaction diminue quand la température augmente, sans contredire la loi d'Arrhénius appliquée à chaque acte élémentaire individuel (qui, eux, ont chacun une énergie d'activation positive).
+</div>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Qu'est-ce qui distingue un état de transition d'un intermédiaire réactionnel ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+L'état de transition est au sommet d'une barrière d'énergie (maximum local), a une durée de vie nulle et n'est jamais observable ; un intermédiaire réactionnel est dans un puits de potentiel relatif (minimum local), a une durée de vie non nulle et est a priori détectable expérimentalement (Définitions 1 et 2, §1).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Pourquoi ne peut-on jamais utiliser un coefficient stœchiométrique fractionnaire dans l'écriture d'un acte élémentaire, contrairement à une équation-bilan globale ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que les coefficients d'un acte élémentaire représentent le nombre réel d'entités qui se rencontrent physiquement lors du choc (la molécularité, un entier) : l'écriture d'un acte élémentaire est unique et n'est pas définie à un facteur multiplicatif près comme celle d'une équation-bilan globale (§1, Loi de Van't Hoff).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Pour le mécanisme A→B→C avec k₂≫k₁, quelle est l'étape cinétiquement déterminante, et quelle est l'allure de [C](t) aux temps longs ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+C'est l'étape 1 (la plus lente) qui est l'ECD ; aux temps longs, $[C]\approx a_0(1-e^{-k_1t})$, comme si A se transformait directement en C avec la constante $k_1$ (§2, cas limites).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Dans quelles conditions peut-on appliquer l'AEQS (approximation de l'état quasi-stationnaire) à un intermédiaire réactionnel ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Uniquement si l'intermédiaire est très réactif, c'est-à-dire haut en énergie et de durée de vie très courte (carbocations, carbanions, radicaux typiquement) — l'AEQS ne s'applique pas à tous les intermédiaires réactionnels (§2, Remarque).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi, dans le mécanisme de synthèse de HBr, la recombinaison de deux radicaux Br nécessite-t-elle l'intervention d'une troisième molécule M (étape trimoléculaire), alors que la recombinaison de deux radicaux méthyle en éthane n'en a pas besoin ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Pour Br + Br → Br₂, l'énergie libérée par la formation de la liaison ne peut se répartir que dans la vibration de cette unique liaison Br–Br, ce qui suffirait à la redissocier immédiatement sans un partenaire de choc M pour évacuer l'excédent d'énergie. Pour 2 CH₃• → C₂H₆, l'énergie libérée peut se répartir entre de nombreux modes de vibration (C–C, C–H) et de rotation interne de la molécule d'éthane, rendant la recombinaison bimoléculaire directement efficace (§3, Remarque).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Piège classique : peut-on définir la vitesse d'une réaction avec pré-équilibre rapide par rapport à la concentration de l'espèce en équilibre (ex. N₂O₂ dans l'exemple NO+O₂) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — piège explicitement signalé (§3, Remarque) : comme l'équilibre est permanent ($v_1=v_{-1}$), la vitesse nette de variation de la concentration de cette espèce est quasi nulle par définition ; définir la vitesse de réaction par rapport à elle donnerait artificiellement une vitesse nulle, sans rapport avec la vitesse réelle de la réaction globale. Il faut toujours définir la vitesse par rapport à une espèce du bilan global (ici NO₂).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : dans l'expérience des miroirs de Paneth, la disparition du premier miroir de plomb quand on avance le four prouve-t-elle simplement que le plomb s'est évaporé sous l'effet de la chaleur ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — l'interprétation correcte (§1, Mise en évidence historique) est que les radicaux méthyle nouvellement produits au niveau du four avancé migrent en amont et réagissent chimiquement avec le plomb du premier miroir ($\mathrm{Pb+4\,CH_3^\bullet\to Pb(CH_3)_4}$), le redissolvant sous forme de plomb tétraméthyle gazeux — ce n'est pas une simple évaporation thermique, mais la preuve chimique directe de l'existence de radicaux méthyle réactifs à durée de vie courte mais suffisante pour parcourir la distance jusqu'au premier miroir.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Que se passerait-il pour la loi de vitesse de l'oxydation de NO si l'étape N₂O₂+O₂→2NO₂ n'était pas beaucoup plus lente que l'établissement du pré-équilibre NO+NO⇌N₂O₂ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+L'hypothèse de pré-équilibre permanent ($v_1=v_{-1}$ à chaque instant, §3) ne serait plus valide : on ne pourrait plus remplacer $[\mathrm{N_2O_2}]$ par son expression d'équilibre $\frac{k_1}{k_{-1}}[\mathrm{NO}]^2$, et il faudrait alors résoudre le système cinétique complet (ou appliquer l'AEQS à N₂O₂ si celui-ci était plutôt un intermédiaire haut en énergie) — la loi de vitesse simple obtenue $v=\frac{k_2k_1}{k_{-1}}[\mathrm{NO}]^2[\mathrm{O_2}]$ ne serait alors plus valable.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : reliez la notion d'énergie d'activation apparente négative (§3) à la loi d'Arrhénius appliquée à chaque acte élémentaire — en quoi cette anomalie macroscopique est-elle compatible avec le fait que chaque étape microscopique individuelle a une énergie d'activation positive ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La constante cinétique globale apparente s'écrit $k=k_2k_1/k_{-1}$, combinant trois constantes d'actes élémentaires ayant chacune sa propre énergie d'activation positive ($E_{a1}$, $E_{a2}$, $E_{a,-1}$, chacune positive comme l'exige la loi d'Arrhénius à l'échelle d'un acte élémentaire). L'énergie d'activation apparente de la réaction globale, obtenue par combinaison de ces trois constantes, vaut $E_{a1}+E_{a2}-E_{a,-1}$ : rien n'empêche cette combinaison algébrique d'être négative si $E_{a,-1}$ (l'énergie d'activation de la dissociation de N₂O₂, favorisée par la température car l'équilibre est exothermique) est suffisamment plus grande que $E_{a1}+E_{a2}$. Il n'y a donc aucune contradiction avec la loi d'Arrhénius microscopique : l'anomalie macroscopique n'existe qu'au niveau de la constante <strong>apparente</strong> résultant de la combinaison d'un pré-équilibre rapide et d'une étape lente, pas au niveau de chaque acte élémentaire pris isolément.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : pourquoi l'AEQS appliquée à un mécanisme par stades (peroxyde de ditertiobutyle) donne-t-elle nécessairement v₃=v₁ (vitesse de la dernière étape = vitesse de la première), alors que ce n'est pas vrai en général pour deux étapes quelconques d'un mécanisme ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que l'étape (1) crée exactement 2 radicaux (formation), l'étape (2) conserve le nombre total de radicaux (un radical Me₃CO• disparaît, un radical CH₃• apparaît), et l'étape (3) consomme exactement 2 radicaux (destruction) : l'AEQS impose que la concentration de chaque radical (haut en énergie) reste constante, ce qui n'est possible que si le nombre total de radicaux créés égale le nombre total de radicaux détruits par unité de temps — ici, 2 radicaux créés par (1) doivent être compensés par 2 radicaux détruits par (3), d'où $v_1=v_3$ (§3, Réaction par stades). Ce résultat n'est une conséquence générale que de cette structure particulière (une étape de création nette, une étape de conservation, une étape de destruction nette, chacune affectant le même nombre d'espèces radicalaires) ; pour un mécanisme où les étapes créent/consomment des nombres différents de radicaux (comme le mécanisme en chaîne de HBr, où amorçage et rupture ne sont pas simplement les inverses stœchiométriques exacts des étapes de propagation), une telle égalité directe entre vitesses d'étapes non consécutives n'est pas garantie sans un calcul complet par combinaisons linéaires des AEQS.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Cinétique chimique — Mécanismes réactionnels en cinétique homogène, loi de vitesse associée », S. Falcou, PCSI1 Sainte-Geneviève (Versailles), 2015-2016</li>
+<li>Programme officiel de Physique-Chimie, CPGE 1<sup>re</sup> année (filière PCSI), thème « Transformation de la matière », bloc mécanismes réactionnels : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>
