@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physique — Thermodynamique 6 : La statique des fluides</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.85rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.45rem;} h2{font-size:1.1rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Pression dans un fluide</a></li>
+  <li class="top"><a href="#s2">2. Principe fondamental de la statique des fluides</a></li>
+  <li class="top"><a href="#s3">3. Théorème d'Archimède</a></li>
+  <li class="top"><a href="#s4">4. L'opérateur gradient</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Thermodynamique 6 — La statique des fluides</h1>
+<div class="meta">Physique — Résumé de cours · PCSI · Prépa Barthou (Pau) · mis au propre le 18/09/2026</div>
+</header>
+
+<section id="s1">
+<h2>1. Pression dans un fluide</h2>
+<div class="block def">
+<span class="label">Définition 1</span>
+Une <strong>particule de fluide</strong> est un petit élément de volume mésoscopique de ce fluide. La force pressante élémentaire subie par une particule de la part du reste du fluide est :
+$$d\vec F_{fluide\to dS} = -P\,dS\,\vec n_{dS\to fluide}$$
+avec $dS$ = surface de la particule en contact avec le reste du fluide, $\vec n_{dS\to fluide}$ = vecteur unitaire normal à $dS$ (orienté de la particule vers le fluide), $P$ = pression (toujours positive).
+</div>
+<figure>
+<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<rect x="20" y="20" width="260" height="160" fill="#e9f1fd" fill-opacity="0.4"/>
+<circle cx="150" cy="100" r="35" fill="#fff" stroke="#333" stroke-width="1.5"/><text x="130" y="105" font-size="11">particule</text>
+<line x1="150" y1="100" x2="185" y2="75" stroke="#c0392b" stroke-width="1.8" marker-end="url(aF2)"/><text x="190" y="70" font-size="10" fill="#c0392b">n (vers fluide)</text>
+<line x1="185" y1="75" x2="160" y2="90" stroke="#2fa365" stroke-width="1.8" marker-end="url(aF2)"/><text x="185" y="95" font-size="9" fill="#2fa365">dF = -P dS n</text>
+<defs><marker id="aF2" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="context-fill"/></marker></defs>
+</svg>
+<figcaption>Fig. 1 — Force pressante sur une particule de fluide : dirigée vers l'intérieur de la particule (opposée à $\vec n$), la pression $P$ étant toujours positive.</figcaption>
+</figure>
+</section>
+
+<section id="s2">
+<h2>2. Principe fondamental de la statique des fluides</h2>
+<div class="block def">
+<span class="label">Définition 2 — Force volumique</span>
+Une force $\vec F$ est dite <strong>volumique</strong> si l'on peut définir sa densité volumique $\vec f_V$ telle que $d\vec F=\vec f_V\,d\tau$ ($d\tau$ = élément de volume). Exemple : le poids, $\vec P=m\vec g=\rho\,d\tau\,\vec g \ \Rightarrow \ \vec f_V=\rho\vec g$ est la densité volumique du poids.
+</div>
+<div class="block theorem">
+<span class="label">Théorème 1 — Équivalent volumique des forces de pression</span>
+Pour un fluide macroscopiquement au repos dans un référentiel galiléen, en notant $\vec f_V$ la résultante des densités volumiques des forces (autres que la pression) s'appliquant sur le fluide :
+$$\vec f_V - \overrightarrow{\text{grad}}\,p = \vec 0 \qquad \text{soit : l'équivalent volumique des forces de pression est } -\overrightarrow{\text{grad}}\,p$$
+</div>
+<div class="block theorem">
+<span class="label">Théorème 2 — Principe fondamental de la statique des fluides (PFSF)</span>
+Si le fluide est à l'équilibre dans un champ de pesanteur uniforme $\vec g$ :
+$$\rho\vec g = \overrightarrow{\text{grad}}\,P$$
+Dans le cas fréquent où $\vec g$ est vertical descendant, $\vec g=-g\,\vec e_z$ ($g>0$) :
+$$\rho g = -\frac{dP}{dz}$$
+</div>
+<figure>
+<svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<rect x="40" y="20" width="180" height="180" fill="#e9f1fd" fill-opacity="0.5" stroke="#3b6fd8" stroke-width="1.2"/>
+<line x1="20" y1="20" x2="20" y2="200" stroke="#333" stroke-width="1"/><line x1="15" y1="20" x2="25" y2="20" stroke="#333" stroke-width="1"/><text x="0" y="16" font-size="10">z</text>
+<line x1="40" y1="60" x2="220" y2="60" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/><text x="225" y="64" font-size="10">P(z1) petite</text>
+<line x1="40" y1="170" x2="220" y2="170" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/><text x="225" y="174" font-size="10">P(z2) grande</text>
+<line x1="20" y1="60" x2="20" y2="170" stroke="#c0392b" stroke-width="1.6" marker-end="url(aF3)"/><text x="-5" y="120" font-size="9" fill="#c0392b">g</text>
+<defs><marker id="aF3" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#c0392b"/></marker></defs>
+</svg>
+<figcaption>Fig. 2 — Pression hydrostatique : $P$ augmente avec la profondeur ($dP/dz=-\rho g<0$, Théorème 2), donc $P$ décroît quand $z$ augmente.</figcaption>
+</figure>
+</section>
+
+<section id="s3">
+<h2>3. Théorème d'Archimède</h2>
+<div class="block theorem">
+<span class="label">Théorème 3 — Poussée d'Archimède</span>
+La résultante des forces pressantes exercées par un fluide quelconque au repos sur un corps placé dans ce fluide, appelée <strong>poussée d'Archimède</strong>, est égale à l'opposé du poids du fluide déplacé :
+$$\vec F_{Archimède} = -m(\text{fluide déplacé})\,\vec g$$
+</div>
+<figure>
+<svg viewBox="0 0 260 180" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<rect x="20" y="20" width="220" height="140" fill="#e9f1fd" fill-opacity="0.5" stroke="#3b6fd8" stroke-width="1.2"/>
+<circle cx="130" cy="100" r="35" fill="#fdf3dd" stroke="#c98a12" stroke-width="1.5"/>
+<line x1="130" y1="100" x2="130" y2="140" stroke="#c0392b" stroke-width="1.8" marker-end="url(aF4)"/><text x="135" y="130" font-size="10" fill="#c0392b">mg</text>
+<line x1="130" y1="100" x2="130" y2="60" stroke="#2fa365" stroke-width="1.8" marker-end="url(aF4)"/><text x="135" y="70" font-size="10" fill="#2fa365">F_Archimède</text>
+<defs><marker id="aF4" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="context-fill"/></marker></defs>
+</svg>
+<figcaption>Fig. 3 — Poussée d'Archimède : verticale, ascendante, opposée au poids du fluide déplacé (Théorème 3).</figcaption>
+</figure>
+</section>
+
+<section id="s4">
+<h2>4. L'opérateur gradient</h2>
+<div class="block def">
+<span class="label">Définition 3 — Gradient</span>
+Soit une fonction $f$. L'accroissement élémentaire $df$ associé à un déplacement élémentaire $d\overrightarrow{OM}$ vérifie :
+$$df = \overrightarrow{\text{grad}}\,f\cdot d\overrightarrow{OM}$$
+En coordonnées cartésiennes :
+$$\overrightarrow{\text{grad}}\,f = \vec e_x\frac{\partial f}{\partial x} + \vec e_y\frac{\partial f}{\partial y} + \vec e_z\frac{\partial f}{\partial z}$$
+</div>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Écrire le principe fondamental de la statique des fluides (PFSF, Théorème 2) dans le cas d'un champ de pesanteur uniforme.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$\rho\vec g=\overrightarrow{\text{grad}}\,P$, ou, si $\vec g$ est vertical descendant : $\rho g=-dP/dz$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Énoncer le théorème d'Archimède (Théorème 3).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La résultante des forces pressantes exercées par un fluide au repos sur un corps immergé est égale à l'opposé du poids du fluide qu'occuperait ce corps (fluide déplacé) : $\vec F_{Archimède}=-m(\text{fluide déplacé})\vec g$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Calculer la variation de pression entre la surface et $h=10\,\text{m}$ de profondeur dans l'eau ($\rho=1000\,\text{kg/m}^3$, $g=9{,}8\,\text{m/s}^2$), en utilisant le Théorème 2.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+En intégrant $dP/dz=-\rho g$ entre $z=0$ (surface) et $z=-h$ (profondeur $h$) : $\Delta P=P(-h)-P(0)=-\rho g\times(-h-0)=\rho g h=1000\times9{,}8\times10=98\,000\,\text{Pa}\approx0{,}98\,\text{bar}$ (la pression augmente d'environ 1 bar tous les 10 m de profondeur).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Un cube de bois de volume $V=0{,}008\,\text{m}^3$ ($8\,\text{L}$) et de masse $m=6\,\text{kg}$ flotte partiellement immergé dans l'eau ($\rho_{eau}=1000\,\text{kg/m}^3$). Calculer le volume immergé $V_{imm}$ à l'équilibre (Théorème 3).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+À l'équilibre, poids = poussée d'Archimède (en norme) : $mg=\rho_{eau}V_{imm}g$ (Théorème 3), donc $V_{imm}=m/\rho_{eau}=6/1000=0{,}006\,\text{m}^3=6\,\text{L}$, soit $75\%$ du volume total immergé.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi la force pressante élémentaire (Définition 1) est-elle toujours dirigée vers l'intérieur de la particule de fluide, quel que soit l'endroit considéré ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que $P$ est toujours positif (Définition 1) et que le vecteur $\vec n$ est orienté de la particule <em>vers</em> le reste du fluide : le signe moins dans $d\vec F=-P\,dS\,\vec n$ inverse systématiquement cette orientation, si bien que la force pressante « pousse » toujours la particule vers l'intérieur (compression), jamais vers l'extérieur — cohérent avec le fait que la pression ne peut jamais « tirer » un fluide (contrairement à une tension, qui n'existe pas dans un fluide au repos).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passerait-il si l'on plaçait le même cube (question 4) dans un liquide deux fois plus dense que l'eau (par exemple une saumure, $\rho=2000\,\text{kg/m}^3$) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le volume immergé à l'équilibre deviendrait $V_{imm}=m/\rho=6/2000=0{,}003\,\text{m}^3=3\,\text{L}$ (Théorème 3), soit seulement $37{,}5\%$ du volume total : le cube flotterait plus haut, car un liquide plus dense fournit une poussée d'Archimède plus grande pour un même volume immergé, nécessitant donc moins de volume immergé pour équilibrer le même poids.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : la pression $P$ dans un fluide au repos dépend-elle de l'orientation de la surface $dS$ considérée (Définition 1) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — $P$ est une grandeur <strong>scalaire</strong>, indépendante de l'orientation de $dS$ (c'est le théorème de Pascal, sous-jacent à la Définition 1) : seule la force $d\vec F=-P\,dS\,\vec n$ dépend de l'orientation via $\vec n$, mais la valeur de $P$ elle-même en un point donné est unique, quelle que soit la direction dans laquelle on « regarde ». Confondre l'anisotropie de la force (qui dépend de $\vec n$) avec une éventuelle anisotropie de $P$ (qui n'existe pas pour un fluide au repos) est une erreur fréquente.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : peut-on appliquer $\rho g=-dP/dz$ (Théorème 2) à un fluide dont la masse volumique $\rho$ varie fortement avec l'altitude (comme l'atmosphère) sans précaution particulière ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La relation différentielle elle-même reste valable localement, mais on ne peut plus la simplifier en $\Delta P=\rho g h$ (comme à la question 3, qui suppose $\rho$ constant) : il faut intégrer $dP=-\rho(z)g\,dz$ en tenant compte de la dépendance de $\rho$ (et souvent de $T$, via l'équation d'état du gaz parfait pour l'atmosphère) avec l'altitude — oublier cette dépendance et appliquer la formule simplifiée de l'incompressible à un gaz est une erreur classique (elle ne donnerait qu'une approximation valable sur de petites variations d'altitude).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : reliez le Théorème 1 (équivalent volumique des forces de pression) et le Théorème 3 (Archimède) pour démontrer que la poussée d'Archimède est bien égale à l'opposé du poids du fluide déplacé.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Considérons le volume fictif qu'occuperait le fluide déplacé, à la place du corps immergé. Ce volume de fluide, à l'équilibre dans le fluide environnant, satisferait le PFSF (Théorème 2) : la résultante des forces de pression sur sa surface (équivalente volumique $-\overrightarrow{\text{grad}}\,p$, Théorème 1, intégrée sur le volume) compenserait exactement son propre poids $m(\text{fluide déplacé})\vec g$. Or, les forces de pression exercées par le fluide extérieur sur la surface du corps réel sont exactement les mêmes que celles qui s'exerceraient sur la surface de ce volume fictif de fluide déplacé (la pression en chaque point de la surface ne dépend que de la position, pas de ce qui se trouve à l'intérieur, Théorème 2) : la résultante de ces forces pressantes (la poussée d'Archimède) est donc égale à l'opposé du poids du fluide déplacé, soit $\vec F_{Archimède}=-m(\text{fluide déplacé})\vec g$ (Théorème 3).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : à l'aide de l'opérateur gradient (Théorème 4/Définition 3) et du PFSF (Théorème 2), montrer que les surfaces isobares ($P=$cte) d'un fluide au repos dans un champ de pesanteur uniforme sont des plans horizontaux.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le gradient $\overrightarrow{\text{grad}}\,P$ est, par définition (Définition 3), orthogonal aux surfaces isobares ($P=$cte) en tout point. Or, le PFSF (Théorème 2) impose $\overrightarrow{\text{grad}}\,P=\rho\vec g$ : le gradient de pression est donc colinéaire à $\vec g$ (vertical) en tout point. Les surfaces isobares, étant orthogonales à $\overrightarrow{\text{grad}}\,P$, sont donc orthogonales à la verticale, c'est-à-dire horizontales — ce résultat justifie que la surface libre d'un liquide au repos (qui est isobare, à la pression atmosphérique) soit toujours plane et horizontale.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « La statique des fluides » (résumé de cours, Prépa Barthou, Pau)</li>
+<li>Programme officiel de Physique-Chimie, CPGE 1<sup>re</sup> année (filière PCSI), bloc « Statique des fluides » : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+<li>H-Prépa Physique 1<sup>re</sup> année (Hachette Éducation) — chapitre « Statique des fluides »</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>

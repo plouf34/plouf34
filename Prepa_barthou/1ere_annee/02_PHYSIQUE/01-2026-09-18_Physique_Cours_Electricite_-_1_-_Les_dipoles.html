@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physique — Électricité 1 : Les dipôles</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.85rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+table{border-collapse:collapse; margin:1rem 0; width:100%;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.9rem; vertical-align:middle;}
+th{background:#f3f2ee;}
+td.sym{text-align:center; width:170px;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.45rem;} h2{font-size:1.1rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} td.sym{width:90px;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Lois générales de l'électricité</a></li>
+  <li class="top"><a href="#s2">2. Convention générateur / récepteur</a></li>
+  <li class="top"><a href="#s3">3. Équivalence Thévenin – Norton</a></li>
+  <li class="top"><a href="#s4">4. Puissance consommée par un dipôle</a></li>
+  <li class="top"><a href="#s5">5. Diviseur de tension – Diviseur de courant</a></li>
+  <li class="top"><a href="#s6">6. Les principaux dipôles</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Électricité 1 — Les dipôles</h1>
+<div class="meta">Physique — Résumé de cours · PCSI · Prépa Barthou (Pau) · mis au propre le 18/09/2026</div>
+</header>
+
+<section id="s1">
+<h2>1. Lois générales de l'électricité</h2>
+
+<div class="block theorem">
+<span class="label">Théorème 1 — loi des mailles</span>
+La somme des différences de potentiel orientées le long d'une maille (boucle fermée) d'un circuit est nulle.
+</div>
+<div class="block theorem">
+<span class="label">Théorème 2 — loi des nœuds</span>
+La somme algébrique des courants arrivant à un nœud est nulle (courants entrants = courants sortants).
+</div>
+<div class="block def">
+<span class="label">Définition 1 — intensité</span>
+Le courant électrique résulte d'un déplacement de charges : $i = \dfrac{dq}{dt}$.
+</div>
+
+<figure>
+<svg viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<text x="150" y="20" text-anchor="middle" font-size="12" font-weight="700" fill="#0f2b4c">Exemple — loi des mailles</text>
+<line x1="60" y1="60" x2="60" y2="180" stroke="#333" stroke-width="1.6"/>
+<line x1="60" y1="180" x2="240" y2="180" stroke="#333" stroke-width="1.6"/>
+<line x1="60" y1="60" x2="240" y2="60" stroke="#333" stroke-width="1.6"/>
+<line x1="150" y1="60" x2="150" y2="180" stroke="#333" stroke-width="1.6"/>
+<line x1="240" y1="60" x2="240" y2="180" stroke="#333" stroke-width="1.6"/>
+<rect x="46" y="100" width="28" height="20" fill="#2fa365" opacity="0.5" stroke="#333"/>
+<rect x="136" y="100" width="28" height="20" fill="#2fa365" opacity="0.5" stroke="#333"/>
+<rect x="180" y="53" width="24" height="14" fill="#2fa365" opacity="0.5" stroke="#333"/>
+<rect x="226" y="100" width="28" height="20" fill="#2fa365" opacity="0.5" stroke="#333"/>
+<text x="35" y="95" font-size="12">U1</text><text x="125" y="95" font-size="12">U2</text>
+<text x="190" y="48" font-size="12">U3</text><text x="260" y="95" font-size="12">U4</text>
+<line x1="60" y1="90" x2="60" y2="70" stroke="#c0392b" stroke-width="1.4" marker-end="url(#aE1)"/>
+<line x1="150" y1="90" x2="150" y2="70" stroke="#c0392b" stroke-width="1.4" marker-end="url(#aE1)"/>
+<line x1="192" y1="58" x2="212" y2="58" stroke="#c0392b" stroke-width="1.4" marker-end="url(#aE1)"/>
+<line x1="240" y1="90" x2="240" y2="70" stroke="#c0392b" stroke-width="1.4" marker-end="url(#aE1)"/>
+<defs><marker id="aE1" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#c0392b"/></marker></defs>
+<text x="330" y="120" font-size="12">$U_3+U_4-U_2=0$</text>
+<text x="330" y="140" font-size="12">$U_3+U_4-U_1=0$</text>
+<text x="330" y="160" font-size="12">$U_1-U_2=0$</text>
+</svg>
+<figcaption>Fig. 1 — Loi des mailles : $U_1$ et $U_2$ relient les deux mêmes nœuds (donc égales) ; $U_3+U_4$ relie ces mêmes nœuds par l'autre chemin.</figcaption>
+</figure>
+
+<figure>
+<svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<circle cx="200" cy="140" r="4" fill="#0f2b4c"/>
+<text x="215" y="130" font-size="11">Nœud</text>
+<line x1="200" y1="140" x2="90" y2="60" stroke="#8b2e2e" stroke-width="1.8" marker-end="url(#aE2)"/><text x="80" y="55" font-size="13" fill="#8b2e2e">I₁</text>
+<line x1="200" y1="140" x2="90" y2="220" stroke="#3b6fd8" stroke-width="1.8" marker-end="url(#aE2)"/><text x="80" y="230" font-size="13" fill="#3b6fd8">I₂</text>
+<line x1="200" y1="140" x2="330" y2="70" stroke="#c0392b" stroke-width="1.8" marker-start="url(#aE2)"/><text x="335" y="65" font-size="13" fill="#c0392b">I₃</text>
+<line x1="200" y1="140" x2="330" y2="140" stroke="#2fa365" stroke-width="1.8" marker-start="url(#aE2)"/><text x="335" y="135" font-size="13" fill="#2fa365">I₄</text>
+<line x1="200" y1="140" x2="330" y2="210" stroke="#7c4fd6" stroke-width="1.8" marker-start="url(#aE2)"/><text x="335" y="215" font-size="13" fill="#7c4fd6">I₅</text>
+<defs><marker id="aE2" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#333"/></marker></defs>
+<text x="200" y="250" text-anchor="middle" font-size="13">$I_1+I_2=I_3+I_4+I_5$</text>
+</svg>
+<figcaption>Fig. 2 — Loi des nœuds : les courants $I_1,I_2$ entrent au nœud, $I_3,I_4,I_5$ en sortent.</figcaption>
+</figure>
+
+</section>
+
+<section id="s2">
+<h2>2. Convention générateur – Convention récepteur</h2>
+<div class="block def">
+<span class="label">Définition 2</span>
+Pour un dipôle quelconque, on choisit une orientation pour la tension $u$ et le courant $i$ à ses bornes :
+<ul>
+<li><strong>Convention récepteur</strong> : les flèches $i$ et $u$ sont dans le <strong>même sens</strong>.</li>
+<li><strong>Convention générateur</strong> : les flèches $i$ et $u$ sont en <strong>sens opposés</strong>.</li>
+</ul>
+</div>
+<figure>
+<svg viewBox="0 0 460 140" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<g transform="translate(0,0)">
+<text x="105" y="20" text-anchor="middle" font-size="12" font-weight="700">Convention récepteur</text>
+<rect x="60" y="55" width="90" height="30" fill="#eaf2fd" stroke="#3b6fd8"/>
+<line x1="20" y1="70" x2="58" y2="70" stroke="#333" stroke-width="1.6" marker-end="url(#aE3)"/><text x="20" y="60" font-size="12">I</text>
+<line x1="150" y1="70" x2="190" y2="70" stroke="#333" stroke-width="1.6" marker-end="url(#aE3)"/>
+<line x1="60" y1="105" x2="150" y2="105" stroke="#c0392b" stroke-width="1.6" marker-end="url(#aE3)"/><text x="95" y="120" font-size="12" fill="#c0392b">V (même sens que I)</text>
+</g>
+<g transform="translate(240,0)">
+<text x="105" y="20" text-anchor="middle" font-size="12" font-weight="700">Convention générateur</text>
+<rect x="60" y="55" width="90" height="30" fill="#fde9d0" stroke="#c98a12"/>
+<line x1="20" y1="70" x2="58" y2="70" stroke="#333" stroke-width="1.6" marker-end="url(#aE3)"/><text x="20" y="60" font-size="12">I</text>
+<line x1="150" y1="70" x2="190" y2="70" stroke="#333" stroke-width="1.6" marker-end="url(#aE3)"/>
+<line x1="150" y1="105" x2="60" y2="105" stroke="#c0392b" stroke-width="1.6" marker-end="url(#aE3)"/><text x="95" y="120" font-size="12" fill="#c0392b">V (sens opposé à I)</text>
+</g>
+<defs><marker id="aE3" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 3 — Convention récepteur ($u,i$ même sens) et convention générateur ($u,i$ sens opposés).</figcaption>
+</figure>
+</section>
+
+<section id="s3">
+<h2>3. Équivalence Thévenin – Norton</h2>
+<div class="block theorem">
+<span class="label">Théorème 3</span>
+Un générateur de tension réel (générateur de Thévenin, f.é.m. $E$ et résistance $R$ en série) est équivalent à un générateur de courant réel (générateur de Norton, courant $I$ et résistance $R$ en parallèle) si :
+$$I = \frac{E}{R}$$
+</div>
+<figure>
+<svg viewBox="0 0 460 160" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<g transform="translate(0,0)">
+<line x1="40" y1="30" x2="40" y2="130" stroke="#333" stroke-width="1.6"/>
+<circle cx="40" cy="80" r="18" fill="none" stroke="#333" stroke-width="1.4"/><text x="40" y="84" text-anchor="middle" font-size="11">E</text>
+<line x1="40" y1="30" x2="130" y2="30" stroke="#333" stroke-width="1.6"/>
+<rect x="80" y="18" width="45" height="24" fill="#eaf2fd" stroke="#3b6fd8"/><text x="102" y="35" text-anchor="middle" font-size="11">R</text>
+<line x1="125" y1="30" x2="160" y2="30" stroke="#333" stroke-width="1.6"/>
+<line x1="160" y1="30" x2="160" y2="130" stroke="#333" stroke-width="2" marker-end="url(#aE4)"/><text x="170" y="60" font-size="12">u</text>
+<line x1="40" y1="130" x2="160" y2="130" stroke="#333" stroke-width="1.6"/>
+<text x="130" y="50" font-size="12" text-anchor="end">A</text><text x="130" y="150" font-size="12" text-anchor="end">B</text>
+</g>
+<text x="200" y="85" font-size="20" text-anchor="middle">⇔</text>
+<g transform="translate(230,0)">
+<line x1="40" y1="30" x2="40" y2="130" stroke="#333" stroke-width="1.6"/>
+<circle cx="40" cy="80" r="18" fill="none" stroke="#333" stroke-width="1.4"/><text x="40" y="60" text-anchor="middle" font-size="10">I=E/R</text>
+<line x1="40" y1="30" x2="130" y2="30" stroke="#333" stroke-width="1.6"/>
+<rect x="105" y="45" width="24" height="70" fill="#eaf2fd" stroke="#3b6fd8"/><text x="117" y="83" text-anchor="middle" font-size="11" transform="rotate(90,117,83)">R</text>
+<line x1="130" y1="30" x2="170" y2="30" stroke="#333" stroke-width="1.6"/>
+<line x1="170" y1="30" x2="170" y2="130" stroke="#333" stroke-width="2"/><text x="180" y="60" font-size="12">u</text>
+<line x1="40" y1="130" x2="170" y2="130" stroke="#333" stroke-width="1.6"/>
+</g>
+<defs><marker id="aE4" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 4 — Générateur de Thévenin (gauche) et son équivalent de Norton (droite).</figcaption>
+</figure>
+</section>
+
+<section id="s4">
+<h2>4. Puissance consommée par un dipôle</h2>
+<div class="block def">
+<span class="label">Définition 3</span>
+Soit $D$ un dipôle quelconque (actif ou passif) en convention récepteur. La puissance consommée par $D$ est :
+$$P = u \cdot i$$
+</div>
+<div class="block theorem">
+<span class="label">Propriété 1</span>
+Pour une résistance $R$ : $P = R\,i^2$.
+</div>
+<div class="block remark">
+<span class="label">Remarques</span>
+$P>0 \Leftrightarrow$ le dipôle est un récepteur ; $P<0 \Leftrightarrow$ le dipôle est un générateur.<br>
+La puissance est la dérivée de l'énergie par rapport au temps : $P = \dfrac{d\,\text{Énergie}}{dt}$.
+</div>
+</section>
+
+<section id="s5">
+<h2>5. Diviseur de tension – Diviseur de courant</h2>
+<div class="block theorem">
+<span class="label">Théorème 4 — diviseur de tension</span>
+Pour deux résistances $R_1,R_2$ en série alimentées par $V_e$, la tension $V_s$ aux bornes de $R_1$ (la plus proche du potentiel de référence) vaut :
+$$V_s = \frac{R_1}{R_1+R_2}\cdot V_e$$
+</div>
+<div class="block theorem">
+<span class="label">Théorème 5 — diviseur de courant</span>
+Pour deux résistances $R_1,R_2$ en parallèle traversées par un courant total $I$ :
+$$I_1 = I\,\frac{R_2}{R_1+R_2} \qquad I_2 = I\,\frac{R_1}{R_1+R_2}$$
+</div>
+<div class="block remark">
+<span class="label">Remarque</span>
+Dans le diviseur de courant, le courant dans une branche est proportionnel à la résistance de <strong>l'autre</strong> branche : plus une résistance est grande, moins elle laisse passer de courant.
+</div>
+<figure>
+<svg viewBox="0 0 620 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<g transform="translate(0,0)">
+<text x="120" y="18" text-anchor="middle" font-size="12" font-weight="700">Diviseur de tension</text>
+<line x1="60" y1="40" x2="60" y2="180" stroke="#333" stroke-width="1.6"/>
+<text x="30" y="115" font-size="12">Ve</text>
+<line x1="60" y1="40" x2="120" y2="40" stroke="#333" stroke-width="1.6"/>
+<rect x="105" y="45" width="30" height="45" fill="#eaf2fd" stroke="#3b6fd8"/><text x="120" y="72" text-anchor="middle" font-size="11">R2</text>
+<line x1="120" y1="90" x2="120" y2="110" stroke="#333" stroke-width="1.6"/>
+<rect x="105" y="110" width="30" height="45" fill="#eaf2fd" stroke="#3b6fd8"/><text x="120" y="137" text-anchor="middle" font-size="11">R1</text>
+<line x1="120" y1="155" x2="120" y2="180" stroke="#333" stroke-width="1.6"/>
+<line x1="60" y1="180" x2="120" y2="180" stroke="#333" stroke-width="1.6"/>
+<line x1="180" y1="40" x2="180" y2="180" stroke="#333" stroke-width="2"/><text x="190" y="115" font-size="12">Vs</text>
+<line x1="120" y1="40" x2="180" y2="40" stroke="#333" stroke-width="1.6"/>
+<line x1="120" y1="180" x2="180" y2="180" stroke="#333" stroke-width="1.6"/>
+<circle cx="120" cy="100" r="2.5" fill="#333"/>
+</g>
+<g transform="translate(320,0)">
+<text x="140" y="18" text-anchor="middle" font-size="12" font-weight="700">Diviseur de courant</text>
+<line x1="30" y1="100" x2="90" y2="100" stroke="#333" stroke-width="1.8" marker-end="url(#aE5)"/><text x="35" y="90" font-size="12">I</text>
+<line x1="90" y1="100" x2="90" y2="60" stroke="#333" stroke-width="1.6"/>
+<line x1="90" y1="60" x2="140" y2="60" stroke="#333" stroke-width="1.8" marker-end="url(#aE5)"/><text x="100" y="52" font-size="11">I1</text>
+<rect x="140" y="45" width="60" height="30" fill="#eaf2fd" stroke="#3b6fd8"/><text x="170" y="65" text-anchor="middle" font-size="11">R1</text>
+<line x1="200" y1="60" x2="250" y2="60" stroke="#333" stroke-width="1.6"/>
+<line x1="90" y1="100" x2="90" y2="140" stroke="#333" stroke-width="1.6"/>
+<line x1="90" y1="140" x2="140" y2="140" stroke="#333" stroke-width="1.8" marker-end="url(#aE5)"/><text x="100" y="132" font-size="11">I2</text>
+<rect x="140" y="125" width="60" height="30" fill="#eaf2fd" stroke="#3b6fd8"/><text x="170" y="145" text-anchor="middle" font-size="11">R2</text>
+<line x1="200" y1="140" x2="250" y2="140" stroke="#333" stroke-width="1.6"/>
+<line x1="250" y1="60" x2="250" y2="140" stroke="#333" stroke-width="1.6"/>
+<line x1="250" y1="100" x2="290" y2="100" stroke="#333" stroke-width="1.8" marker-end="url(#aE5)"/><text x="255" y="90" font-size="12">I</text>
+</g>
+<defs><marker id="aE5" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 5 — Diviseur de tension ($V_s$ pris aux bornes de $R_1$) et diviseur de courant ($R_1,R_2$ en parallèle).</figcaption>
+</figure>
+</section>
+
+<section id="s6">
+<h2>6. Les principaux dipôles</h2>
+<div class="block def">
+<span class="label">Définition 4 — dipôles usuels</span>
+<table>
+<tr><th>Dipôle</th><th>Caractéristique $i(u)$</th></tr>
+<tr><td>Résistance $R$ (convention 1)</td><td>$u = R\,i$</td></tr>
+<tr><td>Résistance $R$ (convention opposée)</td><td>$u = -R\,i$</td></tr>
+<tr><td>Condensateur $C$</td><td>$u = \dfrac{q}{C}$ ; $\ i = \dfrac{dq}{dt}$ (signes $\pm$ selon l'armature référencée)</td></tr>
+<tr><td>Bobine $L$</td><td>$u = L\,\dfrac{di}{dt}$</td></tr>
+<tr><td>Générateur réel</td><td>$u = e_g - R_g\,i$</td></tr>
+<tr><td>Diode (modèle seuil)</td><td>$u\leqslant u_s : i=0$ ; $\ u>u_s : u=R_d\,i+u_s$</td></tr>
+</table>
+</div>
+<figure>
+<svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<g transform="translate(0,0)">
+<line x1="20" y1="100" x2="150" y2="100" stroke="#333" stroke-width="1.2" marker-end="url(#aE6)"/><line x1="80" y1="180" x2="80" y2="20" stroke="#333" stroke-width="1.2" marker-end="url(#aE6)"/>
+<line x1="80" y1="100" x2="140" y2="40" stroke="#3b6fd8" stroke-width="2"/>
+<text x="80" y="195" font-size="10" text-anchor="middle">R : droite par l'origine</text>
+</g>
+<g transform="translate(200,0)">
+<line x1="20" y1="100" x2="150" y2="100" stroke="#333" stroke-width="1.2" marker-end="url(#aE6)"/><line x1="80" y1="180" x2="80" y2="20" stroke="#333" stroke-width="1.2" marker-end="url(#aE6)"/>
+<line x1="80" y1="100" x2="110" y2="100" stroke="#3b6fd8" stroke-width="2"/><line x1="110" y1="100" x2="150" y2="45" stroke="#3b6fd8" stroke-width="2"/>
+<text x="110" y="115" font-size="9">us</text>
+<text x="80" y="195" font-size="10" text-anchor="middle">Diode : seuil puis droite</text>
+</g>
+<g transform="translate(400,0)">
+<line x1="20" y1="100" x2="150" y2="100" stroke="#333" stroke-width="1.2" marker-end="url(#aE6)"/><line x1="80" y1="180" x2="80" y2="20" stroke="#333" stroke-width="1.2" marker-end="url(#aE6)"/>
+<line x1="80" y1="30" x2="80" y2="170" stroke="#3b6fd8" stroke-width="2"/>
+<text x="80" y="195" font-size="10" text-anchor="middle">C,L en régime continu : u seul (i=0) ou i seul</text>
+</g>
+<defs><marker id="aE6" markerWidth="6" markerHeight="6" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 6 — Allure des caractéristiques $i(u)$ : résistance (droite par l'origine), diode à seuil (nulle puis linéaire), et cas particulier d'un condensateur en régime purement continu (caractéristique verticale : $u$ quelconque à $i=0$).</figcaption>
+</figure>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Quelle est la différence entre la convention récepteur et la convention générateur ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+En convention récepteur, les flèches $u$ et $i$ sont orientées dans le même sens à travers le dipôle ; en convention générateur, elles sont orientées en sens opposés (Définition 2). C'est cette convention qui donne son sens à la formule $P=ui$ (puissance reçue positive si le dipôle consomme réellement).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Pourquoi la loi des mailles s'écrit-elle « somme des tensions = 0 » et non « somme des tensions = tension totale » ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce qu'on additionne des tensions <strong>orientées</strong> le long d'une boucle fermée qui revient à son point de départ : le potentiel électrique étant une fonction du point (pas du chemin suivi), la somme des variations de potentiel sur un trajet fermé est nécessairement nulle (Théorème 1).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Deux résistances $R_1=100\,\Omega$ et $R_2=300\,\Omega$ sont en série, alimentées par $V_e=8\,\text{V}$. Calculer $V_s$ aux bornes de $R_1$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$V_s = \dfrac{R_1}{R_1+R_2}V_e = \dfrac{100}{400}\times 8 = 2\,\text{V}$ (Théorème 4).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Un générateur de Thévenin a pour f.é.m. $E=12\,\text{V}$ et résistance interne $R=6\,\Omega$. Donner le courant $I$ de son générateur de Norton équivalent.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$I = E/R = 12/6 = 2\,\text{A}$ (Théorème 3).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi le signe de la puissance $P=ui$ (en convention récepteur) permet-il de savoir si un dipôle « fournit » ou « consomme » de l'énergie, sans rien connaître de sa nature physique ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que $P$ est définie comme la dérivée de l'énergie reçue par le dipôle par rapport au temps (Remarque, §4) : si cette dérivée est positive, l'énergie du dipôle augmente (il reçoit vraiment de l'énergie, c'est un récepteur) ; si elle est négative, il en restitue au reste du circuit (générateur) — ce raisonnement énergétique est indépendant de la technologie du dipôle (résistance, moteur, batterie...).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passe-t-il sur le diviseur de courant (Théorème 5) si $R_2\to\infty$ (branche 2 ouverte) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$I_1 = I\cdot R_2/(R_1+R_2) \to I$ et $I_2 = I\cdot R_1/(R_1+R_2)\to 0$ : tout le courant passe par $R_1$, aucun ne traverse la branche ouverte — comportement physiquement attendu, qui confirme la cohérence de la formule.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : peut-on dire qu'une résistance « obéit toujours à $u=Ri$ », quelle que soit la convention choisie sur le schéma ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — le tableau des dipôles usuels (§6) montre bien deux cas : $u=Ri$ si les flèches $u,i$ sont dans un sens, $u=-Ri$ si elles sont dans l'autre. La loi d'Ohm ne change pas physiquement, mais son <strong>écriture algébrique</strong> dépend de la convention de fléchage choisie sur le schéma — un piège classique en début d'année.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : dans le diviseur de tension (Théorème 4), pourquoi $V_s$ contient-il $R_1$ au numérateur et non $R_2$ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que $V_s$ est mesurée aux bornes de $R_1$ précisément (Fig. 5) : la tension aux bornes d'une résistance en série est proportionnelle à... <strong>sa propre</strong> résistance (et non celle de l'autre, contrairement au diviseur de courant où c'est l'inverse). Confondre les deux formules (tension ↔ propre résistance ; courant ↔ résistance de l'autre branche) est une erreur très fréquente.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : reliez la loi des nœuds (Théorème 2) à la définition de l'intensité $i=dq/dt$ (Définition 1) — pourquoi la loi des nœuds traduit-elle une conservation de la charge électrique ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Un nœud ne peut pas accumuler de charge indéfiniment (il n'a pas de capacité propre) : la charge qui y entre par unité de temps doit être exactement celle qui en sort, sans quoi la charge stockée au nœud varierait, ce que la définition $i=dq/dt$ interdirait de concilier avec un nœud « ponctuel » sans réservoir de charge. La loi des nœuds (Théorème 2) est donc la traduction directe, au niveau d'un point du circuit, de la conservation de la charge électrique.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : un générateur de Thévenin ($E,R$) alimente une résistance de charge $R_u$. Utilisez le diviseur de tension (Théorème 4) pour exprimer la tension aux bornes de $R_u$, puis retrouvez ce résultat en utilisant l'équivalent de Norton (Théorème 3) et le diviseur de courant (Théorème 5).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Avec Thévenin : $R$ et $R_u$ sont en série alimentées par $E$, donc $U_{R_u} = \dfrac{R_u}{R+R_u}E$ (diviseur de tension). Avec Norton : $I=E/R$ alimente $R$ et $R_u$ en parallèle ; le courant dans $R_u$ est $I_{R_u}=I\cdot\dfrac{R}{R+R_u}=\dfrac{E}{R}\cdot\dfrac{R}{R+R_u}=\dfrac{E}{R+R_u}$ (diviseur de courant), d'où $U_{R_u}=R_u\,I_{R_u}=\dfrac{R_u}{R+R_u}E$ — on retrouve exactement le même résultat, ce qui illustre concrètement l'équivalence Thévenin-Norton (Théorème 3).</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Lois générales de l'électricité — Les dipôles » (résumé de cours, Prépa Barthou, Pau)</li>
+<li>Programme officiel de Physique-Chimie, CPGE 1<sup>re</sup> année (filière PCSI), bloc « Circuits électriques dans l'ARQS » : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+<li>H-Prépa Physique 1<sup>re</sup> année (Hachette Éducation) — chapitre « Circuits électriques, lois de Kirchhoff, théorèmes de Thévenin et Norton »</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>
