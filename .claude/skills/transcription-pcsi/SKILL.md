@@ -20,11 +20,20 @@ nommage des fichiers, et le workflow de publication.
 
 1. Nommer le fichier `NN-Date_Matière_Type_NomDuLienSourceSansAccents.html`
    (NN = prochain numéro disponible dans le sous-dossier concerné).
+   Si le cours transcrit est une prise de notes manuscrite de Clarisse
+   (pas un document du professeur), inclure le mot `Clarisse` dans le nom
+   de fichier (ex. `..._Cours_Clarisse_...`) — l'index le classe
+   automatiquement dans « 1. Cours Clarisse » ; tout fichier sans ce mot est
+   classé dans « 2. Cours Profs » (documents récupérés sur le site du prof
+   ou de Louis Barthou).
 2. Le placer dans `Prepa_barthou/1ere_annee/<01_MATHS|02_PHYSIQUE|03_CHIMIE|04_SI>/`
    du dépôt `plouf34/prepabarthou`, branche `claude/pcsi-henri-iv-math-exercises-pubkis`.
-3. Régénérer `Prepa_barthou/1ere_annee/index.html` en scannant le contenu
-   réel des 4 sous-dossiers (ne pas se fier à une liste mémorisée — d'autres
-   sessions peuvent avoir ajouté des fichiers entre-temps).
+3. Régénérer `Prepa_barthou/1ere_annee/index.html` avec le script
+   `.claude/skills/transcription-pcsi/regen_index.py <repo_root>`, qui scanne
+   le contenu réel des 4 sous-dossiers et répartit chaque matière en 2
+   sous-parties « Cours Clarisse » / « Cours Profs » (ne pas régénérer
+   l'index à la main ni se fier à une liste mémorisée — d'autres sessions
+   peuvent avoir ajouté des fichiers entre-temps).
 4. Commit puis push sur la branche ci-dessus.
 5. Fournir une copie du fichier à l'utilisateur (pièce jointe/téléchargement)
    pour récupération locale.
