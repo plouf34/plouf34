@@ -23,10 +23,10 @@ BASE_URL = "https://plouf34.github.io/prepabarthou/Prepa_barthou/1ere_annee"
 # Établissement(s) source des documents "Cours Profs" pour chaque matière
 # (ville affichée à titre indicatif, sans classement — ce n'est pas le Kit de révision).
 SUBJECT_SOURCES = {
-    "01_MATHS": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php")],
-    "02_PHYSIQUE": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php")],
-    "03_CHIMIE": [("Sainte-Geneviève — S. Falcou", "Versailles", None)],
-    "04_SI": [("Jean Perrin — N. Mesnier", "Lyon", "http://nmesnier.free.fr/SII-PCSI.html")],
+    "01_MATHS": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png")],
+    "02_PHYSIQUE": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png")],
+    "03_CHIMIE": [("Sainte-Geneviève — S. Falcou", "Versailles", None, None)],
+    "04_SI": [("Jean Perrin — N. Mesnier", "Lyon", "http://nmesnier.free.fr/SII-PCSI.html", None)],
 }
 
 
@@ -54,15 +54,16 @@ def sources_bar(folder):
     if not items:
         return ""
     chips = ""
-    for name, ville, url in items:
+    for name, ville, url, icon in items:
+        icon_html = f'<img src="{esc(icon)}" class="source-icon" alt="">' if icon else "🏫"
         meta = f'<div class="source-meta">📍 {esc(ville)}</div>'
         if url:
             chips += (f'<div class="source-block">'
-                      f'<a class="source-chip" href="{esc(url)}" target="_blank" rel="noopener">🏫 {esc(name)} <span class="arrow">↗</span></a>'
+                      f'<a class="source-chip" href="{esc(url)}" target="_blank" rel="noopener">{icon_html} {esc(name)} <span class="arrow">↗</span></a>'
                       f'{meta}</div>')
         else:
             chips += (f'<div class="source-block">'
-                      f'<span class="source-chip source-chip-static">🏫 {esc(name)}</span>'
+                      f'<span class="source-chip source-chip-static">{icon_html} {esc(name)}</span>'
                       f'{meta}</div>')
     label = "Source" if len(items) == 1 else "Sources"
     return f'<div class="sources-bar"><span class="sources-label">{label} :</span>{chips}</div>'
@@ -222,6 +223,7 @@ def main():
   }}
   .source-chip-static {{ color: var(--text); }}
   .source-chip .arrow {{ opacity: .6; }}
+  .source-icon {{ height:14px; width:auto; border-radius:2px; vertical-align:middle; }}
   .source-block {{ display: flex; flex-direction: column; gap: 2px; }}
   .source-meta {{ font-size: 10.5px; color: var(--sub); padding-left: 4px; }}
 
@@ -264,7 +266,6 @@ def main():
   <div class="crosslinks">
     <a href="../../index.html">🏠 Accueil</a>
     <a href="../../Kit_Revision_PCSI.html">🎯 Kit de révision PCSI</a>
-    <a href="https://www.prepabarthou.fr/cours/my/courses.php" target="_blank" rel="noopener"><img src="../../logo-barthou.png" alt="">Site Louis Barthou</a>
   </div>
   <h1><img src="../../icon-barthou-title.png" alt="">Prépa Barthou — 1ère année</h1>
   <p>Cours, TD et exercices — mis à jour au fil de l'année</p>
