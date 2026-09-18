@@ -19,24 +19,35 @@ def display_name(filename):
     name = filename[:-5] if filename.endswith(".html") else filename
     return name.replace("_", " ")
 
-def build_subject_block(repo_root, folder, emoji, label):
-    dir_path = os.path.join(repo_root, "Prepa_barthou", "1ere_annee", folder)
-    files = []
-    if os.path.isdir(dir_path):
-        files = sorted(f for f in os.listdir(dir_path) if f.endswith(".html"))
+def is_clarisse(filename):
+    return "_Clarisse_" in filename or "_Clarisse." in filename
+
+def render_file_list(folder, files):
     if not files:
-        return (
-            f'<div class="subject"><h2 class="subject-title">{emoji} {html.escape(label)}</h2>'
-            f'<div class="empty">Aucun fichier pour l\'instant.</div></div>'
-        )
+        return '<div class="empty">Aucun fichier pour l\'instant.</div>'
     items = []
     for f in files:
         url = f"{BASE_URL}/{folder}/{f}"
         name = html.escape(display_name(f))
         items.append(f'<li><a href="{url}" target="_blank" rel="noopener">📄 {name}</a></li>')
+    return f'<ul class="file-list">{"".join(items)}</ul>'
+
+def build_subject_block(repo_root, folder, emoji, label):
+    dir_path = os.path.join(repo_root, "Prepa_barthou", "1ere_annee", folder)
+    files = []
+    if os.path.isdir(dir_path):
+        files = sorted(f for f in os.listdir(dir_path) if f.endswith(".html"))
+
+    clarisse_files = [f for f in files if is_clarisse(f)]
+    profs_files = [f for f in files if not is_clarisse(f)]
+
     return (
         f'<div class="subject"><h2 class="subject-title">{emoji} {html.escape(label)}</h2>'
-        f'<ul class="file-list">{"".join(items)}</ul></div>'
+        f'<h3 class="subsection-title">1. Cours Clarisse</h3>'
+        f'{render_file_list(folder, clarisse_files)}'
+        f'<h3 class="subsection-title">2. Cours Profs</h3>'
+        f'{render_file_list(folder, profs_files)}'
+        f'</div>'
     )
 
 def main():
@@ -72,6 +83,9 @@ def main():
   .subject {{ margin: 18px 0; background:var(--card-bg); border:1px solid var(--border);
     border-radius: 14px; padding: 12px 16px; }}
   .subject-title {{ font-size:16px; margin:0 0 8px; }}
+  .subsection-title {{ font-size:12px; font-weight:700; color:var(--sub); text-transform:uppercase;
+    letter-spacing:0.03em; margin:14px 0 6px; }}
+  .subsection-title:first-of-type {{ margin-top:2px; }}
   .file-list {{ list-style:none; margin:0; padding:0; }}
   .file-list li {{ padding: 8px 0; border-top: 1px solid var(--border); }}
   .file-list li:first-child {{ border-top:none; }}
