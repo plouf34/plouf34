@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie — Transformations chimiques : approche thermodynamique</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.85rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+table{border-collapse:collapse; margin:1rem 0; width:100%;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.9rem; vertical-align:middle;}
+th{background:#f3f2ee;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+.plan ul{margin:.2rem 0 .6rem 0;}
+.plan li{margin:.15rem 0;}
+.plan .capacites{font-style:italic; color:#5c5c56; font-size:.9rem;}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.45rem;} h2{font-size:1.1rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#plan">Plan du cours</a></li>
+  <li class="top"><a href="#d1">Document 1 — Changements d'état</a></li>
+  <li class="top"><a href="#d2">Document 2 — Espèces chimiques</a></li>
+  <li class="top"><a href="#d3">Document 3 — Vaporisation (microscopique)</a></li>
+  <li class="top"><a href="#d4">Document 4 — Équation et nombres stœchiométriques</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Transformations chimiques — approche thermodynamique</h1>
+<div class="meta">Chimie — Résumé de cours · PCSI · Prépa Barthou (Pau) · mis au propre le 18/09/2026</div>
+</header>
+
+<section id="plan" class="plan">
+<h2>Plan du cours</h2>
+<div class="block remark">
+<span class="label">Remarque de transcription</span>
+Le document source distribué par le professeur est un « support » : il donne le plan détaillé des trois chapitres ci-dessous, une série de documents (définitions, données, extraits) qui servent de base au cours oral, ainsi qu'une banque d'exercices. Cette page transcrit fidèlement le plan et l'intégralité des documents ; les exercices (sans corrigé fourni) ne sont pas repris ici.
+</div>
+
+<h3>Chapitre 1 — Systèmes physico-chimiques</h3>
+<ul>
+<li>I. Description physique d'un système : paramètres et fonctions d'état (paramètres physiques, relations entre paramètres d'état, équation d'état du gaz parfait, paramètres intensifs et extensifs)</li>
+<li>II. Composition d'un système : corps purs et mélanges (phase, corps purs, mélanges, solutions, espèces physico-chimiques)</li>
+</ul>
+<p class="capacites"><em>Capacités :</em> recenser les espèces physico-chimiques présentes dans un système ; décrire la composition d'un système à l'aide des grandeurs physiques pertinentes ; reconnaître le caractère extensif ou intensif d'une variable.</p>
+
+<h3>Chapitre 2 — La réaction chimique et son avancement</h3>
+<ul>
+<li>I. Modélisation d'une transformation physico-chimique ; équation de réaction (nombres stœchiométriques algébriques, transformations dues à plusieurs réactions simultanées)</li>
+<li>II. Bilan de matière ; avancement</li>
+</ul>
+<p class="capacites"><em>Capacités :</em> écrire l'équation de la (ou des) réaction(s) qui modélise(nt) une transformation donnée ; décrire qualitativement et quantitativement un système chimique dans l'état initial ou dans un état d'avancement quelconque.</p>
+
+<h3>Chapitre 3 — Évolution et équilibre</h3>
+<ul>
+<li>I. Principes fondamentaux de thermodynamique chimique (activité d'une espèce, quotient de réaction, loi de Guldberg et Waage, critère d'évolution et d'équilibre)</li>
+<li>II. Application : prévision de l'évolution d'un système vers un état final</li>
+<li>III. Optimisation d'un procédé chimique</li>
+</ul>
+<p class="capacites"><em>Capacités :</em> exprimer l'activité d'une espèce chimique pure ou dans un mélange (solutions aqueuses très diluées ou mélanges de gaz parfaits, référence à l'état standard) ; exprimer le quotient de réaction ; prévoir le sens de l'évolution spontanée d'un système chimique ; identifier un état d'équilibre chimique ; déterminer une constante d'équilibre et tester l'influence de différents paramètres sur l'état d'équilibre d'un système ; déterminer la composition chimique du système dans l'état final (équilibre chimique ou transformation totale) ; identifier les paramètres d'influence d'un état d'équilibre et leur contrôle pour optimiser une synthèse ou minimiser la formation d'un produit secondaire indésirable.</p>
+</section>
+
+<section id="d1">
+<h2>Document 1 — Vocabulaire des changements d'état physique</h2>
+<p>Avant de dessiner le schéma : la règle physique qu'il doit respecter est la suivante — les trois états de la matière (solide, liquide, gaz) sont reliés deux à deux par six transformations nommées, chacune orientée dans un seul sens (par exemple la fusion solide→liquide n'est pas le nom du passage inverse, qui se nomme solidification).</p>
+<figure>
+<svg viewBox="0 0 480 380" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<circle cx="240" cy="70" r="46" fill="#e9f1fd" stroke="#3b6fd8" stroke-width="1.6"/>
+<text x="240" y="76" text-anchor="middle" font-size="16" font-weight="700">gaz</text>
+<circle cx="110" cy="290" r="46" fill="#e9f8ee" stroke="#2fa365" stroke-width="1.6"/>
+<text x="110" y="296" text-anchor="middle" font-size="16" font-weight="700">solide</text>
+<circle cx="370" cy="290" r="46" fill="#fdf3dd" stroke="#c98a12" stroke-width="1.6"/>
+<text x="370" y="296" text-anchor="middle" font-size="16" font-weight="700">liquide</text>
+<line x1="150" y1="255" x2="205" y2="105" stroke="#8b2e2e" stroke-width="1.6" marker-end="url(#a1)"/>
+<text x="140" y="180" font-size="12" fill="#8b2e2e" text-anchor="end">sublimation</text>
+<line x1="275" y1="105" x2="330" y2="255" stroke="#8b2e2e" stroke-width="1.6" marker-end="url(#a1)"/>
+<text x="345" y="180" font-size="12" fill="#8b2e2e">condensation</text>
+<line x1="330" y1="270" x2="278" y2="112" stroke="#333" stroke-width="1.4" marker-end="url(#a1)"/>
+<text x="300" y="120" font-size="12" text-anchor="middle">vaporisation</text>
+<line x1="205" y1="112" x2="155" y2="270" stroke="#333" stroke-width="1.4" marker-end="url(#a1)"/>
+<text x="182" y="105" font-size="12" text-anchor="middle">liquéfaction</text>
+<line x1="156" y1="290" x2="324" y2="290" stroke="#333" stroke-width="1.4" marker-end="url(#a1)"/>
+<text x="240" y="278" font-size="12" text-anchor="middle">fusion</text>
+<line x1="324" y1="306" x2="156" y2="306" stroke="#333" stroke-width="1.4" marker-end="url(#a1)"/>
+<text x="240" y="332" font-size="12" text-anchor="middle">solidification</text>
+<defs><marker id="a1" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 1 — Les six changements d'état physique. Vérification : chaque paire d'états est bien reliée par deux flèches de sens opposé et de nom distinct (conforme au schéma manuscrit source).</figcaption>
+</figure>
+
+<div class="block def">
+<span class="label">Définition 1 — phase, corps pur, mélange</span>
+Une <strong>phase</strong> est une portion de matière homogène (mêmes propriétés physiques en tout point). Un <strong>corps pur</strong> est constitué d'une unique espèce chimique ; un <strong>mélange</strong> est constitué de plusieurs espèces chimiques (cas particulier : les <strong>solutions</strong>, mélanges homogènes).
+</div>
+
+<div class="block remark">
+<span class="label">Remarque</span>
+Les espèces physico-chimiques peuvent être atomiques, moléculaires ou ioniques (voir Document 2).
+</div>
+</section>
+
+<section id="d2">
+<h2>Document 2 — Les principaux types d'espèces chimiques</h2>
+<p>Trois grandes familles d'espèces chimiques sont distinguées à l'échelle microscopique (entités constitutives) :</p>
+<table>
+<tr><th>Type</th><th>Échelle microscopique</th><th>Exemple macroscopique</th><th>Notation</th></tr>
+<tr><td>Espèces atomiques (métaux simples, non-métaux simples)</td><td>atomes identiques (ex. atome Fe, atome C)</td><td>morceaux de fer ; diamant</td><td>$\mathrm{Fe}$ ; $\mathrm{C}$</td></tr>
+<tr><td>Espèces moléculaires</td><td>molécules (ex. molécule $\mathrm{H_2O}$)</td><td>glaçons</td><td>$\mathrm{H_2O}$</td></tr>
+<tr><td>Espèces ioniques — solide ionique</td><td>empilement d'ions (ex. $\mathrm{Na^+}$, $\mathrm{Cl^-}$)</td><td>sel de table, halite</td><td>$\mathrm{NaCl}$</td></tr>
+<tr><td>Espèces ioniques — soluté ionique en solution</td><td>ion solvaté (ex. $\mathrm{Na^+}$ entouré de dipôles d'eau)</td><td>eau salée</td><td>$\mathrm{Na^+_{(aq)}}$</td></tr>
+</table>
+<div class="block remark">
+<span class="label">Remarque</span>
+La nature du solvant est indiquée en indice dans la notation de l'espèce physico-chimique lorsqu'elle est en solution. Pour l'eau : $\mathrm{Na^+_{(aq)}}$.
+</div>
+</section>
+
+<section id="d3">
+<h2>Document 3 — Aspect microscopique de la vaporisation de l'eau</h2>
+<div class="block remark">
+<span class="label">Extrait de presse scientifique (résumé)</span>
+D'après des simulations numériques de l'équipe de Yuki Nagata (Institut Max-Planck, Mayence), l'évaporation d'une molécule d'eau n'est pas un phénomène isolé : elle nécessite la coordination d'au moins trois molécules d'eau. Le mécanisme observé se déroule en trois temps : deux molécules d'eau liées par liaison hydrogène s'écartent jusqu'à un écartement minimal (« paire de molécules ») ; environ 40 femtosecondes plus tard, cette paire entre en collision avec une troisième molécule ; sous l'effet de l'énergie ainsi délivrée, une des deux molécules de la paire initiale est éjectée du liquide et passe à l'état gazeux : elle s'évapore. L'évaporation apparaît donc comme un phénomène collectif et statistique plutôt que comme le franchissement individuel d'une barrière d'énergie par une seule molécule.
+</div>
+<p class="meta">Référence : V. Glavieux, « L'évaporation est une affaire collective », <em>La Recherche</em>, n°508, février 2016, p.24, d'après Y. Nagata et al., <em>Phys. Rev. Lett.</em> 115, 236102 (2015) et P. E. Mason, <em>J. Phys. Chem. A</em> 115, 6054 (2011).</p>
+</section>
+
+<section id="d4">
+<h2>Document 4 — Équation d'une réaction chimique et nombres stœchiométriques algébriques</h2>
+<div class="block def">
+<span class="label">Définition 2 — réaction chimique, équation de réaction</span>
+Une réaction chimique est un phénomène où des espèces physico-chimiques sont consommées et produites dans des proportions définies. Elle est symbolisée par une équation de réaction, qui traduit la conservation de chaque élément chimique ainsi que la conservation de la charge électrique au travers des nombres stœchiométriques ajustés.
+</div>
+<p>Exemple, pour une réaction d'oxydoréduction en solution aqueuse :</p>
+$$2\,\mathrm{Hg^{2+}_{(aq)}} + 2\,\mathrm{Fe^{2+}_{(aq)}} = \mathrm{Hg_2^{2+}}_{(aq)} + 2\,\mathrm{Fe^{3+}_{(aq)}}$$
+<p>Les nombres $s_i$ figurant devant les constituants sont les <strong>nombres stœchiométriques</strong> (non algébriques) : ici $s_{\mathrm{Hg^{2+}}}=2$ ; $s_{\mathrm{Fe^{2+}}}=2$ ; $s_{\mathrm{Hg_2^{2+}}}=1$ ; $s_{\mathrm{Fe^{3+}}}=2$.</p>
+<div class="block remark">
+<span class="label">Remarque</span>
+Les équations $4\,\mathrm{Hg^{2+}}+4\,\mathrm{Fe^{2+}}=2\,\mathrm{Hg_2^{2+}}+4\,\mathrm{Fe^{3+}}$, ou encore $\mathrm{Hg^{2+}}+\mathrm{Fe^{2+}}=\tfrac{1}{2}\mathrm{Hg_2^{2+}}+\mathrm{Fe^{3+}}$, auraient pu tout aussi bien être choisies pour représenter la même réaction : elles traduisent de la même façon la conservation des éléments et de la charge. Les nombres stœchiométriques représentent des proportions ; ce sont des nombres <strong>rationnels</strong>.
+</div>
+
+<h3>Orientation d'une équation chimique</h3>
+<p>A priori, une réaction chimique écrite avec le signe $=$ n'est pas orientée : les deux processus peuvent avoir lieu. On convient cependant d'orienter conventionnellement les réactions chimiques selon le sens choisi pour écrire l'équation, en distinguant les espèces de gauche et les espèces de droite.</p>
+<p>Pour éviter d'écrire des formules différentes « pour la gauche » et « pour la droite », on écrit l'équation chimique sous la forme mathématique générale :</p>
+$$0 = \sum_i \nu_i A_i \qquad \nu_i \in \mathbb{Q}$$
+<div class="block theorem">
+<span class="label">Définition 3 — nombre stœchiométrique algébrique</span>
+Soit un constituant $A_i$ de nombre stœchiométrique (non algébrique) $s_i$. Son nombre stœchiométrique algébrique $\nu_i$ vaut :
+$$\nu_i = +s_i \text{ si } A_i \text{ figure à droite de l'équation} \qquad \nu_i = -s_i \text{ si } A_i \text{ figure à gauche}$$
+</div>
+<p>Application à l'exemple précédent : $\nu_{\mathrm{Hg^{2+}}}=-2$ ; $\nu_{\mathrm{Fe^{2+}}}=-2$ ; $\nu_{\mathrm{Hg_2^{2+}}}=+1$ ; $\nu_{\mathrm{Fe^{3+}}}=+2$.</p>
+
+<div class="block remark">
+<span class="label">Remarque — réactifs et produits</span>
+La simple écriture d'une équation de réaction ne permet pas, en toute rigueur, de savoir dans quel sens une transformation chimique éventuelle aurait lieu si on mettait en présence les espèces en question (cela dépend des conditions opératoires ; voir le critère d'évolution thermodynamique, chapitre 3). Toutefois, la plupart du temps, on se place dans des conditions initiales telles que la transformation chimique se déroule dans un sens bien déterminé : les espèces qui diminuent sont alors appelées <strong>réactifs</strong>, celles qui augmentent, <strong>produits</strong>. Dans ce cas, lorsqu'on connaît le sens d'évolution de la transformation, on préférera écrire les réactifs à gauche, les produits à droite.
+</div>
+
+<div class="block correction">
+<span class="label">⚠️ Point de vigilance signalé par le document source</span>
+On s'assurera toujours qu'une même espèce physico-chimique $A_i$ n'apparaisse jamais plusieurs fois dans une même équation (à chaque espèce $A_i$ ne peut correspondre qu'une unique valeur de $\nu_i$). Ainsi l'équation $\mathrm{N_2O_{5(g)}} + \mathrm{O_{2(g)}} = 2\,\mathrm{NO_{2(g)}} + \tfrac{3}{2}\mathrm{O_{2(g)}}$ n'est <strong>pas correcte</strong> ($\mathrm{O_2}$ y figure deux fois) : il faut simplifier en $\mathrm{N_2O_{5(g)}} = 2\,\mathrm{NO_{2(g)}} + \tfrac{1}{2}\mathrm{O_{2(g)}}$. De même, on ne modélise pas la dissolution du chlorure de sodium par $\mathrm{NaCl_{(s)}} + \mathrm{H_2O_{(\ell)}} = \mathrm{Na^+_{(aq)}} + \mathrm{Cl^-_{(aq)}} + \mathrm{H_2O_{(\ell)}}$ (l'eau, solvant, ne doit pas apparaître comme réactif ici puisqu'elle n'est pas consommée en quantité définie) mais par $\mathrm{NaCl_{(s)}} = \mathrm{Na^+_{(aq)}} + \mathrm{Cl^-_{(aq)}}$.
+</div>
+<p>Quand une espèce physico-chimique n'apparaît pas dans une équation, on convient de lui attribuer le nombre stœchiométrique $\nu_i = 0$.</p>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Qu'est-ce qui distingue un corps pur d'un mélange, et qu'est-ce qu'une solution ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Un corps pur est constitué d'une unique espèce chimique, un mélange de plusieurs espèces chimiques (Définition 1). Une solution est le cas particulier d'un mélange <strong>homogène</strong> (une seule phase).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Pourquoi la formule $\mathrm{Na^+_{(aq)}}$ comporte-t-elle l'indice « aq », alors que la formule $\mathrm{NaCl}$ (solide ionique) n'en comporte pas ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+L'indice précise la nature du solvant lorsque l'espèce est un soluté ionique <strong>en solution</strong> (Document 2) : Na⁺(aq) désigne l'ion sodium solvaté par l'eau. Dans NaCl solide, il n'y a pas de solvant : ce sont les ions Na⁺ et Cl⁻ empilés dans un réseau cristallin, il n'y a donc pas d'indice à préciser.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Écrire les nombres stœchiométriques algébriques $\nu_i$ de chaque espèce de la réaction $\mathrm{CaCO_{3(s)}} = \mathrm{CaO_{(s)}} + \mathrm{CO_{2(g)}}$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$\nu_{\mathrm{CaCO_3}} = -1$ (à gauche) ; $\nu_{\mathrm{CaO}} = +1$ et $\nu_{\mathrm{CO_2}} = +1$ (à droite), conformément à la Définition 3.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Pourquoi peut-on dire que les nombres stœchiométriques (non algébriques) $s_i$ sont des nombres <em>rationnels</em>, et non nécessairement des entiers ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que l'équation $2\,\mathrm{Hg^{2+}}+2\,\mathrm{Fe^{2+}}=\mathrm{Hg_2^{2+}}+2\,\mathrm{Fe^{3+}}$ et l'équation $\mathrm{Hg^{2+}}+\mathrm{Fe^{2+}}=\tfrac12\mathrm{Hg_2^{2+}}+\mathrm{Fe^{3+}}$ décrivent rigoureusement la même transformation (Remarque, Document 4) : seules les proportions relatives comptent, pas le choix arbitraire d'un facteur multiplicatif commun. $s_i$ peut donc être fractionnaire.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi l'équation $\mathrm{N_2O_{5(g)}} + \mathrm{O_{2(g)}} = 2\,\mathrm{NO_{2(g)}} + \tfrac{3}{2}\mathrm{O_{2(g)}}$ est-elle interdite, alors qu'elle semble équilibrée en éléments (N et O) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que l'espèce $\mathrm{O_2}$ y apparaît deux fois (à gauche et à droite), ce qui contredit la règle qu'à chaque espèce ne peut correspondre qu'une unique valeur de $\nu_i$ (Correction, Document 4). Il faut la simplifier en $\mathrm{N_2O_{5(g)}} = 2\,\mathrm{NO_{2(g)}} + \tfrac12\mathrm{O_{2(g)}}$, où $\mathrm{O_2}$ n'apparaît plus qu'une fois, avec $\nu_{\mathrm{O_2}} = +\tfrac12 - 1 = -\tfrac12$... en réalité le bilan net (ici $O_2$ consommé net) doit être calculé avant simplification : c'est justement cette étape de simplification qui est obligatoire.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Piège classique : pourquoi ne modélise-t-on pas la dissolution de NaCl par $\mathrm{NaCl_{(s)}} + \mathrm{H_2O_{(\ell)}} = \mathrm{Na^+_{(aq)}} + \mathrm{Cl^-_{(aq)}} + \mathrm{H_2O_{(\ell)}}$ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que l'eau y figure des deux côtés de l'équation avec le même nombre stœchiométrique : elle n'est pas réellement consommée en quantité définie, elle joue seulement le rôle de solvant. L'écriture correcte, plus sobre, est $\mathrm{NaCl_{(s)}} = \mathrm{Na^+_{(aq)}} + \mathrm{Cl^-_{(aq)}}$ (Correction, Document 4) — piège fréquent en début d'année : confondre le rôle de solvant avec celui de réactif.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : une espèce n'apparaissant pas dans une équation de réaction a-t-elle un nombre stœchiométrique algébrique indéfini ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non : par convention, on lui attribue $\nu_i = 0$ (dernière ligne du Document 4). C'est important pour manipuler l'écriture générale $0=\sum_i \nu_i A_i$ sur un ensemble d'espèces fixé, sans avoir à réénumérer les espèces absentes à chaque réaction.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Que se passerait-il si l'on choisissait d'écrire les produits à gauche et les réactifs à droite d'une réaction dont on connaît le sens d'évolution ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Rien d'incorrect en soi : une équation chimique écrite avec le signe « = » n'est a priori pas orientée (Document 4), le choix de placer telle espèce à gauche ou à droite est conventionnel. Mais on préfère, par lisibilité, placer les réactifs à gauche et les produits à droite lorsque le sens d'évolution est connu — c'est un choix d'usage, pas une contrainte physique.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : en quoi le mécanisme d'évaporation décrit dans le Document 3 (nécessitant la coordination de trois molécules d'eau) nuance-t-il une vision « individuelle » de l'agitation thermique, où chaque molécule s'évaporerait seule dès qu'elle atteint une énergie suffisante ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le modèle « individuel » suppose qu'une seule molécule suffit à franchir la barrière d'énergie de vaporisation. Les simulations de Nagata et al. montrent au contraire que l'évaporation résulte d'un événement <strong>collectif</strong> impliquant au minimum trois molécules : une paire liée par liaison hydrogène qui, en s'écartant, entre en collision avec une troisième molécule qui lui transfère l'énergie nécessaire à l'éjection de l'une des deux premières. L'évaporation n'est donc pas la simple sortie d'une molécule isolément « assez chaude », mais le résultat d'une collision à trois corps.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : reliez la notion de nombre stœchiométrique algébrique (Document 4) à celle de sens d'une réaction (réactifs/produits) — pourquoi le signe de $\nu_i$ dépend-il uniquement du choix d'écriture de l'équation, et non de la thermodynamique de la réaction ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le signe de $\nu_i$ ($+$ à droite, $-$ à gauche) est fixé par la convention d'écriture de l'équation (Définition 3), qui est arbitraire et antérieure à toute considération thermodynamique. En revanche, savoir si une espèce est réellement un « réactif » (consommé) ou un « produit » (formé) au cours d'une transformation donnée est une question physique, qui dépend du sens réel d'évolution du système (déterminé par le critère d'évolution thermodynamique du chapitre 3). On choisit ensuite, par commodité, d'orienter l'écriture de l'équation dans le sens réel observé — mais les deux notions (signe algébrique conventionnel / sens physique réel) sont bien distinctes, même si en pratique on les aligne.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Transformations chimiques — Approche thermodynamique » (support de cours, Prépa Barthou, Pau)</li>
+<li>Programme officiel de Physique-Chimie, CPGE 1<sup>re</sup> année (filière PCSI), thème « Transformation de la matière » : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+<li>V. Glavieux, « L'évaporation est une affaire collective », <em>La Recherche</em>, n°508, février 2016 (Document 3)</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>
