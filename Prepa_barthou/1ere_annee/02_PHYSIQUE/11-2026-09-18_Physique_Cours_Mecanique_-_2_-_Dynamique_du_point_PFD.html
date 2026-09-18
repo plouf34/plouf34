@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physique — Mécanique 2 : Dynamique du point (PFD)</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.85rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+table{border-collapse:collapse; width:100%; margin:.8rem 0; font-size:.92rem;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left;}
+th{background:var(--gray-bg);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.45rem;} h2{font-size:1.1rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Les trois lois de Newton</a></li>
+  <li class="top"><a href="#s2">2. Frottement solide (loi de Coulomb)</a></li>
+  <li class="top"><a href="#s3">3. Frottement fluide</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Mécanique 2 — Dynamique du point : Principe Fondamental de la Dynamique</h1>
+<div class="meta">Physique — Résumé de cours · PCSI · Prépa Barthou (Pau) · mis au propre le 18/09/2026</div>
+</header>
+
+<section id="s1">
+<h2>1. Les trois lois de Newton</h2>
+
+<div class="block def">
+<span class="label">Définition 1 — Référentiel galiléen</span>
+Un référentiel est dit <strong>galiléen</strong> si, dans ce référentiel, un point matériel isolé (éloigné de tout autre corps, donc soumis à une résultante des forces nulle) est animé d'un mouvement rectiligne uniforme :
+$$\vec v(M)_{/\mathcal{R}} = \overrightarrow{\text{cte}}$$
+</div>
+
+<div class="block theorem">
+<span class="label">Théorème 1 — Première loi de Newton (principe d'inertie)</span>
+Il existe un référentiel privilégié, dit galiléen, satisfaisant la Définition 1. De plus, tout référentiel $\mathcal{R}'$ en translation rectiligne uniforme par rapport à un référentiel galiléen $\mathcal{R}$ est lui-même galiléen.
+</div>
+
+<div class="block def">
+<span class="label">Définition 2 — Translation</span>
+$\mathcal{R}'$ est en <strong>translation</strong> par rapport à $\mathcal{R}$ si tout vecteur lié à $\mathcal{R}'$ garde une direction fixe dans $\mathcal{R}$. La translation est <strong>rectiligne</strong> si un point de $\mathcal{R}'$ décrit une droite dans $\mathcal{R}$, et <strong>uniforme</strong> si sa vitesse dans $\mathcal{R}$ est constante.
+</div>
+
+<div class="block theorem">
+<span class="label">Théorème 2 — Deuxième loi de Newton (PFD)</span>
+Dans un référentiel galiléen, pour un point matériel $M$ de masse $m$ :
+$$\sum \vec F_{ext} = \frac{d\vec p(M)}{dt} = \frac{d(m\vec v(M))}{dt} \overset{m=\text{cte}}{=} m\vec a(M)$$
+</div>
+
+<div class="block theorem">
+<span class="label">Théorème 3 — Troisième loi de Newton (action-réaction)</span>
+Pour deux points matériels isolés $M_1$ et $M_2$ en interaction, la force exercée par $1$ sur $2$ et la force exercée par $2$ sur $1$ sont opposées :
+$$\vec F_{1\to2} + \vec F_{2\to1} = \vec 0$$
+</div>
+
+<figure>
+<svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<circle cx="120" cy="80" r="22" fill="#e9f1fd" stroke="#3b6fd8" stroke-width="1.5"/><text x="120" y="85" text-anchor="middle" font-size="13">M1</text>
+<circle cx="290" cy="80" r="22" fill="#f2ecfd" stroke="#7c4fd6" stroke-width="1.5"/><text x="290" y="85" text-anchor="middle" font-size="13">M2</text>
+<line x1="142" y1="72" x2="262" y2="72" stroke="#c0392b" stroke-width="1.8" marker-end="url(#aP1)"/><text x="200" y="60" text-anchor="middle" font-size="11" fill="#c0392b">F(1→2)</text>
+<line x1="262" y1="90" x2="142" y2="90" stroke="#2fa365" stroke-width="1.8" marker-end="url(#aP1)"/><text x="200" y="112" text-anchor="middle" font-size="11" fill="#2fa365">F(2→1)</text>
+<defs><marker id="aP1" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="context-fill"/></marker></defs>
+</svg>
+<figcaption>Fig. 1 — Paire action-réaction (Théorème 3) : les deux forces ont même norme, même droite d'action, et sont de sens opposés.</figcaption>
+</figure>
+</section>
+
+<section id="s2">
+<h2>2. Frottement solide (loi de Coulomb)</h2>
+<div class="block def">
+<span class="label">Définition 3</span>
+La réaction $\vec R$ d'un support sur un solide se décompose en une composante normale $\vec R_N$ (perpendiculaire au support) et une composante tangentielle $\vec R_T$ (le frottement) : $\vec R = \vec R_N + \vec R_T$.
+</div>
+<div class="block theorem">
+<span class="label">Théorème 4 — Loi de Coulomb du frottement solide</span>
+$$\|\vec R_T\| < f\|\vec R_N\| \iff \text{pas de glissement (équilibre possible)}$$
+$$\|\vec R_T\| = f\|\vec R_N\| \iff \text{glissement (le solide glisse)}$$
+où $f$ est le coefficient de frottement (sans dimension), dépendant uniquement de la nature des surfaces en contact.
+</div>
+<div class="block remark">
+<span class="label">Remarque — cône de frottement</span>
+La limite $\|\vec R_T\|=f\|\vec R_N\|$ définit géométriquement un cône d'angle $\varphi$ tel que $\tan\varphi = f$ : tant que $\vec R$ reste à l'intérieur de ce cône (autour de la normale), il n'y a pas de glissement.
+</div>
+<figure>
+<svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<line x1="40" y1="180" x2="280" y2="180" stroke="#333" stroke-width="2"/>
+<line x1="160" y1="180" x2="160" y2="60" stroke="#888" stroke-width="1.2" stroke-dasharray="4,3"/><text x="165" y="58" font-size="10" fill="#888">normale n</text>
+<path d="M160 180 L200 70 A 115 115 0 0 0 120 70 Z" fill="#fdf3dd" fill-opacity="0.6" stroke="#c98a12" stroke-width="1.2"/>
+<line x1="160" y1="180" x2="195" y2="80" stroke="#c0392b" stroke-width="2" marker-end="url(#aP2)"/><text x="198" y="75" font-size="11" fill="#c0392b">R</text>
+<path d="M160 150 A 30 30 0 0 1 175 156" fill="none" stroke="#7c4fd6" stroke-width="1.2"/><text x="180" y="150" font-size="10" fill="#7c4fd6">φ</text>
+<defs><marker id="aP2" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#c0392b"/></marker></defs>
+</svg>
+<figcaption>Fig. 2 — Cône de frottement : demi-angle au sommet $\varphi=\arctan f$. La réaction $\vec R$ reste dans le cône tant qu'il n'y a pas glissement.</figcaption>
+</figure>
+<div class="block remark">
+<span class="label">Remarque — ordres de grandeur</span>
+Quelques valeurs usuelles de $f$ (contact sec) : acier sur acier $\approx 0{,}2$ ; pneu sur route sèche $\approx 0{,}7$ ; pneu sur route mouillée $\approx 0{,}1$ ; bois sur bois $\approx 0{,}7$. Ces valeurs dépendent fortement de l'état des surfaces et ne sont que des ordres de grandeur.
+</div>
+</section>
+
+<section id="s3">
+<h2>3. Frottement fluide</h2>
+<div class="block theorem">
+<span class="label">Théorème 5 — Modèles de frottement fluide</span>
+$$v < 10\ \text{m/s (régime laminaire, faible vitesse) : } \vec F = -\alpha\vec v, \qquad \alpha = 6\pi R\eta$$
+$$v \geq 10\ \text{m/s (régime turbulent, forte vitesse) : } \vec F = -\beta v^2\,\vec e_v, \qquad \beta = \frac{1}{2}\rho SC_x$$
+où $R$ est le rayon de la bille, $\eta$ la viscosité dynamique du fluide, $\rho$ sa masse volumique, $S$ la section efficace, et $C_x$ le coefficient de traînée.
+</div>
+<div class="block remark">
+<span class="label">Exemple numérique — bille lente dans l'eau</span>
+Pour une petite bille se déplaçant lentement dans l'eau, $\alpha=6\pi R\eta\approx10^{-4}\,\text{kg/s}$ (avec $R$ de l'ordre du mm et $\eta_{eau}\approx10^{-3}\,\text{Pa·s}$).
+</div>
+<div class="block remark">
+<span class="label">Exemple numérique — bille rapide dans l'air</span>
+Pour une bille de section $S\approx10^{-4}\,\text{m}^2$ dans l'air ($\rho_{air}\approx1\,\text{kg/m}^3$), avec $C_x\approx0{,}5$ (sphère) :
+$$\beta=\frac12\times1\times10^{-4}\times0{,}5=2{,}5\times10^{-5}\,\text{kg/m}$$
+</div>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Énoncer la loi de Coulomb du frottement solide (Théorème 4) : quelles sont les deux situations possibles pour $\vec R_T$ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Si $\|\vec R_T\|<f\|\vec R_N\|$, il n'y a pas de glissement (équilibre statique possible). Si $\|\vec R_T\|=f\|\vec R_N\|$, il y a glissement, et $\vec R_T$ s'oppose au mouvement relatif.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Quelle est l'hypothèse sur le référentiel nécessaire pour appliquer le PFD (Théorème 2) tel qu'énoncé ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le référentiel doit être galiléen (Définition 1) : c'est uniquement dans un tel référentiel que $\sum\vec F_{ext}=d\vec p/dt$ est valable sans terme correctif (pas de force d'inertie à ajouter).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Une bille de rayon $R=1\,\text{mm}$ tombe dans un fluide de viscosité $\eta=10^{-3}\,\text{Pa·s}$, à une vitesse $v=2\,\text{cm/s}$ ($<10$ m/s). Calculer la norme de la force de frottement.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Régime laminaire (Théorème 5) : $\alpha=6\pi R\eta = 6\pi\times10^{-3}\times10^{-3}\approx1{,}88\times10^{-5}\,\text{kg/s}$. Donc $F=\alpha v = 1{,}88\times10^{-5}\times0{,}02\approx3{,}77\times10^{-7}\,\text{N}$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Une masse $m=1\,\text{kg}$ est posée sur un plan horizontal ($f=0{,}3$). On exerce une force horizontale $F=2\,\text{N}$. Y a-t-il glissement ? ($g=10\,\text{m/s}^2$)</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+À l'équilibre (avant glissement), $R_N=mg=10\,\text{N}$ (équilibre vertical) et $R_T=F=2\,\text{N}$ (équilibre horizontal, tant qu'il n'y a pas glissement). Le seuil de glissement est $f\cdot R_N=0{,}3\times10=3\,\text{N}$. Comme $R_T=2\,\text{N}<3\,\text{N}$ (Théorème 4), il n'y a <strong>pas</strong> de glissement : la masse reste immobile.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi la force de frottement fluide change-t-elle de forme ($\vec F=-\alpha\vec v$ puis $\vec F=-\beta v^2\vec e_v$) selon la vitesse (Théorème 5) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Aux faibles vitesses, l'écoulement autour de l'objet est laminaire (les forces visqueuses dominent, proportionnelles à $v$, loi de Stokes). Aux grandes vitesses, l'écoulement devient turbulent : ce sont les forces liées à l'inertie du fluide déplacé qui dominent, proportionnelles à $v^2$. Le seuil $v\approx10\,\text{m/s}$ est une valeur usuelle de transition (liée au nombre de Reynolds), pas une loi physique absolue.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passerait-il si l'on appliquait la troisième loi de Newton (Théorème 3) à un système de plus de deux points en interaction, sans sommer sur toutes les paires ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La troisième loi ne s'énonce que pour une paire isolée $(M_1,M_2)$ : pour un système de $N>2$ points, chaque paire $(i,j)$ vérifie $\vec F_{i\to j}=-\vec F_{j\to i}$, mais il faut sommer sur toutes les paires pour obtenir la résultante des forces internes — oublier une paire ou appliquer la loi globalement sans sommation rigoureuse est une source d'erreur classique dans les systèmes à plusieurs corps.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : peut-on dire que $\vec R_T=f\|\vec R_N\|$ (avec un signe défini) tant qu'il n'y a pas glissement ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non : tant qu'il n'y a pas glissement, $\vec R_T$ est une <strong>inconnue</strong> du problème (une force de liaison), déterminée par les équations d'équilibre, et seule l'inégalité $\|\vec R_T\|<f\|\vec R_N\|$ (Théorème 4) est garantie. L'égalité $\|\vec R_T\|=f\|\vec R_N\|$ n'est vraie qu'au seuil du glissement ou pendant le glissement — l'appliquer systématiquement est une erreur fréquente.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : dans la loi $\vec F=-\alpha\vec v$ (Théorème 5), pourquoi le signe moins est-il essentiel ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le signe moins garantit que la force de frottement s'oppose toujours à la vitesse (elle dissipe de l'énergie, ne peut jamais en fournir) : oublier ce signe conduirait à une force motrice au lieu d'une force résistante, ce qui violerait le second principe de la thermodynamique (une force de frottement ne peut pas accélérer spontanément un mobile).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : à quelle vitesse $v^*$ les deux modèles de frottement fluide (Théorème 5) donneraient-ils la même norme de force, pour une bille avec $\alpha=1{,}88\times10^{-5}\,\text{kg/s}$ (question 3) et $\beta=2{,}5\times10^{-5}\,\text{kg/m}$ (exemple du §3) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+On cherche $\alpha v^*=\beta v^{*2}$, soit $v^*=\alpha/\beta=1{,}88\times10^{-5}/2{,}5\times10^{-5}\approx0{,}75\,\text{m/s}$. Cette valeur est nettement inférieure au seuil usuel de $10\,\text{m/s}$ évoqué dans le Théorème 5 : cela illustre que ce seuil est indicatif et dépend fortement des paramètres $R,\eta,\rho,S,C_x$ de la situation réelle — la transition laminaire/turbulent n'est pas à une vitesse universelle mais liée au nombre de Reynolds propre à chaque cas.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : reliez le cône de frottement (Fig. 2, §2) au PFD (Théorème 2) pour expliquer pourquoi un objet posé sur un plan incliné d'angle $\theta<\varphi=\arctan f$ ne glisse jamais, quelle que soit sa masse.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+À l'équilibre sur le plan incliné, le poids $m\vec g$ se décompose en une composante normale $mg\cos\theta$ et une composante tangentielle $mg\sin\theta$. Par le PFD (Théorème 2) à l'équilibre, $\vec R$ doit compenser exactement le poids, donc $R_N=mg\cos\theta$ et $R_T=mg\sin\theta$, d'où $R_T/R_N=\tan\theta$. Tant que $\tan\theta<f=\tan\varphi$ (Théorème 4, Fig. 2), on a $\theta<\varphi$ et la réaction $\vec R$ reste à l'intérieur du cône de frottement : il n'y a jamais glissement, et ce indépendamment de $m$ car la masse se factorise et s'annule dans le rapport $R_T/R_N=\tan\theta$.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Principe fondamental de la dynamique » (résumé de cours, Prépa Barthou, Pau)</li>
+<li>Programme officiel de Physique-Chimie, CPGE 1<sup>re</sup> année (filière PCSI), bloc « Mécanique du point » : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+<li>H-Prépa Physique 1<sup>re</sup> année (Hachette Éducation) — chapitre « Dynamique du point matériel »</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>
