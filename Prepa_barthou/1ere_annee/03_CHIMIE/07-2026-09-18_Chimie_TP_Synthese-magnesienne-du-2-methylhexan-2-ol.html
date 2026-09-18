@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie — TP : Synthèse magnésienne du 2-méthylhexan-2-ol</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.7rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.84rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.13rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+table{border-collapse:collapse; margin:1rem 0; width:100%;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.9rem; vertical-align:middle;}
+th{background:#f3f2ee;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.3rem;} h2{font-size:1.05rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} table{font-size:.76rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">Objectifs et sécurité</a></li>
+  <li class="top"><a href="#s2">A. Préparation du bromure de butylmagnésium</a></li>
+  <li class="top"><a href="#s3">B. Réaction avec la propanone</a></li>
+  <li class="top"><a href="#s4">C. Hydrolyse de l'alcoolate</a></li>
+  <li class="top"><a href="#s5">Isolement et purification</a></li>
+  <li class="top"><a href="#s6">Questions</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de TP</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>TP — Synthèse magnésienne du 2-méthylhexan-2-ol</h1>
+<div class="meta">Chimie — Travaux pratiques · PCSI · Sainte-Geneviève (Versailles), S. Falcou · mis au propre le 18/09/2026</div>
+</header>
+
+<section id="s1">
+<h2>Objectifs et sécurité</h2>
+<div class="block remark">
+<span class="label">Objectifs</span>
+Réaliser une synthèse magnésienne (organomagnésien mixte, réaction de Grignard) ; utiliser les techniques d'isolement, de purification et de caractérisation des liquides.
+</div>
+<div class="block correction">
+<span class="label">⚠️ Sécurité</span>
+<strong>Éther</strong> : très volatil ($t_{eb}=36$°C), inflammable (point éclair $-45$°C), toxique par inhalation prolongée (vertiges, nausées, migraines). <strong>Acétone (propanone)</strong> : volatile ($t_{eb}=56$°C), inflammable (point éclair $-18$°C), légèrement toxique. → Éviter toute flamme ou étincelle, travailler sous hotte, ne jamais stocker éther ou acétone dans des récipients ouverts. <strong>Organomagnésien</strong> : réagit violemment avec l'eau → utiliser une verrerie rigoureusement sèche et des réactifs anhydres, n'ouvrir le robinet du réfrigérant que pour faire circuler l'eau de refroidissement. Porter blouse, gants et lunettes (pas de lentilles de contact), ne pas manger en salle de TP.
+</div>
+</section>
+
+<section id="s2">
+<h2>A. Préparation du bromure de butylmagnésium</h2>
+<p><strong>Montage</strong> : ballon bicol de 50 mL (éther anhydre, magnésium), ampoule de coulée de 25 mL (dérivé halogéné), réfrigérant double surmonté d'un tube à chlorure de calcium desséchant, agitation, chauffe-ballon. Points de vigilance : stabilité mécanique du montage, étanchéité des rodages, possibilité de refroidir rapidement le bicol (cristallisoir de glace prêt à l'emploi).</p>
+<div class="block theorem">
+<span class="label">Préparation des réactifs et démarrage</span>
+Peser 2,0 g de magnésium en copeaux, l'écraser en mortier (cassures brillantes, surface active) et l'introduire dans le bicol avec 10 mL d'éther anhydre. Introduire dans l'ampoule de coulée 9 mL de 1-bromobutane et 8 mL d'éther anhydre (solution homogénéisée). Ajouter d'abord ~2 mL de cette solution au ballon ; la réaction démarre parfois après quelques minutes d'agitation (chauffage à la main si besoin), sinon amorcer avec un cristal de diiode.
+</div>
+<div class="block remark">
+<span class="label">Conduite de la réaction</span>
+Une fois démarrée, ajouter le reste de la solution de 1-bromobutane <strong>goutte à goutte</strong> : concilier l'évitement d'un emballement (surchauffe) et une durée raisonnable — bonne « vitesse de croisière » : reflux d'environ 2 gouttes d'éther par seconde. Garder le cristallisoir de glace à portée de main, à n'utiliser que si la réaction s'emballe. La réaction secondaire de <strong>Wurtz</strong> (couplage de deux molécules de dérivé halogéné, formant un alcane symétrique et consommant du magnésium sans former d'organomagnésien utile) est favorisée par une surchauffe ou un excès local de dérivé halogéné — d'où l'addition lente et contrôlée.
+</div>
+<div class="block def">
+<span class="label">Bilan de la formation de l'organomagnésien</span>
+$$\mathrm{C_4H_9{-}Br + Mg \xrightarrow{\text{éther anhydre}} C_4H_9{-}MgBr}$$
+</div>
+</section>
+
+<section id="s3">
+<h2>B. Réaction du magnésien avec la propanone (acétone)</h2>
+<p>L'action de l'acétone se fait directement dans le milieu où l'organomagnésien a été préparé. Réaction <strong>très rapide et très exothermique</strong> : mélanger dans l'ampoule de coulée 6,3 mL d'acétone et 5 mL d'éther anhydre ; refroidir le ballon bicol dans la glace et, tout en maintenant l'agitation, introduire la solution d'acétone par <strong>très petites fractions</strong> (une goutte à la fois).</p>
+<div class="block def">
+<span class="label">Bilan (addition nucléophile de l'organomagnésien sur le carbonyle)</span>
+$$\mathrm{C_4H_9{-}MgBr + (CH_3)_2C{=}O \to (CH_3)_2C(OMgBr){-}C_4H_9}$$
+(alcoolate magnésien du 2-méthylhexan-2-ol)
+</div>
+</section>
+
+<section id="s4">
+<h2>C. Hydrolyse de l'alcoolate</h2>
+<p>Préparer une solution d'acide sulfurique dilué : dans un erlenmeyer à col large, verser 60 mL d'eau puis ajouter, en trois fois (dilution très exothermique de l'acide concentré dans l'eau — jamais l'inverse), 6 mL d'acide sulfurique concentré ; agiter, laisser refroidir. Transvaser le contenu du bicol dans un erlenmeyer à col large, refroidir dans un bain de glace, puis verser <strong>goutte à goutte</strong> ce mélange dans l'acide sulfurique dilué (addition sur ~15 minutes).</p>
+<div class="block def">
+<span class="label">Bilan de l'hydrolyse acide</span>
+$$\mathrm{(CH_3)_2C(OMgBr){-}C_4H_9 + H_3O^+ \to (CH_3)_2C(OH){-}C_4H_9 + Mg^{2+} + Br^-}$$
+(2-méthylhexan-2-ol)
+</div>
+</section>
+
+<section id="s5">
+<h2>Isolement et purification de l'alcool formé</h2>
+<div class="block theorem">
+<span class="label">1. Extraction liquide-liquide</span>
+Séparer les deux phases à l'ampoule à décanter (phase éthérée conservée). Réextraire la phase aqueuse résiduelle avec ~30 mL d'éther (éther de récupération), décanter, réunir les deux phases éthérées.
+</div>
+<div class="block theorem">
+<span class="label">2. Séchage de la phase éthérée</span>
+Ajouter du carbonate de potassium anhydre $\mathrm{K_2CO_3}$ jusqu'à neutralité (limpidité, absence de dégagement gazeux), puis du sulfate de magnésium anhydre $\mathrm{MgSO_4}$ en bonne quantité (agent desséchant). La moindre trace d'eau serait gênante lors de la distillation qui suit (risque d'entraînement de l'alcool sous forme d'hétéroazéotrope). Évaporer l'éther à l'évaporateur rotatif.
+</div>
+<div class="block theorem">
+<span class="label">3. Distillation</span>
+Monter l'appareil à distiller (ballon fixé, colonne, réfrigérant, chauffe-ballon sur élévateur pour pouvoir le retirer rapidement en cas de surchauffe). <strong>Vérifier l'absence de peroxyde</strong> dans la phase éthérée (papier imbibé de KI : pas de coloration marron, qui signerait la formation de diiode par réaction avec un peroxyde — les éthers peuvent former, au contact du dioxygène de l'air, des peroxydes explosifs à chaud). Filtrer la phase éthérée dans le ballon à distiller, ajouter 2-3 grains de pierre ponce (évite les à-coups d'ébullition). Distiller doucement (meilleure séparation si la distillation est lente), en recueillant séparément les fractions correspondant aux différents paliers de température ; le 2-méthylhexan-2-ol est recueilli dans un ballon préalablement taré.
+</div>
+<div class="block theorem">
+<span class="label">4. Rendement et caractérisation</span>
+Peser le 2-méthylhexan-2-ol obtenu et calculer le rendement de la synthèse. Vérifier la pureté par mesure de l'indice de réfraction (réfractomètre), à comparer à la valeur du Handbook. Tester l'alcool avec le <strong>réactif de Lucas</strong> (mélange $\mathrm{ZnCl_2}$/HCl concentré).
+</div>
+</section>
+
+<section id="s6">
+<h2>Questions</h2>
+<div class="block def">
+<span class="label">1) Mécanisme et intérêt de chaque transformation</span>
+<strong>Formation de l'organomagnésien</strong> (insertion oxydante du magnésium dans la liaison C–Br) : le magnésium, métal réducteur, s'insère dans la liaison C–Br polarisée, formant une liaison C–Mg fortement polarisée ($\mathrm{C^{\delta-}{-}Mg^{\delta+}}$) qui confère au carbone un caractère fortement nucléophile/basique — intérêt : créer un nucléophile carboné puissant, capable ensuite de créer une liaison C–C. <strong>Addition sur l'acétone</strong> : addition nucléophile du carbanion $\mathrm{C_4H_9^{\delta-}}$ sur le carbone électrophile du groupe carbonyle (mécanisme concerté en général représenté via un état de transition cyclique impliquant $\mathrm{Mg^{2+}}$, qui active le carbonyle en se coordinant à l'oxygène) — intérêt : créer une nouvelle liaison C–C et former l'alcoolate magnésien, précurseur direct de l'alcool tertiaire visé. <strong>Hydrolyse acide</strong> : réaction acido-basique de Brønsted (l'alcoolate $\mathrm{R{-}O^-}$, base forte, est protoné par $\mathrm{H_3O^+}$) — intérêt : libérer l'alcool neutre et éliminer les sels de magnésium (solubles en phase aqueuse), rendant possible l'extraction liquide-liquide qui suit.
+</div>
+<div class="block theorem">
+<span class="label">2) Masse maximale d'alcool et rendement</span>
+La masse maximale (théorique) s'obtient en identifiant le réactif limitant (comparer les quantités de matière introduites de magnésium, de 1-bromobutane et d'acétone, ramenées aux coefficients stœchiométriques 1:1:1 de la séquence organomagnésien → alcoolate) et en multipliant sa quantité de matière initiale par la masse molaire du 2-méthylhexan-2-ol ($\mathrm{C_7H_{16}O}$, $M\approx116\,\mathrm{g\cdot mol^{-1}}$) ; le rendement est alors le rapport (masse d'alcool réellement pesée après distillation) / (masse maximale théorique). Le calcul numérique exact nécessite les densités et quantités précises pesées/prélevées lors de la séance (non fournies dans le protocole type).
+</div>
+<div class="block theorem">
+<span class="label">3) Mécanisme du test de Lucas — caractérise-t-il bien cet alcool ?</span>
+Le réactif de Lucas ($\mathrm{ZnCl_2}$ concentré dans HCl) teste la réactivité d'un alcool en substitution nucléophile <strong>SN1</strong> : $\mathrm{ZnCl_2}$ (acide de Lewis) complexe l'oxygène de l'alcool, facilitant le départ du groupe partant (eau) et la formation d'un <strong>carbocation</strong>, ensuite piégé par $\mathrm{Cl^-}$ pour former le chlorure d'alkyle correspondant (insoluble dans le milieu aqueux, apparaissant sous forme d'un trouble/une seconde phase). La vitesse de formation du carbocation (et donc la rapidité du trouble observé) dépend directement de la stabilité du carbocation intermédiaire : très rapide (trouble immédiat) pour un alcool <strong>tertiaire</strong>, lente (quelques minutes, à chaud) pour un alcool <strong>secondaire</strong>, quasi nulle pour un alcool <strong>primaire</strong>. Le 2-méthylhexan-2-ol étant un alcool tertiaire, le test de Lucas le caractérise bien : il doit donner un trouble immédiat, ce qui permet de confirmer à la fois la nature de la fonction alcool obtenue et son caractère tertiaire (cohérent avec la structure attendue de l'addition sur une cétone).
+</div>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de TP</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Pourquoi la verrerie et les réactifs doivent-ils être rigoureusement secs lors de la préparation de l'organomagnésien ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que l'organomagnésien réagit violemment avec l'eau (Sécurité) : la moindre trace d'humidité détruirait le réactif formé (hydrolyse immédiate et incontrôlée, exothermique) avant même qu'il ait pu réagir avec le dérivé halogéné ou l'acétone visés.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Pourquoi ajoute-t-on le 1-bromobutane goutte à goutte plutôt qu'en une seule fois ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Pour éviter la surchauffe et l'emballement de la réaction (très exothermique), tout en évitant qu'un excès local de dérivé halogéné ne favorise la réaction secondaire de Wurtz, qui consomme du magnésium sans produire l'organomagnésien souhaité (Conduite de la réaction, §A).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Pourquoi doit-on vérifier l'absence de peroxyde dans la phase éthérée avant de distiller ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que les éthers peuvent former, au contact prolongé du dioxygène de l'air, des peroxydes qui sont explosifs lorsqu'ils sont chauffés (§ Isolement, point 3) — la distillation impliquant un chauffage, il est indispensable d'écarter ce risque avant de commencer.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Que signale une coloration marron du papier imbibé de KI lors du test de détection des peroxydes ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La présence de diiode I₂, formé par oxydation des ions iodure I⁻ par un peroxyde présent dans l'éther (§ Isolement, point 3) — c'est donc un signal indirect (via la formation d'I₂ coloré) de la présence du peroxyde dangereux, qu'on ne peut pas détecter directement à l'œil.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi utilise-t-on du carbonate de potassium puis du sulfate de magnésium anhydres lors du séchage de la phase éthérée, plutôt qu'un seul des deux ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$\mathrm{K_2CO_3}$ est ajouté en premier pour neutraliser toute trace d'acidité résiduelle (jusqu'à disparition du dégagement gazeux de CO₂, signe de neutralité), tandis que $\mathrm{MgSO_4}$ anhydre, ajouté ensuite en excès, agit comme agent desséchant proprement dit (absorption physique de l'eau résiduelle) — les deux réactifs répondent donc à deux besoins distincts et complémentaires (§ Isolement, point 2), pas redondants.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Piège classique : peut-on préparer la solution d'acide sulfurique dilué en versant l'eau dans l'acide concentré ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — le protocole précise explicitement de verser l'acide concentré dans l'eau (§C, Hydrolyse), jamais l'inverse : la dilution d'un acide fort concentré est très exothermique, et verser de l'eau dans l'acide concentré provoquerait une projection violente d'acide (l'eau ajoutée localement se vaporise brutalement à la surface de l'acide dense). C'est une règle de sécurité générale en chimie, pas spécifique à ce TP, mais rappelée ici implicitement par l'ordre d'addition « en trois fois » de l'acide dans l'eau.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : le test de Lucas donnerait-il aussi un trouble rapide avec un alcool primaire comme le butan-1-ol ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — c'est un piège de croire que le réactif de Lucas réagit à la même vitesse avec tous les alcools. La vitesse du test dépend de la stabilité du carbocation intermédiaire (mécanisme SN1, Question 3) : un alcool primaire, dont le carbocation serait très instable, ne réagit quasiment pas avec le réactif de Lucas dans les conditions usuelles (pas de trouble observable), contrairement à l'alcool tertiaire du TP qui donne un trouble immédiat.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Que se passerait-il si l'on ajoutait toute la solution d'acétone en une seule fois dans le bicol, plutôt que goutte à goutte ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Étant une réaction très rapide et très exothermique (§B), l'addition massive libérerait une grande quantité de chaleur quasi instantanément, risquant une ébullition brutale et incontrôlée du milieu réactionnel (projection, emballement thermique) — d'où la consigne explicite d'ajouter l'acétone en très petites fractions, une goutte à la fois, tout en refroidissant le ballon dans la glace.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : reliez le choix de l'éther comme solvant de la synthèse magnésienne à la nécessité d'un milieu anhydre — pourquoi l'éther convient-il particulièrement bien à ce type de réaction ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+L'organomagnésien, extrêmement réactif avec l'eau (Sécurité), impose un solvant totalement anhydre et lui-même incapable de le détruire : l'éther, aprotique (pas de liaison O–H susceptible d'être arrachée par le carbanion basique de l'organomagnésien), remplit cette condition. De plus, le doublet non liant de l'oxygène de l'éther peut se coordiner (par liaison dative) au magnésium de l'organomagnésien, stabilisant ce dernier en solution (rôle de base de Lewis du solvant, evoqué de façon générale dans le cours sur les liaisons faibles et les solvants) — ce qui explique à la fois pourquoi l'éther est le solvant classique de choix pour toute synthèse magnésienne et pourquoi la verrerie et les réactifs doivent rester rigoureusement secs tout au long du protocole.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : pourquoi la caractérisation finale du 2-méthylhexan-2-ol combine-t-elle deux méthodes différentes (indice de réfraction et test de Lucas) plutôt qu'une seule ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Les deux méthodes apportent des informations complémentaires et de nature différente : l'indice de réfraction, comparé à une valeur tabulée du Handbook, est un test <strong>quantitatif de pureté</strong> (il renseigne sur la présence d'impuretés résiduelles — solvant, produits secondaires de Wurtz non séparés — sans identifier la nature de la fonction chimique elle-même), tandis que le test de Lucas est un test <strong>qualitatif de fonction et de classe</strong> (il confirme la présence d'un groupe alcool et, via la cinétique du trouble observé, sa classe tertiaire/secondaire/primaire, mais ne renseigne pas sur la pureté du produit). Combiner les deux permet donc de s'assurer à la fois que le produit isolé est bien pur (indice de réfraction conforme) et qu'il s'agit bien de l'alcool tertiaire attendu et non d'un autre composé de structure proche (test de Lucas positif rapide) — une seule méthode prise isolément laisserait un doute sur l'un ou l'autre aspect.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Synthèse magnésienne du 2-méthylhexan-2-ol », TP de chimie organique, S. Falcou, PCSI1 Sainte-Geneviève (Versailles)</li>
+<li>Programme officiel de Physique-Chimie, CPGE 1<sup>re</sup> année (filière PCSI), thème « Molécules du vivant », bloc organomagnésiens : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>
