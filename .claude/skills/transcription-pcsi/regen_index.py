@@ -186,7 +186,8 @@ def main():
   .crosslinks {{ display:flex; justify-content:center; align-items:center; gap:14px; margin-bottom:8px; flex-wrap:wrap; }}
   .crosslinks a {{ display:inline-flex; align-items:center; gap:4px; font-size:12px; font-weight:600; color:var(--accent); text-decoration:none; }}
   .crosslinks img {{ height:16px; width:auto; border-radius:3px; vertical-align:middle; }}
-  header h1 {{ font-size: 19px; margin: 4px 0 2px 0; font-weight: 700; display:flex; align-items:center; justify-content:center; gap:8px; }}
+  header h1 {{ font-size: 19px; margin: 4px 0 2px 0; font-weight: 700; }}
+  header h1 a {{ display:flex; align-items:center; justify-content:center; gap:8px; color:var(--text); text-decoration:none; }}
   header h1 img {{ height:26px; width:auto; vertical-align:middle; }}
   header p {{ margin: 0; color: var(--sub); font-size: 12px; }}
   html {{ scroll-behavior: smooth; }}
@@ -267,7 +268,7 @@ def main():
     <a href="../../index.html">🏠 Accueil</a>
     <a href="../../Kit_Revision_PCSI.html">🎯 Kit de révision PCSI</a>
   </div>
-  <h1><img src="../../icon-barthou-title.png" alt="">Prépa Barthou — 1ère année</h1>
+  <h1><a href="https://www.prepabarthou.fr/cours/my/courses.php" target="_blank" rel="noopener"><img src="../../logo-barthou.png" alt="">Prépa Barthou — 1ère année</a></h1>
   <p>Cours, TD et exercices — mis à jour au fil de l'année</p>
 </header>
 
