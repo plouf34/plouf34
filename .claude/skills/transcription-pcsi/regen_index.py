@@ -82,7 +82,7 @@ def main():
 </head>
 <body>
 <header>
-  <div class="crosslinks"><a href="../../index.html">🏠 Accueil</a><a href="../../Kit_Revision_PCSI.html">🎯 Kit de révision PCSI</a></div>
+  <div class="crosslinks"><a href="../../index.html">🏠 Accueil</a><a href="../../Kit_Revision_PCSI.html">🎯 Kit de révision PCSI</a><a href="https://www.prepabarthou.fr/cours/my/courses.php" target="_blank" rel="noopener">🏫 Moodle Louis Barthou</a></div>
   <h1>📚 Prépa Barthou — 1ère année</h1>
   <p>Cours, TD et exercices — mis à jour au fil de l'année</p>
 </header>
