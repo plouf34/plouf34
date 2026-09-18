@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mathématiques — Ch.1 : Problèmes linéaires unidimensionnels</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' },
+  chtml: { scale: 1 }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430;
+  --paper:#fbfaf7;
+  --panel:#ffffff;
+  --line:#e2e0da;
+  --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--font-body); line-height:1.55; font-size:16px;
+}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.9rem; margin:0 0 .2rem 0;}
+h2{font-size:1.35rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.1rem; margin-top:1.6rem;}
+h4{font-size:1rem; margin-top:1.2rem;}
+h5{font-size:.94rem; margin-top:1rem; font-family:var(--font-body); font-weight:700; color:var(--ink);}
+code, .mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{
+  width:265px; flex-shrink:0; position:sticky; top:0; align-self:flex-start;
+  height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem;
+  border-right:1px solid var(--line); font-size:.86rem;
+}
+nav.toc h4{margin-top:0; color:var(--ink); font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0; counter-reset:sec;}
+nav.toc ol ol{margin:.15rem 0 .4rem 1rem;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block > .label{font-weight:700; font-family:var(--font-body); font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+.chain{margin:.7rem 0; padding-left:.3rem;}
+.chain .step{display:flex; align-items:baseline; gap:.6rem; margin:.25rem 0; flex-wrap:wrap;}
+.chain .step .why{color:#7a7a72; font-size:.82rem; font-style:italic;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+table{border-collapse:collapse; margin:1rem 0; width:100%;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.92rem;}
+th{background:#f3f2ee;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+.footnote{font-size:.8rem; color:#7a7a72; border-top:1px dashed var(--line); margin-top:.6rem; padding-top:.4rem;}
+.wide-scroll{overflow-x:auto; padding-bottom:.3rem;}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){
+  nav.toc{display:none;}
+  main{padding:1.5rem 1.2rem;}
+}
+@media (max-width:480px){
+  main{padding:1rem .7rem;}
+  h1{font-size:1.5rem;}
+  h2{font-size:1.15rem;}
+  .block, .retenir, .quiz-item{padding:.65rem .8rem;}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1.1 Relations de récurrence linéaire de pas 1</a>
+    <ol>
+      <li><a href="#s1-1">1.1.1 Suites</a></li>
+      <li><a href="#s1-2">1.1.2 Suites arithmétiques</a></li>
+      <li><a href="#s1-3">1.1.3 Suites géométriques</a></li>
+      <li><a href="#s1-4">1.1.4 Suites arithmético-géométriques</a></li>
+    </ol>
+  </li>
+  <li class="top"><a href="#s2">1.2 Primitives</a>
+    <ol>
+      <li><a href="#s2-1">1.2.1 Intervalles et continuité</a></li>
+      <li><a href="#s2-2">1.2.2 Rappel sur la dérivation</a></li>
+      <li><a href="#s2-3">1.2.3 Signe de la dérivée et variations</a></li>
+      <li><a href="#s2-4">1.2.4 Notion de primitive, quasi-unicité</a></li>
+      <li><a href="#s2-5">1.2.5 Théorème d'existence et conséquences</a></li>
+    </ol>
+  </li>
+  <li class="top"><a href="#s3">1.3 Équations différentielles linéaires d'ordre 1</a>
+    <ol>
+      <li><a href="#s3-1">1.3.1 Exploitation de la linéarité</a></li>
+      <li><a href="#s3-2">1.3.2 Fonction exponentielle</a></li>
+      <li><a href="#s3-3">1.3.3 Résolution de l'équation homogène</a></li>
+      <li><a href="#s3-4">1.3.4 Méthode de variation de la constante</a></li>
+      <li><a href="#s3-5">1.3.5 Autres techniques de calcul</a></li>
+      <li><a href="#s3-6">1.3.6 Extension aux équations $ay'+by=f$</a></li>
+      <li><a href="#s3-7">1.3.7 Problème de Cauchy</a></li>
+    </ol>
+  </li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Problèmes linéaires unidimensionnels</h1>
+<div class="meta">Mathématiques — Analyse — Chapitre 1 · CPGE 1<sup>re</sup> année · mis au propre le 18/09/2026</div>
+</header>
+
+<p>On étudie dans ce chapitre les suites $(u_n)_n$ satisfaisant une relation de récurrence de la forme
+$$\forall n \in \mathbb{N},\ u_{n+1} = au_n + b,$$
+où $a$ et $b$ sont des nombres réels fixés, ainsi que les fonctions $y$ satisfaisant une équation différentielle de la forme
+$$\forall t \in I,\ y'(t) + a(t)y(t) = f(t)$$
+où $I$ est un intervalle, et $a$ et $f$ sont deux fonctions continues sur $I$.</p>
+
+<section id="s1">
+<h2>1.1 Relations de récurrence linéaire de pas 1</h2>
+
+<h3 id="s1-1">1.1.1 Suites</h3>
+<p>On rappelle qu'une suite de nombres réels, notée $(u_n)_{n\in\mathbb{N}}$, est une application qui à tout entier naturel $n\in\mathbb{N}$ (appelé <strong>indice</strong>) associe un nombre réel noté $u_n$ (appelé <strong>terme général</strong> de la suite).</p>
+<p>Une suite peut aussi être définie uniquement à partir d'un certain rang $n_0$, auquel cas on la notera $(u_n)_{n\geqslant n_0}$ : par exemple la suite $\left(\dfrac{1}{n}\right)_{n\geqslant 1}$ des inverses des entiers naturels non nuls.</p>
+<p>Une suite peut être définie par :</p>
+<ul>
+<li>la donnée de son terme général, soit sous forme explicite (par exemple $u_n=\dfrac{1}{n}$), soit sous forme implicite (par exemple $u_n$ est l'unique racine positive du trinôme $X^2+X-n$) ;</li>
+<li>une relation de récurrence de pas 1 et son premier terme. Par exemple, la suite des nombres factoriels est définie par
+$$0! = 1 \quad\text{et pour } n\in\mathbb{N},\ (n+1)! = (n+1)\times n!$$
+Ce mode de définition par récurrence sera étendu ensuite à des pas supérieurs ou égaux à 2.</li>
+</ul>
+<div class="block remark">
+<span class="label">Vocabulaire</span>
+<strong>Résoudre une relation de récurrence</strong> consiste à obtenir une expression explicite du terme général d'une suite définie par une relation de récurrence, que son premier terme soit spécifié ou non (auquel cas, il joue le rôle d'un paramètre).
+</div>
+
+<h3 id="s1-2">1.1.2 Suites arithmétiques</h3>
+<div class="block def">
+<span class="label">Définition 1.1</span>
+Une suite $(u_n)_n$ est dite <strong>arithmétique</strong> si la différence $u_{n+1}-u_n$ est constante, autrement dit s'il existe un nombre $b$ tel que la relation de récurrence suivante est satisfaite :
+$$\forall n\in\mathbb{N},\ u_{n+1} = u_n + b.$$
+On dit alors que $b$ est la <strong>raison</strong> de la suite.
+</div>
+<div class="block theorem">
+<span class="label">Proposition 1.2</span>
+Si une suite $(u_n)_n$ est arithmétique de raison $b$, alors, pour tout $n\in\mathbb{N}$,
+$$u_n = u_0 + bn.$$
+</div>
+
+<h3 id="s1-3">1.1.3 Suites géométriques</h3>
+<div class="block def">
+<span class="label">Définition 1.3</span>
+Une suite $(u_n)_n$ non constamment nulle est dite <strong>géométrique</strong> s'il existe un nombre $a$ tel que pour tout $n\in\mathbb{N}$, $u_{n+1}=au_n$. On dit alors que $a$ est la <strong>raison</strong> de la suite.
+</div>
+<div class="block remark">
+<span class="label">Remarque 1.4</span>
+La suite constante nulle satisfait la relation $u_{n+1}=au_n$ quel que soit $a$. Elle serait géométrique pour toutes les raisons si on la considérait comme géométrique : il est préférable de l'exclure afin de pouvoir dire qu'une suite géométrique n'a qu'une et une seule raison.
+</div>
+<div class="block theorem">
+<span class="label">Proposition 1.5</span>
+Si une suite $(u_n)_n$ est géométrique de raison $a$, alors, pour tout $n\in\mathbb{N}$,
+$$u_n = a^n u_0.$$
+</div>
+
+<h3 id="s1-4">1.1.4 Suites arithmético-géométriques</h3>
+<div class="block def">
+<span class="label">Définition 1.6</span>
+Une suite $(u_n)_n$ est dite <strong>arithmético-géométrique</strong> s'il existe des nombres $a$ et $b$ tels que pour tout $n\in\mathbb{N}$, $u_{n+1}=au_n+b$.
+</div>
+
+<div class="block theorem">
+<span class="label">Lemme 1.7</span>
+Si deux suites $(u_n)_n$ et $(v_n)_n$ satisfont la même relation de récurrence arithmético-géométrique :
+$$\forall n\in\mathbb{N},\ u_{n+1}=au_n+b \qquad\text{et}\qquad \forall n\in\mathbb{N},\ v_{n+1}=av_n+b,$$
+alors la suite $(u_n-v_n)_n$ est <strong>géométrique</strong> de raison $a$.
+</div>
+
+<div class="block correction">
+<span class="label">⚠️ Correction</span>
+Le document indique que $(u_n-v_n)_n$ est « arithmétique de raison $a$ » : c'est incompatible avec le calcul lui-même. En soustrayant les deux relations,
+$$u_{n+1}-v_{n+1} = (au_n+b)-(av_n+b) = a(u_n-v_n),$$
+on obtient une relation <strong>multiplicative</strong> $w_{n+1}=aw_n$ (avec $w_n=u_n-v_n$), qui est exactement la relation définissant une suite <strong>géométrique</strong> de raison $a$ (Définition 1.3), et non une suite arithmétique (Définition 1.1, relation additive $u_{n+1}=u_n+b$). C'est du reste la seule lecture cohérente avec la formule donnée juste après, $v_n=u_n+Ka^n$ (croissance en $a^n$, caractéristique d'une suite géométrique, et non en $Kn$ comme le serait une suite arithmétique).
+</div>
+
+<p>En conséquence, pour résoudre une relation de récurrence arithmético-géométrique, il suffit de trouver une solution particulière $(u_n)_n$ à cette relation, et toutes les suites satisfaisant la relation ont un terme général de la forme :
+$$v_n = u_n + Ka^n,\quad K\in\mathbb{R}.$$
+Or, il est facile de trouver une solution sous la forme d'une suite $(u_n)_n$ constante : en effet, si $u_n=c$, la relation de récurrence devient $c=ac+b$, qui se résout dans le cas $a\neq 1$ en $c=\dfrac{b}{1-a}$.</p>
+
+<div class="block theorem">
+<span class="label">Proposition 1.8</span>
+Soit $a$ et $b$ deux nombres, tels que $a\neq 1$. Alors, il existe une constante $c$ (dépendant de $a$ et $b$) telle que les suites $(u_n)_n$ qui satisfont la relation de récurrence $u_{n+1}=au_n+b$ sont les suites dont le terme général est de la forme :
+$$u_n = c + Ka^n \quad\text{pour } K\in\mathbb{R}.$$
+</div>
+
+<div class="block demo">
+<span class="label">Méthode de résolution</span>
+<div class="chain">
+<div class="step"><span>Résoudre la relation <strong>homogène</strong> associée, à savoir $u_{n+1}=au_n$</span><span class="why">les solutions sont les suites géométriques de raison $a$</span></div>
+<div class="step"><span>Rechercher une solution <strong>particulière</strong> de l'équation avec second membre, ici sous la forme d'une suite constante $c$</span></div>
+</div>
+Cette méthode (homogène + particulière) sera réinvestie pour les équations différentielles (§1.3).
+</div>
+
+</section>
+
+<section id="s2">
+<h2>1.2 Primitives</h2>
+
+<h3 id="s2-1">1.2.1 Bref rappel sur les intervalles et la continuité</h3>
+<div class="block def">
+<span class="label">Définition 1.9</span>
+Une partie $I\subset\mathbb{R}$ est appelée un <strong>intervalle</strong> si pour tous $a$ et $b$ dans $I$, tout nombre $x$ compris entre $a$ et $b$ appartient encore à $I$.
+</div>
+<div class="block theorem">
+<span class="label">Proposition 1.10</span>
+Les intervalles non vides de $\mathbb{R}$ se distinguent selon qu'ils sont bornés ou non, et qu'ils contiennent ou non leurs bornes finies :
+<ul>
+<li>un seul intervalle ni minoré, ni majoré : $\mathbb{R} = \,]-\infty,+\infty[$ ;</li>
+<li>intervalles minorés mais non majorés : de l'une des deux formes $]a,+\infty[$ ou $[a,+\infty[$ (selon qu'ils contiennent ou non leur borne inférieure) ;</li>
+<li>intervalles majorés mais non minorés : de l'une des deux formes $]-\infty,b[$ ou $]-\infty,b]$ ;</li>
+<li>intervalles bornés : de l'une des formes $[a,b]$ (fermé), $]a,b]$, $[a,b[$ (semi-ouverts) ou $]a,b[$ (ouvert).</li>
+</ul>
+</div>
+<div class="block def">
+<span class="label">Définition 1.11</span>
+Une fonction $f$ est dite <strong>continue en un point $a$</strong> où elle est définie si $\displaystyle\lim_{x\to a} f(x) = f(a)$. Elle est dite <strong>continue sur un domaine $D$</strong> où elle est définie si elle est continue en tout point de $D$.
+</div>
+<div class="block remark">
+<span class="label">Remarque</span>
+L'objectif en ce début d'année n'est pas d'étudier la continuité ni d'un point de vue théorique, ni d'un point de vue pratique : on se contente de signaler l'existence de cette notion, et on admettra la continuité des fonctions considérées durant les premières semaines de cours.
+</div>
+
+<h3 id="s2-2">1.2.2 Bref rappel sur la dérivation</h3>
+<p>On rappelle que la dérivée $F'$ d'une fonction $f$ est définie, sous réserve d'existence, par la formule :
+$$F'(x) = \lim_{h\to 0} \frac{f(x+h)-f(x)}{h}.$$
+En pratique, on ne revient presque jamais à la définition : les calculs de dérivée sont exécutés à partir de la connaissance des dérivées des fonctions usuelles (exponentielle, logarithme, puissances, fonctions circulaires, polynômes), et des règles de compatibilité :</p>
+<div class="block theorem">
+<span class="label">Proposition 1.12 — règles de dérivation</span>
+Toutes les fonctions considérées sont supposées dérivables.
+<ol>
+<li>La dérivation est linéaire : $(\lambda u + \mu v)' = \lambda u' + \mu v'$.</li>
+<li>Dérivée d'un produit : $(uv)' = u'v + uv'$.</li>
+<li>Dérivée d'une puissance : $(u^n)' = nu'u^{n-1}$.</li>
+<li>Dérivée d'un inverse, d'un quotient :
+$$\left(\frac{1}{u}\right)' = -\frac{u'}{u^2}\ ; \qquad \left(\frac{u}{v}\right)' = \frac{u'v-uv'}{v^2} = u'\times\frac{1}{v} - u\times\frac{v'}{v^2}.$$
+</li>
+</ol>
+</div>
+<div class="block def">
+<span class="label">Définition 1.13 — composée</span>
+Soit $u$ et $v$ deux fonctions. On définit la fonction composée $u\circ v$ par l'expression $(u\circ v)(t) = u[v(t)]$. Cette expression est définie pour tous les réels $t$ tels que $v(t)$ est bien défini et $v(t)$ appartient au domaine de définition de $u$.
+</div>
+<div class="block theorem">
+<span class="label">Proposition 1.14</span>
+Sous hypothèse de dérivabilité et d'existence de la composée :
+$$(u\circ v)'(t) = u'(v(t))\times v'(t) \qquad\text{ou encore}\qquad (u\circ v)' = v'\times(u'\circ v).$$
+</div>
+
+<h3 id="s2-3">1.2.3 Signe de la dérivée et variations</h3>
+<div class="block def">
+<span class="label">Définition 1.15</span>
+Une fonction $f$ est dite <strong>croissante</strong> sur un intervalle $I$ si, pour tous $x$ et $y$ dans $I$, $x\leqslant y \Rightarrow f(x)\leqslant f(y)$ ; autrement dit, prendre l'image par $f$ conserve l'ordre. Elle est dite <strong>strictement croissante</strong> si $x<y\Rightarrow f(x)<f(y)$. On définit de même la <strong>décroissance</strong> ($x\leqslant y \Rightarrow f(x)\geqslant f(y)$) et la <strong>décroissance stricte</strong> ($x<y\Rightarrow f(x)>f(y)$).
+</div>
+<div class="block theorem">
+<span class="label">Proposition 1.16</span>
+Soit $f$ une fonction dérivable sur un intervalle $I$ d'intérieur non vide (on exclut l'ensemble vide et les intervalles réduits à un point).
+<ol>
+<li>Si pour tout $t\in I$, $f'(t)\geqslant 0$, alors $f$ est croissante sur $I$.</li>
+<li>Si pour tout $t\in I$, $f'(t)>0$, alors $f$ est strictement croissante sur $I$. La conclusion demeure si $f'(t)\geqslant 0$ pour tout $t$, et $f'(t)>0$ pour tout $t$ dans $I$ sauf en un nombre fini de points.</li>
+</ol>
+Énoncés analogues pour la décroissance et la décroissance stricte.
+</div>
+<p><strong>Exemple 1.17.</strong> Pour tout $n\in\mathbb{N}$, la fonction $t\mapsto t^{2n+1}$ est strictement croissante sur $\mathbb{R}$ : sa dérivée $t\mapsto (2n+1)t^{2n}$ est à valeurs positives sur $\mathbb{R}$ et ne s'annule qu'en un point (0).</p>
+
+<h3 id="s2-4">1.2.4 Notion de primitive et théorème de quasi-unicité</h3>
+<div class="block def">
+<span class="label">Définition 1.18</span>
+On dit qu'une fonction $F$ est une <strong>primitive</strong> d'une fonction $f$ sur un intervalle $I$ si $F$ est dérivable et si $F'=f$.
+</div>
+<div class="block theorem">
+<span class="label">Théorème 1.19 — quasi-unicité</span>
+Deux primitives d'une même fonction sur un intervalle diffèrent d'une constante. Autrement dit, si $F$ et $G$ sont deux fonctions dérivables sur un même intervalle $I$ telles que $F'=G'$ sur $I$, alors il existe une constante $c$ telle que $F=G+c$ sur $I$.
+</div>
+<div class="block remark">
+<span class="label">Remarque 1.20</span>
+Démontrer ce théorème peut être vu comme un objectif des constructions théoriques du premier semestre.
+</div>
+
+<h3 id="s2-5">1.2.5 Théorème d'existence et conséquences</h3>
+<div class="block theorem">
+<span class="label">Théorème 1.21 — théorème fondamental de l'analyse</span>
+Si $f$ est une fonction continue sur un intervalle $I$, alors $f$ admet une primitive sur $I$. Plus précisément, pour tout $a\in I$, la fonction $\displaystyle x\mapsto \int_a^x f(t)\,\mathrm{d}t$ est une primitive de $f$ sur $I$.
+</div>
+<p><strong>Exemple 1.22.</strong> On souhaite définir la fonction logarithme népérien comme la primitive de la fonction inverse sur $\mathbb{R}^{*+}$ qui s'annule en 1. On peut raisonner de deux manières :</p>
+<ul>
+<li>on pose simplement $\ln(x) = \displaystyle\int_1^x \dfrac{\mathrm{d}t}{t}$ : la fonction ainsi définie est bien une primitive de la fonction inverse par le théorème fondamental de l'analyse (car la fonction inverse est continue sur $\mathbb{R}^{*+}$), et elle s'annule en 1 ;</li>
+<li>on considère une primitive $L$ de la fonction inverse sur $\mathbb{R}^{*+}$ (là encore assurée par le théorème fondamental de l'analyse), puis on pose $\ln(x) = L(x)-L(1)$ pour assurer l'annulation en 1.</li>
+</ul>
+<div class="block remark"><span class="label">Remarque 1.23</span>La construction théorique nécessaire à la démonstration du Théorème 1.21 sera étudiée au deuxième semestre.</div>
+
+<div class="block theorem">
+<span class="label">Corollaire 1.24</span>
+Si $f$ est une fonction continue et admet pour primitive $F$ sur l'intervalle $[a,b]$, alors :
+$$\int_a^b f(t)\,\mathrm{d}t = F(b)-F(a).$$
+Pour $f$ une fonction dérivable et de dérivée continue sur $[a,b]$ (une telle fonction est dite <strong>de classe $C^1$</strong>) :
+$$\int_a^b f'(t)\,\mathrm{d}t = f(b)-f(a).$$
+</div>
+<div class="block remark">
+<span class="label">Notation 1.25</span>
+Pour toute expression $F(t)$, la notation $[F(t)]_{t=a}^{t=b}$ désigne $F(b)-F(a)$. Lorsqu'aucune confusion n'est possible quant au paramètre en lequel on évalue, on autorise la notation abrégée $[F(t)]_a^b$.
+</div>
+
+<p>La définition (géométrique) de l'intégrale sera étudiée ultérieurement. Pour le moment, nous aurons besoin des propriétés suivantes du calcul intégral :</p>
+<div class="block theorem">
+<span class="label">Proposition 1.26</span>
+Les fonctions considérées sont supposées continues.
+<ol>
+<li><strong>Linéarité de l'intégrale</strong> : $\displaystyle\int_a^b \big(\lambda u(t)+\mu v(t)\big)\,\mathrm{d}t = \lambda\int_a^b u(t)\,\mathrm{d}t + \mu\int_a^b v(t)\,\mathrm{d}t.$</li>
+<li><strong>Intégration par parties</strong> (fonctions $u,v$ de classe $C^1$ sur $[a,b]$) :
+$$\int_a^b u'(t)v(t)\,\mathrm{d}t = \big[u(t)v(t)\big]_{t=a}^{t=b} - \int_a^b u(t)v'(t)\,\mathrm{d}t.$$
+</li>
+<li><strong>Changement de variable</strong> ($\varphi$ de classe $C^1$ sur $[\alpha,\beta]$, $a=\varphi(\alpha)$, $b=\varphi(\beta)$, $u$ continue sur $[a,b]$) :
+$$\int_\alpha^\beta u(\varphi(t))\,\varphi'(t)\,\mathrm{d}t = \int_a^b u(s)\,\mathrm{d}s.$$
+</li>
+</ol>
+</div>
+<div class="block remark">
+<span class="label">Remarque 1.27</span>
+Le calcul de primitives repose donc sur la connaissance des primitives usuelles, et sur le théorème fondamental de l'analyse qui permet de ramener le calcul de primitives à un calcul d'intégrale, pour lequel on dispose de l'intégration par parties et du changement de variable. Contrairement au calcul de dérivée, cette boîte à outils ne permet en général pas de mener un calcul de primitive « jusqu'au bout ». Par exemple :
+<ul>
+<li>pour exprimer une primitive sur $\mathbb{R}^{*+}$ de $x\mapsto \dfrac{1}{x}$, il a été vu en Terminale qu'il est nécessaire d'introduire une nouvelle fonction, le logarithme népérien ;</li>
+<li>on verra cette année que pour exprimer une primitive sur $\mathbb{R}$ de $t\mapsto \dfrac{1}{1+t^2}$, il sera nécessaire d'introduire la fonction $\arctan$ (réciproque de $\tan = \sin/\cos$) ;</li>
+<li>même avec la nouvelle collection de fonctions usuelles étudiées cette année, maints exemples subsisteront : $t\mapsto e^{t^2}$, $t\mapsto e^{1/t}$, $t\mapsto \dfrac{1}{t}\ln(t)$ par exemple.</li>
+</ul>
+</div>
+
+</section>
+
+<section id="s3">
+<h2>1.3 Équations différentielles linéaires d'ordre 1</h2>
+<p>On résout les équations de la forme $\forall t\in I,\ y'(t)+a(t)y(t)=f(t)$, où $I$ est un intervalle, $a$ et $f$ sont des fonctions continues sur $I$, et $y$ est la fonction inconnue, cherchée parmi les fonctions dérivables sur $I$.</p>
+<div class="block def">
+<span class="label">Définition 1.28</span>
+On appelle <strong>équation homogène</strong> associée à l'équation $y'+ay=f$ l'équation $y'+ay=0$. On dit aussi que $f$ est le <strong>second membre</strong> de l'équation initiale, et donc que l'équation homogène est « sans second membre ».
+<div class="footnote">Attention à bien faire porter l'adjectif « homogène » sur le mot « équation » — on parle d'équation homogène et d'équation avec second membre, jamais d'« homogénéité des solutions ».</div>
+</div>
+
+<h3 id="s3-1">1.3.1 Exploitation de la linéarité</h3>
+<div class="block def">
+<span class="label">Définition 1.29</span>
+Soit $y_1$ et $y_2$ deux objets mathématiques de même nature (deux fonctions, deux suites, deux vecteurs, bientôt deux matrices). On appelle <strong>combinaisons linéaires</strong> de $y_1$ et $y_2$ les objets $\alpha_1 y_1 + \alpha_2 y_2$, pour $\alpha_1,\alpha_2\in\mathbb{R}$.
+</div>
+<div class="block remark">
+<span class="label">Remarque 1.30</span>
+La notion d'« objet mathématique » et celle de « nature » d'un objet ne sont pas bien définies pour l'instant. La notion d'<strong>espace vectoriel</strong>, vue dans quelques semaines, précisera dans quel cadre il est pertinent de considérer des combinaisons linéaires ; les objets seront alors uniformément appelés des <strong>vecteurs</strong>, et $\alpha_1,\alpha_2$ des <strong>scalaires</strong> (réels ou complexes).
+</div>
+<div class="block theorem">
+<span class="label">Proposition 1.31</span>
+Soit une équation différentielle linéaire d'ordre 1 sur un intervalle $I$, de la forme $y'+ay=f$.
+<ol>
+<li>L'ensemble des solutions de l'équation homogène associée est stable par combinaison linéaire : si $y_1,y_2$ satisfont $y'+ay=0$, alors pour tous $\alpha_1,\alpha_2$, $\alpha_1y_1+\alpha_2y_2$ est encore solution de $y'+ay=0$.</li>
+<li>La différence de deux solutions de l'équation avec second membre est une solution de l'équation homogène associée.</li>
+<li><strong>Principe de superposition.</strong> Si $y_1$ est solution de $y'+ay=f_1$ et $y_2$ de $y'+ay=f_2$, alors $y_1+y_2$ est solution de $y'+ay=f_1+f_2$.</li>
+</ol>
+</div>
+<p>Le point 2 permet d'utiliser la même stratégie que pour les relations de récurrence arithmético-géométriques : résolution de l'équation homogène, puis recherche d'une solution particulière de l'équation avec second membre.</p>
+
+<h3 id="s3-2">1.3.2 Fonction exponentielle</h3>
+<p>On a rappelé plus haut la définition du logarithme népérien comme l'unique primitive de la fonction inverse sur $\mathbb{R}^{*+}$ qui s'annule en 1. Cette fonction est continue et strictement croissante sur $\mathbb{R}^{*+}$, et admet les limites $\displaystyle\lim_{x\to 0^+}\ln(x)=-\infty$ et $\displaystyle\lim_{x\to+\infty}\ln(x)=+\infty$. Le théorème des valeurs intermédiaires conjugué à la croissance stricte permet d'affirmer que tout réel $y$ admet un unique antécédent $x\in\mathbb{R}^{*+}$ par $\ln$.</p>
+<div class="block def">
+<span class="label">Définition 1.32</span>
+Pour tout réel $y$, on définit l'<strong>exponentielle</strong> de $y$, notée $e^y$, comme l'unique antécédent de $y$ par la fonction $\ln$ dans $\mathbb{R}^{*+}$.
+</div>
+<div class="block theorem">
+<span class="label">Proposition 1.33</span>
+<ol>
+<li>La fonction exponentielle est définie sur $\mathbb{R}$, à valeurs dans $\mathbb{R}^{*+}$. Tout $x\in\mathbb{R}^{*+}$ admet un unique antécédent par la fonction exponentielle (dans $\mathbb{R}$).</li>
+<li>Pour tout réel $y$, $\ln(e^y)=y$.</li>
+<li>Pour tout réel strictement positif $x$, $e^{\ln(x)}=x$.</li>
+<li>Pour $x_1,x_2>0$, $\ln(x_1x_2)=\ln(x_1)+\ln(x_2)$. De plus $\ln(1/x_1)=-\ln(x_1)$, et pour $n\in\mathbb{Z}$, $\ln(x_1^n)=n\ln(x_1)$.</li>
+<li>Pour $y_1,y_2\in\mathbb{R}$, $e^{y_1+y_2}=e^{y_1}e^{y_2}$. De plus $e^{-y_1}=\dfrac{1}{e^{y_1}}$ et pour $n\in\mathbb{Z}$, $(e^{y_1})^n=e^{ny_1}$.</li>
+<li>La fonction exponentielle est dérivable et égale à sa dérivée.</li>
+</ol>
+</div>
+
+<h3 id="s3-3">1.3.3 Résolution de l'équation homogène</h3>
+<div class="block theorem">
+<span class="label">Théorème 1.34</span>
+Soit $I$ un intervalle et $a$ une fonction continue sur $I$. Soit $A$ une primitive de $a$ sur $I$. Alors les solutions de $y'+ay=0$ sur $I$ sont les fonctions
+$$t\mapsto Ke^{-A(t)},\quad\text{pour } K\in\mathbb{R}.$$
+La résolution d'une telle équation différentielle se ramène donc à un calcul de primitive.
+</div>
+<div class="block retenir">
+<span class="label">À retenir</span>
+$$y'+a(t)y=0 \ \Longrightarrow\ y(t) = Ke^{-A(t)},\quad A'=a,\ K\in\mathbb{R}.$$
+</div>
+<div class="block theorem">
+<span class="label">Corollaire 1.35</span>
+Une solution d'une équation $y'+ay=0$ sur un intervalle de continuité $I$ soit est constamment nulle sur $I$, soit ne s'annule pas sur $I$.
+</div>
+
+<h3 id="s3-4">1.3.4 Méthode de variation de la constante</h3>
+<p>C'est une méthode de changement de fonction inconnue. On suppose que $y_0$ est une solution de $y'+ay=0$ qui ne s'annule pas sur l'intervalle $I$ de résolution. On cherche une solution $y_p$ de l'équation avec second membre $y'+ay=f$ sous la forme $y_p=\lambda y_0$, où $\lambda$ est une nouvelle fonction inconnue.</p>
+<div class="block demo">
+<span class="label">Dérivation de la méthode</span>
+<div class="chain">
+<div class="step"><span>$y_p = \lambda y_0 \Rightarrow y_p' = \lambda' y_0 + \lambda y_0'$</span></div>
+<div class="step"><span>$y_p' + ay_p = \lambda' y_0 + \lambda(y_0'+ay_0)$</span><span class="why">on regroupe les termes en $\lambda$</span></div>
+<div class="step"><span>$y_0'+ay_0=0$ (par hypothèse) $\Rightarrow\ y_p'+ay_p = \lambda' y_0$</span></div>
+<div class="step"><span>Donc $y_p'+ay_p=f \iff \lambda' = \dfrac{f}{y_0}$</span><span class="why">$y_0$ ne s'annule pas sur $I$, donc $f/y_0$ est bien définie et continue</span></div>
+</div>
+<div class="footnote">Le nom « variation de la constante » vient du fait que les solutions de l'équation homogène sont les fonctions $\lambda y_0$ où $\lambda$ est constante : la méthode consiste à reprendre ce paramètre $\lambda$ en le laissant varier.</div>
+</div>
+<p>Cette méthode ramène donc la recherche de $y_p$ à un calcul de primitive. Notons $\Lambda$ une primitive de $f/y_0$ (continue car $y_0$ ne s'annule pas sur $I$).</p>
+<div class="block theorem">
+<span class="label">Proposition 1.36</span>
+Soit $I$ un intervalle et $a,f$ deux fonctions continues sur $I$. Les solutions de $y'+ay=f$ sur $I$ sont les fonctions de la forme
+$$t\mapsto \big(K+\Lambda(t)\big)y_0(t),\quad\text{pour } K\in\mathbb{R},$$
+où $y_0$ est une solution de l'équation homogène $y'+ay=0$ qui ne s'annule pas sur $I$, et $\Lambda$ une primitive sur $I$ de $f/y_0$.
+</div>
+<div class="block retenir">
+<span class="label">À retenir</span>
+$$y'+ay=f \ \Longrightarrow\ y(t) = \big(K+\Lambda(t)\big)y_0(t),\qquad \Lambda' = \frac{f}{y_0}.$$
+</div>
+
+<h3 id="s3-5">1.3.5 Autres techniques de calcul</h3>
+<p>La méthode de variation de la constante est générique. D'autres méthodes peuvent être plus directes sur des équations particulières. Par exemple, si $a$ et $f$ sont <strong>constantes</strong>, il convient de chercher $y_p$ sous forme d'une constante : en imposant $y_p=c$ dans $y'+ay=f$, l'équation devient $ac=f$, donc $c=\dfrac{f}{a}$ convient si $a\neq 0$. Cette stratégie fonctionne plus généralement dès que le quotient $f/a$ est constant.</p>
+<p>On verra en exercice des cas où l'on recherche $y_p$ sous la forme d'un polynôme, ou d'une fonction puissance : les énoncés guident ce type de recherche, surtout en première année.</p>
+
+<h3 id="s3-6">1.3.6 Extension aux équations $ay'+by=f$</h3>
+<p>Il arrive souvent qu'on considère des équations de la forme $ay'+by=f$ sur un intervalle $I$, où $a,b,f$ sont continues. Deux cas se présentent :</p>
+<ul>
+<li>si $a$ ne s'annule pas sur $I$, on divise l'équation par $a$ et l'on se ramène à $y' + \dfrac{b}{a}y = \dfrac{f}{a}$ : tout ce qui précède s'applique alors ;</li>
+<li>si $a$ s'annule en un point $t_0$, la division par $a$ n'est plus possible en $t_0$. La technique consiste alors à résoudre l'équation de part et d'autre de $t_0$, puis à étudier comment les solutions se « recollent » en ce point. Ce n'est pas un objectif du programme, et de tels exemples ne seront étudiés que si le temps le permet — ce qui ne sera pas le cas en début d'année.</li>
+</ul>
+<div class="block def">
+<span class="label">Définition 1.37</span>
+Soit une équation $ay'+by=f$ sur un intervalle $I$ où $a,b,f$ sont continues. Tout point d'annulation de $a$ est appelé <strong>point singulier</strong> de l'équation. Une équation sans point singulier est dite <strong>régulière</strong>. Un intervalle ne contenant aucun point singulier est appelé <strong>intervalle de régularité</strong>.
+</div>
+<div class="block remark">
+<span class="label">Remarque</span>
+La Proposition 1.31 reste valable pour les équations $ay'+by=f$, même en cas de singularités.
+</div>
+
+<h3 id="s3-7">1.3.7 Problème de Cauchy</h3>
+<div class="block def">
+<span class="label">Définition 1.38</span>
+Soit une équation différentielle $y'+ay=f$ (ou une équation $ay'+by=f$ supposée régulière) sur un intervalle $I$. Soit $t_0\in I$ et $y_0$ un nombre. On appelle <strong>problème de Cauchy</strong> le système d'inconnue $y$ constitué de l'équation différentielle et de la <strong>condition initiale</strong> $y(t_0)=y_0$ :
+$$\begin{cases}\forall t\in I,\ y'(t)+a(t)y(t) = f(t)\\ y(t_0)=y_0.\end{cases}$$
+On dit plus précisément qu'il s'agit d'un problème de Cauchy <strong>linéaire d'ordre 1</strong>, au vu de l'équation différentielle.
+</div>
+<p><strong>Exemple 1.39.</strong> La fonction exponentielle est la solution du problème de Cauchy $\begin{cases}y'=y\\ y(0)=1.\end{cases}$</p>
+<div class="block remark">
+<span class="label">Remarque 1.40</span>
+On verra dans un autre chapitre les problèmes de Cauchy linéaires d'ordre 2. Les problèmes de Cauchy non linéaires ne sont pas abordés en première année.
+</div>
+<div class="block theorem">
+<span class="label">Théorème 1.41</span>
+Soit un problème de Cauchy linéaire d'ordre 1 :
+$$\begin{cases}\forall t\in I,\ y'(t)+a(t)y(t) = f(t)\\ y(t_0)=y_0.\end{cases}$$
+Alors ce problème admet une <strong>unique</strong> solution.
+</div>
+<div class="block retenir">
+<span class="label">À retenir — existence et unicité</span>
+Un problème de Cauchy linéaire d'ordre 1 admet toujours une solution, et une seule. La constante $K$ de la Proposition 1.36 est déterminée de façon unique par la condition initiale $y(t_0)=y_0$.
+</div>
+<div class="block remark">
+<span class="label">Remarque 1.42</span>
+Ce théorème (et ses généralisations) est à la base de la physique classique déterministe : on décrit un problème physique par une équation d'évolution, et connaissant l'état initial du système, on est capable de décrire théoriquement son état à tout instant ultérieur. Techniquement, tous les problèmes physiques ne se laissent pas décrire par une équation d'évolution linéaire d'ordre 1 ! Le théorème étudié ici n'est donc, de ce point de vue, qu'un archétype.
+</div>
+
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Pourquoi la Définition 1.3 exclut-elle explicitement la suite constamment nulle des suites géométriques ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que la suite nulle vérifie $u_{n+1}=au_n$ (soit $0=a\times 0$) pour <strong>n'importe quelle</strong> valeur de $a$. Si on l'autorisait comme suite géométrique, elle aurait simultanément une infinité de raisons possibles, ce qui contredirait l'idée qu'une suite géométrique a une raison bien définie et unique.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Qu'est-ce qui distingue une équation « homogène » d'une équation « avec second membre » ? Le mot « homogène » porte-t-il sur l'équation ou sur les solutions ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+L'équation homogène associée à $y'+ay=f$ est $y'+ay=0$ (Définition 1.28) : c'est l'équation obtenue en annulant le second membre $f$. L'adjectif « homogène » qualifie <strong>l'équation</strong>, jamais les solutions — on ne parle pas d'« homogénéité des solutions ».</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Résoudre le problème de Cauchy $y'+2y=6$, $y(0)=5$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$a=2$, $f=6$ sont constantes, donc une solution particulière constante est $y_p=\dfrac{f}{a}=3$ (§1.3.5). L'équation homogène $y'+2y=0$ a pour solutions $Ke^{-2t}$ (Théorème 1.34, avec $A(t)=2t$). La solution générale est $y(t)=3+Ke^{-2t}$. La condition $y(0)=5$ donne $3+K=5$, soit $K=2$. Donc $y(t) = 3+2e^{-2t}$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Une suite arithmético-géométrique vérifie $u_{n+1}=3u_n-4$. Donner l'expression explicite de $u_n$ en fonction de $u_0$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Ici $a=3$, $b=-4$. La solution constante particulière vérifie $c=3c-4 \Rightarrow c=2$. D'après la Proposition 1.8, $u_n=2+K\cdot 3^n$. En $n=0$ : $u_0=2+K \Rightarrow K=u_0-2$. Donc $u_n = 2+(u_0-2)\cdot 3^n$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi la méthode de « variation de la constante » exige-t-elle que $y_0$ (solution de l'équation homogène) ne s'annule pas sur $I$ ? Que se passerait-il dans la division si $y_0$ s'annulait en un point ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La méthode pose $\lambda' = f/y_0$ (§1.3.4) : si $y_0(t_1)=0$ pour un certain $t_1\in I$, cette expression n'est pas définie en $t_1$ (division par zéro), et $\lambda$ ne peut plus être obtenue par un calcul de primitive sur tout $I$. Le Corollaire 1.35 garantit précisément qu'une solution non nulle de l'équation homogène ne s'annule <strong>jamais</strong> sur un intervalle de continuité — ce qui légitime a posteriori le choix de $y_0$ dans la méthode.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passe-t-il si l'on essaie d'appliquer la Proposition 1.8 ($u_n=c+Ka^n$) à une relation $u_{n+1}=u_n+b$ (suite purement arithmétique, $a=1$) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La formule $c=\dfrac{b}{1-a}$ n'est valable que pour $a\neq 1$ (division par $1-a$) : si $a=1$, elle diverge (division par zéro). C'est cohérent, car pour $a=1$ il n'existe pas de solution constante à $u_{n+1}=u_n+b$ dès que $b\neq 0$ — la suite est purement arithmétique et croît indéfiniment ($u_n=u_0+bn$, Proposition 1.2), elle ne peut pas s'écrire sous la forme $c+K\cdot 1^n=c+K$ (qui serait constante).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : un lemme de ce chapitre affirme qu'une certaine différence de suites arithmético-géométriques est « arithmétique de raison $a$ ». Où est l'erreur, et quelle est la bonne affirmation ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+C'est le Lemme 1.7 (voir l'encart ⚠️ Correction) : en soustrayant les deux relations $u_{n+1}=au_n+b$ et $v_{n+1}=av_n+b$, on obtient $u_{n+1}-v_{n+1}=a(u_n-v_n)$, une relation <strong>multiplicative</strong> — c'est la définition même d'une suite <strong>géométrique</strong> de raison $a$ (Définition 1.3), pas d'une suite arithmétique (qui serait définie par une relation additive $w_{n+1}=w_n+b$, Définition 1.1).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : dans le Corollaire 1.24, pourquoi est-il essentiel que $f$ soit <strong>continue</strong> (et non simplement dérivable) pour que $\displaystyle\int_a^b f(t)\,\mathrm{d}t = F(b)-F(a)$ ait un sens, et en quoi ce résultat diffère-t-il du second énoncé du corollaire ($\int_a^b f'(t)\,\mathrm{d}t=f(b)-f(a)$) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Dans le premier énoncé, $f$ est la fonction que l'on intègre et $F$ en est <strong>une primitive</strong> (donc $F'=f$) : la continuité de $f$ garantit à la fois l'existence de $F$ (Théorème 1.21) et le sens de l'intégrale. Dans le second énoncé, les rôles sont inversés : c'est $f$ elle-même qui joue le rôle de la primitive, et on intègre sa dérivée $f'$ — cela suppose que $f$ soit dérivable <strong>et</strong> que $f'$ soit continue (fonction de classe $C^1$), une hypothèse plus forte que la simple continuité de $f$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : expliquez en une chaîne de raisonnement comment on passe de la résolution d'une équation homogène $y'+ay=0$ à la résolution complète d'un problème de Cauchy $y'+ay=f$, $y(t_0)=y_0$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+On résout d'abord l'équation homogène $y'+ay=0$ : ses solutions sont $t\mapsto Ke^{-A(t)}$ où $A'=a$ (Théorème 1.34). On choisit une solution non nulle $y_0(t)=e^{-A(t)}$ de cette équation homogène, puis on applique la variation de la constante : en posant $y=\lambda y_0$, l'équation avec second membre se réduit à $\lambda'=f/y_0$ (§1.3.4), ce qui ramène tout au calcul d'une primitive $\Lambda$ de $f/y_0$. La solution générale de $y'+ay=f$ est alors $y(t)=(K+\Lambda(t))y_0(t)$ (Proposition 1.36). Enfin, la condition initiale $y(t_0)=y_0$ fixe la constante $K$ de façon unique, ce qui donne l'unique solution du problème de Cauchy (Théorème 1.41).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : en quoi la méthode « résoudre l'homogène, puis chercher une solution particulière » est-elle exactement la même pour les suites arithmético-géométriques (§1.1) et pour les équations différentielles linéaires d'ordre 1 (§1.3) ? Sur quelle propriété algébrique commune repose cette analogie ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Dans les deux cas, on exploite la <strong>linéarité</strong> de l'opérateur en jeu (Lemme 1.7 pour les suites, Proposition 1.31 pour les équations différentielles) : la différence de deux solutions de l'équation « avec second membre » est toujours solution de l'équation « homogène » associée. On peut donc écrire toute solution comme (solution particulière) + (solution homogène générale). Pour les suites, l'homogène $u_{n+1}=au_n$ donne les suites géométriques $Ka^n$ ; pour les équations différentielles, l'homogène $y'+ay=0$ donne les fonctions $Ke^{-A(t)}$. Dans les deux cas, on cherche ensuite une solution particulière (constante pour les suites et pour les équations à coefficients constants, via variation de la constante dans le cas général).</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Programme officiel de mathématiques CPGE 1<sup>re</sup> année (voie PCSI), bloc « Analyse — suites et fonctions » : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a> (programmes CPGE, filière PCSI)</li>
+<li>H-Prépa Mathématiques 1<sup>re</sup> année MPSI/PCSI (Hachette Éducation) — chapitres « Suites arithmético-géométriques » et « Équations différentielles linéaires du premier ordre »</li>
+<li>Correction du Lemme 1.7 : dérivation directe présentée dans l'encart ⚠️ ci-dessus, à partir des Définitions 1.1 et 1.3 de ce même chapitre (pas de source externe nécessaire — incohérence interne du document vérifiable par calcul).</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>

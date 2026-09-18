@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathématiques — Ch.1 : Problèmes linéaires unidimensionnels</title>
+<script>
+window.MathJax = {
+  tex: { 
+    inlineMath: [['$','$'],['\\(','\\)']], 
+    displayMath: [['$$','$$'],['\\[','\\]']],
+    processEscapes: true
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430;
+  --paper:#fbfaf7;
+  --panel:#ffffff;
+  --line:#e2e0da;
+  --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--font-body); line-height:1.55; font-size:16px;
+  text-align:left; word-wrap:break-word;
+}
+h1,h2,h3,h4,h5{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.95rem; margin:0 0 .25rem 0;}
+h2{font-size:1.38rem; border-bottom:2px solid var(--line); padding-bottom:.35rem; margin-top:2.3rem;}
+h3{font-size:1.15rem; margin-top:1.7rem;}
+h4{font-size:1.02rem; margin-top:1.25rem;}
+h5{font-size:.95rem; margin-top:1rem; font-style:italic;}
+code, .mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1260px; margin:0 auto;}
+nav.toc{
+  width:265px; flex-shrink:0; position:sticky; top:0; align-self:flex-start;
+  height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem;
+  border-right:1px solid var(--line); font-size:.86rem;
+}
+nav.toc h4{margin-top:0; color:#7a7a72; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0; counter-reset:sec;}
+nav.toc ol.roman{counter-reset:roman;}
+nav.toc ol.roman > li{counter-increment:roman;}
+nav.toc ol.roman > li > a::before{content: counter(roman, upper-roman) " — "; color:var(--blue-bd); font-weight:600;}
+nav.toc ol ol{margin:.15rem 0 .4rem 1rem;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.18rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.8rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1.5rem;}
+p{margin:.65rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.15rem; margin:1.1rem 0; background:#fff;}
+.block > .label{font-weight:700; font-family:var(--font-body); font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.4rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1.1rem 1.3rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+.chain{margin:.75rem 0; padding-left:.3rem;}
+.chain .step{display:flex; align-items:baseline; gap:.6rem; margin:.3rem 0; flex-wrap:wrap;}
+.chain .step .why{color:#7a7a72; font-size:.84rem; font-style:italic;}
+figure{margin:1.3rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.45rem;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd); text-decoration:none;}
+.sources a:hover{text-decoration:underline;}
+
+mjx-container[jax="SVG"]{max-width:100%;}
+mjx-container[jax="SVG"] > svg{max-width:100%; height:auto;}
+mjx-container[jax="SVG"][display="true"]{
+  overflow-x:auto; 
+  overflow-y:hidden; 
+  max-width:100%;
+  padding:0.2em 0;
+  -webkit-overflow-scrolling:touch;
+}
+
+@media (max-width:900px){
+  nav.toc{display:none;}
+  main{padding:1.5rem 1.2rem;}
+}
+@media (max-width:480px){
+  main{padding:1.2rem .8rem;}
+  .chain .step{gap:.35rem;}
+  .block{padding:.75rem .9rem;}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol class="roman">
+  <li><a href="#s1">Les nombres</a></li>
+  <li><a href="#s2">Les suites</a>
+    <ol>
+      <li><a href="#s2-1">Cas particuliers</a></li>
+      <li><a href="#s2-2">Suites arithmético-géométriques</a></li>
+      <li><a href="#s2-3">Bilan &amp; Prolongements</a></li>
+    </ol>
+  </li>
+  <li><a href="#s3">Les fonctions</a>
+    <ol>
+      <li><a href="#s3-1">Exploitation de la linéarité</a></li>
+      <li><a href="#s3-2">Équations à coefficients constants</a></li>
+      <li><a href="#s3-3">Propriétés de l'exponentielle</a></li>
+      <li><a href="#s3-4">Résolution de \(y' = ay + b\)</a></li>
+      <li><a href="#s3-5">Dérivation des fonctions composées</a></li>
+      <li><a href="#s3-6">Primitives et unicité</a></li>
+      <li><a href="#s3-7">Équation homogène \(y' = a(t)y\)</a></li>
+      <li><a href="#s3-8">Cas général avec second membre</a></li>
+    </ol>
+  </li>
+  <li><a href="#s4">Compléments sur le calcul de primitives</a></li>
+  <li><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li><a href="#sources">Sources &amp; Références</a></li>
+</ol>
+</nav>
+
+<main>
+<header class="title">
+<h1>Chapitre 1 : Problèmes linéaires unidimensionnels</h1>
+<div class="meta">Mathématiques · CPGE PCSI (Lycée Louis Barthou, Pau) · Transcription rigoureuse du cours manuscrit</div>
+</header>
+
+<section id="s1">
+<h2>I. Les nombres</h2>
+<p>On cherche à résoudre dans $\mathbb{R}$ une équation de la forme :</p>
+$$ax + b = 0 \quad \text{où } a, b \in \mathbb{R} \text{ sont fixés et } x \in \mathbb{R} \text{ est l'inconnue.}$$
+
+<div class="chain">
+  <div class="step"><span>$ax + b = 0 \iff ax = -b \iff x = -\dfrac{b}{a}$</span><span class="why">(sous réserve que $a \neq 0$)</span></div>
+</div>
+
+<p>Les opérations élémentaires suivantes transforment une équation en une équation rigoureusement équivalente (conservation exacte de l'ensemble des solutions) :</p>
+<ul>
+  <li>Ajouter ou retrancher un même terme de part et d'autre de l'égalité ;</li>
+  <li>Multiplier ou diviser de part et d'autre par un même facteur <strong>non nul</strong>.</li>
+</ul>
+
+<div class="block theorem">
+<span class="label">Discussion exhaustive des solutions selon les paramètres</span>
+<ul>
+  <li><strong>1<sup>er</sup> cas : $a \neq 0$</strong><br>
+  L'équation admet une unique solution dans $\mathbb{R}$ : $S = \left\{ -\dfrac{b}{a} \right\}$.</li>
+  <li><strong>2<sup>e</sup> cas : $a = 0$ et $b \neq 0$</strong><br>
+  L'équation se réduit à l'égalité $0 = -b \neq 0$, qui est impossible. Il n'y a <strong>aucune solution</strong> : $S = \emptyset$.</li>
+  <li><strong>3<sup>e</sup> cas : $a = 0$ et $b = 0$</strong><br>
+  L'équation s'écrit $0 \times x = 0$, ce qui est toujours vérifié. <strong>Tout réel est solution</strong> : $S = \mathbb{R}$.</li>
+</ul>
+</div>
+</section>
+
+<section id="s2">
+<h2>II. Les suites</h2>
+<p><strong>Objectif du chapitre :</strong> Étudier et expliciter le terme général des suites numériques $(u_n)_{n \in \mathbb{N}}$ satisfaisant une relation de récurrence linéaire d'ordre 1 :</p>
+$$\forall n \in \mathbb{N}, \quad u_{n+1} = a u_n + b \quad (a, b \in \mathbb{R})$$
+
+<h3 id="s2-1">1) Cas particuliers</h3>
+
+<div class="block def">
+<span class="label">Définition — Suite arithmétique</span>
+On dit qu'une suite $(u_n)_{n \in \mathbb{N}}$ est <strong>arithmétique</strong> si la différence $u_{n+1} - u_n$ est constante.<br>
+C'est-à-dire qu'il existe un réel $b \in \mathbb{R}$ tel que :
+$$\forall n \in \mathbb{N}, \quad u_{n+1} = u_n + b$$
+Le réel $b$ est appelé la <strong>raison</strong> de la suite arithmétique.<br>
+<em>Résoudre l'équation sur la suite consiste à expliciter $u_n$ en fonction directe de $n$.</em>
+</div>
+
+<div class="block theorem">
+<span class="label">Propriété</span>
+Si $(u_n)_{n \in \mathbb{N}}$ est arithmétique de raison $b$, alors pour tout $n \in \mathbb{N}$ :
+$$u_n = u_0 + nb$$
+</div>
+
+<div class="block demo">
+<span class="label">Démonstration par récurrence</span>
+Démontrons par récurrence la propriété $P(n) : \text{« } u_n = u_0 + nb \text{ »}$ pour tout $n \in \mathbb{N}$.
+<ul>
+  <li><strong>Initialisation ($n=0$) :</strong> Pour $n=0$, $u_0 + 0 \times b = u_0$. Donc $P(0)$ est vraie.</li>
+  <li><strong>Hérédité :</strong> Soit $n \in \mathbb{N}$. Supposons $P(n)$ vraie, c'est-à-dire $u_n = u_0 + nb$ (Hypothèse de Récurrence HR).<br>
+  Calculons le terme au rang $n+1$ :
+  <div class="chain">
+    <div class="step"><span>$u_{n+1} = u_n + b$</span><span class="why">par définition de la suite</span></div>
+    <div class="step"><span>$u_{n+1} = (u_0 + nb) + b$</span><span class="why">par hypothèse de récurrence</span></div>
+    <div class="step"><span>$u_{n+1} = u_0 + b(n+1)$</span><span class="why">en factorisant $b$</span></div>
+  </div>
+  La propriété $P(n+1)$ est donc vraie.</li>
+</ul>
+Par principe de récurrence, pour tout $n \in \mathbb{N}$, $u_n = u_0 + nb$.
+</div>
+
+<div class="block def">
+<span class="label">Définition — Suite géométrique</span>
+On dit qu'une suite numérique $(u_n)_{n \in \mathbb{N}}$ (qui n'est pas la suite identiquement nulle) est <strong>géométrique</strong> s'il existe $a \in \mathbb{R}$ tel que :
+$$\forall n \in \mathbb{N}, \quad u_{n+1} = a u_n$$
+Dans ce cas, le réel $a$ est unique et est appelé la <strong>raison</strong> de la suite géométrique.
+</div>
+
+<div class="block theorem">
+<span class="label">Propriété</span>
+Si $(u_n)_{n \in \mathbb{N}}$ est géométrique de raison $a$, alors pour tout $n \in \mathbb{N}$ :
+$$u_n = u_0 \times a^n$$
+</div>
+
+<h3 id="s2-2">2) Suites arithmético-géométriques</h3>
+
+<div class="block def">
+<span class="label">Définition</span>
+On appelle <strong>suite arithmético-géométrique</strong> toute suite réelle $(u_n)_{n \in \mathbb{N}}$ vérifiant une relation de récurrence :
+$$\forall n \in \mathbb{N}, \quad u_{n+1} = a u_n + b \quad (*)$$
+Il s'agit d'une équation linéaire avec <strong>second membre</strong> (le terme constant $b$ ne dépendant pas de l'inconnue $(u_n)$).
+</div>
+
+<div class="block retenir">
+<span class="label">Méthode générale de résolution</span>
+<ol>
+  <li><strong>Équation homogène associée :</strong> Résoudre $u_{n+1} = a u_n$ (solutions géométriques de la forme $\lambda a^n$).</li>
+  <li><strong>Solution particulière :</strong> Déterminer <em>une</em> solution particulière $(u_n^{(p)})_{n \in \mathbb{N}}$ de l'équation complète $(*)$ (souvent une constante $\ell$).</li>
+  <li><strong>Conclusion :</strong> Sommer la solution particulière et la solution générale de l'homogène : $u_n = u_n^{(p)} + \lambda a^n$.</li>
+</ol>
+</div>
+
+<div class="block demo">
+<span class="label">Exemple d'application détaillé : $u_{n+1} = 2u_n + 1$</span>
+<ol>
+  <li><strong>Équation homogène associée :</strong> $u_{n+1} = 2u_n$.<br>
+  Ses solutions sont les suites géométriques de raison $2$, de la forme $(\lambda \times 2^n)_{n \in \mathbb{N}}$ avec $\lambda \in \mathbb{R}$.</li>
+  <li><strong>Recherche d'une solution particulière constante :</strong><br>
+  On cherche $(u_n^{(p)})$ constante égale à $\ell$. En injectant dans $(*)$ :
+  $$\ell = 2\ell + 1 \iff \ell - 2\ell = 1 \iff -\ell = 1 \iff \ell = -1$$
+  La suite constante égale à $-1$ est donc une solution particulière.</li>
+  <li><strong>Conclusion :</strong> Les suites solutions de la relation $u_{n+1} = 2u_n + 1$ sont exactement les suites :
+  $$u_n = \lambda \times 2^n - 1 \quad (\lambda \in \mathbb{R})$$
+  <em>(La constante $\lambda$ est fixée de manière unique dès que l'on précise la valeur initiale $u_0$).</em></li>
+</ol>
+</div>
+
+<div class="block theorem">
+<span class="label">Théorème fondamental de linéarité</span>
+Soit la relation de récurrence linéaire avec second membre $u_{n+1} = a u_n + b \quad (*)$.
+<ol>
+  <li>Si $(v_n)_{n \in \mathbb{N}}$ et $(w_n)_{n \in \mathbb{N}}$ satisfont l'équation homogène associée, alors pour tous réels $\alpha, \beta$, la combinaison linéaire $(\alpha v_n + \beta w_n)_{n \in \mathbb{N}}$ satisfait encore l'équation homogène.</li>
+  <li>Si $(v_n)_{n \in \mathbb{N}}$ et $(w_n)_{n \in \mathbb{N}}$ satisfont l'équation avec second membre $(*)$, alors la suite différence $(v_n - w_n)_{n \in \mathbb{N}}$ satisfait l'équation homogène associée.</li>
+</ol>
+</div>
+
+<div class="block demo">
+<span class="label">Démonstration du théorème</span>
+<p><strong>Démonstration du point 1 :</strong><br>
+Pour démontrer une implication $P \implies Q$, on suppose $P$ vraie et on montre $Q$.<br>
+Supposons que $v_{n+1} = a v_n$ et $w_{n+1} = a w_n$ pour tout $n \in \mathbb{N}$.<br>
+Calculons le terme au rang $n+1$ de la combinaison linéaire :
+$$\alpha v_{n+1} + \beta w_{n+1} = \alpha(a v_n) + \beta(a w_n) = a(\alpha v_n + \beta w_n)$$
+Ce qui établit que $(\alpha v_n + \beta w_n)$ vérifie bien la relation homogène.</p>
+
+<p><strong>Démonstration du point 2 :</strong><br>
+Supposons que $v_{n+1} = a v_n + b$ et $w_{n+1} = a w_n + b$ pour tout $n \in \mathbb{N}$.<br>
+Calculons la différence des termes au rang $n+1$ :
+$$v_{n+1} - w_{n+1} = (a v_n + b) - (a w_n + b) = a v_n - a w_n = a(v_n - w_n)$$
+La suite $(v_n - w_n)$ est donc bien solution de l'équation homogène.</p>
+</div>
+
+<div class="block theorem">
+<span class="label">Corollaire</span>
+Si on connaît <strong>une</strong> suite $(u_n^{(p)})_{n \in \mathbb{N}}$ satisfaisant $(*)$ et la totalité des suites $(v_n)_{n \in \mathbb{N}}$ satisfaisant l'équation homogène $v_{n+1} = a v_n$, alors l'ensemble des suites satisfaisant $(*)$ est exactement constitué des suites $(u_n^{(p)} + v_n)_{n \in \mathbb{N}}$.
+</div>
+
+<div class="block demo">
+<span class="label">Démonstration rigoureuse par double inclusion ensembliste</span>
+<p>Le corollaire énonce l'égalité $S_1 = S_2$ entre les deux ensembles suivants :</p>
+$$S_1 = \left\{ (u_n)_{n \in \mathbb{N}} \;\middle|\; \forall n \in \mathbb{N}, \, u_{n+1} = a u_n + b \right\}$$
+$$S_2 = \left\{ (u_n^{(p)} + v_n)_{n \in \mathbb{N}} \;\middle|\; \forall n \in \mathbb{N}, \, v_{n+1} = a v_n \right\}$$
+
+<p><strong>1. Montrons que $S_1 \subset S_2$ :</strong><br>
+Soit $(u_n)_{n \in \mathbb{N}} \in S_1$ quelconque (donc $u_{n+1} = a u_n + b$). Montrons que $(u_n) \in S_2$.<br>
+Posons $v_n = u_n - u_n^{(p)}$ pour tout $n$, de sorte que $u_n = u_n^{(p)} + v_n$.<br>
+Puisque $(u_n)$ et $(u_n^{(p)})$ vérifient toutes deux la relation $(*)$, leur différence $(v_n)$ vérifie l'équation homogène d'après le point 2 du théorème : $v_{n+1} = a v_n$.<br>
+Ainsi, la suite $(u_n)$ s'écrit bien sous la forme $u_n^{(p)} + v_n$ avec $(v_n)$ solution homogène, donc $(u_n) \in S_2$.<br>
+Ceci prouve l'inclusion $S_1 \subset S_2$.</p>
+
+<p><strong>2. Montrons que $S_2 \subset S_1$ :</strong><br>
+Soit une suite de $S_2$, c'est-à-dire de la forme $(u_n^{(p)} + v_n)_{n \in \mathbb{N}}$ où $(v_n)$ vérifie $v_{n+1} = a v_n$.<br>
+Calculons son terme au rang $n+1$ :
+$$u_{n+1}^{(p)} + v_{n+1} = (a u_n^{(p)} + b) + a v_n = a(u_n^{(p)} + v_n) + b$$
+La suite $(u_n^{(p)} + v_n)$ vérifie donc bien la relation $(*)$, ce qui montre qu'elle appartient à $S_1$.<br>
+Ceci prouve l'inclusion $S_2 \subset S_1$.</p>
+<p>Par double inclusion, on a rigoureusement $S_1 = S_2$.</p>
+</div>
+
+<h3 id="s2-3">3) Bilan et Prolongements</h3>
+
+<div class="block remark">
+<span class="label">Bilan méthodologique</span>
+<ul>
+  <li>Capacité 1 : Savoir résoudre une relation arithmético-géométrique par superposition.</li>
+  <li>Capacités générales : Savoir structurer une preuve d'implication ($P \implies Q$), manier les notations ensemblistes, et démontrer une égalité d'ensembles par double inclusion.</li>
+  <li><strong>Généralisation :</strong> La preuve de la structure $S_1 = S_2$ n'a <em>jamais</em> utilisé le fait que $a$ et $b$ soient constants. Pour une relation $u_{n+1} = a_n u_n + b_n$, l'ensemble des solutions est toujours la somme d'une solution particulière et de la solution générale homogène.</li>
+</ul>
+</div>
+
+<div class="block correction">
+<span class="label">Prolongements — Forme de la solution particulière $u_n^{(p)}$</span>
+Lorsque $a$ et $b$ sont constants :
+<ul>
+  <li>Si $a \neq 1$ et $b \neq 0$ : on cherche une constante $u_n^{(p)} = \ell$.</li>
+  <li><strong>Second membre géométrique ($b_n = \ell^n$) :</strong><br>
+  Pour $u_{n+1} = a u_n + \ell^n$ avec $\ell \neq a$, on cherche sous la forme $u_n^{(p)} = \alpha \ell^n$.</li>
+  <li><strong>Cas de résonance ($b_n = a^n$) :</strong><br>
+  Pour $u_{n+1} = a u_n + a^n$, la forme précédente échoue (car $a^n$ est déjà solution de l'homogène). On cherche alors sous la forme :
+  $$u_n^{(p)} = \alpha n a^n$$
+  <em>En effet : $\alpha(n+1)a^{n+1} = a(\alpha n a^n) + a^n \iff \alpha(n+1)a^{n+1} = \alpha n a^{n+1} + a^n \iff \alpha a^{n+1} = a^n \iff \alpha a = 1 \iff \alpha = \dfrac{1}{a}$.</em>
+  </li>
+</ul>
+</div>
+</section>
+
+<section id="s3">
+<h2>III. Les fonctions</h2>
+<p>On s'intéresse aux <strong>équations différentielles linéaires (EDL) du premier ordre</strong> :</p>
+$$\forall t \in I, \quad y'(t) = a(t)y(t) + b(t) \quad (*)$$
+<p>où $I \subset \mathbb{R}$ est un <strong>intervalle</strong>, $a$ et $b$ sont des fonctions réelles continues sur $I$, et $y$ est la fonction inconnue dérivable sur $I$.</p>
+
+<div class="block def">
+<span class="label">Définitions</span>
+<ul>
+  <li>On appelle <strong>second membre</strong> le terme $b(t)$ qui ne dépend pas de la fonction inconnue $y$.</li>
+  <li>On appelle <strong>équation homogène associée</strong> (notée $E_0$) l'équation obtenue en annulant ce second membre :
+  $$\forall t \in I, \quad y'(t) = a(t)y(t) \quad (E_0)$$
+  </li>
+  <li>Le terme <em>linéaire</em> signifie que si l'on applique l'opérateur $L(y) = y' - a(t)y$ à une combinaison linéaire de fonctions, on obtient :
+  $$L(\lambda_1 y_1 + \lambda_2 y_2) = \lambda_1 L(y_1) + \lambda_2 L(y_2)$$
+  </li>
+</ul>
+</div>
+
+<h3 id="s3-1">1) Exploitation de la linéarité</h3>
+
+<div class="block theorem">
+<span class="label">Propositions — Structure de l'ensemble des solutions</span>
+Soit l'équation différentielle linéaire $(E) : y'(t) = a(t)y(t) + b(t)$ sur l'intervalle $I$.
+<ol>
+  <li>Si $y_1$ et $y_2$ sont deux solutions de $(E_0)$, alors pour tous réels $\lambda_1, \lambda_2$, la fonction $\lambda_1 y_1 + \lambda_2 y_2$ est encore solution de $(E_0)$.<br>
+  <em>(L'ensemble des solutions de l'équation homogène est un sous-espace vectoriel).</em></li>
+  <li>Si $y_p$ est <strong>une</strong> solution particulière de $(E)$, alors l'ensemble des solutions de $(E)$ est rigoureusement :
+  $$\mathcal{S} = \{ y_p + y_0 \mid y_0 \text{ est solution de } (E_0) \}$$
+  <em>(L'ensemble des solutions forme un sous-espace affine dirigé par l'espace vectoriel des solutions homogènes).</em></li>
+  <li><strong>Principe de superposition :</strong> Si le second membre est décomposable en $b = b_1 + b_2$, et si $y_1$ est solution de $y' = ay + b_1$ et $y_2$ est solution de $y' = ay + b_2$, alors $y_1 + y_2$ est solution de l'équation complète $y' = ay + (b_1 + b_2)$.</li>
+</ol>
+</div>
+
+<div class="block demo">
+<span class="label">Démonstrations détaillées</span>
+<p><strong>1. Démonstration de la stabilité par combinaison linéaire :</strong><br>
+Soient $y_1, y_2$ telles que $y_1' = a y_1$ et $y_2' = a y_2$.<br>
+Par linéarité de la dérivation :
+$$(\lambda_1 y_1 + \lambda_2 y_2)' = \lambda_1 y_1' + \lambda_2 y_2' = \lambda_1(a y_1) + \lambda_2(a y_2) = a(\lambda_1 y_1 + \lambda_2 y_2)$$
+Donc $\lambda_1 y_1 + \lambda_2 y_2$ est bien solution de $(E_0)$.</p>
+
+<p><strong>2. Démonstration de l'égalité d'ensembles par double inclusion :</strong><br>
+Montrons que $\{y \mid y \text{ solution de } (E)\} = \{y_p + y_0 \mid y_0 \text{ solution de } (E_0)\}$.
+</p>
+<ul>
+  <li><strong>Sens $\supset$ :</strong> Soit $y = y_p + y_0$ avec $y_0' = a y_0$ et $y_p' = a y_p + b$.
+  $$y' = (y_p + y_0)' = y_p' + y_0' = (a y_p + b) + a y_0 = a(y_p + y_0) + b = a y + b$$
+  Donc $y$ est bien solution de $(E)$.</li>
+  <li><strong>Sens $\subset$ :</strong> Soit $y$ une solution quelconque de $(E)$ ($y' = a y + b$).<br>
+  Posons $y_0 = y - y_p$, de sorte que $y = y_p + y_0$.<br>
+  Calculons la dérivée de $y_0$ :
+  $$y_0' = y' - y_p' = (a y + b) - (a y_p + b) = a(y - y_p) = a y_0$$
+  Ainsi $y_0$ est bien solution de $(E_0)$, d'où $y \in \{y_p + y_0 \mid y_0 \text{ sol. de } (E_0)\}$.</li>
+</ul>
+L'égalité est démontrée.
+</div>
+
+<div class="block demo">
+<span class="label">Exemple d'application du principe de superposition</span>
+Soit à résoudre la récurrence : $u_{n+1} = -u_n + 2^n + 1 \quad (*)$. Le second membre est la somme de $2^n$ et de $1$.
+<ol>
+  <li><strong>Équation homogène :</strong> $u_{n+1} = -u_n \implies u_n = \lambda (-1)^n$ avec $\lambda \in \mathbb{R}$.</li>
+  <li><strong>Partie 1 ($b_n^{(1)} = 2^n$) :</strong> On cherche $u_n = \alpha 2^n$.
+  $$\alpha 2^{n+1} = -\alpha 2^n + 2^n \iff 2\alpha = -\alpha + 1 \iff 3\alpha = 1 \iff \alpha = \frac{1}{3}$$
+  Donc $u_n^{(1)} = \dfrac{1}{3} 2^n$.</li>
+  <li><strong>Partie 2 ($b_n^{(2)} = 1$) :</strong> On cherche $u_n = \ell$ (constante).
+  $$\ell = -\ell + 1 \iff 2\ell = 1 \iff \ell = \frac{1}{2}$$
+  Donc $u_n^{(2)} = \dfrac{1}{2}$.</li>
+  <li><strong>Solution générale superposée :</strong>
+  $$u_n = \frac{1}{3} 2^n + \frac{1}{2} + \lambda (-1)^n \quad (\lambda \in \mathbb{R})$$
+</li>
+</ol>
+</div>
+
+<h3 id="s3-2">2) Équations à coefficients et second membre constants</h3>
+
+<div class="block remark">
+<span class="label">Rappel fondamental — La fonction exponentielle</span>
+Il existe une unique fonction dérivable sur $\mathbb{R}$, notée $\exp$, satisfaisant le problème de Cauchy :
+$$\begin{cases} \exp'(t) = \exp(t) \quad (\forall t \in \mathbb{R}) \\ \exp(0) = 1 \end{cases}$$
+Notation usuelle : $\exp(t) = \mathrm{e}^t$, où le nombre d'Euler vaut $\mathrm{e} = \exp(1) \approx 2{,}71828$.
+</div>
+
+<h3 id="s3-3">3) Propriétés analytiques et géométriques de l'exponentielle</h3>
+
+<div class="block theorem">
+<span class="label">Propriétés fondamentales</span>
+<ol>
+  <li><strong>Bijection réciproque :</strong> Pour tout $y \in \mathbb{R}_+^*$, il existe un unique réel $t \in \mathbb{R}$ tel que $y = \mathrm{e}^t$. Ce réel est noté $t = \ln(y)$ (logarithme népérien).<br>
+  $\forall y > 0, \forall t \in \mathbb{R}, \quad y = \mathrm{e}^t \iff t = \ln(y)$.</li>
+  <li><strong>Monotonie stricte :</strong> La fonction exp est strictement croissante sur $\mathbb{R}$ : $x < y \iff \mathrm{e}^x < \mathrm{e}^y$.</li>
+  <li><strong>Positivité stricte :</strong> $\forall t \in \mathbb{R}, \quad \mathrm{e}^t > 0$.</li>
+  <li><strong>Morphisme algébrique :</strong> Pour tous réels $u, t$ : $\mathrm{e}^{u+t} = \mathrm{e}^u \times \mathrm{e}^t$.</li>
+  <li><strong>Limites aux infinis :</strong> $\lim_{t \to -\infty} \mathrm{e}^t = 0^+$ et $\lim_{t \to +\infty} \mathrm{e}^t = +\infty$.</li>
+  <li><strong>Convexité stricte :</strong> La fonction exponentielle est strictement convexe sur $\mathbb{R}$. Pour tous $t < u$ et tout $\lambda \in [0,1]$ :
+  $$\mathrm{e}^{\lambda t + (1-\lambda)u} \leqslant \lambda \mathrm{e}^t + (1-\lambda)\mathrm{e}^u$$
+  </li>
+</ol>
+</div>
+
+<div class="block correction">
+<span class="label">⚠️ Correction — Coquille du manuscrit sur la convexité</span>
+Sur la copie manuscrite, la formule de convexité comporte la mention erronée $f(4)$ au lieu de $f(u)$. Il s'agit d'une coquille d'écriture : l'inégalité de convexité s'écrit rigoureusement $f(\lambda t + (1-\lambda)u) \leqslant \lambda f(t) + (1-\lambda)f(u)$.
+</div>
+
+<div class="block remark">
+<span class="label">Les trois facettes équivalentes de la convexité</span>
+<ul>
+  <li><strong>Cordes / sécantes :</strong> Les segments reliant deux points du graphe sont toujours situés au-dessus de la courbe.</li>
+  <li><strong>Tangentes :</strong> La courbe représentative est entièrement située au-dessus de chacune de ses tangentes : $\forall t, a \in \mathbb{R}, \, \mathrm{e}^t \geqslant \mathrm{e}^a(t-a) + \mathrm{e}^a$. En particulier, pour $a = 0$ : $\mathrm{e}^t \geqslant 1 + t$.</li>
+  <li><strong>Dérivée seconde :</strong> $\exp''(t) = \exp'(t) = \exp(t) > 0$ sur $\mathbb{R}$.</li>
+</ul>
+</div>
+
+<div class="block remark">
+<span class="label">Règle géométrique du schéma</span>
+Pour tracer fidèlement la fonction exponentielle, la courbe doit être strictement croissante, strictement positive sur $\mathbb{R}$, passer par $(0,1)$, et être située strictement au-dessus de sa tangente en 0 ($y=t+1$) tout en restant sous ses sécantes.
+</div>
+
+<figure>
+<svg viewBox="0 0 540 290" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+  <!-- Axes -->
+  <line x1="40" y1="230" x2="490" y2="230" stroke="#1c2430" stroke-width="1.5" marker-end="url(#arrow-axes)"></line>
+  <line x1="220" y1="270" x2="220" y2="20" stroke="#1c2430" stroke-width="1.5" marker-end="url(#arrow-axes)"></line>
+  <defs>
+    <marker id="arrow-axes" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto">
+      <path d="M0,0 L6,2 L0,4 Z" fill="#1c2430"></path>
+    </marker>
+  </defs>
+  
+  <text x="480" y="250" font-size="13" font-weight="600">t</text>
+  <text x="200" y="32" font-size="13" font-weight="600">y</text>
+  <text x="206" y="246" font-size="12">0</text>
+  
+  <!-- Graduations -->
+  <line x1="290" y1="227" x2="290" y2="233" stroke="#1c2430"></line><text x="287" y="248" font-size="12">1</text>
+  <line x1="150" y1="227" x2="150" y2="233" stroke="#1c2430"></line><text x="142" y="248" font-size="12">-1</text>
+  <line x1="217" y1="160" x2="223" y2="160" stroke="#1c2430"></line><text x="204" y="165" font-size="12">1</text>
+  
+  <!-- Courbe exponentielle : passe par (-1, e^-1~0.37), (0, 1), (1, e~2.72) -->
+  <path d="M 60 228 C 160 227, 195 195, 220 160 C 245 125, 275 60, 310 25" fill="none" stroke="#3b6fd8" stroke-width="2.5"></path>
+  <text x="315" y="42" font-size="14" fill="#3b6fd8" font-weight="bold">y = e^t</text>
+  
+  <!-- Tangente en (0,1) : y = t + 1 -->
+  <line x1="120" y1="260" x2="290" y2="90" stroke="#2fa365" stroke-width="1.8" stroke-dasharray="4,3"></line>
+  <text x="110" y="275" font-size="11" fill="#2fa365">Tangente en t=0 (y = t + 1)</text>
+  
+  <!-- Corde entre t=-1 et t=1 -->
+  <line x1="150" y1="205" x2="290" y2="40" stroke="#c98a12" stroke-width="1.5" stroke-dasharray="3,3"></line>
+  <circle cx="150" cy="205" r="3.5" fill="#c98a12"></circle>
+  <circle cx="290" cy="40" r="3.5" fill="#c98a12"></circle>
+  <text x="295" y="55" font-size="11" fill="#c98a12">Corde (au-dessus de la courbe)</text>
+  
+  <circle cx="220" cy="160" r="4" fill="#0f2b4c"></circle>
+</svg>
+<figcaption>Fig. 1 — Graphe de l'exponentielle : stricte positivité, croissance et convexité (située au-dessus de sa tangente et sous ses cordes).</figcaption>
+</figure>
+
+<h3 id="s3-4">4) Résolution des équations $y' = ay + b$ (coefficients constants)</h3>
+
+<div class="block theorem">
+<span class="label">Théorème</span>
+Soient $a, b \in \mathbb{R}$ avec $a \neq 0$. Les solutions sur $\mathbb{R}$ de l'équation différentielle $y'(t) = a y(t) + b$ sont les fonctions :
+$$t \mapsto \lambda \mathrm{e}^{at} + \ell \quad \text{où } \lambda \in \mathbb{R} \text{ et } \ell = -\frac{b}{a}$$
+</div>
+
+<div class="block demo">
+<span class="label">Démonstration par la méthode de la fonction auxiliaire</span>
+<p><strong>Étape 1 : Résolution de l'équation homogène $(E_0) : y' = ay$.</strong><br>
+Soit $y$ une fonction dérivable sur $\mathbb{R}$.<br>
+Introduisons la fonction auxiliaire $z$ définie par :
+$$z(t) = \frac{y(t)}{\mathrm{e}^{at}} = y(t)\mathrm{e}^{-at}$$
+La fonction $z$ est dérivable sur $\mathbb{R}$ par produit de fonctions dérivables. Calculons sa dérivée :
+$$z'(t) = y'(t)\mathrm{e}^{-at} + y(t)(-a\mathrm{e}^{-at}) = \mathrm{e}^{-at}(y'(t) - ay(t))$$
+Puisque pour tout réel $t$, $\mathrm{e}^{-at} > 0$, on a l'équivalence logique :
+$$y'(t) - ay(t) = 0 \iff z'(t) = 0$$
+Or, une fonction dont la dérivée est identiquement nulle sur un <strong>intervalle</strong> ($\mathbb{R}$) est une fonction constante.<br>
+Ainsi : $z'(t) = 0 \iff \exists \lambda \in \mathbb{R}, \, \forall t \in \mathbb{R}, \, z(t) = \lambda$.<br>
+En revenant à $y$ : $y(t)\mathrm{e}^{-at} = \lambda \iff y(t) = \lambda \mathrm{e}^{at}$.<br>
+Les solutions de $(E_0)$ sont donc exactement les fonctions $t \mapsto \lambda \mathrm{e}^{at}$.</p>
+
+<p><strong>Étape 2 : Solution particulière et superposition.</strong><br>
+Cherchons une solution particulière constante $y_p(t) = \ell$. Sa dérivée est nulle ($y_p' = 0$).
+$$0 = a\ell + b \iff a\ell = -b \iff \ell = -\frac{b}{a} \quad (\text{car } a \neq 0)$$
+D'après la proposition de linéarité, la solution générale est $y(t) = \lambda \mathrm{e}^{at} - \dfrac{b}{a}$.</p>
+
+<p><em>Remarque pour $a = 0$ :</em> L'équation devient $y'(t) = b$, dont les solutions sont les fonctions affines $y(t) = bt + c$ ($c \in \mathbb{R}$).</p>
+</div>
+
+<h3 id="s3-5">5) Dérivation des fonctions composées</h3>
+
+<div class="block def">
+<span class="label">Règle de composition (Chain Rule)</span>
+Soit $u : I \to J$ dérivable sur $I$, et $v : J \to \mathbb{R}$ dérivable sur $J$.<br>
+La fonction composée $v \circ u$ définie par $(v \circ u)(t) = v(u(t))$ est dérivable sur $I$ et :
+$$(v \circ u)'(t) = v'(u(t)) \times u'(t)$$
+</div>
+
+<div class="block demo">
+<span class="label">Exemples pratiques d'application</span>
+<ul>
+  <li><strong>Exemple 1 :</strong> $v(t) = \mathrm{e}^t$ et $u(t) = at + b$.<br>
+  $(v \circ u)(t) = \mathrm{e}^{at+b} \implies (v \circ u)'(t) = a\mathrm{e}^{at+b}$.</li>
+  <li><strong>Exemple 2 :</strong> $v(t) = \sqrt{t}$ et $u(t) = at + b$ (sur un intervalle où $at+b > 0$).<br>
+  $(v \circ u)(t) = \sqrt{at+b} \implies (v \circ u)'(t) = \dfrac{a}{2\sqrt{at+b}}$.</li>
+  <li><strong>Exemple 3a :</strong> $u(t) = t^2$ et $v(t) = \mathrm{e}^t$.<br>
+  $(v \circ u)(t) = \mathrm{e}^{t^2} \implies (v \circ u)'(t) = 2t \mathrm{e}^{t^2}$.</li>
+  <li><strong>Exemple 3b :</strong> $u(t) = \dfrac{1-t}{1+t}$ sur $]-1, 1[$ et $v(x) = \ln(x)$.<br>
+  $(v \circ u)(t) = \ln\left(\dfrac{1-t}{1+t}\right) = \ln(1-t) - \ln(1+t)$.<br>
+  En dérivant chaque terme composé :
+  $$(v \circ u)'(t) = \frac{-1}{1-t} - \frac{1}{1+t} = \frac{-(1+t) - (1-t)}{(1-t)(1+t)} = \frac{-2}{1-t^2}$$
+  </li>
+</ul>
+</div>
+
+<h3 id="s3-6">6) Primitives et unicité à une constante près</h3>
+
+<div class="block def">
+<span class="label">Définition — Primitive</span>
+Soit $a$ une fonction continue sur un intervalle $I$. Une fonction $A$ est appelée une <strong>primitive</strong> de $a$ sur $I$ si $A$ est dérivable sur $I$ et $\forall t \in I, \, A'(t) = a(t)$.
+</div>
+
+<div class="block theorem">
+<span class="label">Théorème</span>
+Si $A_1$ et $A_2$ sont deux primitives d'une même fonction $a$ sur un intervalle $I$, alors leur différence est constante sur $I$ :
+$$\exists C \in \mathbb{R}, \, \forall t \in I, \quad A_1(t) - A_2(t) = C$$
+</div>
+
+<div class="block demo">
+<span class="label">Démonstration</span>
+Considérons la fonction $D = A_1 - A_2$. Par linéarité de la dérivation :
+$$D'(t) = (A_1 - A_2)'(t) = A_1'(t) - A_2'(t) = a(t) - a(t) = 0$$
+Puisque $I$ est un <strong>intervalle</strong> et que la dérivée de $D$ y est identiquement nulle, $D$ est constante sur $I$. Donc $A_1 - A_2 = C$.
+</div>
+
+<h3 id="s3-7">7) Équation homogène générale $y' = a(t)y$</h3>
+
+<div class="block theorem">
+<span class="label">Théorème</span>
+Soit $I$ un intervalle et $a$ une fonction continue sur $I$.<br>
+Les solutions sur $I$ de l'équation différentielle homogène $y' = a(t)y$ sont les fonctions :
+$$t \mapsto \lambda \mathrm{e}^{A(t)} \quad (\lambda \in \mathbb{R})$$
+où $A$ désigne <strong>une</strong> primitive fixée de $a$ sur $I$.
+</div>
+
+<div class="block demo">
+<span class="label">Démonstration rigoureuse par double implication</span>
+<p><strong>1. Sens direct (vérification) :</strong> Soit $y(t) = \lambda \mathrm{e}^{A(t)}$.<br>
+Par la formule de dérivation des composées : $y'(t) = \lambda A'(t) \mathrm{e}^{A(t)} = \lambda a(t) \mathrm{e}^{A(t)} = a(t)y(t)$.<br>
+Donc toute fonction de cette forme est solution.</p>
+
+<p><strong>2. Réciproque (exhaustivité) :</strong> Soit $y$ une solution quelconque sur $I$ ($y' = a(t)y$).<br>
+Posons $z(t) = \dfrac{y(t)}{\mathrm{e}^{A(t)}} = y(t)\mathrm{e}^{-A(t)}$.<br>
+Dérivons le produit sur l'intervalle $I$ :
+$$z'(t) = y'(t)\mathrm{e}^{-A(t)} + y(t)\big(-A'(t)\mathrm{e}^{-A(t)}\big) = \mathrm{e}^{-A(t)}\big(y'(t) - a(t)y(t)\big)$$
+Comme $y$ est solution, $y'(t) - a(t)y(t) = 0$. Donc $z'(t) = 0$ pour tout $t \in I$.<br>
+Puisque $I$ est un intervalle, $z$ est une constante $\lambda \in \mathbb{R}$.<br>
+D'où $y(t) = \lambda \mathrm{e}^{A(t)}$, ce qui assure l'unicité de la forme des solutions.</p>
+</div>
+
+<div class="block demo">
+<span class="label">Exemples de résolution détaillés</span>
+<ol>
+  <li><strong>Résoudre $y'(t) - (1+t)y(t) = 0$ sur $\mathbb{R}$ :</strong><br>
+  L'équation s'écrit $y' = a(t)y$ avec $a(t) = 1+t$.<br>
+  Une primitive est $A(t) = t + \dfrac{t^2}{2}$.<br>
+  Les solutions sont les fonctions $t \mapsto \lambda \mathrm{e}^{t + \frac{t^2}{2}}$ avec $\lambda \in \mathbb{R}$.</li>
+
+  <li><strong>Résoudre $y'(t) - \ln(t)y(t) = 0$ sur $I = ]0, +\infty[$ :</strong><br>
+  Ici $a(t) = \ln(t)$. Une primitive classique est $A(t) = t\ln(t) - t$ (car $(t\ln t - t)' = \ln t + 1 - 1 = \ln t$).<br>
+  Les solutions sont $y(t) = \lambda \mathrm{e}^{t\ln(t) - t} = \lambda (\mathrm{e}^{\ln(t)})^t \mathrm{e}^{-t} = \lambda t^t \mathrm{e}^{-t}$ avec $\lambda \in \mathbb{R}$.<br>
+  <em>(Rappel : par définition pour $t > 0$ et $x \in \mathbb{R}$, $t^x = \mathrm{e}^{x\ln(t)}$).</em></li>
+
+  <li><strong>Résoudre $y'(t) + \dfrac{1}{t}y(t) = 0$ :</strong><br>
+  <div class="block correction">
+  <span class="label">⚠️ Point fondamental d'analyse — La notion d'intervalle</span>
+  On ne résout <strong>jamais</strong> une équation différentielle sur l'ensemble $\mathbb{R}^* = ]-\infty, 0[ \cup ]0, +\infty[$ d'un seul bloc car ce n'est pas un intervalle !<br>
+  Sur un ensemble non connexe, le fait que $f' = 0$ n'implique pas que $f$ soit constante globale (ex: la fonction signe vaut $1$ sur $\mathbb{R}_+^*$ et $-1$ sur $\mathbb{R}_-^*$, sa dérivée est nulle partout sans être constante).<br>
+  On résout donc impérativement sur $I_1 = ]0, +\infty[$ puis sur $I_2 = ]-\infty, 0[$.
+  </div>
+  Sur $I_1 = ]0, +\infty[$ : $a(t) = -\dfrac{1}{t}$. Une primitive est $A(t) = -\ln(t) = \ln\left(\dfrac{1}{t}\right)$.<br>
+  Les solutions sont : $y(t) = \lambda \mathrm{e}^{-\ln(t)} = \dfrac{\lambda}{t}$ avec $\lambda \in \mathbb{R}$.<br>
+  Sur $I_2 = ]-\infty, 0[$ : $a(t) = -\dfrac{1}{t}$. Une primitive est $A(t) = -\ln(-t) = \ln\left(-\dfrac{1}{t}\right)$.<br>
+  Les solutions sont : $y(t) = \mu \mathrm{e}^{-\ln(-t)} = \dfrac{\mu}{-t} = \dfrac{\lambda'}{t}$ avec $\lambda' \in \mathbb{R}$.
+  </li>
+</ol>
+</div>
+
+<h3 id="s3-8">8) Cas général avec second membre : $y' + a(t)y = b(t)$</h3>
+
+<p>Deux approches complémentaires sont à maîtriser :</p>
+
+<h4>a) Méthode par identification (forme adaptée)</h4>
+<p>Valable lorsque les coefficients sont constants et que le second membre est de nature exponentielle, polynomiale ou trigonométrique. En cas de somme au second membre, on applique la <strong>superposition</strong>.</p>
+<div class="block demo">
+<span class="label">Exemple : $y'(t) + 2y(t) = \mathrm{e}^t + \mathrm{e}^{-2t}$ sur $\mathbb{R}$</span>
+<ol>
+  <li>L'équation homogène $y' + 2y = 0$ donne les solutions $y_0(t) = \lambda \mathrm{e}^{-2t}$.</li>
+  <li>Pour le second membre partiel $b_1(t) = \mathrm{e}^t$, on cherche $y_1(t) = \alpha \mathrm{e}^t$ :
+  $$\alpha \mathrm{e}^t + 2\alpha \mathrm{e}^t = \mathrm{e}^t \iff 3\alpha = 1 \iff \alpha = \frac{1}{3}$$</li>
+  <li>Pour $b_2(t) = \mathrm{e}^{-2t}$ (terme en résonance car $-2$ est racine caractéristique), on cherche sous la forme $y_2(t) = \beta t \mathrm{e}^{-2t}$ :
+  $$y_2'(t) = \beta \mathrm{e}^{-2t} - 2\beta t \mathrm{e}^{-2t}$$
+  $$y_2'(t) + 2y_2(t) = (\beta \mathrm{e}^{-2t} - 2\beta t \mathrm{e}^{-2t}) + 2\beta t \mathrm{e}^{-2t} = \beta \mathrm{e}^{-2t}$$
+  On identifie $\beta \mathrm{e}^{-2t} = \mathrm{e}^{-2t} \iff \beta = 1$.</li>
+  <li><strong>Solution générale :</strong> $y(t) = \dfrac{1}{3}\mathrm{e}^t + t\mathrm{e}^{-2t} + \lambda \mathrm{e}^{-2t}$ ($\lambda \in \mathbb{R}$).</li>
+</ol>
+</div>
+
+<h4>b) Méthode de variation de la constante (Portée générale)</h4>
+
+<div class="block retenir">
+<span class="label">Méthode de la variation de la constante</span>
+Soit à résoudre l'équation $y'(t) + a(t)y(t) = b(t) \quad (*)$ sur un intervalle $I$.<br>
+Soit $y_0$ <strong>une</strong> solution non identiquement nulle de l'équation homogène $y' + a(t)y = 0$ (par exemple $y_0(t) = \mathrm{e}^{-A(t)}$, qui ne s'annule jamais sur $I$).<br>
+On cherche une solution particulière de $(*)$ sous la forme :
+$$y_p(t) = \lambda(t)y_0(t)$$
+où $\lambda$ est une fonction inconnue dérivable sur $I$.
+</div>
+
+<div class="block demo">
+<span class="label">Pourquoi le terme en $\lambda(t)$ sans dérivée disparaît-il systématiquement ?</span>
+Substituons $y_p$ dans l'équation différentielle complète $(*)$ :
+<div class="chain">
+  <div class="step"><span>$y_p'(t) + a(t)y_p(t) = b(t)$</span><span class="why">équation complète avec second membre</span></div>
+  <div class="step"><span>$[\lambda'(t)y_0(t) + \lambda(t)y_0'(t)] + a(t)[\lambda(t)y_0(t)] = b(t)$</span><span class="why">dérivation du produit $y_p = \lambda y_0$</span></div>
+  <div class="step"><span>$\lambda'(t)y_0(t) + \lambda(t)\underbrace{(y_0'(t) + a(t)y_0(t))}_{= 0} = b(t)$</span><span class="why">par factorisation de $\lambda(t)$</span></div>
+</div>
+Puisque $y_0$ est solution de l'équation homogène, la quantité entre parenthèses est identiquement nulle !<br>
+L'équation différentielle se simplifie en une relation directe sur la dérivée $\lambda'$ :
+$$\lambda'(t)y_0(t) = b(t) \iff \lambda'(t) = \frac{b(t)}{y_0(t)}$$
+Puisque $y_0(t) = \mathrm{e}^{-A(t)} \neq 0$ partout, la fonction $\dfrac{b(t)}{y_0(t)} = b(t)\mathrm{e}^{A(t)}$ est continue sur $I$. Elle admet donc une primitive $\lambda(t) = \int b(t)\mathrm{e}^{A(t)} \, \mathrm{d}t$.<br>
+Une solution particulière est alors $y_p(t) = \lambda(t)y_0(t)$, ce qui achève la résolution complète.
+</div>
+</section>
+
+<section id="s4">
+<h2>IV. Compléments sur le calcul de primitives</h2>
+
+<p>Soit $f$ une fonction continue sur un intervalle $I$.</p>
+
+<div class="block correction">
+<span class="label">⚠️ Précision sur les notations de calcul intégral</span>
+Dans les notes de cours, la notation $\int^x f(t)\,\mathrm{d}t$ est employée pour désigner <em>une</em> primitive par rapport à $x$. En prépa, on distingue rigoureusement :
+<ul>
+  <li>L'<strong>intégrale définie</strong> $\displaystyle\int_a^b f(t)\,\mathrm{d}t$, qui est un <em>nombre réel</em> représentant l'aire sous la courbe (si $f \geq 0$).</li>
+  <li>L'<strong>intégrale fonctionnelle</strong> $\displaystyle x \mapsto \int_a^x f(t)\,\mathrm{d}t$, qui est <em>l'unique primitive</em> de $f$ sur $I$ qui s'annule en $a$.</li>
+  <li>L'<strong>intégrale indéfinie</strong> $\displaystyle\int f(t)\,\mathrm{d}t$, qui représente la famille complète des primitives à une constante additive près.</li>
+</ul>
+</div>
+
+<div class="block remark">
+<span class="label">Règle géométrique du schéma</span>
+L'intégrale définie d'une fonction continue positive entre deux bornes a et b correspond à la mesure de l'aire sous la courbe délimitée verticalement par t = a et t = b, et horizontalement par l'axe des abscisses.
+</div>
+
+<figure>
+<svg viewBox="0 0 460 230" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+  <!-- Axes -->
+  <line x1="30" y1="190" x2="420" y2="190" stroke="#1c2430" stroke-width="1.5" marker-end="url(#arrow-riemann)"></line>
+  <line x1="60" y1="210" x2="60" y2="20" stroke="#1c2430" stroke-width="1.5" marker-end="url(#arrow-riemann)"></line>
+  <defs>
+    <marker id="arrow-riemann" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto">
+      <path d="M0,0 L6,2 L0,4 Z" fill="#1c2430"></path>
+    </marker>
+    <!-- Pattern de hachures conforme au carnet -->
+    <pattern id="hatch" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#3b6fd8" stroke-width="1.2"></line>
+    </pattern>
+  </defs>
+  
+  <!-- Surface sous la courbe hachurée entre a et b -->
+  <path d="M 130 190 L 130 110 Q 180 50, 230 90 T 320 85 L 320 190 Z" fill="#e9f1fd"></path>
+  <path d="M 130 190 L 130 110 Q 180 50, 230 90 T 320 85 L 320 190 Z" fill="url(#hatch)" stroke="#3b6fd8" stroke-width="1"></path>
+  
+  <!-- Courbe f(t) -->
+  <path d="M 70 145 Q 110 125, 130 110 Q 180 50, 230 90 T 320 85 Q 360 85, 390 60" fill="none" stroke="#0f2b4c" stroke-width="2.4"></path>
+  <text x="395" y="60" font-size="14" fill="#0f2b4c" font-weight="bold">C_f</text>
+  
+  <!-- Bornes a et b -->
+  <line x1="130" y1="187" x2="130" y2="193" stroke="#1c2430" stroke-width="2"></line>
+  <text x="130" y="210" font-size="13" font-weight="600" text-anchor="middle">a</text>
+  
+  <line x1="320" y1="187" x2="320" y2="193" stroke="#1c2430" stroke-width="2"></line>
+  <text x="320" y="210" font-size="13" font-weight="600" text-anchor="middle">b</text>
+  
+  <text x="225" y="145" font-size="13" fill="#0f2b4c" font-weight="600" text-anchor="middle">Aire hachurée = $\int_a^b f(t)\,\mathrm{d}t$</text>
+</svg>
+<figcaption>Fig. 2 — Interprétation géométrique de l'intégrale définie comme aire sous la courbe $\mathcal{C}_f$.</figcaption>
+</figure>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. [Définition / Hypothèse clé] Pourquoi est-il indispensable que le domaine de résolution d'une équation différentielle soit un <em>intervalle</em> pour que la solution de $y' = a(t)y$ soit uniquement de la forme $\lambda \mathrm{e}^{A(t)}$ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La preuve repose sur le théorème fondamental : « une fonction dont la dérivée est nulle est constante ». Ce résultat n'est vrai que sur un <strong>intervalle</strong> (ensemble connexe de $\mathbb{R}$). Sur une réunion d'intervalles disjoints (comme $\mathbb{R}^* = ]-\infty, 0[ \cup ]0, +\infty[$), la fonction peut prendre une constante $\lambda_1$ sur $]0, +\infty[$ et une autre constante distincte $\lambda_2$ sur $]-\infty, 0[$ tout en ayant une dérivée identiquement nulle partout où elle est définie.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. [Application directe] Résoudre la récurrence $u_{n+1} = 3u_n + 4$ avec la condition initiale $u_0 = 1$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+L'équation homogène associée est $u_{n+1} = 3u_n$, d'où la solution générale homogène $v_n = \lambda 3^n$. Une solution particulière constante $\ell$ vérifie $\ell = 3\ell + 4 \iff -2\ell = 4 \iff \ell = -2$. La solution générale est donc $u_n = \lambda 3^n - 2$. Avec $u_0 = 1$ : $\lambda 3^0 - 2 = 1 \iff \lambda = 3$. Le terme général est donc $u_n = 3 \times 3^n - 2 = 3^{n+1} - 2$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. [Compréhension conceptuelle] Dans la méthode de variation de la constante $y_p(t) = \lambda(t)y_0(t)$, pourquoi le terme contenant $\lambda(t)$ sans dérivée disparaît-il toujours lors de l'injection dans l'équation différentielle ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+En dérivant le produit, on obtient $y_p' + ay_p = \lambda' y_0 + \lambda y_0' + a\lambda y_0 = \lambda' y_0 + \lambda(y_0' + ay_0)$. Or, par définition même du choix de la fonction de base, $y_0$ est <strong>solution de l'équation homogène</strong>, ce qui implique rigoureusement $y_0' + ay_0 = 0$. Le crochet s'annule donc identiquement, ne laissant subsister que le terme dérivé $\lambda'(t)y_0(t)$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. [Piège classique] Quelle forme particulière doit-on poser pour trouver une solution de l'équation différentielle $y' + 2y = \mathrm{e}^{-2t}$ ? Pourquoi la forme $\alpha \mathrm{e}^{-2t}$ échoue-t-elle ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+C'est le cas de <strong>résonance</strong> : comme $-2$ est la racine caractéristique de l'équation homogène, la fonction $t \mapsto \mathrm{e}^{-2t}$ annule l'opérateur $y' + 2y$ (en injectant $\alpha \mathrm{e}^{-2t}$, on trouve $0 = \mathrm{e}^{-2t}$, ce qui est impossible). Il faut multiplier par la variable et chercher une solution particulière sous la forme $y_p(t) = \beta t \mathrm{e}^{-2t}$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. [Synthèse structurelle] Quel est le lien mathématique profond entre la résolution de la suite $u_{n+1} = a u_n + b$ et celle de l'équation différentielle $y' = ay + b$ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Les deux problèmes relèvent de la <strong>linéarité</strong> d'ordre 1. Dans les deux cas, les solutions du problème avec second membre forment un <strong>espace affine</strong> dont la direction est l'espace vectoriel des solutions de l'équation homogène associée. L'ensemble des solutions s'obtient de façon universelle par la somme :
+$$\text{Solution Générale} = \text{Solution Particulière du problème complet} + \text{Solution Générale du problème homogène}$$
+Le comportement homogène est à croissance géométrique ($a^n$) pour le cas discret et exponentielle ($\mathrm{e}^{at}$) pour le cas continu.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. [Définition / Hypothèse clé] Qu'appelle-t-on « équation homogène associée » à une équation différentielle linéaire $y'(t) = a(t)y(t) + b(t)$, et pourquoi ce terme est-il approprié ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+C'est l'équation obtenue en annulant le second membre, c'est-à-dire $y'(t) = a(t)y(t)$. Le terme « homogène » vient du fait que tous les termes de l'équation dépendent alors linéairement de l'inconnue $y$ (aucun terme constant ne « dépareille » l'équation) : si $y$ est solution, alors $\lambda y$ l'est aussi pour tout $\lambda \in \mathbb{R}$, ce qui n'est pas vrai dès qu'un second membre non nul est présent.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. [Application directe] En utilisant la formule de dérivation des fonctions composées, calculer la dérivée de $f(t) = \ln\left(\dfrac{1-t}{1+t}\right)$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+On écrit $f(t) = \ln(1-t) - \ln(1+t)$. En dérivant chaque terme composé séparément :
+$$f'(t) = \frac{-1}{1-t} - \frac{1}{1+t} = \frac{-(1+t) - (1-t)}{(1-t)(1+t)} = \frac{-2}{1-t^2}$$</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. [Piège classique] Quelle confusion doit-on absolument éviter entre l'intégrale indéfinie $\int f(t)\,\mathrm{d}t$ et l'intégrale définie $\int_a^b f(t)\,\mathrm{d}t$ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+L'intégrale indéfinie $\int f(t)\,\mathrm{d}t$ désigne toute la <strong>famille de fonctions</strong> primitives de $f$ (définie à une constante additive près) : ce n'est pas un nombre. L'intégrale définie $\int_a^b f(t)\,\mathrm{d}t$, elle, est un <strong>nombre réel</strong> (l'aire algébrique sous la courbe entre $a$ et $b$). Confondre les deux — par exemple en traitant $\int^x f(t)\,\mathrm{d}t$ comme un nombre plutôt que comme une fonction de $x$ — est une erreur fréquente et pénalisée.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. [Compréhension conceptuelle] Pourquoi la démonstration de l'égalité $S_1 = S_2$ (structure de l'ensemble des solutions) exige-t-elle une preuve par <strong>double inclusion</strong> plutôt qu'un raisonnement direct ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$S_1 = S_2$ est une égalité entre deux <strong>ensembles</strong>. Pour l'établir rigoureusement, il faut montrer que tout élément de $S_1$ appartient à $S_2$ ($S_1 \subset S_2$), <strong>puis</strong> que tout élément de $S_2$ appartient à $S_1$ ($S_2 \subset S_1$). Montrer une seule des deux inclusions ne prouverait qu'un lien d'appartenance dans un seul sens, pas l'égalité complète des deux ensembles.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. [Synthèse] Énoncer le principe de superposition et expliquer son intérêt pratique pour résoudre une équation avec un second membre complexe.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Si le second membre se décompose en $b = b_1 + b_2$, et si $y_1$ est solution de $y' = ay + b_1$ tandis que $y_2$ est solution de $y' = ay + b_2$, alors $y_1 + y_2$ est solution de l'équation complète $y' = ay + (b_1 + b_2)$. L'intérêt pratique est de pouvoir décomposer un second membre compliqué (par exemple $2^n + 1$) en morceaux plus simples à traiter séparément, puis de sommer les solutions particulières obtenues — comme illustré dans l'exemple sur $u_{n+1} = -u_n + 2^n + 1$.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources &amp; Références</h2>
+<ul class="sources">
+  <li>Programme officiel de Mathématiques en CPGE PCSI — Ministère de l'Enseignement Supérieur et de la Recherche.</li>
+  <li>Notes manuscrites de cours du 14/09/2026.</li>
+  <li>Ouvrages de référence : <em>H-Prépa Mathématiques PCSI (Analyse 1ère année)</em>, <em>Tout-en-un Mathématiques PCSI (Dunod)</em>.</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>

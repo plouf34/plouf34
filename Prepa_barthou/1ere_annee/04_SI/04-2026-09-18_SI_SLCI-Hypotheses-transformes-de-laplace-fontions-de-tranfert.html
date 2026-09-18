@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SI — TD : Modèle de connaissance des SLCI — chauffage d'une pièce</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+  --blank-bg:#fbeaea; --blank-bd:#c0392b;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.9rem; margin:0 0 .2rem 0;}
+h2{font-size:1.35rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.1rem; margin-top:1.6rem;}
+h4{font-size:1rem; margin-top:1.2rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:265px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc ol ol{margin:.15rem 0 .4rem 1rem;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+.blank{background:var(--blank-bg); border-color:var(--blank-bd); border-style:dashed;} .blank>.label{color:var(--blank-bd);}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+.chain{margin:.7rem 0; padding-left:.3rem;}
+.chain .step{display:flex; align-items:baseline; gap:.6rem; margin:.25rem 0; flex-wrap:wrap;}
+.chain .step .why{color:#7a7a72; font-size:.82rem; font-style:italic;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+table{border-collapse:collapse; margin:1rem 0; width:100%;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.92rem;}
+th{background:#f3f2ee;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+.footnote{font-size:.8rem; color:#7a7a72; border-top:1px dashed var(--line); margin-top:.6rem; padding-top:.4rem;}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.5rem;} h2{font-size:1.15rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">Énoncé — système de chauffage d'une pièce</a></li>
+  <li class="top"><a href="#s2">Modèle de connaissance de la pièce</a></li>
+  <li class="top"><a href="#s3">Vérification des hypothèses SLCI</a></li>
+  <li class="top"><a href="#s4">Modèle dans le domaine de Laplace</a></li>
+  <li class="top"><a href="#corrige">Corrigé proposé (non fourni par le professeur)</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de TD</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>TD — Modèle de connaissance des SLCI : chauffage d'une pièce</h1>
+<div class="meta">SI (Sciences Industrielles) — Modèle de connaissance, hypothèses SLCI, transformée de Laplace, fonction de transfert · MPSI/PCSI · CPGE Barthou / Pau · mis au propre le 18/09/2026</div>
+</header>
+
+<div class="block blank">
+<span class="label">⚠️ Nature du document</span>
+Ce PDF est une <strong>feuille de TD vierge</strong> (« Exercice 1 »), distincte des trois documents « AUTOMATIQUE – SLCI » précédents (gabarit et numérotation propres à ce cours). L'énoncé, les schémas fournis et les deux équations données sont transcrits <strong>tels quels</strong> ci-dessous ; les emplacements où le document original est resté vierge (à compléter en classe) sont signalés par un encart rouge en tirets. Une proposition de corrigé, clairement identifiée comme <strong>non fournie par le professeur</strong>, est présentée séparément en fin de document.
+</div>
+
+<section id="s1">
+<h2>Énoncé — système de chauffage d'une pièce</h2>
+<p>Le système peut être assimilé à un système qui commande la température : commande et température sont des grandeurs analogiques — le système est bien asservi en température.</p>
+
+<figure>
+<svg viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<line x1="330" y1="30" x2="330" y2="70" stroke="#2fa365" stroke-width="1.6" marker-end="url(#aS)"/>
+<line x1="330" y1="30" x2="70" y2="30" stroke="#2fa365" stroke-width="1.6"/>
+<line x1="70" y1="30" x2="70" y2="98" stroke="#2fa365" stroke-width="1.6" marker-end="url(#aS)"/>
+<text x="400" y="24" font-size="11" fill="#2fa365">Température de la pièce</text>
+
+<rect x="30" y="100" width="90" height="40" fill="#eaf2fd" stroke="#3b6fd8"/>
+<text x="75" y="124" text-anchor="middle" font-size="11" font-weight="600">Acquérir</text>
+<text x="10" y="95" font-size="9">Température</text>
+<text x="10" y="106" font-size="9">souhaitée</text>
+<line x1="0" y1="120" x2="28" y2="120" stroke="#0f2b4c" stroke-width="1.6" marker-end="url(#aS)"/>
+<text x="75" y="150" text-anchor="middle" font-size="8">Module dialogue / capteur T°</text>
+
+<line x1="120" y1="120" x2="150" y2="120" stroke="#0f2b4c" stroke-width="1.6" marker-end="url(#aS)"/>
+<rect x="150" y="100" width="80" height="40" fill="#eaf2fd" stroke="#3b6fd8"/>
+<text x="190" y="124" text-anchor="middle" font-size="11" font-weight="600">Traiter</text>
+<text x="190" y="150" text-anchor="middle" font-size="8">Carte de commande</text>
+
+<line x1="230" y1="120" x2="260" y2="120" stroke="#0f2b4c" stroke-width="1.6" marker-end="url(#aS)"/>
+<rect x="260" y="100" width="100" height="40" fill="#eaf2fd" stroke="#3b6fd8"/>
+<text x="310" y="124" text-anchor="middle" font-size="11" font-weight="600">Communiquer</text>
+
+<line x1="360" y1="120" x2="360" y2="170" stroke="#0f2b4c" stroke-width="1.6" marker-end="url(#aS)"/>
+<text x="368" y="150" font-size="9">commande</text>
+
+<text x="20" y="185" font-size="9">Energie électrique</text>
+<line x1="0" y1="200" x2="28" y2="200" stroke="#333" stroke-width="1.6" marker-end="url(#aS)"/>
+<rect x="30" y="180" width="80" height="40" fill="#f1f1ef" stroke="#8b8b85"/>
+<text x="70" y="204" text-anchor="middle" font-size="11" font-weight="600">Alimenter</text>
+
+<line x1="110" y1="200" x2="140" y2="200" stroke="#333" stroke-width="1.6" marker-end="url(#aS)"/>
+<text x="112" y="192" font-size="8">E.E. adaptée</text>
+<rect x="140" y="180" width="80" height="40" fill="#f1f1ef" stroke="#8b8b85"/>
+<text x="180" y="204" text-anchor="middle" font-size="11" font-weight="600">Distribuer</text>
+
+<line x1="220" y1="200" x2="250" y2="200" stroke="#333" stroke-width="1.6" marker-end="url(#aS)"/>
+<text x="222" y="192" font-size="8">E.E. régulée</text>
+<rect x="250" y="180" width="90" height="40" fill="#f1f1ef" stroke="#8b8b85"/>
+<text x="295" y="200" text-anchor="middle" font-size="11" font-weight="600">Convertir</text>
+<text x="295" y="214" text-anchor="middle" font-size="8">Résistance</text>
+
+<line x1="340" y1="200" x2="390" y2="200" stroke="#333" stroke-width="1.6" marker-end="url(#aS)"/>
+<text x="342" y="192" font-size="8">Energie thermique</text>
+
+<rect x="390" y="160" width="100" height="80" fill="#fde9d0" stroke="#c98a12"/>
+<text x="440" y="204" text-anchor="middle" font-size="12" font-weight="700">Agir</text>
+<text x="440" y="218" text-anchor="middle" font-size="8">Radiateur</text>
+<line x1="360" y1="175" x2="388" y2="185" stroke="#0f2b4c" stroke-width="1.4"/>
+
+<text x="380" y="255" font-size="9">Pièce non chauffée</text>
+<line x1="380" y1="240" x2="392" y2="240" stroke="#333" stroke-width="1.4"/>
+<line x1="490" y1="200" x2="550" y2="200" stroke="#333" stroke-width="1.8" marker-end="url(#aS)"/>
+<text x="555" y="195" font-size="10">Pièce chauffée</text>
+<defs><marker id="aS" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 1 — Structure fonctionnelle : chaîne d'information (Acquérir–Traiter–Communiquer, avec retour de la température de la pièce) pilotant la chaîne d'énergie (Alimenter–Distribuer–Convertir–Agir), qui chauffe la pièce (matière d'œuvre).</figcaption>
+</figure>
+
+<figure>
+<svg viewBox="0 0 460 100" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<rect x="160" y="30" width="140" height="45" fill="#f2ecfd" stroke="#7c4fd6" stroke-width="1.5"/>
+<text x="230" y="57" text-anchor="middle" font-size="12" font-weight="700">Chauffage régulé</text>
+<line x1="20" y1="52" x2="158" y2="52" stroke="#0f2b4c" stroke-width="2" marker-end="url(#aT)"/>
+<text x="20" y="40" font-size="11">Température souhaitée</text>
+<line x1="302" y1="52" x2="440" y2="52" stroke="#0f2b4c" stroke-width="2" marker-end="url(#aT)"/>
+<text x="440" y="40" font-size="11" text-anchor="end">Température réelle</text>
+<defs><marker id="aT" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#0f2b4c"/></marker></defs>
+</svg>
+<figcaption>Fig. 2 — Vue « boîte noire » du système asservi complet.</figcaption>
+</figure>
+
+</section>
+
+<section id="s2">
+<h2>Modèle de connaissance de la pièce</h2>
+
+<figure>
+<svg viewBox="0 0 460 150" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<line x1="230" y1="20" x2="230" y2="48" stroke="#c0392b" stroke-width="1.8" marker-end="url(#aU)"/>
+<text x="230" y="14" text-anchor="middle" font-size="11" fill="#c0392b">Température extérieure</text>
+<rect x="160" y="50" width="140" height="50" fill="#f1f1ef" stroke="#8b8b85"/>
+<text x="230" y="80" text-anchor="middle" font-size="13" font-weight="700">Pièce</text>
+<line x1="20" y1="75" x2="158" y2="75" stroke="#0f2b4c" stroke-width="2" marker-end="url(#aU)"/>
+<text x="20" y="63" font-size="10">Puissance thermique reçue</text>
+<line x1="302" y1="75" x2="440" y2="75" stroke="#0f2b4c" stroke-width="2" marker-end="url(#aU)"/>
+<text x="440" y="63" font-size="10" text-anchor="end">Température réelle</text>
+<defs><marker id="aU" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 3 — Modèle de connaissance de la pièce : la température extérieure est une perturbation subie, non maîtrisée (cf. document 2/3, Fig. 2).</figcaption>
+</figure>
+
+<p>Le comportement d'une pièce chauffée dont les murs sont mal isolés peut être décrit par les équations suivantes :</p>
+<div class="block def">
+<span class="label">Équation de la chaleur du système « pièce »</span>
+$$C\,\frac{dT(t)}{dt} = P_r(t) - P_p(t)$$
+$C$ : capacité thermique de la pièce (J/K) ; $P_r(t)$ : puissance thermique reçue (W) ; $P_p(t)$ : puissance thermique perdue (W) ; $T(t)$ : température de la pièce (K).
+</div>
+<div class="block def">
+<span class="label">Pertes de puissance à travers les murs</span>
+$$P_p(t) = h\big(T(t)-T_{ext}(t)\big)$$
+$h$ : conductance thermique du mur (W/K) ; $T_{ext}(t)$ : température extérieure (K).
+</div>
+
+<p>La combinaison de ces deux équations donne l'équation différentielle suivante :</p>
+<div class="block blank">
+<span class="label">Emplacement vierge dans le document source</span>
+« Équation obtenue : » — case laissée vide dans le PDF (à établir en classe à partir des deux équations ci-dessus).
+</div>
+
+<p>On pose $\Delta T(t) = T(t)-T_0$ la température de la pièce relative, et $\Delta T_{ext}(t) = T_{ext}(t)-T_0$ la température extérieure relative, $T_0$ étant la température initiale de la salle et extérieure, supposée identique.</p>
+
+</section>
+
+<section id="s3">
+<h2>Vérification des hypothèses SLCI</h2>
+<div class="block blank">
+<span class="label">Emplacements vierges dans le document source</span>
+Trois puces sans justification dans le PDF original :
+<ul>
+<li>Linéarité : —</li>
+<li>Continue : —</li>
+<li>Invariant : —</li>
+</ul>
+</div>
+</section>
+
+<section id="s4">
+<h2>Modèle du SLCI dans le domaine de Laplace</h2>
+<div class="block def">
+<span class="label">Définition de la transformée de Laplace de fonctions usuelles</span>
+Soit $x$ une fonction continue sur l'intervalle $[0,+\infty[$ :
+$$x(t) \xrightarrow{\mathcal{L}} X(p) = \int_0^{+\infty} x(t)\,e^{-pt}\,dt, \qquad p=\sigma+j\omega,\ p\in\mathbb{C}$$
+</div>
+
+<div class="block blank">
+<span class="label">Emplacement vierge dans le document source</span>
+« Application à la pièce » — espace laissé vide dans le PDF (à établir en classe).
+</div>
+
+<figure>
+<svg viewBox="0 0 460 100" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<rect x="150" y="30" width="70" height="40" fill="#f2ecfd" stroke="#7c4fd6"/>
+<text x="185" y="55" text-anchor="middle" font-size="13" font-weight="700">G(p)</text>
+<line x1="20" y1="50" x2="148" y2="50" stroke="#0f2b4c" stroke-width="1.8" marker-end="url(#aV)"/>
+<text x="20" y="40" font-size="10">Pr(p)</text>
+<line x1="222" y1="50" x2="300" y2="50" stroke="#0f2b4c" stroke-width="1.8" marker-end="url(#aV)"/>
+<text x="235" y="40" font-size="10">ΔT₁(p)</text>
+
+<rect x="150" y="60" width="0" height="0"/>
+<defs><marker id="aV" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+</figure>
+<figure>
+<svg viewBox="0 0 460 100" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<rect x="150" y="30" width="70" height="40" fill="#f2ecfd" stroke="#7c4fd6"/>
+<text x="185" y="55" text-anchor="middle" font-size="13" font-weight="700">H(p)</text>
+<line x1="10" y1="50" x2="148" y2="50" stroke="#0f2b4c" stroke-width="1.8" marker-end="url(#aW)"/>
+<text x="10" y="40" font-size="10">ΔText(p)</text>
+<line x1="222" y1="50" x2="300" y2="50" stroke="#0f2b4c" stroke-width="1.8" marker-end="url(#aW)"/>
+<text x="235" y="40" font-size="10">ΔT₂(p)</text>
+<defs><marker id="aW" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 4 — Fonctions de transfert demandées : $G(p)=\Delta T_1(p)/P_r(p)$ et $H(p)=\Delta T_2(p)/\Delta T_{ext}(p)$ (blocs donnés vides dans le PDF).</figcaption>
+</figure>
+</section>
+
+<section id="corrige">
+<h2>Corrigé proposé <span style="font-size:.7em; color:#7a7a72; font-weight:400;">(non fourni par le professeur — proposition établie pour cette mise au propre)</span></h2>
+
+<div class="block demo">
+<span class="label">Équation obtenue</span>
+<div class="chain">
+<div class="step"><span>$C\,\dfrac{dT(t)}{dt} = P_r(t) - P_p(t) = P_r(t) - h\big(T(t)-T_{ext}(t)\big)$</span></div>
+<div class="step"><span>$\Rightarrow\ C\,\dfrac{dT(t)}{dt} + h\,T(t) = P_r(t) + h\,T_{ext}(t)$</span></div>
+<div class="step"><span>Avec $T=T_0+\Delta T$, $T_{ext}=T_0+\Delta T_{ext}$ : $C\,\dfrac{d\Delta T}{dt} + h\,T_0+h\,\Delta T = P_r + h\,T_0 + h\,\Delta T_{ext}$</span><span class="why">les termes constants $hT_0$ s'annulent des deux côtés</span></div>
+<div class="step"><span>$\boxed{C\,\dfrac{d\Delta T(t)}{dt} + h\,\Delta T(t) = P_r(t) + h\,\Delta T_{ext}(t)}$</span><span class="why">équation différentielle linéaire du 1<sup>er</sup> ordre à coefficients constants</span></div>
+</div>
+</div>
+
+<div class="block demo">
+<span class="label">Vérification des hypothèses SLCI</span>
+<ul>
+<li><strong>Linéarité</strong> : l'équation obtenue est une équation différentielle <strong>linéaire</strong> (à coefficients constants $C$ et $h$) reliant $\Delta T$ aux deux entrées $P_r$ et $\Delta T_{ext}$ — aucun terme en produit ou en puissance des inconnues. Le principe de superposition (doc. 2/3, Théorème 1) s'applique donc.</li>
+<li><strong>Continue</strong> : $T(t)$, $T_{ext}(t)$ et $P_r(t)$ sont des grandeurs physiques (température, puissance) qui varient continûment dans le temps : le système est <strong>continu</strong> au sens de la Définition 11 (doc. 2/3).</li>
+<li><strong>Invariant</strong> : $C$ (capacité thermique) et $h$ (conductance du mur) sont supposées constantes dans le temps : le système est <strong>invariant</strong>, du moins en première approximation — comme le note le cours (doc. 2/3, §2.4) pour l'exemple du four, l'isolation d'un mur réel peut en toute rigueur se dégrader sur le long terme, ce qui remettrait en cause cette hypothèse à très long terme.</li>
+</ul>
+</div>
+
+<div class="block demo">
+<span class="label">Application à la pièce — fonctions de transfert</span>
+<div class="chain">
+<div class="step"><span>Transformée de Laplace (conditions initiales nulles : $\Delta T(0)=0$ par construction) :</span></div>
+<div class="step"><span>$C\,p\,\Delta T(p) + h\,\Delta T(p) = P_r(p) + h\,\Delta T_{ext}(p)$</span></div>
+<div class="step"><span>$\Rightarrow\ (Cp+h)\,\Delta T(p) = P_r(p) + h\,\Delta T_{ext}(p)$</span></div>
+<div class="step"><span>Par superposition, on isole l'effet de chaque entrée :</span><span class="why">Théorème 1, doc. 2/3</span></div>
+<div class="step"><span>$G(p) = \dfrac{\Delta T_1(p)}{P_r(p)} = \dfrac{1}{Cp+h}$</span></div>
+<div class="step"><span>$H(p) = \dfrac{\Delta T_2(p)}{\Delta T_{ext}(p)} = \dfrac{h}{Cp+h}$</span></div>
+<div class="step"><span>et $\Delta T(p) = \Delta T_1(p) + \Delta T_2(p) = G(p)\,P_r(p) + H(p)\,\Delta T_{ext}(p)$</span><span class="why">réponse totale = somme des réponses à chaque entrée prise isolément</span></div>
+</div>
+</div>
+
+<div class="block retenir">
+<span class="label">À retenir</span>
+Les deux fonctions de transfert $G(p)$ et $H(p)$ sont de la forme canonique du 1<sup>er</sup> ordre $\dfrac{K}{1+\tau p}$ : en factorisant par $h$, $G(p)=\dfrac{1/h}{1+(C/h)p}$ (gain $1/h$, constante de temps $\tau=C/h$) et $H(p)=\dfrac{1}{1+(C/h)p}$ (gain unitaire, même constante de temps $\tau=C/h$).
+</div>
+
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de TD</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Dans la structure fonctionnelle (Fig. 1), quelle grandeur est mesurée et reboucle sur le bloc « Acquérir » ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La <strong>température de la pièce</strong> : c'est la grandeur asservie, mesurée en continu et renvoyée vers la chaîne d'information pour être comparée à la température souhaitée.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Quelle est la différence entre $T(t)$ et $\Delta T(t)$ dans ce modèle ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$T(t)$ est la température absolue de la pièce (en kelvins). $\Delta T(t) = T(t)-T_0$ est la température <strong>relative</strong> à la température initiale $T_0$ (supposée commune à la pièce et à l'extérieur) : c'est une variable d'écart, utile pour obtenir des conditions initiales nulles et donc une équation homogène en $\Delta T$, exploitable directement par transformée de Laplace.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Calculer $G(p)$ et $H(p)$ pour $C=500\,\text{J/K}$ et $h=25\,\text{W/K}$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$G(p)=\dfrac{1}{500p+25}=\dfrac{0{,}04}{1+20p}$ et $H(p)=\dfrac{25}{500p+25}=\dfrac{1}{1+20p}$ (constante de temps $\tau=C/h=20\,\text{s}$).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Si la pièce est en régime permanent ($\Delta T$ constant) sans chauffage ($P_r=0$), exprimer $\Delta T$ en fonction de $\Delta T_{ext}$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+En régime permanent, $d\Delta T/dt=0$, donc l'équation devient $h\,\Delta T = h\,\Delta T_{ext}$, soit $\Delta T=\Delta T_{ext}$ : sans apport de puissance, la pièce finit par s'équilibrer exactement à la température extérieure relative — résultat physiquement attendu (pas de source de chaleur interne, murs à conductance finie mais non nulle).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi la conductance thermique $h$ apparaît-elle à la fois dans l'équation d'origine et dans le gain de $H(p)$, alors qu'elle n'apparaît qu'indirectement (via $C/h$) dans la constante de temps de $G(p)$ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$h$ intervient deux fois dans l'équation : comme coefficient du terme $h\Delta T$ (perte thermique, lié à la dynamique du système, donc à la constante de temps $\tau=C/h$ commune aux deux fonctions de transfert) et comme coefficient multiplicatif direct du second terme d'entrée $h\Delta T_{ext}$ (couplage direct de la perturbation extérieure). C'est ce second rôle qui explique le gain $h/h=1$ de $H(p)$ en régime permanent (cf. question 4), alors que $G(p)$ a un gain $1/h$ different, propre à l'action du chauffage.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passerait-il sur les fonctions de transfert $G(p)$ et $H(p)$ si les murs de la pièce étaient parfaitement isolés ($h\to 0$) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$G(p)\to \dfrac{1}{Cp}$ : la pièce devient un pur intégrateur de la puissance reçue (plus aucune fuite thermique ne s'oppose à l'accumulation de chaleur, la température croît indéfiniment sous $P_r$ constant). $H(p)\to 0$ : la température extérieure n'a plus aucune influence sur la température intérieure, ce qui est cohérent avec une isolation parfaite.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : peut-on affirmer que ce système est linéaire simplement parce que « température » et « puissance » sont des grandeurs physiques usuelles ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — la linéarité ne se déduit pas de la nature des grandeurs physiques en jeu, mais de la <strong>forme mathématique</strong> de l'équation qui les relie (§ Vérification des hypothèses SLCI). Ici, c'est parce que l'équation $C\,d\Delta T/dt + h\,\Delta T = P_r + h\,\Delta T_{ext}$ ne contient que des termes du premier degré en les inconnues, à coefficients constants, que le système est linéaire — un modèle de pièce avec pertes non linéaires (par exemple rayonnement en $T^4$) donnerait un système non linéaire malgré les mêmes grandeurs physiques.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : pourquoi doit-on vérifier que les conditions initiales sont nulles avant d'écrire $G(p)=\Delta T_1(p)/P_r(p)$ directement à partir de l'équation transformée ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Comme au document 3/3 (§5.1, question 2), la transformée de Laplace d'une dérivée introduit normalement un terme en $\Delta T(0)$. Ici, ce terme est bien nul <strong>par construction</strong> : $\Delta T(t)=T(t)-T_0$ est défini de façon à valoir 0 à l'instant initial (température de la pièce égale à sa propre valeur initiale). C'est précisément l'intérêt d'introduire la variable d'écart $\Delta T$ plutôt que de travailler directement sur $T(t)$, dont la valeur initiale $T_0$ n'est en général pas nulle.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : reliez la structure fonctionnelle chaîne d'info / chaîne d'énergie (Fig. 1) au modèle de connaissance (Fig. 3) — quel bloc de la Fig. 1 correspond exactement au bloc « Pièce » de la Fig. 3 ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le bloc « Pièce » de la Fig. 3 correspond à la <strong>matière d'œuvre</strong> traitée par le bloc « Agir » (radiateur) de la Fig. 1 : c'est la pièce elle-même qui reçoit l'énergie thermique produite par la chaîne d'énergie et qui restitue, en sortie, sa température réelle — laquelle reboucle ensuite sur « Acquérir » dans la chaîne d'information. Le modèle de connaissance (Fig. 3) ne détaille que le comportement physique de cette matière d'œuvre, indépendamment du mécanisme qui produit la puissance $P_r$ en amont.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : en admettant que la structure de ce TD (une équation différentielle linéaire du 1<sup>er</sup> ordre à deux entrées $P_r$ et $\Delta T_{ext}$) est un cas particulier de la forme générale $b_0 s + b_1 s' = a_0 e$ vue au document 3/3 (§5.1), à quoi correspondent ici $s(t)$, les deux « entrées » $e(t)$, et pourquoi faut-il alors <strong>deux</strong> fonctions de transfert $G(p)$ et $H(p)$ plutôt qu'une seule $H(p)=S(p)/E(p)$ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Ici $s(t)=\Delta T(t)$, mais il y a <strong>deux</strong> entrées distinctes ($e_1=P_r$, l'entrée de commande, et $e_2=\Delta T_{ext}$, une perturbation), alors que la forme générale du document 3/3 ne prévoyait qu'une seule entrée $e(t)$. Le théorème de superposition (document 2/3) justifie de traiter chaque entrée séparément : on définit une fonction de transfert par entrée ($G(p)$ pour $P_r$, $H(p)$ pour $\Delta T_{ext}$), chacune obtenue en annulant l'autre entrée, et la réponse totale s'obtient en additionnant les deux contributions — exactement la méthode utilisée dans le corrigé proposé ci-dessus.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « SII — Modèle de connaissance des SLCI – Hypothèses, transformée de Laplace, fonction de transfert », TD n°1, CPGE Barthou / Pau, MPSI/PCSI (feuille distribuée en classe, réponses laissées vierges dans le fichier récupéré)</li>
+<li>Programme officiel de Sciences Industrielles pour l'Ingénieur, CPGE 1<sup>re</sup> année : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+<li>Documents 1/3 à 3/3 du chapitre « AUTOMATIQUE – SLCI » (mêmes notations : Théorème 1 — superposition ; Définition 11 — système continu ; §2.4 — système invariant)</li>
+<li>Le corrigé proposé dans ce document est une résolution originale à partir des équations et hypothèses données par l'énoncé — il ne reproduit aucune correction du professeur, qui n'était pas fournie dans le fichier source.</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>

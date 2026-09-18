@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SI — Exercices sur la transformée de Laplace (sujet)</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.85rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.08rem; margin-top:1.6rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.45rem;} h2{font-size:1.1rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#ex1">Exercice 1</a></li>
+  <li class="top"><a href="#ex2">Exercice 2</a></li>
+  <li class="top"><a href="#ex3">Exercice 3</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de TD</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Exercices sur la transformée de Laplace</h1>
+<div class="meta">SII — Systèmes linéaires continus invariants (sujet) · MPSI/PCSI · CPGE Barthou / Pau · mis au propre le 18/09/2026</div>
+<div class="meta">Applications dans la résolution d'équations différentielles. La correction officielle fait l'objet d'un document séparé (voir Sources).</div>
+</header>
+
+<section id="ex1">
+<h2>Exercice 1</h2>
+<p><strong>I)</strong> Soit $F(p)$ la fonction de transfert d'un système définie par :
+$$F(p) = \frac{p+2}{p(p+1)(p^2+p+1)}$$
+Donner la limite $f(\infty)$ de la réponse du système à une excitation impulsionnelle (fonction de Dirac) appliquée en son entrée. Vous citerez le théorème utilisé.</p>
+
+<p><strong>II)</strong> Calculer les transformées inverses $y(t)$ des fonctions suivantes (conditions initiales nulles) :</p>
+<ol type="1">
+<li>$Y(p) = \dfrac{2}{p}+\dfrac{3}{p+5}$</li>
+<li>$Y(p) = \dfrac{1}{p(1+7p)}$</li>
+<li>$Y(p) = \dfrac{p+2}{1+3p+p^2}$</li>
+</ol>
+</section>
+
+<section id="ex2">
+<h2>Exercice 2</h2>
+<p>Soit un système dynamique linéaire continu invariant caractérisé par l'équation différentielle linéaire suivante :
+$$\frac{d^2y(t)}{dt^2} - 3\frac{dy(t)}{dt} + 2y(t) = x(t)$$</p>
+<figure>
+<svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<rect x="110" y="20" width="80" height="40" fill="#f2ecfd" stroke="#7c4fd6" stroke-width="1.5"/><text x="150" y="45" text-anchor="middle" font-size="12" font-weight="700">H(p)</text>
+<line x1="20" y1="40" x2="108" y2="40" stroke="#0f2b4c" stroke-width="2" marker-end="url(#a1)"/><text x="20" y="30" font-size="11">x(t)</text>
+<line x1="192" y1="40" x2="280" y2="40" stroke="#0f2b4c" stroke-width="2" marker-end="url(#a1)"/><text x="200" y="30" font-size="11">y(t)</text>
+<defs><marker id="a1" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#0f2b4c"/></marker></defs>
+</svg>
+</figure>
+<p>On demande de résoudre cette équation différentielle par la transformée de Laplace, les conditions initiales étant nulles, lorsque l'entrée est :</p>
+<ol type="a">
+<li>une fonction échelon unitaire ;</li>
+<li>une fonction de Dirac ;</li>
+<li>une rampe de pente $A$ ;</li>
+<li>une fonction exponentielle du type $e^{-at}$.</li>
+</ol>
+<p>Les étapes de la résolution sont : déterminer la fonction de transfert $H(p)$ du système ; pour chacune des entrées, déterminer $X(p)$, en déduire $Y(p)$, décomposer $Y(p)$ en éléments types (constantes à déterminer), puis appliquer la transformée de Laplace inverse pour obtenir $y(t)$.</p>
+</section>
+
+<section id="ex3">
+<h2>Exercice 3</h2>
+<p>Soit un système dynamique linéaire continu invariant caractérisé par l'équation différentielle linéaire suivante :
+$$\frac{dy(t)}{dt} + 2y(t) = 5x(t)$$</p>
+<p>On demande de résoudre cette équation différentielle par la transformée de Laplace, les conditions initiales étant nulles, lorsque l'entrée est une fonction échelon $E_0=100$.</p>
+<p>Vous définirez les caractéristiques de ce système (ordre, fonction de transfert, gain, constante de temps) et tracerez l'allure de la réponse indicielle $y(t)$ (on ne demande pas l'expression de $y(t)$).</p>
+<p>Vous justifierez le tracé de l'asymptote en $+\infty$ et la tangente en $0^+$ en indiquant les théorèmes utilisés ainsi que la position de points particuliers. Donner le temps de réponse à 5% du système.</p>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de TD</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Pourquoi peut-on directement écrire $X(p)=1$ lorsque l'entrée est une impulsion de Dirac (Exercice 1-I) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Par définition, $\mathcal{L}[\delta(t)]=1$ (voir le formulaire de Laplace) : l'impulsion de Dirac a pour transformée la constante 1, quelle que soit son amplitude théoriquement infinie — c'est justement l'intérêt de cette entrée type, qui « révèle » directement $H(p)$ puisque $Y(p)=H(p)\cdot 1=H(p)$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Calculer $y(t)$ pour $Y(p)=\dfrac{2}{p}+\dfrac{3}{p+5}$ (Exercice 1-II-1).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$y(t) = 2 + 3e^{-5t}$ pour $t>0$ (transformées inverses directes de $1/p$ et $1/(p+5)$).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Dans l'Exercice 3, pourquoi le tracé de l'asymptote en $+\infty$ repose-t-il sur le théorème de la valeur finale, et non sur un calcul direct de $y(t)$ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+L'énoncé demande explicitement de ne pas calculer l'expression complète de $y(t)$ : le théorème de la valeur finale ($\lim_{t\to\infty}y(t)=\lim_{p\to0}pY(p)$) permet d'obtenir directement la valeur asymptotique sans inverser Laplace — c'est tout l'intérêt pratique de ce théorème pour caractériser rapidement un système sans résoudre entièrement l'équation différentielle.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Que se passerait-il dans l'Exercice 2 si l'on cherchait la réponse à une entrée sinusoïdale plutôt qu'aux quatre entrées demandées (échelon, Dirac, rampe, exponentielle) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La méthode resterait identique (Laplace de $X(p)$, produit par $H(p)$, décomposition en éléments simples, transformée inverse) ; seule la forme de $X(p)=\omega/(p^2+\omega^2)$ changerait, ce qui ferait apparaître dans $Y(p)$ des pôles complexes conjugués supplémentaires — la décomposition suivrait alors le cas « pôles complexes conjugués » du formulaire de Laplace, donnant une réponse combinant termes exponentiels (dus aux pôles de $H(p)$) et sinusoïdaux (dus aux pôles de l'entrée).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Piège classique : dans l'Exercice 2, l'équation différentielle contient le terme $-3\,dy/dt$ (coefficient négatif). Cela change-t-il la méthode de résolution par Laplace ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non pour la méthode (la transformation de Laplace s'applique de la même façon, terme à terme, quel que soit le signe des coefficients), mais cela change la <strong>nature physique</strong> du système : le polynôme caractéristique $p^2-3p+2=(p-1)(p-2)$ a des racines <strong>positives</strong> ($p=1$ et $p=2$), donc des pôles à partie réelle positive. Le système est donc <strong>instable</strong> (la réponse contient des termes en $e^{t}$ et $e^{2t}$ qui divergent) — à ne pas confondre avec un système stable où les pôles seraient négatifs.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Piège classique : peut-on appliquer directement le théorème de la valeur finale à la fonction de transfert de l'Exercice 2, $H(p)=1/[(p-2)(p-1)]$, pour trouver la limite de sa réponse à un échelon ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — le théorème de la valeur finale ($\lim_{t\to\infty}y(t)=\lim_{p\to0}pY(p)$) n'est valable que si $Y(p)$ n'a pas de pôle à partie réelle positive ou nulle (hors l'éventuel pôle simple en $p=0$ apporté par l'entrée elle-même). Ici $H(p)$ a des pôles en $p=1$ et $p=2$ (parties réelles strictement positives) : la réponse diverge, $y(t)\to+\infty$, et le théorème de la valeur finale ne s'applique pas (il donnerait un résultat numérique fini mais physiquement faux).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Synthèse : dans l'Exercice 3, à partir de $H(p)=\dfrac{5}{p+2}$, retrouvez la forme canonique du premier ordre et identifiez $K$ et $T$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$H(p)=\dfrac{5}{p+2}=\dfrac{5/2}{1+p/2}$, soit la forme $\dfrac{K}{1+Tp}$ avec $K=5/2$ (gain statique) et $T=1/2=0{,}5\,\text{s}$ (constante de temps) — cohérent avec un pôle unique en $p=-2=-1/T$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Synthèse : pour ce même système du 1<sup>er</sup> ordre ($K=5/2$, $T=0{,}5$s) soumis à l'échelon $E_0=100$, donner la valeur asymptotique $y(\infty)$ et le temps de réponse à 5%.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$y(\infty)=K\cdot E_0 = 2{,}5\times100=250$ (théorème de la valeur finale) ; $t_{R(5\%)}=3T=1{,}5\,\text{s}$ (propriété du premier ordre).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : comparez la méthode de décomposition en éléments simples utilisée pour $Y(p)=\dfrac{p+2}{1+3p+p^2}$ (Exercice 1-II-3, pôles réels irrationnels) et pour $Y(p)=\dfrac{1}{p(1+7p)}$ (Exercice 1-II-2, un pôle en 0). Qu'est-ce qui change dans la méthode ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Dans les deux cas on décompose en une somme de fractions à pôle simple $A/(p-p_i)$, mais la nature des pôles diffère : pour II-2, l'un des pôles est $p=0$ (associé à un terme constant dans $y(t)$, ici $y(t)=1$), typique d'une entrée ou d'une dynamique intégrale ; pour II-3, les deux pôles sont réels mais irrationnels ($(-3\pm\sqrt5)/2$), donnant deux exponentielles décroissantes à coefficients irrationnels — la méthode de calcul des coefficients (multiplier par le facteur, évaluer à la racine) reste identique, seule la valeur numérique des pôles change.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : les quatre entrées de l'Exercice 2 (échelon, Dirac, rampe, exponentielle) permettent-elles, ensemble, de caractériser complètement le système $H(p)$ ? Pourquoi choisir précisément ces quatre signaux ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Une seule d'entre elles suffirait en principe à identifier $H(p)$ si l'on connaît sa forme algébrique (le Dirac donne directement $y(t) \leftrightarrow H(p)$). L'intérêt pédagogique de tester les quatre est de illustrer, sur un même système, les techniques de décomposition associées à chaque type de pôle apporté par l'entrée elle-même (pôle simple en 0 pour l'échelon, aucun pôle supplémentaire pour le Dirac, pôle double en 0 pour la rampe, pôle simple en $-a$ pour l'exponentielle) — ce sont précisément les quatre signaux canoniques du cours (Automatique partie temporelle, §II.4.2) dont la réponse caractérise entièrement les performances (précision, rapidité) d'un système asservi.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Exercices sur la transformée de Laplace : applications dans la résolution d'équations différentielles » (SII, CPGE Barthou / Pau, MPSI/PCSI)</li>
+<li>Correction officielle : voir <em>08-2026-09-18_SI_Exercice_Correction_des_exercices_sur_la_transformee_de_Laplace.html</em> (même dossier)</li>
+<li>Programme officiel de Sciences Industrielles pour l'Ingénieur, CPGE 1<sup>re</sup> année : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+<li>Formulaire de transformée de Laplace : voir <em>05-2026-09-18_SI_Polycop_partie_1_avec_sommaire.html</em>, section « Formulaire mathématique »</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>

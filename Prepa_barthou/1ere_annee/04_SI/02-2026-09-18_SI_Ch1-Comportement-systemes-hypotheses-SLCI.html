@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SI — Ch.1 (II) : Comportement des systèmes et hypothèses SLCI</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.9rem; margin:0 0 .2rem 0;}
+h2{font-size:1.35rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.1rem; margin-top:1.6rem;}
+h4{font-size:1rem; margin-top:1.2rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:265px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc ol ol{margin:.15rem 0 .4rem 1rem;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+.chain{margin:.7rem 0; padding-left:.3rem;}
+.chain .step{display:flex; align-items:baseline; gap:.6rem; margin:.25rem 0; flex-wrap:wrap;}
+.chain .step .why{color:#7a7a72; font-size:.82rem; font-style:italic;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+table{border-collapse:collapse; margin:1rem 0; width:100%;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.92rem;}
+th{background:#f3f2ee;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+.footnote{font-size:.8rem; color:#7a7a72; border-top:1px dashed var(--line); margin-top:.6rem; padding-top:.4rem;}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.5rem;} h2{font-size:1.15rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Les modèles</a>
+    <ol>
+      <li><a href="#s1-1">1.1 Convention</a></li>
+      <li><a href="#s1-2">1.2 Modèle de connaissance</a></li>
+      <li><a href="#s1-3">1.3 Modèle de comportement</a></li>
+      <li><a href="#s1-4">1.4 Caractéristique statique</a></li>
+    </ol>
+  </li>
+  <li class="top"><a href="#s2">2. Classification</a>
+    <ol>
+      <li><a href="#s2-1">2.1 Systèmes dynamiques</a></li>
+      <li><a href="#s2-2">2.2 Systèmes continus</a></li>
+      <li><a href="#s2-3">2.3 Linéarité, superposition, linéarisation</a></li>
+      <li><a href="#s2-4">2.4 Système invariant</a></li>
+    </ol>
+  </li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>II — Analyse du comportement de processus ou systèmes physiques</h1>
+<div class="meta">SI (Sciences Industrielles) — Automatique / SLCI · MPSI-PCSI1 · Prép@barthou · Enseignant : Éric Lacroix · mis au propre le 18/09/2026</div>
+<div class="meta">Document 2/3 du chapitre « AUTOMATIQUE – SLCI » — numérotation des définitions poursuivie depuis le document 1 (<a href="#sources">voir Sources</a>).</div>
+</header>
+
+<p>Un système physique peut être considéré comme un ensemble d'éléments fournissant des informations en sortie, en réponse à des sollicitations (signaux d'entrée). La possibilité de prédire les sorties suppose une relation de cause à effet entre les signaux.</p>
+
+<section id="s1">
+<h2>1. Les modèles</h2>
+
+<h3 id="s1-1">1.1 Convention</h3>
+<p>Un modèle de système se présente sous la forme d'un bloc ; les entrées sont généralement situées à gauche et les sorties à droite. L'intérieur du bloc contient une description du système étudié, sous forme littérale ou symbolique.</p>
+
+<figure>
+<svg viewBox="0 0 680 210" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<rect x="70" y="70" width="150" height="70" fill="#f2ecfd" stroke="#7c4fd6" stroke-width="1.5" rx="4"/>
+<text x="145" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#0f2b4c">SYSTÈME</text>
+<text x="145" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#0f2b4c">PHYSIQUE</text>
+<line x1="15" y1="95" x2="68" y2="95" stroke="#0f2b4c" stroke-width="2" marker-end="url(#arA)"/>
+<line x1="15" y1="115" x2="68" y2="115" stroke="#0f2b4c" stroke-width="2" marker-end="url(#arA)"/>
+<text x="15" y="80" font-size="12">Entrées</text>
+<line x1="222" y1="105" x2="270" y2="105" stroke="#0f2b4c" stroke-width="2" marker-end="url(#arA)"/>
+<text x="230" y="90" font-size="12">Sorties</text>
+
+<rect x="330" y="40" width="150" height="45" fill="#eaf2fd" stroke="#3b6fd8"/>
+<text x="405" y="66" text-anchor="middle" font-size="12" font-weight="600">Résistance R</text>
+<line x1="300" y1="62" x2="328" y2="62" stroke="#333" stroke-width="1.6" marker-end="url(#arA)"/>
+<text x="300" y="52" font-size="11">U(t)</text>
+<line x1="482" y1="62" x2="520" y2="62" stroke="#333" stroke-width="1.6" marker-end="url(#arA)"/>
+<text x="520" y="52" font-size="11">i(t)</text>
+
+<rect x="330" y="120" width="150" height="45" fill="#eaf2fd" stroke="#3b6fd8"/>
+<text x="405" y="146" text-anchor="middle" font-size="12" font-weight="600">Ressort raideur k</text>
+<line x1="300" y1="142" x2="328" y2="142" stroke="#333" stroke-width="1.6" marker-end="url(#arA)"/>
+<text x="300" y="132" font-size="11">F(t)</text>
+<line x1="482" y1="142" x2="520" y2="142" stroke="#333" stroke-width="1.6" marker-end="url(#arA)"/>
+<text x="520" y="132" font-size="11">x(t)</text>
+<defs><marker id="arA" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 1 — Convention générale (entrées à gauche, sorties à droite) et deux exemples : résistance électrique ($U(t)\to i(t)$) et ressort ($F(t)\to x(t)$).</figcaption>
+</figure>
+
+<p>Lorsque le système est influencé par des <strong>perturbations</strong>, c'est-à-dire par des signaux parasites que l'on ne pourra pas manipuler et que le système devra subir, on utilise la représentation suivante :</p>
+
+<figure>
+<svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<rect x="60" y="70" width="160" height="70" fill="#f2ecfd" stroke="#7c4fd6" stroke-width="1.5" rx="4"/>
+<text x="140" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#0f2b4c">SYSTÈME</text>
+<text x="140" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#0f2b4c">PHYSIQUE</text>
+<line x1="100" y1="40" x2="100" y2="68" stroke="#c0392b" stroke-width="1.8" marker-end="url(#arB)"/>
+<line x1="140" y1="40" x2="140" y2="68" stroke="#c0392b" stroke-width="1.8" marker-end="url(#arB)"/>
+<line x1="180" y1="40" x2="180" y2="68" stroke="#c0392b" stroke-width="1.8" marker-end="url(#arB)"/>
+<text x="140" y="28" text-anchor="middle" font-size="12" fill="#c0392b">Perturbations</text>
+<line x1="10" y1="95" x2="58" y2="95" stroke="#0f2b4c" stroke-width="2" marker-end="url(#arB)"/>
+<line x1="10" y1="115" x2="58" y2="115" stroke="#0f2b4c" stroke-width="2" marker-end="url(#arB)"/>
+<text x="10" y="80" font-size="12">Entrées</text>
+<line x1="222" y1="105" x2="260" y2="105" stroke="#0f2b4c" stroke-width="2" marker-end="url(#arB)"/>
+<text x="225" y="90" font-size="12">Sorties</text>
+
+<rect x="440" y="90" width="150" height="45" fill="#eaf2fd" stroke="#3b6fd8"/>
+<text x="515" y="116" text-anchor="middle" font-size="12" font-weight="600">Résistance R</text>
+<line x1="600" y1="40" x2="515" y2="88" stroke="#c0392b" stroke-width="1.8" marker-end="url(#arB)"/>
+<text x="605" y="35" font-size="11" text-anchor="start">Déperdition</text>
+<text x="605" y="48" font-size="11" text-anchor="start">dans le four</text>
+<line x1="380" y1="112" x2="438" y2="112" stroke="#333" stroke-width="1.6" marker-end="url(#arB)"/>
+<text x="380" y="100" font-size="10">Débit de combustible</text>
+<line x1="592" y1="112" x2="650" y2="112" stroke="#333" stroke-width="1.6" marker-end="url(#arB)"/>
+<text x="650" y="100" font-size="10" text-anchor="end">Température dans le four</text>
+<defs><marker id="arB" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 2 — Représentation d'un système avec perturbations, et exemple d'un four : la déperdition thermique est une perturbation subie, non maîtrisée.</figcaption>
+</figure>
+
+<h3 id="s1-2">1.2 Modèle de connaissance</h3>
+<div class="block def">
+<span class="label">Définition 7</span>
+Le <strong>modèle de connaissance</strong> s'établit directement à partir de l'analyse du système réel, en mettant directement en œuvre les lois de la physique. Ce modèle découle essentiellement des hypothèses choisies pour écrire les lois physiques.
+</div>
+
+<p><strong>Exemple 1 — suspension automobile.</strong> On considère le châssis comme une masse $m$ dont on étudie la variation de la position $s(t)$ autour de la position d'équilibre, lorsqu'on lui applique un déplacement de la roue noté $e(t)$. Cette masse est liée à un bâti par deux éléments en parallèle : un ressort de raideur $k$ et un amortisseur (vérin) visqueux de coefficient $f$.</p>
+
+<div class="block demo">
+<span class="label">Mise en équation</span>
+<div class="chain">
+<div class="step"><span>Force du ressort : $F_r = k\,(e(t)-s(t))$</span><span class="why">proportionnelle au déplacement relatif roue/châssis</span></div>
+<div class="step"><span>Force de l'amortisseur : $F_v = f\,\dfrac{d}{dt}\big(e(t)-s(t)\big)$</span><span class="why">proportionnelle à la vitesse relative</span></div>
+<div class="step"><span>Principe fondamental de la dynamique sur la masse $m$ : $m\,s''(t) = F_r+F_v$</span></div>
+<div class="step"><span>$\Rightarrow\ m\,s''(t) + f\,s'(t) + k\,s(t) = f\,e'(t) + k\,e(t)$</span><span class="why">équation différentielle linéaire du 2<sup>e</sup> ordre à coefficients constants</span></div>
+</div>
+</div>
+
+<figure>
+<svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<circle cx="70" cy="60" r="26" fill="none" stroke="#333" stroke-width="1.6"/>
+<text x="70" y="35" text-anchor="middle" font-size="12">e(t)+</text>
+<line x1="96" y1="60" x2="150" y2="60" stroke="#0f2b4c" stroke-width="1.8" marker-end="url(#arC)"/>
+<text x="110" y="50" font-size="11">e(t)-s(t)</text>
+<path d="M55 45 L85 75 M85 45 L55 75" stroke="#333" stroke-width="1.3"/>
+<text x="70" y="95" text-anchor="middle" font-size="11">−</text>
+
+<rect x="150" y="30" width="110" height="35" fill="#eaf2fd" stroke="#3b6fd8"/>
+<text x="205" y="52" text-anchor="middle" font-size="12" font-weight="600">Ressort</text>
+<rect x="150" y="80" width="110" height="35" fill="#eaf2fd" stroke="#3b6fd8"/>
+<text x="205" y="102" text-anchor="middle" font-size="12" font-weight="600">Vérin</text>
+<line x1="96" y1="60" x2="120" y2="47" stroke="#0f2b4c" stroke-width="1.4"/>
+<line x1="120" y1="47" x2="148" y2="47" stroke="#0f2b4c" stroke-width="1.4" marker-end="url(#arC)"/>
+<line x1="96" y1="60" x2="120" y2="97" stroke="#0f2b4c" stroke-width="1.4"/>
+<line x1="120" y1="97" x2="148" y2="97" stroke="#0f2b4c" stroke-width="1.4" marker-end="url(#arC)"/>
+
+<circle cx="330" cy="47" r="20" fill="none" stroke="#333" stroke-width="1.6"/>
+<text x="330" y="25" text-anchor="middle" font-size="10">+</text>
+<line x1="262" y1="47" x2="310" y2="47" stroke="#0f2b4c" stroke-width="1.8" marker-end="url(#arC)"/>
+<text x="275" y="40" font-size="10">Fr(t)</text>
+<line x1="262" y1="97" x2="300" y2="97" stroke="#0f2b4c" stroke-width="1.8"/>
+<line x1="300" y1="97" x2="325" y2="63" stroke="#0f2b4c" stroke-width="1.8" marker-end="url(#arC)"/>
+<text x="290" y="90" font-size="10">Fv(t)</text>
+<text x="345" y="62" font-size="10">+</text>
+
+<line x1="350" y1="47" x2="400" y2="47" stroke="#0f2b4c" stroke-width="1.8" marker-end="url(#arC)"/>
+<text x="360" y="38" font-size="10">Fr+Fv</text>
+<rect x="400" y="25" width="110" height="45" fill="#f2ecfd" stroke="#7c4fd6"/>
+<text x="455" y="52" text-anchor="middle" font-size="13" font-weight="700">Masse</text>
+<line x1="510" y1="47" x2="545" y2="47" stroke="#0f2b4c" stroke-width="2" marker-end="url(#arC)"/>
+<text x="520" y="38" font-size="11">s(t)</text>
+
+<line x1="528" y1="47" x2="528" y2="200" stroke="#2fa365" stroke-width="1.6" stroke-dasharray="4,2"/>
+<line x1="528" y1="200" x2="70" y2="200" stroke="#2fa365" stroke-width="1.6" stroke-dasharray="4,2"/>
+<line x1="70" y1="200" x2="70" y2="86" stroke="#2fa365" stroke-width="1.6" stroke-dasharray="4,2" marker-end="url(#arD)"/>
+<text x="300" y="215" text-anchor="middle" font-size="10" fill="#2fa365">retour de s(t) (signe −)</text>
+<defs>
+<marker id="arC" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#0f2b4c"/></marker>
+<marker id="arD" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#2fa365"/></marker>
+</defs>
+</svg>
+<figcaption>Fig. 3 — Schéma-blocs de la suspension : l'écart $e(t)-s(t)$ traverse en parallèle le ressort et le vérin, dont les forces s'additionnent pour accélérer la masse ; $s(t)$ reboucle négativement sur l'écart d'entrée. Le tracé et l'analyse détaillés de ce type de schéma seront étudiés ultérieurement.</figcaption>
+</figure>
+
+<h3 id="s1-3">1.3 Modèle de comportement</h3>
+<div class="block def">
+<span class="label">Définition 8</span>
+Le <strong>modèle de comportement</strong> s'établit sur la base de la connaissance des signaux de sortie obtenus en fonction des signaux d'entrée appliqués au système à modéliser. Celui-ci est une sorte de boîte noire dont on ne connaît que le flux entrant et sortant : on ne connaît pas la physique interne du système. On fait l'hypothèse d'une structure mathématique liant la sortie à l'entrée, qui sera pour un SLCI une équation différentielle linéaire à coefficients constants. On parle alors d'<strong>identification</strong> du processus, cherchant expérimentalement à déterminer les coefficients de l'équation supposée.
+<div class="footnote">Le document désigne ce même modèle tantôt « modèle de comportement » (titre de section), tantôt « modèle de représentation » (dans la phrase de définition elle-même) : il s'agit bien du même concept — deux appellations synonymes rencontrées dans la littérature d'automatique, conservées ici sans en privilégier une.</div>
+</div>
+
+<h3 id="s1-4">1.4 Caractéristique statique</h3>
+<div class="block def">
+<span class="label">Définition 9</span>
+On soumet le système à une entrée de valeur constante, on attend un temps suffisant pour que la sortie soit stabilisée, puis on mesure sa valeur. En répétant l'opération pour d'autres valeurs de l'entrée, on obtient la <strong>caractéristique statique</strong> du système : la loi entrée-sortie en <strong>régime permanent</strong>, sous forme d'une courbe.
+</div>
+
+<figure>
+<svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<line x1="50" y1="220" x2="360" y2="220" stroke="#333" stroke-width="1.3" marker-end="url(#arE)"/>
+<line x1="50" y1="220" x2="50" y2="30" stroke="#333" stroke-width="1.3" marker-end="url(#arE)"/>
+<text x="360" y="240" font-size="12" text-anchor="middle">Valeurs de e</text>
+<text x="30" y="30" font-size="12" text-anchor="middle">s</text>
+<path d="M60 210 C 150 205, 220 170, 350 45" fill="none" stroke="#3b6fd8" stroke-width="2.2"/>
+<text x="30" y="215" font-size="10" text-anchor="end">0</text>
+<defs><marker id="arE" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 4 — Caractéristique statique : valeur de la sortie en régime permanent en fonction de la valeur (constante) de l'entrée.</figcaption>
+</figure>
+
+</section>
+
+<section id="s2">
+<h2>2. Classification</h2>
+
+<h3 id="s2-1">2.1 Systèmes dynamiques</h3>
+<div class="block def">
+<span class="label">Définition 10</span>
+Un <strong>système dynamique</strong> prend en compte les phénomènes d'inertie et de mémoire (inertie dynamique, inertie thermique...) : les grandeurs de sortie dépendent des valeurs présentes <strong>et passées</strong> des grandeurs d'entrée. Cette mémoire du passé est généralement de durée infinie, tout en s'atténuant le plus souvent au cours du temps ; en pratique, on considère qu'un système dynamique a une mémoire finie dont la durée fixe le <strong>temps de réponse</strong>.
+</div>
+
+<h3 id="s2-2">2.2 Systèmes continus</h3>
+<div class="block def">
+<span class="label">Définition 11</span>
+Un système est dit <strong>continu</strong> si les variations des grandeurs physiques le caractérisant sont des fonctions à temps continu, définies à tout instant.
+</div>
+
+<h3 id="s2-3">2.3 Linéarité, superposition, linéarisation</h3>
+
+<h4>2.3.1 Principe de proportionnalité</h4>
+<div class="block theorem">
+<span class="label">Propriété 1</span>
+Si la grandeur d'entrée $x(t)$ induit une grandeur de sortie $y(t)$, alors $\lambda\, x(t)$ induit $\lambda\, y(t)$. La caractéristique entrée-sortie ($y(t)$ en fonction de $x(t)$) est une droite.
+</div>
+
+<h4>2.3.2 Principe d'additivité</h4>
+<div class="block theorem">
+<span class="label">Théorème 1 — superposition</span>
+Si $x_1(t)$ induit $y_1(t)$ et $x_2(t)$ induit $y_2(t)$, alors $x(t)=x_1(t)+x_2(t)$ induit $y(t)=y_1(t)+y_2(t)$.
+</div>
+<div class="block retenir">
+<span class="label">À retenir</span>
+Du fait de cette propriété caractéristique des systèmes linéaires, il suffit d'étudier le comportement du système à chacune de ses entrées prises isolément pour en déduire son comportement à toute entrée résultant d'une combinaison linéaire de celles-ci.
+</div>
+
+<h4>2.3.3 Linéarisation</h4>
+<p>Pratiquement, tous les systèmes physiques présentent des non-linéarités sous différentes formes.</p>
+
+<figure>
+<svg viewBox="0 0 720 210" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<g transform="translate(0,0)">
+<line x1="40" y1="170" x2="150" y2="170" stroke="#333" stroke-width="1.2" marker-end="url(#arF)"/>
+<line x1="95" y1="190" x2="95" y2="40" stroke="#333" stroke-width="1.2" marker-end="url(#arF)"/>
+<path d="M45 165 C 70 165, 80 100, 95 100 C 110 100, 120 45, 145 45" fill="none" stroke="#3b6fd8" stroke-width="2"/>
+<line x1="60" y1="150" x2="130" y2="60" stroke="#3b6fd8" stroke-width="1.2" stroke-dasharray="3,2"/>
+<text x="95" y="195" font-size="10" text-anchor="middle">Courbure</text>
+</g>
+<g transform="translate(170,0)">
+<line x1="40" y1="170" x2="150" y2="170" stroke="#333" stroke-width="1.2" marker-end="url(#arF)"/>
+<line x1="95" y1="190" x2="95" y2="40" stroke="#333" stroke-width="1.2" marker-end="url(#arF)"/>
+<path d="M45 155 L75 155 L 120 65 L145 65" fill="none" stroke="#3b6fd8" stroke-width="2"/>
+<text x="150" y="68" font-size="9" text-anchor="end">Smax</text>
+<text x="150" y="158" font-size="9" text-anchor="end">−Smax</text>
+<text x="95" y="195" font-size="10" text-anchor="middle">Saturation</text>
+</g>
+<g transform="translate(340,0)">
+<line x1="40" y1="170" x2="150" y2="170" stroke="#333" stroke-width="1.2" marker-end="url(#arF)"/>
+<line x1="95" y1="190" x2="95" y2="40" stroke="#333" stroke-width="1.2" marker-end="url(#arF)"/>
+<path d="M45 160 L82 160 L145 60" fill="none" stroke="#3b6fd8" stroke-width="2"/>
+<text x="95" y="195" font-size="10" text-anchor="middle">Seuil</text>
+</g>
+<g transform="translate(510,0)">
+<line x1="40" y1="170" x2="150" y2="170" stroke="#333" stroke-width="1.2" marker-end="url(#arF)"/>
+<line x1="95" y1="190" x2="95" y2="40" stroke="#333" stroke-width="1.2" marker-end="url(#arF)"/>
+<path d="M50 165 L140 55" fill="none" stroke="#3b6fd8" stroke-width="2"/>
+<path d="M50 150 L140 40" fill="none" stroke="#3b6fd8" stroke-width="2"/>
+<text x="80" y="185" font-size="9" text-anchor="middle">−h/2</text>
+<text x="110" y="185" font-size="9" text-anchor="middle">h/2</text>
+<text x="95" y="195" font-size="10" text-anchor="middle">Hystérésis</text>
+</g>
+<defs><marker id="arF" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 5 — Quatre non-linéarités classiques (axes : entrée $e$ en abscisse, sortie $s$ en ordonnée).</figcaption>
+</figure>
+
+<p>On peut néanmoins les linéariser pour de petites amplitudes autour d'un point de fonctionnement, ou par limitation du domaine d'utilisation du système, en remplaçant la caractéristique par sa tangente au point choisi.</p>
+
+<figure>
+<svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<line x1="40" y1="200" x2="340" y2="200" stroke="#333" stroke-width="1.3" marker-end="url(#arG)"/>
+<line x1="40" y1="200" x2="40" y2="20" stroke="#333" stroke-width="1.3" marker-end="url(#arG)"/>
+<text x="340" y="218" font-size="12" text-anchor="middle">x</text>
+<text x="25" y="20" font-size="12">y</text>
+<path d="M50 185 C 120 180, 180 130, 320 40" fill="none" stroke="#3b6fd8" stroke-width="2.2"/>
+<line x1="90" y1="195" x2="270" y2="65" stroke="#c0392b" stroke-width="1.6" stroke-dasharray="5,3"/>
+<circle cx="190" cy="128" r="4" fill="#0f2b4c"/>
+<line x1="190" y1="128" x2="190" y2="200" stroke="#b7b7ae" stroke-dasharray="3,3"/>
+<line x1="40" y1="128" x2="190" y2="128" stroke="#b7b7ae" stroke-dasharray="3,3"/>
+<text x="190" y="215" font-size="11" text-anchor="middle">x₁</text>
+<text x="30" y="132" font-size="11" text-anchor="end">y₁</text>
+<text x="240" y="80" font-size="10" fill="#c0392b">tangente</text>
+<text x="230" y="150" font-size="9" fill="#7a7a72">zone d'approximation linéaire</text>
+<defs><marker id="arG" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 6 — Linéarisation par la tangente au point de fonctionnement $(x_1,y_1)$ : l'approximation n'est fidèle que dans un voisinage restreint de ce point.</figcaption>
+</figure>
+
+<h4>2.3.4 Exemple 2 — réservoir d'eau à écoulement libre</h4>
+<p>La hauteur d'eau $H$ résulte de l'effet contradictoire du débit d'arrivée $Q_e$ et du débit de fuite $Q_s$, ce dernier dépendant de $H$ selon une relation non linéaire du type $Q_s = K\sqrt{H}$.</p>
+
+<figure>
+<svg viewBox="0 0 620 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<text x="140" y="20" text-anchor="middle" font-size="12" font-weight="700" fill="#0f2b4c">Schéma descriptif</text>
+<rect x="70" y="60" width="140" height="110" fill="#eaf2fd" stroke="#3b6fd8" stroke-width="1.4"/>
+<line x1="90" y1="40" x2="90" y2="60" stroke="#0f2b4c" stroke-width="2" marker-end="url(#arH)"/>
+<text x="90" y="32" font-size="11" text-anchor="middle">Qe</text>
+<path d="M200 130 q20 5 30 20" stroke="#3b6fd8" stroke-width="2" fill="none" marker-end="url(#arH)"/>
+<text x="235" y="145" font-size="11">Qs</text>
+<line x1="60" y1="170" x2="60" y2="100" stroke="#333" stroke-width="1.2" marker-end="url(#arH)"/>
+<text x="45" y="135" font-size="11">H</text>
+
+<text x="470" y="20" text-anchor="middle" font-size="12" font-weight="700" fill="#0f2b4c">Schéma fonctionnel (non linéaire)</text>
+<circle cx="330" cy="90" r="16" fill="none" stroke="#333" stroke-width="1.4"/>
+<text x="330" y="70" font-size="10" text-anchor="middle">+</text>
+<text x="330" y="112" font-size="10" text-anchor="middle">−</text>
+<line x1="280" y1="80" x2="314" y2="86" stroke="#0f2b4c" stroke-width="1.8" marker-end="url(#arH)"/>
+<text x="280" y="72" font-size="10">Qe(t)</text>
+<line x1="330" y1="106" x2="330" y2="140" stroke="#0f2b4c" stroke-width="1.6"/>
+<text x="345" y="150" font-size="10">Qs(t)</text>
+<line x1="346" y1="90" x2="400" y2="90" stroke="#0f2b4c" stroke-width="1.8" marker-end="url(#arH)"/>
+<rect x="400" y="68" width="110" height="44" fill="#f2ecfd" stroke="#7c4fd6"/>
+<text x="455" y="94" text-anchor="middle" font-size="12" font-weight="600">Réservoir</text>
+<line x1="510" y1="90" x2="560" y2="90" stroke="#0f2b4c" stroke-width="2" marker-end="url(#arH)"/>
+<text x="520" y="80" font-size="11">H(t)</text>
+<defs><marker id="arH" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#0f2b4c"/></marker></defs>
+</svg>
+<figcaption>Fig. 7 — Réservoir à écoulement libre : schéma descriptif et schéma fonctionnel associé ($Q_e$ et $-Q_s$ sommés en entrée d'un bloc « Réservoir » qui restitue $H$).</figcaption>
+</figure>
+
+<div class="block demo">
+<span class="label">Mise en équation et linéarisation</span>
+<div class="chain">
+<div class="step"><span>Bilan de matière : $Q_e - Q_s = S\,\dfrac{dH}{dt}$</span></div>
+<div class="step"><span>Loi de vidange : $Q_s = K\sqrt{H}$</span></div>
+<div class="step"><span>$\Rightarrow\ Q_e = S\,\dfrac{dH}{dt} + K\sqrt{H}$ &nbsp;(1)</span><span class="why">équation différentielle non linéaire (terme $\sqrt{H}$)</span></div>
+<div class="step"><span>Régime permanent : $Q_0 = K\sqrt{H_0}$ &nbsp;(2), avec $H_0$ hauteur d'équilibre</span></div>
+<div class="step"><span>On pose $Q_e=Q_0+q_e$, $H=H_0+h$ (petites variations)</span></div>
+<div class="step"><span>(1) devient $Q_0+q_e = S\dfrac{dh}{dt} + K\sqrt{H_0}\left(1+\dfrac{h}{H_0}\right)^{1/2}$</span></div>
+<div class="step"><span>Au voisinage de 0 : $(1+x)^{n}\approx 1+nx$, ici $n=\tfrac12$</span><span class="why">approximation du 1<sup>er</sup> ordre</span></div>
+<div class="step"><span>$\Rightarrow\ Q_0+q_e \approx S\dfrac{dh}{dt} + K\sqrt{H_0}+K\sqrt{H_0}\cdot\dfrac{h}{2H_0}$</span></div>
+<div class="step"><span>Or $K\sqrt{H_0}=Q_0$ (2) $\Rightarrow\ q_e \approx S\dfrac{dh}{dt} + \dfrac{Q_0}{2H_0}\,h$</span></div>
+<div class="step"><span>En posant $\lambda=\dfrac{Q_0}{2H_0}$ : $\boxed{q_e = S\dfrac{dh}{dt}+\lambda h}$</span><span class="why">équation différentielle linéaire du 1<sup>er</sup> ordre, valable pour de petites variations $(q_e,h)$ autour de $(Q_0,H_0)$</span></div>
+</div>
+</div>
+
+<p>On peut représenter ce comportement linéarisé par le schéma-blocs suivant, où l'intégration temporelle et le retour non linéaire $K\sqrt{\ }$ apparaissent explicitement :</p>
+
+<figure>
+<svg viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<circle cx="110" cy="70" r="16" fill="none" stroke="#333" stroke-width="1.4"/>
+<text x="110" y="50" font-size="10" text-anchor="middle">+</text>
+<text x="110" y="92" font-size="10" text-anchor="middle">−</text>
+<line x1="30" y1="60" x2="94" y2="66" stroke="#0f2b4c" stroke-width="1.8" marker-end="url(#arI)"/>
+<text x="30" y="50" font-size="11">Qe(t)</text>
+<line x1="126" y1="70" x2="180" y2="70" stroke="#0f2b4c" stroke-width="1.8" marker-end="url(#arI)"/>
+<rect x="180" y="48" width="80" height="44" fill="#f2ecfd" stroke="#7c4fd6"/>
+<text x="220" y="74" text-anchor="middle" font-size="16" font-style="italic">∫</text>
+<line x1="260" y1="70" x2="330" y2="70" stroke="#0f2b4c" stroke-width="2" marker-end="url(#arI)"/>
+<text x="270" y="60" font-size="11">H(t)</text>
+<line x1="300" y1="70" x2="300" y2="150" stroke="#2fa365" stroke-width="1.6" stroke-dasharray="4,2"/>
+<line x1="300" y1="150" x2="110" y2="150" stroke="#2fa365" stroke-width="1.6" stroke-dasharray="4,2"/>
+<line x1="110" y1="150" x2="110" y2="88" stroke="#2fa365" stroke-width="1.6" stroke-dasharray="4,2" marker-end="url(#arJ)"/>
+<rect x="160" y="128" width="90" height="34" fill="#f1f1ef" stroke="#8b8b85"/>
+<text x="205" y="150" text-anchor="middle" font-size="12">K√ </text>
+<defs>
+<marker id="arI" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#0f2b4c"/></marker>
+<marker id="arJ" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#2fa365"/></marker>
+</defs>
+</svg>
+<figcaption>Fig. 8 — Forme intégrateur + retour non linéaire du réservoir : $Q_e-Q_s$ (retour $K\sqrt{H}$) est intégré dans le temps pour donner $H(t)$, traduisant $S\,dH/dt=Q_e-Q_s$.</figcaption>
+</figure>
+
+<div class="block remark">
+<span class="label">Vérification du schéma (Fig. 8)</span>
+Le bloc intégrateur doit recevoir en entrée le débit net $Q_e-Q_s$ (cohérent avec $S\,dH/dt=Q_e-Q_s$) et produire $H$ par intégration temporelle ; le retour $K\sqrt{\ }$ reconvertit $H$ en $Q_s=K\sqrt{H}$ pour le soustraire de $Q_e$. La structure est bien celle d'une boucle fermée, conforme à l'équation (1), avant toute linéarisation.
+</div>
+
+<h3 id="s2-4">2.4 Système invariant</h3>
+<p>Un système est <strong>invariant</strong> si les caractéristiques de comportement (la relation entrée-sortie) ne se modifient pas dans le temps — en d'autres termes, un système qui ne vieillit pas. Un four n'est pas rigoureusement un système invariant, car son isolation se détériore sensiblement au cours du temps.</p>
+
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Quelle est la différence essentielle entre un modèle de connaissance et un modèle de comportement ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le modèle de connaissance (Définition 7) s'obtient en appliquant directement les lois de la physique au système réel (on connaît sa structure interne). Le modèle de comportement (Définition 8) traite le système comme une boîte noire : on ne connaît que les signaux d'entrée et de sortie, et on suppose a priori une forme mathématique (équation différentielle linéaire pour un SLCI) dont on identifie les coefficients expérimentalement.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Pourquoi un système dynamique a-t-il, en pratique, une « mémoire finie » alors que la définition parle d'une mémoire de durée infinie ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La mémoire du passé (Définition 10) s'atténue le plus souvent au cours du temps : mathématiquement elle ne s'annule jamais exactement, mais en pratique elle devient négligeable au-delà d'une certaine durée. C'est cette durée « effective » qui est retenue comme temps de réponse du système.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Pour la suspension automobile, on donne $m=800\,\text{kg}$, $k=20\,000\,\text{N/m}$, $f=1\,600\,\text{N.s/m}$. Écrire l'équation différentielle vérifiée par $s(t)$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+D'après l'Exemple 1 : $m\,s''(t)+f\,s'(t)+k\,s(t) = f\,e'(t)+k\,e(t)$, soit numériquement $800\,s''(t) + 1\,600\,s'(t) + 20\,000\,s(t) = 1\,600\,e'(t) + 20\,000\,e(t)$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Un réservoir a pour débit d'équilibre $Q_0 = 4\,\text{L/s}$ à une hauteur d'équilibre $H_0=1{,}6\,\text{m}$. Calculer le coefficient $\lambda$ de l'équation linéarisée $q_e = S\,dh/dt + \lambda h$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$\lambda = \dfrac{Q_0}{2H_0} = \dfrac{4}{2\times 1{,}6} = 1{,}25\ \text{L.s}^{-1}\text{.m}^{-1}$ (Exemple 2, §2.3.4).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi le théorème de superposition (Théorème 1) est-il si utile en pratique pour l'étude des systèmes linéaires ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Il permet de décomposer une entrée complexe (combinaison de plusieurs signaux) en une somme de signaux élémentaires plus simples à étudier isolément (échelon, sinusoïde...), puis de reconstituer la réponse totale par simple addition des réponses individuelles — sans devoir résoudre directement l'équation pour l'entrée complexe.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passerait-il si l'on tentait d'appliquer le théorème de superposition à un système présentant une saturation (Fig. 5) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le théorème ne s'applique plus : la saturation est une non-linéarité, donc le principe d'additivité n'est pas vérifié. La réponse à $x_1+x_2$ n'est en général pas égale à la somme des réponses à $x_1$ et $x_2$ pris isolément — en particulier dès que la somme dépasse le seuil $S_{max}$, la sortie réelle plafonne alors que la somme des réponses individuelles continuerait de croître.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : peut-on dire qu'un système linéarisé (Fig. 6) est devenu un système réellement linéaire au sens strict ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — c'est une <strong>approximation</strong>, valable uniquement pour de petites variations autour d'un point de fonctionnement donné. Le système physique réel reste non linéaire (Fig. 5) ; on ne fait qu'utiliser un modèle linéaire local, la tangente, qui devient de plus en plus fausse à mesure qu'on s'éloigne du point $(x_1,y_1)$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : dans la caractéristique statique (Fig. 4, Définition 9), pourquoi doit-on attendre que la sortie soit stabilisée avant de la mesurer ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que la caractéristique statique décrit le comportement en <strong>régime permanent</strong> uniquement — elle ignore volontairement la dynamique transitoire du système (inertie, temps de réponse, cf. Définition 10). Mesurer trop tôt donnerait une valeur encore affectée par le régime transitoire, et fausserait la loi entrée-sortie recherchée.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : en quoi le schéma-blocs de la suspension (Fig. 3) et celui du réservoir (Fig. 7-8) illustrent-ils tous les deux la même démarche de modélisation « modèle de connaissance → schéma-blocs », bien que l'un soit linéaire et l'autre non ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Dans les deux cas, on part des lois physiques (principe fondamental de la dynamique pour la suspension, bilan de matière et loi de vidange pour le réservoir) pour écrire une équation différentielle (Définition 7), puis on la traduit en un schéma-blocs faisant apparaître sommations et blocs fonctionnels. La différence est que la suspension est directement linéaire (Fr et Fv sont proportionnelles à des écarts), alors que le réservoir fait apparaître un terme $\sqrt{H}$ non linéaire (Fig. 8) qu'il faut ensuite linéariser (§2.3.4) pour retrouver la forme canonique d'un SLCI.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : montrez que le principe de proportionnalité (Propriété 1) est un cas particulier du théorème de superposition (Théorème 1).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le théorème de superposition dit que si $x_1\to y_1$ et $x_2\to y_2$, alors $x_1+x_2\to y_1+y_2$. En prenant $x_1=x_2=x$ (donc $y_1=y_2=y$), on obtient $2x\to 2y$ ; en itérant ou en admettant la propriété pour tout réel $\lambda$ (et pas seulement les entiers), on retrouve $\lambda x \to \lambda y$, qui est exactement le principe de proportionnalité. Additivité + homogénéité (proportionnalité) forment ensemble la définition complète de la linéarité au sens des systèmes.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Programme officiel de Sciences Industrielles pour l'Ingénieur, CPGE 1<sup>re</sup> année (filière PCSI) : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+<li>H-Prépa Sciences Industrielles pour l'Ingénieur (Hachette Éducation) — chapitre « Modélisation des systèmes linéaires continus »</li>
+<li>Précis Bréal Sciences de l'Ingénieur — modélisation par schéma-blocs et linéarisation autour d'un point de fonctionnement</li>
+<li>Document 1/3 du même chapitre : <em>2026-09-18_SI_Ch1-Introduction-notions-automatique.html</em> (numérotation des définitions 1 à 6)</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>
