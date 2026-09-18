@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie — Les liaisons faibles</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.75rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.84rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.13rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+table{border-collapse:collapse; margin:1rem 0; width:100%;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.9rem; vertical-align:middle;}
+th{background:#f3f2ee;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.35rem;} h2{font-size:1.05rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} table{font-size:.76rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Nécessité des liaisons faibles</a></li>
+  <li class="top"><a href="#s2">2. La liaison de Van der Waals</a></li>
+  <li class="top"><a href="#s3">3. La liaison hydrogène</a></li>
+  <li class="top"><a href="#s4">4. Solvants, solubilité, miscibilité</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Les liaisons faibles</h1>
+<div class="meta">Chimie — Résumé de cours · PCSI · Sainte-Geneviève (Versailles), S. Falcou · mis au propre le 18/09/2026</div>
+</header>
+
+<section id="s1">
+<h2>1. Nécessité d'existence des liaisons faibles</h2>
+<p>Lors d'un changement d'état physique (fusion/solidification, vaporisation/liquéfaction, sublimation/condensation), la structure chimique (les liaisons covalentes) n'est pas modifiée. Pour que les différents états de la matière existent et se différencient, il est donc nécessaire que des <strong>interactions</strong> existent entre les structures chimiques — plus faibles que les liaisons covalentes, mais responsables de la cohésion des phases condensées.</p>
+<div class="block remark">
+<span class="label">Rappel — diagramme (p,T) et analyse thermique</span>
+À pression fixée, un corps pur change d'état à température fixe (température de changement d'état) : une courbe d'analyse thermique $T(t)$ présente un palier horizontal pendant le changement d'état. Le point triple (les trois phases coexistent) et le point critique (au-delà duquel liquide et gaz sont indiscernables, état fluide) caractérisent le diagramme (p,T). Certains mélanges particuliers (azéotropes, eutectiques) se comportent comme des corps purs lors du changement d'état et nécessitent donc des précautions pour conclure à la pureté d'un corps.
+</div>
+</section>
+
+<section id="s2">
+<h2>2. La liaison de Van der Waals</h2>
+<div class="block theorem">
+<span class="label">Trois termes attractifs (interactions électrostatiques entre dipôles)</span>
+<ul>
+<li><strong>Keesom</strong> — dipôle permanent / dipôle permanent : deux molécules polaires s'attirent électrostatiquement. $U_K(r)=-A_K/r^6$ ($A_K$ dépend de la température et des moments dipolaires).</li>
+<li><strong>Debye</strong> — dipôle permanent / dipôle induit : une molécule polaire (moment $\vec\mu$) crée un champ $\vec E$ qui induit, dans une molécule apolaire polarisable, un moment dipolaire induit $\vec\mu_{induit}=\alpha\vec E$ ($\alpha$ = coefficient de polarisabilité). $U_D(r)=-A_D/r^6$.</li>
+<li><strong>London</strong> — dipôle instantané / dipôle induit : même deux molécules apolaires possèdent, à chaque instant, un moment dipolaire instantané non nul (barycentres des charges + et − non confondus instantanément, bien que nuls en moyenne) ; effet purement quantique, présent dans <strong>tous</strong> les cas. $U_L(r)=-A_L/r^6$.</li>
+</ul>
+</div>
+<div class="block def">
+<span class="label">Définition 1 — polarisabilité</span>
+La polarisabilité $\alpha$ traduit l'aptitude du nuage électronique d'une molécule à se déformer sous l'influence d'un champ électrique extérieur. $\alpha$ varie comme le rayon atomique/ionique : plus l'atome est gros, plus les électrons externes sont loin du noyau et sensibles au champ extérieur (ex. $\alpha_I>\alpha_{Br}>\alpha_{Cl}>\alpha_F$).
+</div>
+<table>
+<tr><th>Molécule</th><th>$\alpha$ (Å³)</th><th>$\mu$ (D)</th><th>% Keesom</th><th>% Debye</th><th>% London</th></tr>
+<tr><td>Ne</td><td>0,39</td><td>0</td><td>0</td><td>0</td><td>100</td></tr>
+<tr><td>CH₄</td><td>2,60</td><td>0</td><td>0</td><td>0</td><td>100</td></tr>
+<tr><td>HCl</td><td>2,63</td><td>1,08</td><td>9</td><td>5</td><td>86</td></tr>
+<tr><td>NH₃</td><td>2,26</td><td>1,47</td><td>34</td><td>9</td><td>57</td></tr>
+<tr><td>H₂O</td><td>1,48</td><td>1,85</td><td>69</td><td>7</td><td>24</td></tr>
+</table>
+<div class="block remark">
+<span class="label">À retenir</span>
+Sauf pour les molécules très polaires (Keesom alors prépondérant), c'est le terme de <strong>London</strong> qui domine le plus souvent l'énergie de Van der Waals totale.
+</div>
+<div class="block theorem">
+<span class="label">Terme répulsif et bilan énergétique</span>
+La non-interpénétrabilité des nuages électroniques produit, à très courte distance, une répulsion $E_R=a/r^n$ ($n\approx10$ en général). L'énergie totale, somme des termes attractifs (en $1/r^6$) et répulsif :
+$$E=\frac{a}{r^n}-\frac{A_{VdW}}{r^6}$$
+présente un <strong>puits de potentiel</strong> (distance d'équilibre $\ell_{VdW}$, énergie de stabilisation $E_{VdW}$). Ordres de grandeur : énergie de liaison 1 à 10 kJ·mol⁻¹, longueur de liaison 0,3 à 0,5 nm. La force de Van der Waals s'exerce à très courte portée et décroît rapidement avec $r$.
+</div>
+<div class="block remark">
+<span class="label">Influence sur les constantes physiques</span>
+Les interactions de Van der Waals augmentent en intensité avec la taille des structures (plus de dipôles en interaction, plus grande polarisabilité), d'où une augmentation des températures de fusion/ébullition/sublimation : ex. $T_{eb}$(He)=−269°C &lt; $T_{eb}$(Ne)=−246°C &lt; $T_{eb}$(Ar)=−189°C ; de même pour les alcanes linéaires (butane −0,5°C → octane 125,7°C). Plus la liaison assurant la cohésion est forte, plus les températures de changement d'état sont élevées.
+</div>
+</section>
+
+<section id="s3">
+<h2>3. La liaison hydrogène</h2>
+<div class="block correction">
+<span class="label">⚠️ Existence d'anomalies</span>
+Par extrapolation sur la série $\mathrm{H_2O,H_2S,H_2Se,H_2Te}$ (masse molaire et polarisabilité croissantes), l'eau devrait être un gaz à température ambiante (bouillir vers −75°C) ; or elle est liquide ($T_{eb}=100$°C). Le même phénomène (composé « en tête de série » anormalement peu volatil) se produit pour $\mathrm{NH_3}$ (comparé à $\mathrm{PH_3,AsH_3,SbH_3}$) et HF (comparé à HCl, HBr, HI). Il existe donc, dans $\mathrm{H_2O,NH_3,HF}$, des interactions faibles d'un autre type, plus énergétiques que la seule liaison de Van der Waals, qui inversent la tendance attendue.
+</div>
+<div class="block def">
+<span class="label">Définition 2 — conditions d'existence de la liaison hydrogène</span>
+La liaison hydrogène nécessite le motif $\mathrm{A-H\cdots B}$ avec $A,B\in\{\mathrm{O,N,F}\}$ (et $B$ pouvant aussi être S) : $A$ doit être petit et très électronégatif (polarisation très forte de la liaison A–H) ; $B$ doit avoir des propriétés de base de Lewis et être petit (rapprochement important des deux espèces). Les trois atomes A, H, B sont, autant que possible, alignés. La liaison A–H est légèrement allongée (affaiblie) par rapport à la molécule isolée. C'est un cas particulier (10× plus fort en énergie, plus court) des interactions dipôle-dipôle de Van der Waals, essentiellement de nature électrostatique.
+</div>
+<p>Ordre de grandeur : énergie de quelques dizaines de kJ·mol⁻¹ ; longueur 0,25 à 0,30 nm.</p>
+<div class="block demo">
+<span class="label">Applications</span>
+<strong>Édifices particuliers</strong> : l'acide éthanoïque se dimérise en phase gazeuse (deux liaisons hydrogène intermoléculaires stabilisant le dimère cyclique). <strong>Liaisons inter/intramoléculaires</strong> : les trois isomères de l'hydroxyphénol (ortho, méta, para) ont des températures d'ébullition différentes (240, 277, 285°C) — l'isomère ortho, où la liaison hydrogène est <strong>intramoléculaire</strong> (conservée en phase gazeuse, ne freinant pas la vaporisation), bout à température plus basse que les isomères méta et para, où les liaisons hydrogène <strong>intermoléculaires</strong> prédominantes doivent être rompues pour vaporiser.
+</div>
+<div class="block remark">
+<span class="label">Importance en biologie</span>
+Structure des membranes cellulaires : liaisons de Van der Waals entre chaînes hydrocarbonées des phospholipides. Structure secondaire des protéines (hélice α) : liaisons hydrogène entre CO et NH des liaisons peptidiques. Double hélice de l'ADN : l'adénine s'apparie avec la thymine par <strong>2</strong> liaisons hydrogène, la guanine avec la cytosine par <strong>3</strong> liaisons hydrogène — c'est ce nombre différent de liaisons qui contribue à la fidélité de la réplication (chaque base ne s'appariant correctement qu'avec sa base complémentaire).
+</div>
+</section>
+
+<section id="s4">
+<h2>4. Solvants, solubilité et miscibilité</h2>
+<h3>Dissolution d'un composé moléculaire non ionisable</h3>
+<p>Équilibre de mise en solution $\mathrm{A_s\rightleftharpoons A_{solv}}$, déplacé selon les interactions relatives soluté-solvant (Van der Waals ou liaison hydrogène).</p>
+<div class="block theorem">
+<span class="label">Règle de solubilité</span>
+Une espèce A se solubilise bien dans un solvant S si les interactions que A donne avec S sont du même type que celles que A donne avec elle-même, ou que S donne avec lui-même. Ex. l'éthanol (protique, liaisons H) est miscible en toutes proportions avec l'eau (protique, liaisons H).
+</div>
+<h3>Dissolution d'un composé donnant des ions</h3>
+<p>Trois étapes : <strong>ionisation</strong> (AB → paire d'ions liée, polarisation par le solvant, effet dépendant de $\mu,\alpha$ du solvant, relié macroscopiquement à $\varepsilon_r$) — <strong>dispersion/dissociation</strong> (séparation des deux ions, nécessite un fort $\varepsilon_r$ pour affaiblir la force de Coulomb $\|\vec F\|=|qq'|/(4\pi\varepsilon_0\varepsilon_r r^2)$) — <strong>solvatation</strong> (interactions ion-solvant, exothermique, d'autant plus intense que l'ion est petit et chargé). Les deux premières étapes sont endothermiques, la troisième exothermique.</p>
+<div class="block remark">
+<span class="label">Catégories de solvants</span>
+Solvants <strong>non polaires</strong> (non dissociants, ex. hexane, benzène, $\varepsilon_r&lt;3$) ; solvants polaires <strong>aprotiques</strong> (pas de liaison H donneuse, ex. THF, acétone, DMF, DMSO) ; solvants polaires <strong>protogènes/protiques</strong> (donneurs de liaison H, ex. eau, éthanol, méthanol, acide éthanoïque). Les ions ne sont en général solvatés efficacement que par des solvants dissociants à fort $\varepsilon_r$ (l'eau étant quasiment le seul solvant courant capable de solubiliser efficacement des ions).
+</div>
+<h3>Extraction liquide-liquide</h3>
+<p>L'eau et l'huile (chaînes hydrocarbonées apolaires, interactions de Van der Waals uniquement) sont non miscibles (« liaison hydrophobe »). Cette différence de solubilité est à la base de l'<strong>extraction liquide-liquide</strong> : on utilise deux solvants non miscibles (eau + solvant organique) ; les espèces ioniques (ou ionisées par ajustement du pH, acides en milieu basique, bases en milieu acide) passent en phase aqueuse, les molécules organiques neutres restent en phase organique.</p>
+<h3>Composés hydrophiles, hydrophobes, amphiphiles</h3>
+<div class="block def">
+<span class="label">Définition 3</span>
+Un composé <strong>hydrophile</strong> se dissout bien dans l'eau ; un composé <strong>hydrophobe</strong> y est insoluble. Un composé <strong>amphiphile</strong> possède une tête hydrophile (souvent ionique) et une queue hydrophobe (chaîne hydrocarbonée).
+</div>
+<p>Au-delà de la <strong>concentration micellaire critique</strong> (C.M.C.), les tensioactifs amphiphiles s'auto-organisent en <strong>micelles</strong> (directes en milieu aqueux, inverses en milieu organique) ou en <strong>bicouches</strong> (membranes cellulaires). Applications : émulsifiants (mayonnaise), détergents, catalyse ou inhibition par transfert de phase (ex. hydrolyse basique du cristal violet inhibée par SDS, catalysée par CTAB).</p>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Quels sont les trois termes attractifs de la liaison de Van der Waals ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Keesom (dipôle permanent/dipôle permanent), Debye (dipôle permanent/dipôle induit), London (dipôle instantané/dipôle induit) — tous trois en $1/r^6$ (§2).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Quelles sont les conditions (atomes A et B) pour qu'une liaison hydrogène existe entre deux molécules ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le motif A–H···B, avec A ∈ {O, N, F} et B ∈ {O, N, F, S} : A doit être petit et très électronégatif, B doit être une base de Lewis, petite (Définition 2, §3).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Pourquoi la force de London existe-t-elle même entre deux atomes de gaz noble parfaitement apolaires (ex. Ne) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce qu'à chaque instant, le barycentre des charges positives (noyau) et celui des charges négatives (nuage électronique) ne sont pas rigoureusement confondus : chaque atome possède un moment dipolaire <strong>instantané</strong> (nul seulement en moyenne), qui induit un moment dipolaire instantané dans l'atome voisin — effet purement quantique (§2, London).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. D'après le tableau du §2, quel terme (Keesom, Debye ou London) est prépondérant dans l'interaction entre deux molécules de méthane CH₄ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+London à 100 % (CH₄ est apolaire, μ=0, donc Keesom et Debye — qui nécessitent un moment dipolaire permanent — sont nuls).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi l'acide benzoïque PhCOOH, insoluble dans l'eau, devient-il soluble une fois déprotoné en ion benzoate PhCOO⁻ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+L'eau est quasiment le seul solvant courant capable de bien solvater des espèces <strong>ioniques</strong> (fort $\varepsilon_r$, effet ionisant/dissociant, §4) : en devenant un ion, le benzoate bénéficie d'une forte solvatation électrostatique par l'eau, alors que la molécule neutre PhCOOH, peu polaire, n'établit avec l'eau que des interactions faibles insuffisantes pour compenser la rupture du réseau de liaisons hydrogène de l'eau.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Piège classique : l'eau (H₂O) devrait-elle bouillir à une température plus élevée ou plus basse que le sulfure d'hydrogène (H₂S) si l'on ne considérait que la liaison de Van der Waals (taille/polarisabilité croissante de O à S) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Plus basse : le soufre, plus gros et plus polarisable que l'oxygène, devrait donner des interactions de Van der Waals plus fortes pour H₂S, donc un $T_{eb}$ plus élevé pour H₂S que pour H₂O si seule cette interaction comptait. Mais expérimentalement H₂O bout à une température bien plus haute : c'est la liaison hydrogène (existant dans l'eau, absente dans H₂S car S est un mauvais donneur de liaison H) qui inverse cette tendance attendue (§3, Existence d'anomalies) — piège classique consistant à oublier la liaison hydrogène et raisonner sur la seule taille atomique.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : les trois isomères du dihydroxybenzène (ortho, méta, para) ont-ils tous la même température d'ébullition, puisqu'ils ont la même formule brute ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — piège classique de confondre formule brute et propriétés physiques. L'isomère ortho forme une liaison hydrogène <strong>intramoléculaire</strong> (conservée même en phase gazeuse, ne s'opposant pas à la vaporisation), donc bout à température plus basse (240°C) que les isomères méta (277°C) et para (285°C), où les liaisons hydrogène <strong>intermoléculaires</strong> prédominent et doivent être rompues pour permettre le passage à l'état gazeux (§3, Applications).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Que se passerait-il pour la réplication de l'ADN si l'adénine pouvait s'apparier aussi facilement avec la cytosine qu'avec la thymine ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La fidélité de la réplication serait compromise : c'est justement parce que le nombre de liaisons hydrogène formées diffère selon les paires (2 pour A–T, 3 pour G–C, §3) que l'appariement correct (A avec T, G avec C) est thermodynamiquement favorisé par rapport à un appariement incorrect (qui formerait un nombre différent, donc moins stable, de liaisons hydrogène) — ce mécanisme énergétique est à la base de la lecture fidèle de l'alphabet génétique.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : pourquoi un solvant comme le DMSO (aprotique, mais très polaire, $\varepsilon_r$≈48,9) peut-il tout de même bien dissocier des paires d'ions, bien qu'il ne puisse pas former de liaison hydrogène donneuse ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+L'étape de <strong>dissociation</strong> des ions ne dépend que de la capacité du solvant à affaiblir la force de Coulomb entre les deux ions, via sa permittivité relative $\varepsilon_r$ (§4, $\|\vec F\|=|qq'|/(4\pi\varepsilon_0\varepsilon_r r^2)$) — un fort $\varepsilon_r$ suffit, qu'il provienne ou non de liaisons hydrogène. En revanche, l'étape de <strong>solvatation</strong> des ions ainsi séparés peut être moins efficace pour un solvant aprotique que pour l'eau (protique) : DMSO dissocie donc bien les paires d'ions, mais solvate différemment (souvent mieux les cations que les anions, faute de liaison H donneuse) — ce qui explique pourquoi certains solvants aprotiques polaires sont préférés pour certaines réactions (ex. SN2 avec un bon nucléophile anionique peu solvaté).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : reliez la notion de polarisabilité (§2, Van der Waals) à celle de composé amphiphile et micelle (§4) — pourquoi la concentration micellaire critique existe-t-elle, c'est-à-dire pourquoi les tensioactifs ne forment-ils pas de micelles à toute concentration, même très faible ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+À très faible concentration, les molécules amphiphiles individuelles peuvent se placer à l'interface eau/air (tête hydrophile dans l'eau, queue hydrophobe hors de l'eau, §4), minimisant ainsi le contact défavorable entre leur chaîne apolaire et le réseau de liaisons hydrogène de l'eau sans qu'un assemblage collectif soit nécessaire. Ce n'est que lorsque la concentration dépasse la C.M.C., et que la surface disponible à l'interface est saturée, que l'auto-assemblage en micelles (queues hydrophobes regroupées à l'intérieur, à l'abri de l'eau, têtes hydrophiles à l'extérieur en contact avec l'eau) devient le moyen le plus efficace de minimiser l'énergie globale du système — la répulsion moléculaire de Van der Waals/hydrophobe entre chaînes carbonées et eau (§2, §4) est le moteur thermodynamique de cette organisation collective, qui n'apparaît qu'au-delà d'un seuil de concentration.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Les liaisons faibles », S. Falcou, PCSI1 Sainte-Geneviève (Versailles), 2015-2016</li>
+<li>Programme officiel de Physique-Chimie, CPGE 1<sup>re</sup> année (filière PCSI), thème « Constitution et transformations de la matière », bloc interactions intermoléculaires : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>
