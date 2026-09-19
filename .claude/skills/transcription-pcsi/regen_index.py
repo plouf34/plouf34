@@ -331,7 +331,7 @@ def main():
 
   .pill {{ display: inline-block; font-size: 11px; font-weight: 700; text-decoration: none; padding: 4px 8px; border-radius: 8px; white-space: nowrap; margin: 2px; }}
   .pill-sujet {{ background: rgba(10,99,211,0.12); color: var(--accent); }}
-  .pill-pdf {{ background: rgba(138,20,20,0.10); color: #b83a3a; }}
+  .pill-pdf {{ background: rgba(214,40,40,0.12); color:#d62828; }}
   .pill-off {{ color: var(--sub); font-size: 12px; }}
 
   footer {{ text-align: center; padding: 16px; color: var(--sub); font-size: 10.5px; }}
