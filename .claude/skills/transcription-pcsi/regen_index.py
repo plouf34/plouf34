@@ -28,7 +28,7 @@ SUBJECT_SOURCES = {
     "01_MATHS": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png", None)],
     "02_PHYSIQUE": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png", None)],
     "03_CHIMIE": [
-        ("Sainte-Geneviève — S. Falcou", "Versailles", None, None, (1, 7)),
+        ("Sainte-Geneviève — S. Falcou", "Versailles", "http://www.pcsi1.bginette.com/Chim/Polys.php", None, (1, 7)),
         ("Janson de Sailly", "Paris", "http://chimie-pcsi-jds.net", None, (8, 11)),
     ],
     "04_SI": [("Jean Perrin — N. Mesnier", "Lyon", "http://nmesnier.free.fr/SII-PCSI.html", None, None)],
@@ -61,15 +61,15 @@ def sources_bar(folder):
     chips = ""
     for name, ville, url, icon, _num_range in items:
         icon_html = f'<img src="{esc(icon)}" class="source-icon" alt="">' if icon else "🏫"
-        meta = f'<div class="source-meta">📍 {esc(ville)}</div>'
+        pin = f'<span class="source-pin">📍 {esc(ville)}</span>'
         if url:
             chips += (f'<div class="source-block">'
-                      f'<a class="source-chip" href="{esc(url)}" target="_blank" rel="noopener">{icon_html} {esc(name)} <span class="arrow">↗</span></a>'
-                      f'{meta}</div>')
+                      f'<a class="source-chip" href="{esc(url)}" target="_blank" rel="noopener">{icon_html} {esc(name)} {pin} <span class="arrow">↗</span></a>'
+                      f'</div>')
         else:
             chips += (f'<div class="source-block">'
-                      f'<span class="source-chip source-chip-static">{icon_html} {esc(name)}</span>'
-                      f'{meta}</div>')
+                      f'<span class="source-chip source-chip-static">{icon_html} {esc(name)} {pin}</span>'
+                      f'</div>')
     label = "Source" if len(items) == 1 else "Sources"
     return f'<div class="sources-bar"><span class="sources-label">{label} :</span>{chips}</div>'
 
@@ -245,6 +245,7 @@ def main():
     border: 1px solid var(--border);
     text-align: center;
   }}
+  nav#tabs a.tab-home {{ flex: 0 0 auto; padding: 6px 10px; }}
   main {{ padding: 10px 8px 40px 8px; max-width: 760px; margin: 0 auto; }}
   .subject {{ scroll-margin-top: 56px; padding-top: 4px; }}
   .subject-title {{
@@ -264,8 +265,8 @@ def main():
   .source-chip-static {{ color: var(--text); }}
   .source-chip .arrow {{ opacity: .6; }}
   .source-icon {{ height:14px; width:auto; border-radius:2px; vertical-align:middle; }}
-  .source-block {{ display: flex; flex-direction: column; gap: 2px; }}
-  .source-meta {{ font-size: 10.5px; color: var(--sub); padding-left: 4px; }}
+  .source-block {{ display: flex; }}
+  .source-pin {{ opacity: .65; font-weight: 500; font-size: 11px; }}
 
   table {{
     width: 100%; border-collapse: collapse;
@@ -312,6 +313,7 @@ def main():
 </header>
 
 <nav id="tabs">
+  <a href="../../index.html" class="tab-home" title="Accueil">🏠</a>
 {nav_links}
 </nav>
 
