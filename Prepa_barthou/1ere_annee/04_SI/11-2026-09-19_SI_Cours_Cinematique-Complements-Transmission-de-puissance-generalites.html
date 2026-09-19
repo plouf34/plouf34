@@ -81,11 +81,11 @@ mjx-container{overflow-x:auto; max-width:100%;}
 <nav class="toc">
 <h4>Sommaire</h4>
 <ol>
-  <li class="top"><a href="#s1">1. Introduction</a></li>
-  <li class="top"><a href="#s2">2. Transformateurs de mouvement</a></li>
-  <li class="top"><a href="#s3">3. Adaptateurs sans transformation</a></li>
-  <li class="top"><a href="#s4">4. Accouplements</a></li>
-  <li class="top"><a href="#s5">5. Roue libre, embrayage, limiteurs, couplage, freins</a></li>
+  <li class="top"><a href="#s1">I. Introduction</a></li>
+  <li class="top"><a href="#s2">II. Transformateurs de mouvements</a></li>
+  <li class="top"><a href="#s3">III. Adaptateurs sans transformation</a></li>
+  <li class="top"><a href="#s4">IV. Accouplements, roue libre, embrayage, limiteurs</a></li>
+  <li class="top"><a href="#s5">V. Couplage hydraulique et frein</a></li>
   <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
   <li class="top"><a href="#sources">Sources</a></li>
 </ol>
@@ -101,257 +101,318 @@ mjx-container{overflow-x:auto; max-width:100%;}
 
 <p class="access-note">Document original (PDF professeur) protégé par mot de passe sur le site source — voir la section <a href="#sources">Sources</a> ci-dessous pour le mot de passe d'accès au site <code>aroux-sii.fr</code>.</p>
 
-<p><strong>Objectif :</strong> analyser une solution de transmission de puissance.</p>
+<p><strong>Objectifs :</strong> Analyser une solution de transmission de puissance.</p>
 
 <section id="s1">
-<h2>1. Introduction</h2>
-<p>Les systèmes de transmission de puissance mécanique sont situés, sur la chaîne d'énergie, entre l'<strong>actionneur</strong> et l'<strong>effecteur</strong> : ils occupent la fonction « <strong>Transmettre</strong> ».</p>
+<h2>I. Introduction</h2>
+<p>Les systèmes de transmission de puissance mécanique sont situés, sur la chaîne d'énergie, entre l'actionneur et l'effecteur.</p>
 <figure>
-<svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
-<rect x="4" y="4" width="500" height="90" fill="none" stroke="#c23b6c" stroke-width="1.5"/>
-<text x="255" y="-6" text-anchor="middle" fill="#c23b6c" font-weight="700" y="18">CHAÎNE D'ÉNERGIE</text>
-<rect x="20" y="35" width="80" height="40" fill="#e9f1fd" stroke="#3b6fd8"/><text x="60" y="59" text-anchor="middle">Alimenter</text>
-<rect x="120" y="35" width="80" height="40" fill="#e9f1fd" stroke="#3b6fd8"/><text x="160" y="59" text-anchor="middle">Distribuer</text>
-<rect x="220" y="35" width="80" height="40" fill="#e9f1fd" stroke="#3b6fd8"/><text x="260" y="59" text-anchor="middle">Convertir</text>
-<rect x="320" y="35" width="90" height="40" fill="#a8e6fb" stroke="#1c2430" stroke-width="2"/><text x="365" y="59" text-anchor="middle" font-weight="700">Transmettre</text>
-<rect x="440" y="35" width="60" height="40" fill="#e9f8ee" stroke="#2fa365"/><text x="470" y="53" text-anchor="middle" font-size="10.5">Agir sur la</text><text x="470" y="65" text-anchor="middle" font-size="10.5">matière d'œuvre</text>
-<line x1="0" y1="55" x2="20" y2="55" stroke="#1c2430" marker-end="url(#arTr)"/><text x="0" y="30" font-size="10.5">Énergie d'entrée</text>
-<line x1="100" y1="55" x2="120" y2="55" stroke="#1c2430" marker-end="url(#arTr)"/>
-<line x1="200" y1="55" x2="220" y2="55" stroke="#1c2430" marker-end="url(#arTr)"/>
-<line x1="300" y1="55" x2="320" y2="55" stroke="#1c2430" marker-end="url(#arTr)"/><text x="300" y="30" font-size="10.5">Actionneur</text>
-<line x1="410" y1="55" x2="440" y2="55" stroke="#1c2430" marker-end="url(#arTr)"/><text x="415" y="30" font-size="10.5">Effecteur</text>
-<line x1="500" y1="55" x2="560" y2="55" stroke="#2fa365" marker-end="url(#arTr2)"/><text x="505" y="100" font-size="10.5">Agit sur la matière d'œuvre</text>
-<defs><marker id="arTr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c2430"/></marker>
-<marker id="arTr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2fa365"/></marker></defs>
-</svg>
-<figcaption>Fig. 1 — Position de la fonction « Transmettre » sur la chaîne d'énergie : elle adapte l'énergie mécanique (sans en changer la nature) pour la rendre utilisable par l'effecteur.</figcaption>
+<img src="./img/11-fig1-chaine-energie.png" alt="Chaîne d'énergie : Alimenter, Distribuer, Convertir, Transmettre, Agir sur la matière d'œuvre">
+<figcaption>Chaîne d'énergie — la fonction « Transmettre » se situe entre l'actionneur et l'effecteur.</figcaption>
 </figure>
-<p>Sans changer le type d'énergie (mécanique pour la plupart des systèmes étudiés en CPGE), les systèmes de transmission de puissance l'adaptent pour qu'elle soit utilisable par l'effecteur. On distingue plusieurs familles :</p>
+<p>Sans changer le type d'énergie (mécanique pour la plupart des systèmes étudiés en CPGE), les systèmes de transmission de puissance l'adaptent pour qu'elle soit utilisable par l'effecteur.</p>
+<p>Les systèmes de transmission de puissance mécanique les plus courants sont :</p>
+<p>- <strong>Les transformateurs de mouvement</strong> (transforment la nature du mouvement) :</p>
+<figure>
+<img src="./img/11-fig2-transformateurs-grille.png" alt="Transformateurs de mouvement : pignon/crémaillère, vis/écrou, bielle/manivelle, came/poussoir, treuil, poulies-courroie ou pignons-chaîne, systèmes de barres articulées">
+<figcaption>Pignon/crémaillère (R↔T), Vis/écrou (R→T), Bielle/manivelle (R↔T<sub>alternative</sub>), Came/poussoir (R→T<sub>alternative</sub>), Treuil (R→T), Poulies/courroie ou pignons/chaîne lorsque la courroie (ou la chaîne) est la sortie (R→T), Systèmes de barres articulées (mouvements quelconques).</figcaption>
+</figure>
+<p>- <strong>Les adaptateurs de mouvement sans transformation</strong> (même nature du mouvement E/S) : engrenage, poulie-courroie</p>
+<figure>
+<img src="./img/11-fig3-adaptateurs-grille.png" alt="Adaptateurs de mouvement sans transformation : engrenages droits, coniques, roue et vis sans fin, poulie-courroie">
+<figcaption>Engrenage (droit, conique, roue et vis sans fin), poulie-courroie.</figcaption>
+</figure>
+<p>- <strong>Les accouplement</strong> (ou joint de transmission), embrayage et frein :</p>
 <ul>
-<li><strong>Les transformateurs de mouvement</strong> : ils transforment la <em>nature</em> du mouvement (rotation ↔ translation, mouvement quelconque…).</li>
-<li><strong>Les adaptateurs de mouvement sans transformation</strong> : la nature du mouvement en entrée et en sortie est identique (rotation → rotation), seuls la vitesse, le couple ou l'axe changent.</li>
-<li><strong>Les accouplements</strong> (joints de transmission), <strong>embrayages</strong> et <strong>freins</strong>.</li>
-<li><strong>Les limiteurs, régulateurs, boîtes de vitesse et variateurs</strong> mécaniques.</li>
+<li>Accouplement : permet l'entrainement d'un système par un autre (dont les axes peuvent être non alignés) ;</li>
+<li>Embrayage : accouplement temporaire ;</li>
+<li>Frein : embrayage dont l'un des deux systèmes est le bâti.</li>
 </ul>
-<table>
-<thead><tr><th>Organe</th><th>Fonction</th></tr></thead>
-<tbody>
-<tr><td>Limiteur</td><td>Délivre une vitesse ou un couple en sortie ne pouvant pas dépasser une valeur maximale</td></tr>
-<tr><td>Régulateur</td><td>Délivre une vitesse de sortie constante, même si l'entrée varie</td></tr>
-<tr><td>Boîte de vitesses</td><td>Permet d'obtenir des rapports de transmission différents (discrets)</td></tr>
-<tr><td>Variateur</td><td>Boîte de vitesses continue (variation continue du rapport de transmission)</td></tr>
-<tr><td>Accouplement</td><td>Permet l'entraînement d'un système par un autre (axes pouvant être non alignés)</td></tr>
-<tr><td>Embrayage</td><td>Accouplement temporaire</td></tr>
-<tr><td>Frein</td><td>Embrayage dont l'un des deux systèmes est le bâti</td></tr>
-</tbody>
-</table>
+<figure>
+<img src="./img/11-fig4-accouplements-frein-icones.png" alt="Icônes accouplements et frein à disque">
+<figcaption>accouplements, Frein à disque.</figcaption>
+</figure>
+<p>- <strong>Les limiteur, régulateur, boîte de vitesse et variateur mécaniques</strong></p>
+<p>Un limiteur délivre une vitesse ou un couple en sortie ne pouvant pas dépasser une valeur max.</p>
+<p>Un régulateur délivre une vitesse de sortie constante (même si l'entrée varie).</p>
+<p>Une boîte de vitesse permet d'obtenir des rapports de transmissions différents.</p>
+<p>Un variateur est une boîte de vitesses continue (variation continue du rapport de transmission).</p>
 </section>
 
 <section id="s2">
-<h2>2. Les transformateurs de mouvement</h2>
+<h2>II. Les transformateurs de mouvements</h2>
 
-<h3>A. Bielle-manivelle</h3>
-<p>La manivelle (ou vilebrequin, arbre à excentrique) est en liaison pivot avec le bâti ; la bielle transmet le mouvement (mouvement plan) ; le coulisseau, en liaison glissière ou pivot glissant avec le bâti, se translate de façon alternative.</p>
+<h3>A. Bielle-Manivelle</h3>
 <figure>
-<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
-<circle cx="80" cy="140" r="4" fill="#1c2430"/><text x="65" y="160" font-size="11">O</text>
-<line x1="80" y1="140" x2="150" y2="90" stroke="#3b6fd8" stroke-width="2.5"/><text x="105" y="105" font-size="10.5" fill="#3b6fd8">Manivelle</text>
-<circle cx="150" cy="90" r="4" fill="#1c2430"/><text x="155" y="85" font-size="11">T</text>
-<line x1="150" y1="90" x2="270" y2="140" stroke="#c23b6c" stroke-width="2.5"/><text x="185" y="100" font-size="10.5" fill="#c23b6c">Bielle</text>
-<circle cx="270" cy="140" r="4" fill="#1c2430"/><text x="275" y="135" font-size="11">P</text>
-<rect x="270" y="125" width="40" height="30" fill="#e9f1fd" stroke="#1c2430"/><text x="290" y="170" text-anchor="middle" font-size="10.5">Coulisseau</text>
-<line x1="330" y1="140" x2="380" y2="140" stroke="#1c2430" stroke-dasharray="3,3"/>
-<path d="M60,155 l40,0 M65,160 l5,-5 M75,160 l5,-5 M85,160 l5,-5" stroke="#1c2430" fill="none"/>
-<text x="150" y="20" text-anchor="middle" font-weight="700">Point mort haut : O, T, P alignés (T entre O et P)</text>
-<line x1="80" y1="190" x2="130" y2="190" stroke="#1c2430" stroke-dasharray="3,3"/><circle cx="80" cy="190" r="3" fill="#1c2430"/><text x="60" y="206" font-size="10.5">T</text>
-<circle cx="130" cy="190" r="3" fill="#1c2430"/><text x="132" y="206" font-size="10.5">O</text>
-<line x1="130" y1="190" x2="230" y2="190" stroke="#1c2430" stroke-dasharray="3,3"/><circle cx="230" cy="190" r="3" fill="#1c2430"/><text x="228" y="206" font-size="10.5">P</text>
-<text x="150" y="215" text-anchor="middle" font-size="11">Point mort bas : T, O, P alignés (O entre T et P)</text>
-</svg>
-<figcaption>Fig. 2 — Système bielle-manivelle : deux points morts (haut/bas) lorsque manivelle, bielle et coulisseau sont alignés. La course du coulisseau vaut 2 fois l'excentrique [OT] de la manivelle.</figcaption>
+<img src="./img/11-fig5-bielle-manivelle-photo.png" alt="Vilebrequin, bielle, piston">
+<figcaption>Vilebrequin 1 (ou maneton, ou manivelle), Bielle 2, Piston 3, Bâti 0.</figcaption>
 </figure>
-<table>
-<thead><tr><th>Caractéristique</th><th>Bielle-manivelle</th></tr></thead>
-<tbody>
-<tr><td>Relation des vitesses</td><td>Si $\omega_{manivelle}$ = cste, la vitesse du coulisseau varie de façon <strong>sinusoïdale</strong>, avec 2 instants de vitesse nulle et de changement de sens (les points morts)</td></tr>
-<tr><td>Rendement</td><td>≈ 40 % sans roulements (varie beaucoup selon les matériaux)</td></tr>
-<tr><td>Réversibilité</td><td>Réversible sous conditions : la manivelle en entrée fonctionne toujours ; le coulisseau en entrée ne fonctionne que si l'on parvient à franchir les points morts (démarreur + masses d'équilibrage sur moteur thermique)</td></tr>
-<tr><td>Exemples</td><td>Moteurs thermiques (coulisseau/piston en entrée) ; certaines pompes (manivelle en entrée, piston comprime l'air)</td></tr>
-</tbody>
-</table>
+<figure>
+<img src="./img/11-fig6-bielle-manivelle-schema-points-morts.png" alt="Schéma bielle-manivelle et points morts haut/bas">
+<figcaption>Manivelle, Bielle, Coulisseau — Point mort haut (O, T, P alignés) et Point mort bas (T, O, P alignés).</figcaption>
+</figure>
+<p>♦ <em>Fonctionnement :</em> La manivelle (ou vilebrequin, ou arbre a excentrique) est en liaison pivot avec le bâti, la bielle transmet le mouvement (mouvement plan), et le coulisseau, en liaison glissière ou pivot glissant avec le bâti, se translate de façon alternative. Deux points morts existent :</p>
+<p>- Point mort haut : position la plus éloignée entre le coulisseau et l'axe de rotation de la manivelle ;</p>
+<p>- Point mort bas : position du coulisseau opposée au point mort haut.</p>
+<p>La course du coulisseau vaut 2 fois l'excentrique [OT] de la manivelle.</p>
+<p>♦ <em>Relation des vitesses :</em> Si la vitesse de rotation de la manivelle est constante (uniforme), alors la vitesse du coulisseau varie de façon sinusoïdale, avec 2 instants de vitesse nulle et de changement de sens (les deux points morts).</p>
+<p>♦ <em>Rendement :</em> ≈ 40% sans roulements (varie beaucoup selon les matériaux employés).</p>
+<p>♦ <em>Réversibilité :</em> Réversible sous conditions.</p>
+<p>La manivelle en entrée fonctionne toujours.</p>
+<p>Le coulisseau en entrée ne fonctionne que si l'on parvient à franchir les points morts (d'où l'utilisation d'un démarreur pour les moteurs thermiques, et de masses d'équilibrage qui facilitent le franchissement des points morts une fois le système lancé, grâce à l'inertie en rotation de la manivelle).</p>
+<p>♦ <em>Exemples d'utilisations industrielles :</em> Les moteurs thermiques utilisent ce système avec le coulisseau (piston) en entrée. Certaines pompes utilisent ce système avec la manivelle en entrée (le piston sert alors à comprimer l'air dans la chambre du cylindre).</p>
 
-<h3>B. Pignon-crémaillère</h3>
-<p>La crémaillère est en liaison glissière avec le bâti, le pignon en liaison pivot avec le bâti. Pignon et crémaillère engrènent au point d'intersection du diamètre primitif du pignon et de la ligne de référence de la crémaillère.</p>
+<h3>B. Pignon-Crémaillère</h3>
+<figure>
+<img src="./img/11-fig7-pignon-cremaillere.png" alt="Pignon-crémaillère">
+<figcaption>Pignon, Crémaillère — diamètre primitif du pignon et ligne de référence de la crémaillère.</figcaption>
+</figure>
+<p>♦ <em>Fonctionnement :</em> La crémaillère est en liaison glissière avec le bâti et le pignon est en liaison pivot avec le bâti. Pignon et crémaillère engrènent au point d'intersection du diamètre primitif du pignon et de la ligne de référence de la crémaillère.</p>
 <div class="block def">
 <span class="label">Relation des vitesses</span>
-$$V_{crémaillère}=R_P.\omega_{pignon} \quad\text{avec}\quad R_P=\frac{d_P}{2}\ \text{et}\ d_P=m.Z$$
-($d_P$ : diamètre primitif du pignon ; $m$ : module du pignon ; $Z$ : nombre de dents du pignon)
+$$V_{CREMAILLERE}=R_P.\omega_{PIGNON} \quad\text{avec}\quad R_P=\frac{d_P}{2}\ \text{et}\ d_P=m.Z$$
+(d<sub>P</sub> : diamètre primitif du pignon ; m : module du pignon ; Z : nombre de dents du pignon)
 </div>
-<table>
-<tbody>
-<tr><td>Rendement</td><td>≈ 98 %</td></tr>
-<tr><td>Réversibilité</td><td>Toujours réversible</td></tr>
-<tr><td>Exemples</td><td>Portes de TGV, portes de garage, directions de voiture</td></tr>
-</tbody>
-</table>
+<p>♦ <em>Rendement :</em> ≈ 98%.</p>
+<p>♦ <em>Réversibilité :</em> Toujours réversible.</p>
+<p>♦ <em>Exemples d'utilisations industrielles :</em> portes de TGV, portes de garage, directions de voiture</p>
 
 <h3>C. Vis-écrou (contact glissant ou éléments roulants)</h3>
-<p>La vis et l'écrou sont en liaison hélicoïdale. L'une des deux pièces est en liaison pivot avec le bâti (rotation), l'autre en liaison glissière (translation rectiligne).</p>
+<figure>
+<img src="./img/11-fig8-vis-ecrou.png" alt="Vis-écrou : pas de vis et vis à billes">
+<figcaption>Vis, Écrou, Pas = x mm (rotation d'un tour → translation de x mm) ; vis à 4 filets, déflecteur, conduit de recirculation (vis à billes).</figcaption>
+</figure>
+<p>♦ <em>Fonctionnement :</em> La vis et l'écrou sont en liaison hélicoïdale. L'une des deux pièces est en liaison pivot avec le bâti (rotation), l'autre en liaison glissière (translation rectiligne).</p>
 <div class="block def">
 <span class="label">Relation des vitesses</span>
-Le pas de vis $p_V$ (en mm) signifie que lorsque la vis tourne d'un tour, l'écrou se translate de $p_V$ mm :
-$$V=\pm\,\omega\,\frac{p_V}{2\pi}\quad (V\text{ en m/s},\ p_V\text{ en m} ;\ \text{signe} + \text{pour un pas de vis à droite})$$
+Le pas de vis $p_V$ (en mm) signifie que lorsque la vis tourne d'un tour, l'écrou se translate de $p_V$ mm.
+On a donc la relation :
+$$V=\pm\,\omega\,\frac{p_V}{2\pi}\quad (V\text{ en m/s} ;\ p_V\text{ en m} ;\ \text{le signe} + \text{est pour un pas de vis à droite})$$
 </div>
-<table>
-<tbody>
-<tr><td>Rendement</td><td>≈ 50 % pour les contacts directs ; jusqu'à 97 % pour les vis à billes</td></tr>
-<tr><td>Réversibilité</td><td>Réversible sous conditions. La vis en entrée fonctionne toujours. L'écrou en entrée ne fonctionne que si l'angle d'hélice de la vis $\beta$ est supérieur au demi-angle au sommet du cône de frottement $\phi$ ($f=\tan\phi$) — condition d'irréversibilité (auto-freinage) sinon.</td></tr>
-</tbody>
-</table>
+<p>♦ <em>Rendement :</em> ≈ 50% pour les contacts directs ; mais jusqu'à 97% pour les vis à billes.</p>
+<p>♦ <em>Réversibilité :</em> Réversible sous conditions. La vis en entrée fonctionne toujours.</p>
+<p>L'écrou en entrée fonctionne uniquement si l'angle d'hélice de la vis β est supérieur au demi-angle au sommet du cône de frottement φ (f = tan(φ)).</p>
 
 <h3>D. Came ou excentrique</h3>
-<p>La came (ou l'excentrique) est en liaison pivot avec le bâti, le coulisseau en liaison glissière ou pivot glissant avec le bâti. Le contact came/coulisseau peut être un point ou une ligne courte ; on utilise souvent un galet au bout du coulisseau pour réduire les frottements. Le <strong>profil de came</strong> est la courbe le long de laquelle le coulisseau appuie ; il définit le déplacement du coulisseau selon la position angulaire de la came (profil intérieur ou extérieur possible). Pour un excentrique, c'est l'<strong>excentration</strong> qui définit le déplacement du coulisseau.</p>
-<table>
-<tbody>
-<tr><td>Relation des vitesses</td><td>Dépend entièrement du profil de la came — une partie du mouvement de la came peut ne pas entraîner de mouvement du coulisseau</td></tr>
-<tr><td>Rendement</td><td>≈ 35 % sans galet (varie beaucoup selon les matériaux)</td></tr>
-<tr><td>Réversibilité</td><td>Irréversible pour un profil extérieur ; peut être en partie réversible, sous conditions, pour un profil intérieur</td></tr>
-<tr><td>Exemples</td><td>Pompes hydrauliques, arbres à cames</td></tr>
-</tbody>
-</table>
+<figure>
+<img src="./img/11-fig9-came-excentrique-radiale.png" alt="Came/excentrique radiale et came axiale">
+<figcaption>Excentrique, Rayon R, Excentration e, Piston ou coulisseau — Galet, Came, Came axiale.</figcaption>
+</figure>
+<p>♦ <em>Fonctionnement :</em> La came ou excentrique est en liaison pivot avec le bâti et le coulisseau est en liaison glissière ou pivot glissant avec le bâti. Le contact entre la came et le coulisseau peut être un point ou une ligne courte. Afin de réduire beaucoup les frottements entre la came et le coulisseau, on peut utiliser un galet au bout du coulisseau. Le profil de came est la courbe le long de laquelle le coulisseau appuie. C'est elle qui définit le déplacement du coulisseau selon la position angulaire de la came. Un profil de came peut aussi être intérieur (sillon creuse dans une pièce motrice). Pour un excentrique, c'est la valeur de l'excentration qui définit le déplacement du coulisseau.</p>
+<figure>
+<img src="./img/11-fig10-came-radiale-axiale.png" alt="Came radiale et came axiale, exemples">
+<figcaption>Came radiale (avec galet), Came axiale (Cylindre, Rainure).</figcaption>
+</figure>
+<p>♦ <em>Relation des vitesses :</em> La relation des vitesses dépend du profil de came. Une partie du mouvement de la came peut ne pas entrainer de mouvement du coulisseau.</p>
+<p>♦ <em>Rendement :</em> ≈ 35% sans galets (varie beaucoup selon les matériaux employés).</p>
+<p>♦ <em>Réversibilité :</em> Irréversible pour un profil extérieur. Peut être en partie réversible, sous conditions, pour un profil intérieur.</p>
+<p>♦ <em>Exemples d'utilisations industrielles :</em> pompes hydrauliques, arbres à cames …</p>
 
 <h3>E. Croix de Malte</h3>
-<p>À chaque tour de l'arbre d'entrée (muni d'un ergot), la croix de Malte tourne d'un quart de tour ; pendant les trois quarts restants du mouvement d'entrée, la croix ne bouge pas — mouvement de sortie <strong>intermittent</strong>.</p>
-<table>
-<tbody>
-<tr><td>Réversibilité</td><td>Irréversible</td></tr>
-<tr><td>Exemples</td><td>Plateau de machine de transfert, indexage</td></tr>
-</tbody>
-</table>
+<figure>
+<img src="./img/11-fig11-croix-de-malte.png" alt="Croix de Malte : Croix, Ergot, Rainure">
+<figcaption>Croix, Ergot, Rainure.</figcaption>
+</figure>
+<p>♦ <em>Fonctionnement :</em> A chaque tour de l'arbre d'entrée (avec ergot) la croix de malte tourne d'un quart de tour. Pendant les 3/4 du mouvement d'entrée, la croix ne bouge pas.</p>
+<p>♦ <em>Réversibilité :</em> Irréversible.</p>
+<p>♦ <em>Exemples d'utilisations industrielles :</em> plateau de machine de transfert, indexage…</p>
 
 <h3>F. Double excentrique</h3>
-<p>L'arbre d'entrée tourne en continu tandis que l'arbre récepteur tourne en <strong>alternant de sens</strong>.</p>
+<p>♦ <em>Fonctionnement :</em> L'arbre d'entrée tourne en continue tandis que l'arbre récepteur tourne en alternant de sens.</p>
 
-<h3>G. Barres articulées (parallélogramme déformable)</h3>
-<p>Une bielle en mouvement plan relie un arbre d'entrée (rotation continue) à un arbre récepteur (mouvement de sortie dépendant de la géométrie du système de barres, potentiellement quelconque).</p>
+<h3>G. Barres articulées</h3>
+<p>♦ <em>Fonctionnement :</em> Parallélogramme déformable</p>
+<figure>
+<img src="./img/11-fig12-barres-articulees.png" alt="Barres articulées : arbre d'entrée, bielle, arbre récepteur">
+<figcaption>Arbre d'entrée, Bielle (mvt plan), Arbre récepteur.</figcaption>
+</figure>
 </section>
 
 <section id="s3">
-<h2>3. Les adaptateurs de mouvement sans transformation</h2>
-<p>Contrairement aux transformateurs, la nature du mouvement en sortie est identique à celle de l'entrée (rotation → rotation).</p>
+<h2>III. Les adaptateurs de mouvement sans transformation</h2>
+
 <h3>A. Les engrenages</h3>
-<p>Transmission de puissance par obstacle, avec un rapport de réduction fixé par les nombres de dents (trains simples et épicycloïdaux — voir chapitre dédié).</p>
-<h3>B. Le système pignon-chaîne</h3>
-<p>Comme pour les engrenages, la transmission se fait par <strong>obstacle</strong> (pas de glissement possible).</p>
-<h3>C. Le système poulie-courroie</h3>
-<p>La transmission se fait ici par l'intermédiaire de l'<strong>adhérence</strong> entre la poulie et la courroie (sauf courroie synchrone/crantée, associée à des poulies dentées, où l'entraînement se fait par obstacle comme pour les engrenages, sans glissement).</p>
+<p>Voir cours de BE du mardi matin sur les trains simples et épicycloïdaux.</p>
+
+<h3>B. Le système pignon-chaine</h3>
+<p>Comme pour les engrenages, la transmission de puissance se fait par obstacle.</p>
 <figure>
-<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
-<circle cx="120" cy="110" r="70" fill="none" stroke="#2fa365" stroke-width="2"/><text x="120" y="195" text-anchor="middle" fill="#2fa365">Poulie menée s ($R_s$)</text>
-<circle cx="340" cy="110" r="38" fill="none" stroke="#3b6fd8" stroke-width="2"/><text x="340" y="165" text-anchor="middle" fill="#3b6fd8">Poulie menante e ($R_e$)</text>
-<line x1="120" y1="40" x2="340" y2="72" stroke="#1c2430" stroke-dasharray="5,3"/>
-<line x1="120" y1="180" x2="340" y2="148" stroke="#1c2430" stroke-dasharray="5,3"/>
-<line x1="120" y1="40" x2="120" y2="20" stroke="#1c2430" marker-end="url(#arPC)"/>
-<line x1="340" y1="72" x2="340" y2="52" stroke="#1c2430" marker-end="url(#arPC)"/>
-<circle cx="120" cy="110" r="3" fill="#1c2430"/><circle cx="340" cy="110" r="3" fill="#1c2430"/>
-<line x1="60" y1="185" x2="180" y2="185" stroke="#2fa365"/>
-<line x1="300" y1="153" x2="380" y2="153" stroke="#3b6fd8"/>
-<defs><marker id="arPC" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c2430"/></marker></defs>
-</svg>
-<figcaption>Fig. 3 — Transmission poulie-courroie : deux brins tangents communs aux deux poulies (rayons $R_e$, $R_s$). Sans glissement, $R_e.\omega_e = R_s.\omega_s$.</figcaption>
+<img src="./img/11-fig13-pignon-chaine.png" alt="Pignon-chaîne : roue, pignon, entraxe, technologies de chaîne">
+<figcaption>Roue, Pignon, Entraxe — différentes technologies de chaîne (à maillons, à rouleaux, à dents).</figcaption>
 </figure>
-<div class="block remark">
-<span class="label">Règles pratiques</span>
-<ul>
-<li>Quand une courroie quitte une poulie, elle doit se trouver dans le <strong>plan médian</strong> de la poulie réceptrice.</li>
-<li>La tension de pose (contrôlée par la mesure de la flèche du brin rectiligne) diminue avec l'usure/le vieillissement : un système d'entraxe réglable ou un galet enrouleur est souvent nécessaire pour la maintenir.</li>
-<li>Un inverseur de sens de rotation s'obtient en croisant la courroie entre les deux poulies.</li>
-</ul>
-</div>
+
+<h3>C. Le système poulie-courroie</h3>
+<p>La transmission se fait ici par l'intermédiaire de l'adhérence entre la poulie et la courroie.</p>
+<figure>
+<img src="./img/11-fig14-poulie-courroie.png" alt="Poulie-courroie crantée, technologies de courroie">
+<figcaption>Poulie, Courroie crantée — indication éventuelle sur le type de courroie (plate, ronde, trapézoïdale, crantée).</figcaption>
+</figure>
+<p>L'intérêt d'une courroie trapézoïdale par rapport à une courroie plate est que le couple transmissible est plus important a tension de pose identique, et que les efforts radiaux sur l'arbre sont moindres à couple transmis identique.</p>
+<p>La transmission de puissance par courroie synchrone (ou crantée), associée a des poulies dentées, permet d'éviter le glissement. On les utilise par exemple pour les courroies de distribution d'automobiles ou pour les systèmes asservis en position ou un positionnement précis est nécessaire. L'entrainement ne se fait plus par adhérence, mais par obstacle, comme dans le cas des engrenages. Le dimensionnement de la transmission est essentiellement base sur la capacité de la courroie à supporter l'effort de traction.</p>
+<p>Une courroie crantée trapézoïdale n'est pas une courroie synchrone. Les « crans » sont uniquement là pour faciliter l'enroulement de la courroie autour de la poulie.</p>
+<p>La valeur de la tension de pose est souvent contrôlée par la mesure de la flèche du brin rectiligne, sous un effort normal F, appliqué en son milieu. L'usure et le vieillissement de la courroie entrainent une diminution progressive de la tension de pose. C'est pourquoi, un système d'entraxe réglable ou un dispositif annexe de tension (galet enrouleur,…) est souvent nécessaire. Cela permet de régler la tension initiale indispensable à l'adhérence et à la transmission de mouvement et cela permet de compenser l'allongement de la courroie au cours du temps.</p>
+<figure>
+<img src="./img/11-fig15-tension-de-pose.png" alt="Tension de pose : brin mou, brin tendu, galet enrouleur">
+<figcaption>Poulie menante, brin mou, poulie menée, brin tendu — galet enrouleur.</figcaption>
+</figure>
+<p>Règle : quand une courroie quitte une poulie, elle doit se trouver dans le plan médian de la poulie réceptrice.</p>
+<figure>
+<img src="./img/11-fig16-inverseur-point-milieu.png" alt="Inverseur à courroies croisées/non croisées, point milieu">
+<figcaption>Inverseur à courroies croisées, inverseur à courroies non croisées — point milieu de la poulie réceptrice.</figcaption>
+</figure>
+
 <h3>D. Comparatif</h3>
 <table>
-<thead><tr><th>Système</th><th>Avantages</th><th>Inconvénients</th></tr></thead>
+<thead><tr><th>Système de transmission</th><th>Avantages</th><th>Inconvénients</th></tr></thead>
 <tbody>
-<tr><td>Poulie-courroie</td><td>Variation d'entraxe possible ; souplesse de transmission ; limiteur de couple (glissement possible) ; grande durée de vie ; coût réduit ; $\eta>95\%$ ; silencieux</td><td>Conditions de travail (eau, poussière) ; rapport de transmission variable ; encombrement ; puissance limitée</td></tr>
-<tr><td>Chaîne-pignon</td><td>Puissances importantes ; variation d'entraxe possible ; synchronisme (obstacle) ; conditions de travail rudes ; coût inférieur aux engrenages ; $\eta>98\%$</td><td>Vibrations ; nécessité de lubrification et d'un carter ; bruit important ; $r>\frac18$</td></tr>
-<tr><td>Engrenages</td><td>Puissance très élevée ; durée de vie élevée ; orientation des arbres quelconque ; précision de la transmission ; $\eta>98\%$</td><td>Nécessité de lubrification et d'un carter ; usinage soigneux et entraxe très précis ; coût important ; $r>\frac17$</td></tr>
+<tr><td>Poulie-Courroie</td><td>Variation d'entraxe possible ; Souplesse de transmission ; Limiteur de couple (glissement possible) ; Grande durée de vie ; Coût réduit ; $\eta>95\%$ ; Silencieux</td><td>Conditions de travail (eau, poussière) ; Rapport de transmission variable… ; Encombrement ; Puissance limitée</td></tr>
+<tr><td>Chaîne - Pignon</td><td>Puissances importantes ; Variation d'entraxe possible ; Synchronisme (obstacle) ; Conditions de travail rudes ; Coût inférieur aux engrenages ; $\eta>98\%$</td><td>Vibrations ; Nécessité de lubrification ; Nécessité d'un carter ; Bruit important ; $r>\frac18$</td></tr>
+<tr><td>Engrenages</td><td>Puissance très élevée ; Durée de vie élevée ; Orientation des arbres quelconques ; Précision de la transmission ; $\eta>98\%$</td><td>Nécessité de lubrification ; Nécessité d'un carter ; Usinage soigneux et entraxe très précis ; Coût important ; $r>\frac17$</td></tr>
 </tbody>
 </table>
 </section>
 
 <section id="s4">
-<h2>4. Les accouplements</h2>
+<h2>IV. Les accouplements</h2>
 <h3>A. Accouplements rigides</h3>
-<p>Cas particulier de liaison encastrement entre deux arbres (voir chapitre liaisons).</p>
+<p>Voir cours de BE du mardi matin sur les liaisons encastrement.</p>
 <h3>B. Accouplements entre arbres alignés</h3>
-<p>Permettent de rattraper de petits défauts d'alignement entre deux arbres : désalignement radial, axial, angulaire, ou écart angulaire en torsion.</p>
-<h3>C. Accouplements élastiques / D. Accouplements flexibles</h3>
-<p>Autorisent un léger débattement (radial, axial ou angulaire) grâce à un élément élastique (manchon caoutchouc, soufflet métallique…), tout en transmettant le couple.</p>
-<h3>E. Joint de Oldham</h3>
-<p>Permet de transmettre une rotation entre deux arbres <strong>parallèles mais décalés</strong> (défaut de coaxialité), via une pièce intermédiaire coulissant selon deux directions perpendiculaires.</p>
-<h3>F. Joint de cardan</h3>
-<p>La liaison sphérique à doigt est réalisée à l'aide de deux liaisons pivots d'axes orthogonaux, en série. Il permet de transmettre une rotation entre deux arbres <strong>sécants</strong>, avec un angle de brisure $\alpha$ (limité en pratique à 40° environ).</p>
-<div class="block def">
-<span class="label">Relation cinématique (un seul cardan)</span>
-$$\theta_s=\arctan(\cos\alpha \cdot \tan\theta_e)$$
-$\theta_e$ : angle de rotation de l'arbre d'entrée ; $\theta_s$ : angle de rotation de l'arbre de sortie ; $\alpha$ : angle de brisure entre les deux arbres.
-</div>
 <figure>
-<svg viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
-<line x1="30" y1="90" x2="180" y2="90" stroke="#3b6fd8" stroke-width="4"/><text x="60" y="75" fill="#3b6fd8">Arbre d'entrée $\theta_e$</text>
-<circle cx="195" cy="90" r="14" fill="#f1f1ef" stroke="#1c2430"/>
-<line x1="210" y1="90" x2="380" y2="55" stroke="#c23b6c" stroke-width="4"/><text x="260" y="45" fill="#c23b6c">Arbre de sortie $\theta_s$</text>
-<path d="M180,120 A80,30 0 0 0 210,120" fill="none" stroke="#1c2430" stroke-dasharray="3,2"/>
-<text x="185" y="140" font-size="11">angle de brisure α</text>
-</svg>
-<figcaption>Fig. 4 — Joint de cardan simple entre deux arbres sécants : la vitesse de sortie n'est pas uniforme (elle dépend de $\theta_e$) sauf pour $\alpha=0$.</figcaption>
+<img src="./img/11-fig17-arbres-alignes.png" alt="Accouplements entre arbres alignés : sans défaut d'alignement, désalignement radial, axial, angulaire, écart angulaire en torsion">
+<figcaption>Sans défaut d'alignement, désalignement radial, désalignement axial, désalignement angulaire — écart angulaire en torsion.</figcaption>
 </figure>
-<div class="block remark">
-<span class="label">Remarques</span>
-<ul>
-<li>On peut réaliser un accouplement <strong>homocinétique</strong> (vitesse de sortie égale à tout instant à la vitesse d'entrée) en associant <strong>deux cardans</strong> montés en opposition.</li>
-<li>Dans l'automobile, l'appellation « joint de cardan » est souvent un abus de langage : il s'agit en réalité d'un <strong>joint tripode</strong> associé à un <strong>joint Rzeppa</strong>.</li>
-</ul>
+<h3>C. Accouplements élastiques</h3>
+<figure>
+<img src="./img/11-fig18-accouplements-elastiques.png" alt="Accouplements élastiques">
+<figcaption>Accouplements élastiques (repères 1 à 5).</figcaption>
+</figure>
+<h3>D. Accouplements flexibles</h3>
+<figure>
+<img src="./img/11-fig19-accouplements-flexibles.png" alt="Accouplements flexibles">
+<figcaption>Accouplement flexible à soufflet (repères 1 à 3).</figcaption>
+</figure>
+<h3>E. Joint de Oldham</h3>
+<figure>
+<img src="./img/11-fig20-joint-oldham.png" alt="Joint de Oldham">
+<figcaption>Joint de Oldham (repères 1, 2, 3).</figcaption>
+</figure>
+<h3>F. Joint de cardan</h3>
+<figure>
+<img src="./img/11-fig21-cardan-photo.png" alt="Joint de cardan">
+</figure>
+<p>La liaison sphérique à doigt est réalisée à l'aide de deux liaisons pivots d'axes orthogonaux, en série.</p>
+<figure>
+<img src="./img/11-fig22-cardan-exploded.png" alt="Joint de cardan en coupe et vue éclatée">
+</figure>
+<p>La relation entre angle de sortie et angle d'entree est : $\theta_s = \arctan(\cos\alpha \cdot \tan\theta_e)$.</p>
+<p>En pratique, l'angle de brisure (entre les arbres sécants) est au maximum de 40 degrés</p>
+<p>Remarques :</p>
+<p>- On peut réaliser un joint d'accouplement homocinétique (la vitesse de rotation de sortie reste à tout instant égale a la vitesse de rotation d'entrée) avec deux cardans.</p>
+<figure>
+<img src="./img/11-fig23-double-cardan-homocinetique.png" alt="Double cardan homocinétique (croisillon)">
+<figcaption>Croisillon — association de deux cardans.</figcaption>
+</figure>
+<p>- Dans l'automobile, parlez d'un joint de cardan et un abus de langage, il s'agit en fait d'un joint tripode et Rzeppa qui sont associés.</p>
+<figure>
+<img src="./img/11-fig24-joint-tripode-application.png" alt="Application automobile du joint tripode">
+<figcaption>joint tripode, arbre de roue, joint à rotule.</figcaption>
+</figure>
+<figure>
+<img src="./img/11-fig25-joint-tripode-coupe.png" alt="Joint tripode en coupe et vue éclatée">
+<figcaption>Direction (S,x'), Galet, Tulipe, Triaxe — vue éclatée.</figcaption>
+</figure>
+<h3>G. Joint tripode</h3>
+<figure>
+<img src="./img/11-fig26-joint-tripode-render.png" alt="Rendu 3D du joint tripode">
+</figure>
+<h3>H. Joint Rzeppa</h3>
+<figure>
+<img src="./img/11-fig27-joint-rzeppa.png" alt="Rendu 3D du joint Rzeppa">
+</figure>
+<h3>I. Roue libre et roue à cliquets</h3>
+<figure>
+<img src="./img/11-fig28-roue-libre-roue-cliquets.png" alt="Roue libre et roue à cliquets">
+<figcaption>Roue à rochet (bague intérieure), Bague extérieure, Cliquet, Ressort de compression.</figcaption>
+</figure>
+<p>La roue libre permet de transmettre la puissance entre deux arbres, mais uniquement pour un sens de rotation. C'est une transmission unidirectionnelle.</p>
+<h3>J. Embrayage</h3>
+<p>L'embrayage est un mécanisme qui permet d'accoupler ou de séparer, progressivement ou non, les arbres respectivement solidaires du moteur et du récepteur.</p>
+<figure>
+<img src="./img/11-fig29-embrayage-disque.png" alt="Embrayage à disque, vue en coupe">
+<figcaption>disque d'embrayage, moyeu, vilebrequin, garnitures, volant moteur — plateau de pression d'embrayage, anneaux de basculement, boulons entretoises, ressort à diaphragme, butée de débrayage, arbre primaire de boîte de vitesses, fourchette de débrayage, carter, ressorts tangentiels à lame.</figcaption>
+</figure>
+<p>Le couple transmissible par un embrayage a disques est donne dans le cas d'une modélisation a pression de contact uniforme par :</p>
+<div class="block def">
+$$C_f=\frac{2}{3}nNf\frac{r_2^3-r_1^3}{r_2^2-r_1^2}$$
+n : nombre de surfaces frottantes ; N : effort presseur ; f : facteur de frottement ; r<sub>2</sub> : grand rayon du disque ; r<sub>1</sub> : petit rayon du disque
 </div>
-<h3>G. Joint tripode / H. Joint Rzeppa</h3>
-<p>Ces deux joints homocinétiques équipent les transmissions automobiles (arbres de roue) : le joint tripode autorise un débattement axial (variation de longueur), le joint Rzeppa (à billes) transmet la rotation avec un angle de brisure important tout en restant homocinétique.</p>
+
+<h4>1. Principe d'un embrayage mono disque automobile</h4>
+<figure>
+<img src="./img/11-fig30-embrayage-monodisque-principe.png" alt="Principe d'un embrayage mono disque automobile">
+<figcaption>0 : bâti fixe ; 1 : plateau d'embrayage (solidaire de l'arbre moteur) ; 1' : couvercle en tôle emboutie ; 2 : arbre récepteur ; 3 : plateau de pression en fonte ; 4 : butée ; 5 : disque ; 6 : diaphragme ; 7 : porte-butée ; 8 : fourchette de commande.</figcaption>
+</figure>
+<p>Le débrayage est commandé par la fourchette 8 actionnée en A (Câble, commande hydraulique…) qui entraîne grâce au contact en C, la translation de l'ensemble {4,7}. L'effort axial en D entre la butée 4 et le diaphragme 6 entraîne la déformation élastique de ce dernier autour du point E. Ainsi le plateau 3 libère le disque 5 *, lequel est en liaison glissière d'axe Ox sur l'arbre récepteur 2.</p>
+<p>L'embrayage se fait par relâchement de l'effort en A et le retour du diaphragme dans sa position d'origine, lequel vient générer l'effort presseur sur le plateau 3.</p>
+
+<h4>2. Nature des matériaux de friction</h4>
+<p>Le matériau de friction rapporté sur le disque (collé ou riveté) est un composite comprenant des fils spéciaux, tissés, agglomérés par des liants à forte résistance thermique et mécanique. Les principales qualités d'une garniture de friction sont :</p>
+<p>- Facteur de frottement (directement lié au couple transmissible)</p>
+<p>- Résistance à l'usure (détermine la durée de vie)</p>
+<p>- Constance des caractéristiques (quelque soit le degré d'usure)</p>
+<p>- Résistance à l'effet de centrifugation</p>
+<p>- Résistance à la chaleur</p>
+
+<h4>3. Amortissement et couple à transmettre</h4>
+<p>En général, le disque d'embrayage ne se limite pas à un simple plateau en tôle muni de garnitures. La liaison entre la périphérie du disque a solidaire de la garniture et le moyeu central b est le plus souvent élastique. Ainsi le disque d'embrayage assure un rôle d'amortisseur de couple. Il évite les effets oscillations de couple propres aux moteurs thermiques classiques.</p>
+<figure>
+<img src="./img/11-fig31-amortisseur-couple.png" alt="Amortisseur de couple du disque d'embrayage">
+<figcaption>a : périphérie solidaire de la garniture ; b : moyeu central ; c : ressort(s) de compression.</figcaption>
+</figure>
+<p>Des ressorts de compressions c assurent l'élasticité de la liaison pivot a/b (Débattement de l'ordre de 15°). Ils n'entrent pas tous en action simultanément et leurs raideurs sont judicieusement choisies différentes. Il est ainsi possible d'obtenir une courbe d'amortissement pour laquelle le débattement angulaire n'est pas proportionnel au couple transmis.</p>
+<figure>
+<img src="./img/11-fig32-embrayage-ressorts-disque.png" alt="Disque d'embrayage avec ressorts de compression">
+</figure>
+
+<h4>4. Exemples de réalisations</h4>
+<p><em>a- Embrayage mono disque à commande par câble, à diaphragme</em></p>
+<figure>
+<img src="./img/11-fig33-embrayage-realisation-a.png" alt="Embrayage mono disque à commande par câble, à diaphragme">
+<figcaption>1 : Entrée ; 1' : Carter en tôle ; 2 : Sortie ; 3 : Plateau de pression ; 4 : Baque intérieure de la butée à billes ; 5 : Disque ; 6 : Diaphragme ; 7 : Manchon (en laison pivot glissant avec le tube-guide) ; 8 : Fourchette de commande.</figcaption>
+</figure>
+<p><em>b- Embrayage multi disque à commande pneumatique ou hydrauliqu</em></p>
+<figure>
+<img src="./img/11-fig34-embrayage-multidisque-pneumatique.png" alt="Embrayage multi disque à commande pneumatique ou hydraulique">
+<figcaption>1 : Entrée (ou sortie) - Cloche ; 2 : Sortie (ou entrée) - Moyeu ; 3 : Disques en liaison glissière par rapport à la cloche 2 ; 4 : Disques en liaison glissière par rapport au moyeu 1 ; 5 : Piston assurant l'existence de l'effort presseur ; 6 : Ressorts de rappel.</figcaption>
+</figure>
+<p><em>c- Embrayage multi disque à commande électromagnétique</em></p>
+<figure>
+<img src="./img/11-fig35-embrayage-multidisque-electromagnetique.png" alt="Embrayage multi disque à commande électromagnétique">
+<figcaption>1 : Entrée (ou sortie) - Moyeu ; 2 : Sortie (ou entrée) - Cloche ; 3 : Disques, en liaison glissière par rapport à l'ensemble contenant 1 ; 4 : Disques, en liaison glissière par rapport à la cloche 2 ; 5 : Poussoir ; 6 : Ressorts assurant l'existence de l'effort presseur ; 7 : Écrou freiné, permettant le réglage de l'entrefer ; 8 : Collecteur, recevant les balais assurant l'alimentation électrique de l'électro-aimant 9 ; 9 : Électro-aimant.</figcaption>
+</figure>
+
+<h3>K. Limiteurs de couple</h3>
+<figure>
+<img src="./img/11-fig36-limiteurs-couple.png" alt="Limiteurs de couple">
+</figure>
+<p>Ce sont des organes de sécurité. Ils permettent en cas d'efforts trop importants de désolidariser l'arbre d'entrée et l'arbre de sortie.</p>
+<p>Les autres systèmes de régulation seront abordés en BE du mardi matin.</p>
 </section>
 
 <section id="s5">
-<h2>5. Roue libre, embrayage, limiteurs, couplage, freins</h2>
-<h3>I. Roue libre et roue à cliquets</h3>
-<p>La roue libre permet de transmettre la puissance entre deux arbres, mais uniquement pour <strong>un seul sens de rotation</strong> : c'est une transmission unidirectionnelle.</p>
-<h3>J. Embrayage</h3>
-<p>L'embrayage est un mécanisme qui permet d'accoupler ou de séparer, progressivement ou non, les arbres respectivement solidaires du moteur et du récepteur.</p>
-<div class="block def">
-<span class="label">Couple transmissible par un embrayage à disques (pression de contact uniforme)</span>
-$$C_f=\frac{2}{3}.n.N.f.\frac{r_2^3-r_1^3}{r_2^2-r_1^2}$$
-$n$ : nombre de surfaces frottantes ; $N$ : effort presseur ; $f$ : facteur de frottement ; $r_2$ : grand rayon du disque ; $r_1$ : petit rayon du disque.
-</div>
-<figure>
-<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
-<circle cx="150" cy="110" r="90" fill="#f1f1ef" stroke="#1c2430"/>
-<circle cx="150" cy="110" r="40" fill="#fff" stroke="#1c2430"/>
-<circle cx="150" cy="110" r="3" fill="#1c2430"/>
-<line x1="150" y1="110" x2="150" y2="20" stroke="#1c2430" marker-end="url(#arEm)"/><text x="105" y="55" font-size="11">$r_2$ (grand rayon)</text>
-<line x1="150" y1="110" x2="150" y2="70" stroke="#c23b6c" marker-end="url(#arEm)"/><text x="155" y="90" font-size="11" fill="#c23b6c">$r_1$</text>
-<text x="150" y="210" text-anchor="middle" font-weight="700">Disque de friction — couronne $[r_1,r_2]$</text>
-<defs><marker id="arEm" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c2430"/></marker></defs>
-</svg>
-<figcaption>Fig. 5 — Disque d'embrayage : la surface frottante utile est la couronne comprise entre le petit rayon $r_1$ et le grand rayon $r_2$.</figcaption>
-</figure>
-<p>Les principales qualités attendues d'une garniture de friction sont : le facteur de frottement (lié directement au couple transmissible), la résistance à l'usure, la constance des caractéristiques (quel que soit le degré d'usure), la résistance à l'effet de centrifugation et la résistance à la chaleur.</p>
-<div class="block remark">
-<span class="label">Amortissement</span>
-Le disque d'embrayage assure le plus souvent un rôle d'<strong>amortisseur de couple</strong> (ressorts de compression entre la périphérie solidaire de la garniture et le moyeu central), afin d'éviter les effets d'oscillations de couple propres aux moteurs thermiques.
-</div>
-<p>Réalisations courantes : embrayage monodisque à commande par câble/diaphragme ; embrayage multidisque à commande pneumatique/hydraulique ou électromagnétique (par électro-aimant).</p>
-<h3>K. Limiteurs de couple</h3>
-<p>Organes de sécurité qui permettent, en cas d'efforts trop importants, de désolidariser l'arbre d'entrée et l'arbre de sortie.</p>
+<h2>V. Couplage hydraulique et frein</h2>
 <h3>L. Couplage hydraulique</h3>
-<p>La transmission de l'énergie de l'arbre moteur vers l'arbre récepteur se fait par couplage hydraulique : une roue à aubes « pompe » fournit l'énergie cinétique au fluide hydraulique, une roue à aubes « turbine » retransforme cette énergie cinétique en énergie mécanique de rotation. Le couvercle assure l'étanchéité ; <strong>il n'y a pas de liaison mécanique</strong> entre l'arbre d'entrée et l'arbre de sortie — le coupleur filtre en partie les phénomènes vibratoires.</p>
+<figure>
+<img src="./img/11-fig37-couplage-hydraulique.png" alt="Couplage hydraulique">
+<figcaption>arbre moteur ($\omega_p$, $C_p$), pompe, turbine, couvercle, arbre récepteur ($\omega_t$, $C_t$), bâti — veine fluide.</figcaption>
+</figure>
+<p>La transmission de l'énergie de l'arbre moteur vers l'arbre récepteur peut se faire par couplage hydraulique. Une roue à aubes « pompe » fournit l'énergie cinétique au fluide hydraulique. La roue a aubes « turbine » transforme cette énergie cinétique en énergie mécanique de rotation. Le couvercle assure l'étanchéité. Il n'y a pas de liaison mécanique entre l'arbre d'entrée et l'arbre de sortie. Le coupleur filtre en partie les phénomènes vibratoires.</p>
 <h3>M. Frein</h3>
-<p>La fonction du frein est le plus souvent de ralentir ou d'arrêter un arbre en mouvement. Systèmes les plus fréquents : freins à disque, freins à tambour.</p>
+<figure>
+<img src="./img/11-fig38-frein-disque-tambour.png" alt="Frein à disque et frein à tambour">
+<figcaption>Frein à disque (pare-saleté, canalisation hydraulique, disque, goujon, piston, moyeu de roue, garniture de friction) — Frein à tambour (tambour, garniture de frein, ressort de rappel, piston, cylindre de roue, segment).</figcaption>
+</figure>
+<p>Dans le cas des freins, la fonction est le plus souvent de ralentir ou d'arrêter l'arbre en mouvement. Beaucoup de systèmes de freinage existent : freins à tambours, à disques pour les plus fréquents.</p>
 </section>
 
 <section id="quiz">
