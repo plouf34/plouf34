@@ -57,26 +57,15 @@ def parse_number_and_title(filename):
     return num, rest.strip()
 
 
-def sources_bar(folder):
-    items = SUBJECT_SOURCES.get(folder, [])
-    if not items:
-        return ""
-    chips = ""
-    for name, ville, url, icon, _num_range, password in items:
-        icon_html = f'<img src="{esc(icon)}" class="source-icon" alt="">' if icon else "🏫"
-        pin = f'<span class="source-pin">📍 {esc(ville)}</span>'
-        if password:
-            pin += f'<span class="source-pin">🔑 {esc(password)}</span>'
-        if url:
-            chips += (f'<div class="source-block">'
-                      f'<a class="source-chip" href="{esc(url)}" target="_blank" rel="noopener">{icon_html} {esc(name)} {pin} <span class="arrow">↗</span></a>'
-                      f'</div>')
-        else:
-            chips += (f'<div class="source-block">'
-                      f'<span class="source-chip source-chip-static">{icon_html} {esc(name)} {pin}</span>'
-                      f'</div>')
-    label = "Source" if len(items) == 1 else "Sources"
-    return f'<div class="sources-bar"><span class="sources-label">{label} :</span>{chips}</div>'
+def source_chip_html(name, ville, url, icon, password=None):
+    icon_html = f'<img src="{esc(icon)}" class="source-icon" alt="">' if icon else "🏫"
+    pin = f'<span class="source-pin">📍 {esc(ville)}</span>'
+    if password:
+        pin += f'<span class="source-pin">🔑 {esc(password)}</span>'
+    if url:
+        return (f'<a class="source-chip-inline" href="{esc(url)}" target="_blank" rel="noopener">'
+                f'{icon_html} {esc(name)} {pin} <span class="arrow">↗</span></a>')
+    return f'<span class="source-chip-inline source-chip-static">{icon_html} {esc(name)} {pin}</span>'
 
 
 def table_row(num, titre, url):
@@ -89,8 +78,9 @@ def table_row(num, titre, url):
             f'<td class="col-link">{link_html}</td></tr>')
 
 
-def section_row(title):
-    return f'<tr class="section-row"><td colspan="3">{esc(title)}</td></tr>'
+def section_row(title, chip_html=""):
+    sep = " — " if chip_html else ""
+    return f'<tr class="section-row"><td colspan="3">{esc(title)}{sep}{chip_html}</td></tr>'
 
 
 def empty_row():
@@ -128,8 +118,14 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
 
     sources = SUBJECT_SOURCES.get(folder, [])
     if len(sources) <= 1:
-        # Source unique (ou aucune) : un seul pavé "Cours Profs", comme avant.
-        body += section_row("2. Cours Profs")
+        # Source unique (ou aucune) : un seul pavé "Cours Profs", avec la
+        # puce source (nom + ville + lien cliquable) directement dans l'en-tête.
+        if sources:
+            name, ville, url, icon, _num_range, password = sources[0]
+            chip = source_chip_html(name, ville, url, icon, password)
+        else:
+            chip = ""
+        body += section_row("2. Cours Profs", chip)
         if profs_files:
             for f in profs_files:
                 num, titre = parse_number_and_title(f)
@@ -139,12 +135,13 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
             body += empty_row()
     else:
         # Plusieurs sources : un pavé "Cours Profs — <source>" par source,
-        # les fichiers étant attribués selon leur numéro (num_range).
+        # avec la puce source dans l'en-tête, les fichiers étant attribués
+        # selon leur numéro (num_range).
         assigned = set()
         section_idx = 2
-        for name, ville, _url, _icon, num_range, _password in sources:
-            short_name = name.split(" — ")[0]
-            body += section_row(f"{section_idx}. Cours Profs — {short_name} ({ville})")
+        for name, ville, url, icon, num_range, password in sources:
+            chip = source_chip_html(name, ville, url, icon, password)
+            body += section_row(f"{section_idx}. Cours Profs", chip)
             section_idx += 1
             matched = []
             for f in profs_files:
@@ -170,7 +167,7 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
 
     return (f'<section id="{anchor}" class="subject">'
             f'<h2 class="subject-title">{emoji} {esc(label)}</h2>'
-            f'{sources_bar(folder)}{body}</section>')
+            f'{body}</section>')
 
 
 def main():
@@ -258,19 +255,17 @@ def main():
   }}
   .subject:first-of-type .subject-title {{ border-top: none; margin-top: 4px; }}
 
-  .sources-bar {{ display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 8px 6px 10px 6px; font-size: 12px; }}
-  .sources-label {{ color: var(--sub); font-weight: 600; }}
-  .source-chip {{
+  .source-chip-inline {{
     display: inline-flex; align-items: center; gap: 4px;
     background: var(--card-bg); border: 1px solid var(--border);
-    padding: 5px 10px; border-radius: 14px;
-    color: var(--accent); font-weight: 600; text-decoration: none; font-size: 12px;
+    padding: 3px 9px; border-radius: 12px; margin-left: 4px;
+    color: var(--accent); font-weight: 600; text-decoration: none;
+    font-size: 11px; text-transform: none; letter-spacing: normal;
   }}
-  .source-chip-static {{ color: var(--text); }}
-  .source-chip .arrow {{ opacity: .6; }}
-  .source-icon {{ height:14px; width:auto; border-radius:2px; vertical-align:middle; }}
-  .source-block {{ display: flex; }}
-  .source-pin {{ opacity: .65; font-weight: 500; font-size: 11px; }}
+  .source-chip-inline.source-chip-static {{ color: var(--section-text); }}
+  .source-chip-inline .arrow {{ opacity: .6; }}
+  .source-icon {{ height:13px; width:auto; border-radius:2px; vertical-align:middle; }}
+  .source-pin {{ opacity: .7; font-weight: 500; }}
 
   table {{
     width: 100%; border-collapse: collapse;
