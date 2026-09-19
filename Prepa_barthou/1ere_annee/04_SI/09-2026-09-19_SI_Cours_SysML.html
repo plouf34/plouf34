@@ -34,7 +34,7 @@ h3{font-size:1.1rem; margin-top:1.6rem;}
 h4{font-size:1rem; margin-top:1.2rem;}
 code,.mono{font-family:var(--font-mono);}
 .layout{display:flex; max-width:1250px; margin:0 auto;}
-nav.toc{width:265px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc{width:275px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
 nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
 nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
 nav.toc ol ol{margin:.15rem 0 .4rem 1rem;}
@@ -55,6 +55,7 @@ p{margin:.6rem 0;}
 .correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
 .retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
 .retenir>.label{color:#cfe0f5;}
+.question{font-weight:700; text-align:center; margin:1rem 0; font-style:italic;}
 figure{margin:1.2rem 0; text-align:center;}
 figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
 figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
@@ -81,17 +82,21 @@ mjx-container{overflow-x:auto; max-width:100%;}
 <nav class="toc">
 <h4>Sommaire</h4>
 <ol>
-  <li class="top"><a href="#s1">1. Rôle de SysML</a></li>
-  <li class="top"><a href="#s2">2. Structure : les 9 diagrammes</a></li>
-  <li class="top"><a href="#s3">3. Système étudié : le drone CinéDrone</a></li>
-  <li class="top"><a href="#s4">4. Diagramme des exigences (req)</a></li>
-  <li class="top"><a href="#s5">5. Diagramme de contexte</a></li>
-  <li class="top"><a href="#s6">6. Diagramme des cas d'utilisation (uc)</a></li>
-  <li class="top"><a href="#s7">7. Diagramme de séquence (sd)</a></li>
-  <li class="top"><a href="#s8">8. Diagramme d'états (stm)</a></li>
-  <li class="top"><a href="#s9">9. Diagramme de définition de blocs (bdd)</a></li>
-  <li class="top"><a href="#s10">10. Diagramme de bloc interne (ibd)</a></li>
-  <li class="top"><a href="#s11">11. Rappel de vocabulaire</a></li>
+  <li class="top"><a href="#s1">1. Rôle</a></li>
+  <li class="top"><a href="#s2">2. Structure</a></li>
+  <li class="top"><a href="#s3">3. Système souhaité</a>
+    <ol>
+      <li><a href="#s31">3.1. Un drone pour le cinéma</a></li>
+      <li><a href="#s32">3.2. Diagramme transversal</a></li>
+      <li><a href="#s33">3.3. Diagrammes comportementaux</a></li>
+    </ol>
+  </li>
+  <li class="top"><a href="#s4">4. Système réel</a>
+    <ol>
+      <li><a href="#s41">4.1. Diagrammes structurels</a></li>
+    </ol>
+  </li>
+  <li class="top"><a href="#s5">5. Rappel sur le vocabulaire</a></li>
   <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
   <li class="top"><a href="#sources">Sources</a></li>
 </ol>
@@ -106,105 +111,143 @@ mjx-container{overflow-x:auto; max-width:100%;}
 
 <p class="access-note">Document original (PDF professeur) protégé par mot de passe sur le site source — voir la section <a href="#sources">Sources</a> ci-dessous pour le mot de passe d'accès au site <code>aroux-sii.fr</code>.</p>
 
-<section id="s1">
-<h2>1. Rôle de SysML</h2>
-<p>SysML (<em>System Modeling Language</em>) est un <strong>langage de modélisation graphique</strong> spécifique au domaine de l'Ingénierie Système. Il permet la <strong>spécification, l'analyse, la conception, la vérification et la validation</strong> des systèmes et sous-systèmes.</p>
-<p>Il permet à tous les acteurs d'un projet de parler un même langage, chacun faisant évoluer le modèle collectif avec l'avancement du projet. Il est particulièrement utile pour <strong>documenter des projets</strong> faisant intervenir de nombreux acteurs de différents métiers (logiciel, mécanique, électrique…), et est adapté aux grands projets (transport, infrastructure) — utilisé par des groupes comme Airbus, Alsthom, Peugeot, EADS…</p>
 <div class="block remark">
-<span class="label">Remarque — origine</span>
-SysML dérive d'UML (<em>Unified Modeling Language</em>), langage centré sur l'ingénierie logicielle, dont il reprend une partie des diagrammes en les adaptant à des systèmes pluritechnologiques (pas seulement du logiciel).
-</div>
-<div class="block remark">
-<span class="label">Attention — à ne pas confondre</span>
+<span class="label">Compétences attendues</span>
 <ul>
-<li>La <strong>méthode</strong> Ingénierie Système avec les <strong>outils</strong> comme SysML qui favorisent la mise en place du processus IS : <strong>SysML n'est pas une méthode</strong>, seulement un langage de représentation.</li>
-<li>Un <strong>système</strong> (modèle réalisé) avec son <strong>instance</strong> (un système particulier réel correspondant au modèle). Exemple : système = Motocyclette ; instance = Honda Gold Wing 1832 cm³.</li>
+<li>Décrire le besoin et les exigences.</li>
+<li>Traduire un besoin fonctionnel en exigences.</li>
+<li>Définir les domaines d'application et les critères technico-économiques et environnementaux.</li>
+<li>Qualifier et quantifier les exigences.</li>
+<li>Évaluer l'impact environnemental et sociétal.</li>
+<li>Isoler un système et justifier l'isolement.</li>
+<li>Définir les éléments influents du milieu extérieur.</li>
+<li>Identifier la nature des flux échangés traversant la frontière d'étude.</li>
+<li>Associer les fonctions aux constituants.</li>
+<li>Identifier et décrire les chaines fonctionnelles du système.</li>
+<li>Identifier et décrire les liens entre les chaines fonctionnelles.</li>
+<li>Caractériser un constituant de la chaine d'information.</li>
+<li><strong>Savoir lire un diagramme SysML</strong></li>
 </ul>
 </div>
-<p><strong>Compétences attendues associées à ce chapitre :</strong> décrire le besoin et les exigences ; traduire un besoin fonctionnel en exigences ; définir les domaines d'application et les critères technico-économiques et environnementaux ; qualifier et quantifier les exigences ; évaluer l'impact environnemental et sociétal ; isoler un système et justifier l'isolement ; définir les éléments influents du milieu extérieur ; identifier la nature des flux échangés traversant la frontière d'étude ; associer les fonctions aux constituants ; identifier et décrire les chaînes fonctionnelles du système et les liens entre elles ; caractériser un constituant de la chaîne d'information ; savoir lire un diagramme SysML.</p>
+
+<section id="s1">
+<h2>1. Rôle</h2>
+<p>SysML est un <strong>langage de modélisation</strong> (<em>System Modeling Language</em>) spécifique au domaine de l'Ingénierie Système.</p>
+<ul>
+<li>Il permet la <strong>spécification, l'analyse, la conception, la vérification et la validation</strong> des systèmes et sous-systèmes.</li>
+<li>Il permet à <strong>tous les acteurs</strong> de parler un <strong>même langage</strong>, chacun d'eux faisant évoluer le modèle collectif avec l'avancement du projet.</li>
+<li>Il est particulièrement utile pour <strong>documenter les projets</strong> faisant intervenir de nombreux acteurs de différents génies (logiciel, mécanique, électrique …).</li>
+<li>Il est adapté aux grands projets (transport, infrastructure) et est utilisé par des groupes comme Airbus, Alsthom, Peugeot, EADS …</li>
+</ul>
+<p><em>SysML dérive d'UML (Unified Modeling Language) centré sur l'ingénierie logicielle.</em></p>
+<p>Il ne faut pas confondre :</p>
+<ul>
+<li>la <strong>méthode</strong> Ingénierie Système avec les <strong>outils</strong> comme SysML favorisant la mise en place du processus IS, <strong><u>SysML n'est pas une méthode</u></strong>.</li>
+<li>un <strong>système</strong> (modèle réalisé) avec son <strong>instance</strong> (un système particulier réel correspondant au modèle).</li>
+</ul>
+<p>Par exemple : système = Motocyclette ← Instance = Honda Gold Wing 1832 cc.</p>
 </section>
 
 <section id="s2">
-<h2>2. Structure : les 9 diagrammes</h2>
-<p>SysML est essentiellement graphique. Il repose sur une série de <strong>9 diagrammes</strong> permettant de décrire les exigences attendues ou imposées, la structure du système et le comportement souhaité, selon différents points de vue. Les diagrammes et leurs éléments sont interconnectés par des liens qui permettent de vérifier à chaque instant la cohérence globale du modèle.</p>
-<div class="block remark">
-<span class="label">Remarque</span>
-Il n'y a <strong>pas d'ordre imposé</strong> pour commencer les diagrammes : ceux-ci sont enrichis par chaque acteur, au fur et à mesure de l'avancement de l'étude.
-</div>
-<table>
-<thead><tr><th>Famille</th><th>Diagramme</th><th>Type</th><th>Rôle</th></tr></thead>
-<tbody>
-<tr><td rowspan="2">Transversal</td><td>Diagramme d'exigences</td><td class="mono">req</td><td>Décrire les exigences (contrat client/réalisateur)</td></tr>
-<tr><td>Diagramme de contexte</td><td class="mono">bdd</td><td>Isoler le système et son milieu extérieur (usage non normalisé du type <span class="mono">bdd</span>)</td></tr>
-<tr><td rowspan="4">Structurels</td><td>Diagramme de blocs (packages)</td><td class="mono">pkg</td><td>Organiser le modèle en paquets</td></tr>
-<tr><td>Diagramme de définition de blocs</td><td class="mono">bdd</td><td>Décrire la structure (« qui contient quoi ? »)</td></tr>
-<tr><td>Diagramme de bloc interne</td><td class="mono">ibd</td><td>Décrire les flux matière/énergie/information entre blocs</td></tr>
-<tr><td>Diagramme paramétrique</td><td class="mono">par</td><td>Relier les propriétés par des contraintes (équations)</td></tr>
-<tr><td rowspan="4">Comportementaux</td><td>Diagramme de cas d'utilisation</td><td class="mono">uc</td><td>Décrire les services rendus par le système</td></tr>
-<tr><td>Diagramme de séquences</td><td class="mono">sd</td><td>Décrire le scénario d'un cas d'utilisation</td></tr>
-<tr><td>Diagramme d'états</td><td class="mono">stm</td><td>Décrire les états et transitions du système</td></tr>
-<tr><td>Diagramme d'activité</td><td class="mono">act</td><td>Décrire l'enchaînement d'actions</td></tr>
-</tbody>
-</table>
+<h2>2. Structure</h2>
+<p>SysML est essentiellement graphique.</p>
+<ul>
+<li>Il repose sur une série de <strong>9 Diagrammes</strong> permettant de décrire les <strong>exigences</strong> attendues ou imposées, la <strong>structure</strong> du système et le <strong>comportement</strong> souhaité selon différents points de vue.</li>
+<li>Les diagrammes et leurs éléments sont interconnectés par des liens permettant de vérifier à chaque instant la cohérence globale du modèle.</li>
+<li>Il n'y a <strong>pas d'ordre pour commencer les diagrammes</strong>, ceux-ci sont enrichis par chaque acteur, au fur et à mesure de l'avancement de l'étude.</li>
+</ul>
+<figure>
+<svg viewBox="0 0 620 380" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11.5">
+<text x="10" y="18" font-weight="700" font-size="12">TypeDiagramme [TypeElémentModèleSysML] NomElement [Point de vue : optionnel]</text>
+<rect x="30" y="35" width="150" height="55" fill="#fdf3dd" stroke="#c98a12"/><text x="105" y="55" text-anchor="middle">Diagramme de</text><text x="105" y="68" text-anchor="middle">contexte</text><text x="105" y="81" text-anchor="middle" font-style="italic" font-size="10">souvent Type bdd</text>
+<text x="35" y="105" font-size="10" font-style="italic">(ce type de diagramme</text><text x="35" y="117" font-size="10" font-style="italic">n'est pas normalisé)</text>
+<rect x="230" y="150" width="150" height="55" fill="#e9f1fd" stroke="#3b6fd8"/><text x="305" y="182" text-anchor="middle" font-weight="700">Diagrammes SysML</text>
+<line x1="105" y1="90" x2="270" y2="150" stroke="#1c2430"/>
+<rect x="430" y="60" width="150" height="55" fill="#f2ecfd" stroke="#7c4fd6"/><text x="505" y="80" text-anchor="middle">Diagrammes</text><text x="505" y="93" text-anchor="middle">Structurels</text>
+<line x1="380" y1="165" x2="430" y2="90" stroke="#1c2430"/>
+<rect x="230" y="30" width="150" height="55" fill="#e9f8ee" stroke="#2fa365"/><text x="305" y="52" text-anchor="middle">Diagramme</text><text x="305" y="65" text-anchor="middle">d'exigences</text>
+<line x1="305" y1="150" x2="305" y2="85" stroke="#1c2430"/>
+<rect x="430" y="230" width="180" height="70" fill="#fde9f0" stroke="#c23b6c"/><text x="520" y="252" text-anchor="middle">Diagrammes</text><text x="520" y="265" text-anchor="middle">Comportementaux</text><text x="520" y="278" text-anchor="middle" font-style="italic" font-size="10">(Behavior)</text>
+<line x1="380" y1="190" x2="430" y2="255" stroke="#1c2430"/>
+<rect x="450" y="10" width="130" height="35" fill="#fff" stroke="#3b6fd8"/><text x="515" y="32" text-anchor="middle" font-size="10">Diagramme de bloc interne — ibd</text>
+<rect x="450" y="130" width="130" height="35" fill="#fff" stroke="#3b6fd8"/><text x="515" y="152" text-anchor="middle" font-size="10">Diagramme de définition de blocs — bdd</text>
+<rect x="450" y="90" width="130" height="35" fill="#fff" stroke="#7c4fd6"/><text x="515" y="112" text-anchor="middle" font-size="10">Diagramme paramétrique — par</text>
+<rect x="450" y="55" width="130" height="30" fill="#fff" stroke="#7c4fd6" font-size="10"/><text x="515" y="75" text-anchor="middle" font-size="10">Diagramme de packages — pkg</text>
+<rect x="450" y="330" width="150" height="30" fill="#fff" stroke="#c23b6c"/><text x="525" y="350" text-anchor="middle" font-size="10">Diagramme de cas d'utilisation — uc</text>
+<rect x="450" y="365" width="150" height="0" fill="none"/>
+<rect x="270" y="330" width="150" height="30" fill="#fff" stroke="#c23b6c"/><text x="345" y="350" text-anchor="middle" font-size="10">Diagramme d'états — stm</text>
+<rect x="270" y="295" width="150" height="30" fill="#fff" stroke="#c23b6c"/><text x="345" y="315" text-anchor="middle" font-size="10">Diagramme de séquences — sd</text>
+<rect x="450" y="295" width="150" height="30" fill="#fff" stroke="#c23b6c"/><text x="525" y="315" text-anchor="middle" font-size="10">Diagramme d'activité — act</text>
+<text x="10" y="345" font-size="10" font-style="italic">Cartouche normalisé</text>
+<text x="10" y="360" font-size="10" font-style="italic">Liaison normalisée entre les éléments</text>
+</svg>
+<figcaption>Fig. 1 — Structure des 9 diagrammes SysML : diagramme d'exigences (transversal), diagrammes structurels (bdd/ibd/pkg/par) et diagrammes comportementaux (uc/sd/stm/act) ; le diagramme de contexte, de type bdd, n'est pas normalisé.</figcaption>
+</figure>
 
-<h3>Le cartouche</h3>
+<h3>Éléments graphiques des diagrammes</h3>
 <p>Chaque diagramme SysML représente un élément particulier du modèle selon un certain point de vue : afin de le repérer, chaque diagramme comporte un « cartouche » positionné sur la partie supérieure gauche du cadre.</p>
 <figure>
 <svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
 <rect x="10" y="10" width="330" height="34" fill="#fff" stroke="#1c2430" stroke-width="1.5"/>
 <text x="20" y="32" font-size="15"><tspan font-weight="700">req</tspan> [Package] Airbus A380 [Économique]</text>
 <line x1="330" y1="27" x2="480" y2="80" stroke="#3b6fd8" stroke-width="1.2"/>
-<text x="485" y="84" font-size="13" fill="#3b6fd8">Point de vue utilisé (informatif, optionnel)</text>
+<text x="485" y="84" font-size="13" fill="#3b6fd8">Point de vue utilisé (informatif et optionnel)</text>
 <line x1="200" y1="44" x2="280" y2="115" stroke="#3b6fd8" stroke-width="1.2"/>
-<text x="285" y="119" font-size="13" fill="#3b6fd8">Nom du système modélisé</text>
+<text x="285" y="119" font-size="13" fill="#3b6fd8">Nom du système modélisé par le langage SysML</text>
 <line x1="140" y1="44" x2="220" y2="150" stroke="#3b6fd8" stroke-width="1.2"/>
-<text x="225" y="154" font-size="13" fill="#3b6fd8">Type d'élément dans l'arborescence du modèle</text>
+<text x="225" y="154" font-size="13" fill="#3b6fd8">Type d'élément dans l'arborescence informatique du modèle SysML</text>
 <line x1="30" y1="44" x2="90" y2="185" stroke="#3b6fd8" stroke-width="1.2"/>
-<text x="95" y="189" font-size="13" fill="#3b6fd8">Type de diagramme (normalisé, en gras) — ici : req</text>
+<text x="95" y="189" font-size="13" fill="#3b6fd8">Indicateur normalisé du type de diagramme, indiqué en gras : il s'agit ici d'un diagramme des exigences (requirement)</text>
 </svg>
-<figcaption>Fig. 1 — Cartouche d'un diagramme SysML : type normalisé, type d'élément, nom du système, point de vue.</figcaption>
+<figcaption>Fig. 2 — Le cartouche d'un diagramme.</figcaption>
 </figure>
-<p>Les parties suivantes présentent les diagrammes du langage SysML sur l'exemple d'un <strong>drone multi-rotors</strong> (« CinéDrone ») utilisé pour la prise de vue aérienne lors de la réalisation de films ou de reportages.</p>
+<p>Les parties suivantes présentent les neufs diagrammes du langage SysML sur l'exemple particulier d'un <strong>drone multi-rotors</strong> utilisé pour la prise de vue aérienne lors de la réalisation de films ou de reportages.</p>
 </section>
 
 <section id="s3">
-<h2>3. Système étudié : le drone CinéDrone</h2>
-<h3>3.1. Le besoin du client</h3>
-<p>Afin de réaliser des prises de vue aériennes en haute définition lors de la réalisation de reportages ou de films, des drones sont fréquemment utilisés. Ces appareils sont loués par la production à des entreprises spécialisées qui fournissent, outre le matériel, un pilote maîtrisant parfaitement le vol de son engin et pouvant donc répondre à toutes les demandes du réalisateur et de son chef opérateur, le tout pour un prix très raisonnable par rapport aux solutions classiques utilisant des avions ou des hélicoptères : on passe en effet d'un prix horaire d'au moins 2000 € HT pour un avion ou un hélicoptère à un prix journalier de 1000 à 3000 € HT selon les prestations attendues pour le drone.</p>
-<h3>3.2. Caractéristiques des drones</h3>
+<h2>3. Système souhaité</h2>
+<p>Les diagrammes qui suivent font appel aux <strong>caractéristiques attendues du produit</strong>. Ils permettent de définir ce que l'on attend du système et comment les objectifs seront atteints.</p>
+
+<h3 id="s31">3.1. Un drone pour le cinéma</h3>
+<h4>3.1.1. Le besoin du client</h4>
+<p>Afin de réaliser des prises de vue aériennes en haute définition lors de la réalisation de reportages ou de films, des drones sont fréquemment utilisés. Ces appareils sont loués par la production à des entreprises spécialisées qui fournissent, outre le matériel, un pilote maîtrisant parfaitement le vol de son engin et pouvant donc répondre à toutes les demandes du réalisateur et de son chef opérateur, le tout pour un prix très raisonnable par rapport aux solutions classiques utilisant des avions ou des hélicoptères : on passe en effet d'un prix horaire d'au moins 2000 € HT pour un avion ou un hélicoptère à un prix journalier de 1 000 à 3000 € HT selon les prestations attendues pour le drone.</p>
+<p><em>Vous trouverez une vidéo de démonstration ici : <a href="http://cine-drone.fr/video.html" target="_blank" rel="noopener">http://cine-drone.fr/video.html</a></em></p>
+<h4>3.1.2. Caractéristiques des drones</h4>
 <p>Le tableau ci-dessous montre les principales différences des trois modèles de drones S (Small), L (Large) et XL (Extra-Large) de l'entreprise Ciné-Drone.</p>
 <table>
 <thead><tr><th>Caractéristiques</th><th>Modèle S</th><th>Modèle L</th><th>Modèle XL</th></tr></thead>
 <tbody>
-<tr><td>Moteurs</td><td>6 rotors 15 A – 12 V</td><td>8 rotors 30 A – 12 V</td><td>8 rotors 60 A – 12 V</td></tr>
-<tr><td>Charge embarquée</td><td>jusqu'à 1,5 kg</td><td>jusqu'à 2,3 kg</td><td>jusqu'à 5 kg</td></tr>
+<tr><td>Moteurs</td><td>6 rotors 15 A - 12 V</td><td>8 rotors 30 A - 12 V</td><td>8 rotors 60 A - 12 V</td></tr>
+<tr><td>Charge embarquée</td><td>Jusqu'à 1,5 kg</td><td>Jusqu'à 2,3 kg</td><td>Jusqu'à 5 kg</td></tr>
 <tr><td>Charge maximale</td><td>3 kg</td><td>5 kg</td><td>14 kg</td></tr>
 <tr><td>Exemple de caméra</td><td>Go-Pro 2</td><td>Black Magic</td><td>Red Epic</td></tr>
 <tr><td>Vent maximal</td><td>25 km/h</td><td>35 km/h</td><td>65 km/h</td></tr>
 <tr><td>Durée de vol maximale</td><td>12 min</td><td>8 min</td><td>5 min</td></tr>
 </tbody>
 </table>
-<p>Le modèle étudié dans la suite du chapitre est le <strong>Drone CinéDrone L</strong>.</p>
-</section>
 
-<section id="s4">
-<h2>4. Diagramme des exigences (req)</h2>
-<div class="block def">
-<span class="label">Définition — exigence</span>
-Une <strong>exigence</strong> permet de spécifier une fonction que doit assurer le système. Les exigences établissent le contrat entre client et réalisateur du futur système (Cahier des Charges Fonctionnel, CdCF).
-</div>
-<p><strong>Question posée par ce diagramme :</strong> « Quelles sont les exigences auxquelles le système doit répondre ? »</p>
-<p>Le diagramme d'exigences, noté <span class="mono">req</span> (<em>SysML Requirements Diagram</em>), permet de représenter toutes les exigences du système (environnementales, économiques, fonctionnelles, techniques…). Les éléments graphiques utilisés sont principalement des rectangles avec un titre représentant l'exigence, un identifiant sous forme de numéro et une description textuelle libre mais concise. Les exigences sont en général organisées de haut en bas, du général au particulier.</p>
-<p>Les exigences peuvent être reliées entre elles par trois types de relations :</p>
+<h3 id="s32">3.2. Diagramme transversal</h3>
+<h4>3.2.1. Diagramme des exigences (req)</h4>
+<p style="color:#c0392b;">Une <strong>exigence</strong> permet de spécifier une <strong>fonction</strong> que doit assurer le système.</p>
+<p>Les exigences établissent le contrat entre client et réalisateur du futur système (CdCF).</p>
+<p class="question">« Quelles sont les exigences auxquelles le système doit répondre ? »</p>
+<p>Le diagramme d'exigences noté <strong>req</strong> (<em>SysML Requirements Diagram</em>) permet de représenter toutes les exigences du système (environnementales, économiques, fonctionnelles, techniques…).</p>
+<p>Les éléments graphiques utilisés dans ce diagramme sont principalement des rectangles avec un titre représentant les exigences, un identifiant sous forme de numéro et une description textuelle libre mais concise. Les exigences sont en général organisées de haut en bas du général au particulier. Un chiffre ordonne les exigences et permet de juger de leur niveau hiérarchique.</p>
+<p>Les exigences peuvent être reliées entre elles par des relations de <strong>contenance</strong>, de <strong>raffinement</strong>, ou de <strong>dérivation</strong> :</p>
 <ul>
-<li><strong>Contenance</strong> : décompose une exigence composite en plusieurs exigences unitaires, plus faciles à tracer vis-à-vis de l'architecture ou des tests.</li>
-<li><strong>Raffinement</strong> (« <span class="mono">refine</span> ») : ajout de précisions, par exemple des données quantitatives.</li>
-<li><strong>Dérivation</strong> (« <span class="mono">derive</span> » ou « <span class="mono">deriveReqt</span> ») : relie des exigences de niveaux différents (ex. exigence système → exigence sous-système). Implique en général des choix d'architecture.</li>
+<li>La <strong>contenance</strong> permet de décomposer une exigence composite en plusieurs exigences unitaires, plus faciles ensuite à tracer vis-à-vis de l'architecture ou des tests.</li>
+<li>Le <strong>raffinement</strong> (« <span class="mono">refine</span> ») consiste en l'ajout de précisions, par exemple de données quantitatives.</li>
+<li>La <strong>dérivation</strong> (« <span class="mono">derive</span> » ou « <span class="mono">deriveReqt</span> ») consiste à relier des exigences de niveaux différents, par exemple des exigences système à des exigences de niveau sous-système, etc. Elle implique généralement des choix d'architecture.</li>
 </ul>
-<div class="block remark">
-<span class="label">Remarque importante</span>
-Il est possible d'ajouter des blocs « <span class="mono">block</span> » qui permettent de préciser, par des relations « <span class="mono">satisfy</span> », les éléments satisfaisant les exigences ciblées. Ce diagramme doit rester le plus simple possible pour rester lisible : il est inutile de poser toutes les exigences, sauf cas très particuliers ; on peut réaliser plusieurs diagrammes d'exigences en regroupant par secteur.
-</div>
+<p><u>Remarque</u> : Ce diagramme devra être le plus simple possible pour rester lisible : il est donc inutile de poser toutes les exigences, sauf cas très particuliers. De plus, pour améliorer sensiblement la compréhension de la problématique, il est possible de réaliser plusieurs diagrammes d'exigences si nécessaire en regroupant par exemple les exigences par secteur.</p>
+<p><u>Remarque importante</u> : Dans certains cas, il est possible d'ajouter des blocs « <span class="mono">block</span> » qui permettent de préciser, par des conditions « <span class="mono">satisfy</span> », les éléments satisfaisant les exigences ciblées.</p>
+<p><em>Illustration :</em></p>
+<p>Pour le système étudié, il est possible de mettre en place le diagramme présenté ci-dessous dans lequel les exigences de la production apparaissent comme étant déclinées en trois exigences particulières sur les aspects économique, de norme et technique :</p>
+<ul>
+<li>Économie : le prix maximum admissible pour la réalisation de la séquence est indiqué.</li>
+<li>Norme : le drone doit respecter les normes les plus restrictives, ceci afin d'éviter tout problème avec la législation en cours.</li>
+<li>Aspect technique sur la vidéo et la capacité de vol : ces exigences sont « raffinées » (flèche en pointillés avec le stéréotype « <span class="mono">refine</span> ») par une précision sur des données numériques attendues en fonction des caméras dont dispose la production.</li>
+</ul>
 <figure>
 <svg viewBox="0 0 780 460" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
 <rect x="4" y="4" width="772" height="452" fill="none" stroke="#1c2430" stroke-width="1"/>
@@ -263,18 +306,17 @@ Il est possible d'ajouter des blocs « <span class="mono">block</span> » qui pe
 <line x1="330" y1="285" x2="610" y2="330" stroke="#1c2430" stroke-dasharray="4,3"/><path d="M610,330 l-9,-3 l3,-9 z" fill="none" stroke="#1c2430"/>
 <text x="500" y="313" font-size="10.5" font-style="italic">«refine»</text>
 </svg>
-<figcaption>Fig. 2 — Diagramme d'exigences (req) du drone CinéDrone L, point de vue « production » : exigences composites décomposées et raffinées (contrat client/réalisateur).</figcaption>
+<figcaption>Fig. 3 — Diagramme des exigences (req) du drone CinéDrone L, point de vue « production ».</figcaption>
 </figure>
-</section>
 
-<section id="s5">
-<h2>5. Diagramme de contexte</h2>
-<p>Dans une phase d'utilisation définie, le diagramme de contexte permet de définir les <strong>frontières de l'étude</strong> en précisant les différents interacteurs du milieu extérieur avec le système. Chaque élément du milieu extérieur (EME) représenté interagit avec le système, et cette interaction peut s'exprimer sous la forme : « EME 1 – verbe d'action – EME 2 ».</p>
-<div class="block remark">
-<span class="label">Remarque</span>
-Si un même élément extérieur intervient X fois, un nombre X (multiplicité) est noté en bout de connecteur de l'EME avec le système. Ce type de diagramme n'est pas normalisé au sens strict de SysML (usage courant du <span class="mono">bdd</span> pour ce point de vue).
-</div>
-<p><strong>Question posée par ce diagramme :</strong> « Quels sont les acteurs et éléments environnants du système ? »</p>
+<h3 id="s33">3.3. Diagrammes comportementaux</h3>
+<h4>3.3.1. Diagramme de contexte</h4>
+<p>Dans une phase d'utilisation définie, le diagramme de contexte permet de définir les frontières de l'étude et précisant les différents interacteurs du milieu extérieur avec le système. Chaque élément du milieu extérieur (EME) représenté interagit avec le système et cette interaction peut s'exprimer sous la forme :</p>
+<p class="question">EME 1 – verbe d'action – EME 2.</p>
+<p><u>Remarque</u> : Si on a X fois un même élément extérieur, un nombre X (multiplicité) est noté en bout de connecteur de l'EME avec le système.</p>
+<p class="question">« Quels sont les acteurs et éléments environnants du système ? »</p>
+<p><em>Illustration :</em></p>
+<p>Pour le système étudié, il est possible de mettre en place le diagramme présenté ci-dessous dans lequel les exigences de la production apparaissent comme étant déclinées en trois acteurs qui interagissent avec le système et qui pilotent le drone, la nacelle et la caméra, ainsi que les cas d'utilisation reliés aux acteurs et rédigés selon le point de vue de ces derniers, et la frontière du système qui contient tous les éléments permettant d'atteindre les objectifs terminaux.</p>
 <figure>
 <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="13">
 <rect x="4" y="4" width="632" height="292" fill="none" stroke="#1c2430"/>
@@ -314,26 +356,30 @@ Si un même élément extérieur intervient X fois, un nombre X (multiplicité) 
 <line x1="510" y1="232" x2="400" y2="165" stroke="#1c2430"/>
 </g>
 </svg>
-<figcaption>Fig. 3 — Diagramme de contexte du drone : trois acteurs (pilote drone, pilote nacelle, chef opérateur) et trois éléments du milieu extérieur (vent, obstacle, production).</figcaption>
+<figcaption>Fig. 4 — Diagramme de contexte du drone.</figcaption>
 </figure>
-</section>
+<p><u>Remarque</u> : Les liens montrent des échanges qui à ce stade, ne sont pas encore définis.</p>
 
-<section id="s6">
-<h2>6. Diagramme des cas d'utilisation (uc)</h2>
-<div class="block def">
-<span class="label">Définition</span>
-Le diagramme des cas d'utilisation, noté <span class="mono">uc</span> (<em>SysML Use Case Diagram</em>), permet de montrer les fonctionnalités du système en identifiant les services qu'il rend.
-</div>
-<p><strong>Question posée par ce diagramme :</strong> « Quels services rend le système ? »</p>
-<p>Éléments graphiques principaux :</p>
+<h4>3.3.2. Diagramme des cas d'utilisation (uc)</h4>
+<p>Le diagramme des cas d'utilisation noté <strong>uc</strong> (<em>SysML Use Case Diagram</em>) permet de montrer les fonctionnalités du système en identifiant les services qu'il rend.</p>
+<p class="question">« Quels services rend le système ? »</p>
+<p>Les éléments graphiques utilisés dans ce diagramme sont principalement :</p>
 <ul>
-<li>Les <strong>acteurs</strong>, entités extérieures en interaction avec le système (pictogramme « bonhomme bâton »), reliés à un ou plusieurs cas d'utilisation par une <strong>association</strong> (trait simple).</li>
-<li>Les <strong>cas d'utilisation</strong>, représentés par des ovales, énoncés du point de vue de l'acteur, hors technologie (en termes de résultats attendus).</li>
-<li>La <strong>frontière du système</strong>, rectangle englobant les cas d'utilisation ; les acteurs restent à l'extérieur.</li>
+<li>Les acteurs, entités extérieures au système et en interaction avec lui (représentés par le pictogramme « bonhomme bâton ») et sont reliés à un ou plusieurs cas d'utilisation par une ligne simple appelée association.</li>
+<li>Les cas d'utilisation sont représentés sous forme d'ovales. Ils donnent les fonctionnalités du système et sont énoncés du point de vue de l'acteur.</li>
+<li>La frontière du système permet de symboliser les limites du modèle (représentée par un simple rectangle englobant les cas d'utilisation), les acteurs étant à l'extérieur.</li>
+</ul>
+<p><u>Remarque</u> : L'énoncé d'un cas d'utilisation doit se faire hors technologie, puisqu'il est défini en termes de résultats attendus.</p>
+<p><em>Illustration :</em></p>
+<p>Pour le système étudié, il est possible de mettre en place le diagramme présenté ci-dessous où se retrouvent les éléments énoncés précédemment, à savoir :</p>
+<ul>
+<li>Les trois acteurs qui interagissent avec le système (liens avec les cas d'utilisation) et qui pilotent le drone, la nacelle et la caméra.</li>
+<li>Les cas d'utilisation reliés aux acteurs et rédigés selon le point de vue de ces derniers.</li>
+<li>La frontière du système qui contient tous les éléments permettant d'atteindre les objectifs terminaux.</li>
 </ul>
 <figure>
 <svg viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
-<text x="10" y="20" font-weight="700">uc [Paquet] Cas d'utilisation — Général</text>
+<text x="10" y="20" font-weight="700">uc [Paquet] Cas utilisation Général</text>
 <rect x="230" y="35" width="320" height="270" fill="none" stroke="#1c2430"/>
 <text x="390" y="55" text-anchor="middle" font-weight="700">Drone CinéDrone L</text>
 <g text-anchor="middle">
@@ -363,32 +409,24 @@ Le diagramme des cas d'utilisation, noté <span class="mono">uc</span> (<em>SysM
 <text x="380" y="284" text-anchor="middle" font-weight="700">Éviter les obstacles</text>
 <line x1="470" y1="270" x2="470" y2="280" stroke="#1c2430"/>
 </svg>
-<figcaption>Fig. 4 — Diagramme des cas d'utilisation du drone : trois acteurs humains et un élément extérieur (obstacle), quatre cas d'utilisation.</figcaption>
+<figcaption>Fig. 5 — Diagramme des cas d'utilisation du drone.</figcaption>
 </figure>
-<div class="block remark">
-<span class="label">Attention</span>
-Il n'est pas nécessaire ici de représenter les cas d'utilisation correspondant à l'installation ou à l'entretien du drone (hors du périmètre de la phase de vol étudiée).
-</div>
-<p>Il est possible d'enrichir ce diagramme avec des liens <span class="mono">include</span> (le cas source comprend obligatoirement le cas inclus) et <span class="mono">extend</span> (le cas source est une extension possible du cas destination) — par exemple « Piloter automatiquement » qui étend « Piloter le drone », ou « Orienter dans toutes les directions de l'espace » qui est inclus dans « Orienter la nacelle ».</p>
-</section>
+<p><strong><u>Attention</u></strong> : Il n'est pas nécessaire ici de mettre les cas d'utilisation correspondant à l'installation du drone ou d'entretien du drone.</p>
+<p><u>Remarque</u> : Il aurait ainsi été possible de rajouter des sous-cas d'utilisation ou des éléments graphiques complémentaires avec, par exemple, des raffinements (« <span class="mono">refine</span> ») ou des extensions (« <span class="mono">extend</span> »), etc. : cela n'aurait pas été pertinent car ce diagramme est d'autant plus intéressant qu'il reste simple et compréhensible immédiatement.</p>
+<p><u>Remarque</u> : En rajoutant des liens « <span class="mono">include</span> » et « <span class="mono">extend</span> », cela aurait pu donner (« Piloter automatiquement » qui étend « Piloter le drone » ; « Orienter dans toutes les directions de l'espace » qui est inclus dans « Orienter la nacelle ») :</p>
 
-<section id="s7">
-<h2>7. Diagramme de séquence (sd)</h2>
-<div class="block def">
-<span class="label">Définition</span>
-Le diagramme de séquence, noté <span class="mono">sd</span> (<em>SysML Sequence Diagram</em>), permet de décrire les scénarios correspondant aux cas d'utilisation.
-</div>
-<p><strong>Question posée par ce diagramme :</strong> « Comment est réalisé ce cas d'utilisation ? »</p>
-<div class="block remark">
-<span class="label">Règle</span>
-À tout cas d'utilisation correspond au moins un diagramme de séquence.
-</div>
-<p>Éléments graphiques principaux :</p>
+<h4>3.3.3. Diagramme des séquences (sd)</h4>
+<p>Le diagramme de séquence noté <strong>sd</strong> (<em>SysML Sequence Diagram</em>) permet de décrire les scénarios correspondant aux cas d'utilisation.</p>
+<p class="question">« Comment est réalisé ce cas d'utilisation ? »</p>
+<p style="color:#c0392b; font-style:italic;">À tout cas d'utilisation correspond au moins un diagramme de séquence.</p>
+<p>Les éléments graphiques utilisés dans ce diagramme sont principalement :</p>
 <ul>
-<li>Des traits verticaux en pointillés, appelés <strong>lignes de vie</strong>, avec l'indication des propriétaires (acteurs, système, sous-systèmes) sur la partie supérieure. Le temps se déroule du haut vers le bas, sans échelle particulière.</li>
-<li>Des flèches horizontales, avec différentes syntaxes, indiquant l'envoi et la réception de <strong>messages</strong> (au sens large : un appui sur un bouton peut être un message envoyé, l'affichage d'une image la réponse à cette sollicitation).</li>
-<li>Des bandes verticales le long d'une ligne de vie, représentant des périodes d'<strong>activation</strong> ; elles sont optionnelles mais aident à repérer la flèche pointillée du message de retour.</li>
+<li>Des traits verticaux en pointillés appelés « lignes de vie » avec l'indication des propriétaires (en général des acteurs, le système et tout ou partie de ses sous-systèmes) sur la partie supérieure. Le temps se déroule du haut vers le bas, sans échelle particulière.</li>
+<li>Des flèches horizontales, avec différentes syntaxes, indiquant l'envoi et la réception de « messages », notion qui doit être prise au sens large car ils matérialisent les interactions qu'il peut y avoir entre un émetteur et un récepteur. Par exemple, l'appui sur un bouton peut être considéré comme le message envoyé (représentant dans ce cas un événement) et l'affichage d'une image sur un écran comme la réponse à cette sollicitation.</li>
+<li>Les bandes verticales le long d'une ligne de vie représentent des périodes d'« activation ». Elles sont optionnelles mais permettent de mieux comprendre la flèche pointillée du message de retour.</li>
 </ul>
+<p><em>Illustration :</em></p>
+<p>Pour le système étudié, il est possible de mettre en place le diagramme présenté ci-dessous qui décrit l'évolution séquentielle des échanges entre les deux techniciens de vol (le pilote du drone et le pilote de la nacelle supportant la caméra) lors de la phase de préparation au vol : cette description répond à une exigence portant sur la norme et ne représente donc pas un scénario complet car seule la phase de test préalable à l'utilisation du système est représentée, ce qui correspond à une partie des cas d'utilisation « Piloter le drone » et « Orienter la nacelle ».</p>
 <figure>
 <svg viewBox="0 0 640 470" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11.5">
 <rect x="4" y="4" width="632" height="462" fill="none" stroke="#1c2430"/>
@@ -419,69 +457,115 @@ Le diagramme de séquence, noté <span class="mono">sd</span> (<em>SysML Sequenc
 <line x1="157" y1="297" x2="523" y2="297" stroke="#1c2430" marker-end="url(#arSD)"/><text x="165" y="293">10: Ordre décollage du drone</text>
 <line x1="523" y1="312" x2="157" y2="312" stroke="#1c2430" stroke-dasharray="4,3" marker-end="url(#arSD)"/><text x="165" y="308">11: Drone stabilisé à hauteur des yeux</text>
 <rect x="60" y="330" width="14" height="14" fill="#dfe8f7" stroke="#1c2430"/>
-<line x1="74" y1="337" x2="150" y2="337" stroke="#1c2430" marker-end="url(#arSD)"/><text x="165" y="333">12: Validations auditive/sonore</text>
-<line x1="157" y1="357" x2="523" y2="357" stroke="#1c2430" marker-end="url(#arSD)"/><text x="165" y="353">13: Ordres mouvement (3 directions)</text>
+<line x1="74" y1="337" x2="150" y2="337" stroke="#1c2430" marker-end="url(#arSD)"/><text x="165" y="333">12: Validations auditive et sonore du fonctionnement normal du drone</text>
+<line x1="157" y1="357" x2="523" y2="357" stroke="#1c2430" marker-end="url(#arSD)"/><text x="165" y="353">13: Ordres mouvement selon les 3 directions</text>
 <line x1="523" y1="377" x2="157" y2="377" stroke="#1c2430" stroke-dasharray="4,3" marker-end="url(#arSD)"/><text x="165" y="373">14: Tests terminés</text>
 <line x1="157" y1="397" x2="523" y2="397" stroke="#1c2430" marker-end="url(#arSD)"/><text x="165" y="393">15: Démarrage du flux vidéo</text>
 <line x1="523" y1="417" x2="157" y2="417" stroke="#1c2430" stroke-dasharray="4,3" marker-end="url(#arSD)"/><text x="165" y="413">16: Image affichée (retour vidéo)</text>
 <rect x="70" y="430" width="500" height="20" fill="none" stroke="#1c2430"/>
 <text x="80" y="444" font-weight="700" font-size="11">loop</text>
-<text x="130" y="444" font-size="10.5" font-style="italic">[phase de fonctionnement normal : gestion attitudes + prise de vue]</text>
+<text x="130" y="444" font-size="10.5" font-style="italic">[Phase de fonctionnement normal : gestion des attitudes du drone et de la caméra + prise de vue]</text>
 <defs><marker id="arSD" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1c2430"/></marker></defs>
 </svg>
-<figcaption>Fig. 5 — Diagramme de séquence de la phase de test/décollage : échanges entre les techniciens de vol et le drone (correspond aux cas d'utilisation « Piloter le drone » et « Orienter la nacelle »).</figcaption>
+<figcaption>Fig. 6 — Diagramme de séquence de la phase de préparation au vol.</figcaption>
 </figure>
-</section>
 
-<section id="s8">
-<h2>8. Diagramme d'états (stm)</h2>
-<div class="block def">
-<span class="label">Définition</span>
-Le diagramme d'états, noté <span class="mono">stm</span> (<em>SysML State Machine Diagram</em>), décrit le fonctionnement d'un système (ou sous-système) sous forme de machine d'états : il montre les différents états pris par le système en fonction des interactions.
-</div>
-<p><strong>Question posée par ce diagramme :</strong> « Comment représenter les différents états du système ? »</p>
-<p>Éléments graphiques : des rectangles à coins arrondis représentant les <strong>états</strong> ; des flèches orientées représentant les <strong>transitions</strong>, liées aux évènements qui les déclenchent. Le point de départ est un point noir extérieur aux états ; le point de fin est un point noir entouré d'un cercle.</p>
+<h4>3.3.4. Diagramme d'états (stm)</h4>
+<p>Le diagramme d'états noté <strong>stm</strong> (<em>SysML State Machine Diagram</em>) permet de décrire le fonctionnement d'un programme sous forme de machine d'états. <strong>Il montre les différents états pris par le système (ou un sous-système) en fonction des interactions.</strong></p>
+<p class="question">« Comment représenter les différents états du système ? »</p>
+<p>Les éléments graphiques utilisés dans ce diagramme sont principalement des rectangles aux coins arrondis représentant les <strong>états</strong>. Les <strong>transitions</strong> entre les états sont représentées avec des flèches orientées et un texte les décrit.</p>
+<p>Les transitions sont liées aux évènements et sont réalisées lorsque les évènements associés ont lieu.</p>
+<p>Le point de départ est un point noir extérieur aux états, le point de fin est un point noir entouré d'un cercle noir.</p>
+<p><em>Illustration :</em></p>
+<p>Pour le système étudié, il est possible de mettre en place le diagramme d'états (stm) présenté ci-dessous qui permet de représenter les différents modes de fonctionnement du système, ainsi que les évènements qui permettent de passer de l'un à l'autre.</p>
 <figure>
 <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
 <circle cx="60" cy="50" r="7" fill="#1c2430"/>
 <line x1="60" y1="57" x2="60" y2="90" stroke="#1c2430" marker-end="url(#arST)"/><text x="65" y="72" font-size="11">ON</text>
 <rect x="10" y="90" width="150" height="50" rx="10" fill="#a8e6fb" stroke="#1c2430"/>
-<text x="85" y="112" text-anchor="middle" font-weight="700" font-size="11">Initialisation</text>
-<text x="85" y="128" text-anchor="middle" font-size="10.5">(tests du drone)</text>
+<text x="85" y="112" text-anchor="middle" font-weight="700" font-size="11">Initialisation de la</text>
+<text x="85" y="128" text-anchor="middle" font-weight="700" font-size="11">phase de vol du drone</text>
 <line x1="160" y1="115" x2="240" y2="115" stroke="#1c2430" marker-end="url(#arST)"/>
 <rect x="240" y="90" width="140" height="50" rx="10" fill="#a8e6fb" stroke="#1c2430"/>
-<text x="310" y="108" text-anchor="middle" font-weight="700" font-size="11">Pilotage standard</text>
+<text x="310" y="108" text-anchor="middle" font-weight="700" font-size="11">Mode pilotage standard</text>
 <text x="310" y="124" text-anchor="middle" font-size="10.5">do / pilotage normal</text>
 <line x1="380" y1="105" x2="470" y2="105" stroke="#1c2430" marker-end="url(#arST)"/>
-<text x="390" y="98" font-size="10">batterie niveau 1</text>
+<text x="390" y="98" font-size="10">batterie en défaut de charge niveau 1</text>
 <rect x="470" y="80" width="150" height="60" rx="10" fill="#a8e6fb" stroke="#1c2430"/>
 <text x="545" y="98" text-anchor="middle" font-weight="700" font-size="11">Mode urgence 1</text>
-<text x="545" y="112" text-anchor="middle" font-size="10">entry / couper flux vidéo</text>
+<text x="545" y="112" text-anchor="middle" font-size="10">entry / Couper flux vidéo</text>
 <text x="545" y="126" text-anchor="middle" font-size="10">do / pilotage urgence 1</text>
 <line x1="470" y1="130" x2="380" y2="150" stroke="#1c2430" marker-end="url(#arST)" stroke-dasharray="4,3"/>
-<text x="400" y="150" font-size="9.5" font-style="italic">dans ce mode, flux</text>
-<text x="400" y="162" font-size="9.5" font-style="italic">vidéo coupé (économie)</text>
+<text x="400" y="150" font-size="9.5" font-style="italic">Dans ce mode, le flux vidéo</text>
+<text x="400" y="162" font-size="9.5" font-style="italic">est coupé pour économiser de l'énergie</text>
 <line x1="620" y1="110" x2="620" y2="200" stroke="#1c2430"/><line x1="620" y1="200" x2="380" y2="200" stroke="#1c2430" marker-end="url(#arST)"/>
-<text x="480" y="195" font-size="10">batterie niveau 2</text>
-<rect x="620" y="80" width="0" height="0"/>
-<rect x="620" y="95" width="10" height="10" fill="none"/>
+<text x="480" y="195" font-size="10">batterie en défaut de charge niveau 2</text>
 <text x="620" y="60" text-anchor="middle" font-size="10.5">Mode urgence 2</text>
+<text x="620" y="76" text-anchor="middle" font-size="9.5">entry / pilotage urgence 2</text>
 <line x1="310" y1="140" x2="80" y2="210" stroke="#1c2430" marker-end="url(#arST)"/><text x="150" y="185" font-size="11">OFF</text>
 <circle cx="60" cy="220" r="8" fill="none" stroke="#1c2430"/><circle cx="60" cy="220" r="4" fill="#1c2430"/>
 <text x="90" y="224" font-size="11">État final</text>
 <defs><marker id="arST" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1c2430"/></marker></defs>
 </svg>
-<figcaption>Fig. 6 — Diagramme d'états simplifié des modes de fonctionnement du drone : initialisation → pilotage standard ⇄ modes d'urgence (batterie faible) → arrêt.</figcaption>
+<figcaption>Fig. 7 — Diagramme d'états des modes de fonctionnement du drone.</figcaption>
 </figure>
-<div class="block remark">
+<p>L'initialisation est un mode temporaire dans lequel le système effectue tous ses tests avant de donner la main aux pilotes. La transition est ensuite franchie automatiquement car il n'y a pas d'évènement particulier à marquer (c'est la fin de l'initialisation). Viennent ensuite le mode de fonctionnement normal puis les modes d'urgence en cas de niveau de charge insuffisant.</p>
+<p>Le comportement lors de l'entrée et de la sortie de chaque état est décrit : par exemple, l'entrée dans le mode urgence 1 (évènement interne <em>entry</em>) provoque automatiquement la coupure du flux vidéo pour économiser l'énergie et un mode de pilotage dégradé (pilotage à vue) où le drone ne peut que redescendre.</p>
+
+<h4>État composite</h4>
+<div class="block def">
 <span class="label">État composite</span>
-Un <strong>état composite</strong> peut être vu comme un « macro-état » : il décrit ses évolutions internes au moyen d'un autre diagramme d'états qu'il contient (représenté par le pictogramme « lunettes » ⊂⊃ dans le coin de l'état). Exemple : le mode « urgence » peut lui-même être décomposé en sous-états « signal lumineux », « signal sonore », « rotation hélices » activés en séquence.
+Un état composite (lunettes) peut être vu comme un macro-état. Il décrit les évolutions internes avec un autre diagramme d'état (il contient une machine d'état).
 </div>
+<p>Illustration d'un état composite associé au fonctionnement du drone.</p>
+<figure>
+<svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
+<circle cx="60" cy="40" r="7" fill="#1c2430"/>
+<line x1="60" y1="47" x2="60" y2="75" stroke="#1c2430" marker-end="url(#arE)"/>
+<rect x="15" y="75" width="150" height="45" rx="8" fill="#a8e6fb" stroke="#1c2430"/>
+<text x="90" y="95" text-anchor="middle" font-weight="700" font-size="11">Etat 1</text>
+<text x="90" y="110" text-anchor="middle" font-size="10">Démarrage du drone</text>
+<line x1="165" y1="97" x2="330" y2="60" stroke="#1c2430" marker-end="url(#arE)"/><text x="220" y="72" font-size="10.5">[Mode normal]</text>
+<line x1="90" y1="120" x2="90" y2="150" stroke="#1c2430" marker-end="url(#arE)"/><text x="95" y="140" font-size="10.5">[Mode lent]</text>
+<rect x="330" y="35" width="120" height="45" rx="8" fill="#a8e6fb" stroke="#1c2430"/>
+<text x="390" y="62" text-anchor="middle" font-weight="700" font-size="11">Etat 2</text>
+<circle cx="20" cy="170" r="6" fill="none" stroke="#1c2430"/>
+<line x1="26" y1="170" x2="330" y2="60" stroke="#1c2430" stroke-dasharray="3,2"/>
+<circle cx="330" cy="60" r="0" fill="none"/>
+<path d="M 20 165 L 30 165 M 20 175 L 30 175" stroke="#1c2430"/>
+<rect x="15" y="150" width="100" height="45" rx="8" fill="none" stroke="#1c2430" stroke-dasharray="0"/>
+<line x1="60" y1="150" x2="60" y2="120" stroke="none"/>
+<line x1="450" y1="57" x2="530" y2="57" stroke="#1c2430" marker-end="url(#arE)"/><text x="455" y="50" font-size="10.5">[Fin]</text>
+<rect x="530" y="35" width="100" height="45" rx="8" fill="#a8e6fb" stroke="#1c2430"/>
+<text x="580" y="60" text-anchor="middle" font-size="10.5">Etat 3</text>
+<text x="580" y="74" text-anchor="middle" font-size="9.5">Signal sonore</text>
+<circle cx="580" cy="150" r="8" fill="none" stroke="#1c2430"/><circle cx="580" cy="150" r="4" fill="#1c2430"/>
+<line x1="580" y1="80" x2="580" y2="142" stroke="#1c2430" marker-end="url(#arE)"/><text x="588" y="115" font-size="10.5">[Arrêt]</text>
+<line x1="20" y1="176" x2="500" y2="150" stroke="#1c2430" marker-end="url(#arE)"/><text x="200" y="200" font-size="10.5">[Arrêt d'urgence]</text>
+<rect x="20" y="220" width="600" height="90" fill="none" stroke="#1c2430"/>
+<text x="30" y="238" font-weight="700" font-size="10.5">Sous Machine : Etat 2</text>
+<circle cx="60" cy="260" r="6" fill="#1c2430"/>
+<line x1="66" y1="260" x2="110" y2="260" stroke="#1c2430" marker-end="url(#arE)"/>
+<rect x="110" y="245" width="120" height="30" fill="#a8e6fb" stroke="#1c2430"/><text x="170" y="264" text-anchor="middle" font-size="10">Etat 4 — Signal lumineux rouge</text>
+<line x1="230" y1="260" x2="330" y2="260" stroke="#1c2430" marker-end="url(#arE)"/><text x="240" y="253" font-size="9.5">T=1s</text>
+<circle cx="80" cy="290" r="6" fill="none" stroke="#1c2430"/>
+<line x1="86" y1="290" x2="130" y2="290" stroke="#1c2430" marker-end="url(#arE)"/>
+<rect x="130" y="278" width="130" height="26" fill="#a8e6fb" stroke="#1c2430"/><text x="195" y="295" text-anchor="middle" font-size="10">Etat 5 — Signal lumineux bleu</text>
+<line x1="260" y1="290" x2="330" y2="270" stroke="#1c2430" marker-end="url(#arE)"/><text x="280" y="282" font-size="9.5">T=1s</text>
+<rect x="330" y="250" width="140" height="40" fill="#a8e6fb" stroke="#1c2430"/><text x="400" y="273" text-anchor="middle" font-size="10">Etat 6 — Rotation hélices</text>
+<circle cx="500" cy="270" r="8" fill="none" stroke="#1c2430"/><circle cx="500" cy="270" r="4" fill="#1c2430"/>
+<line x1="470" y1="270" x2="492" y2="270" stroke="#1c2430" marker-end="url(#arE)"/><text x="475" y="263" font-size="9.5" fill="#3b6fd8">Fin batterie</text>
+<defs><marker id="arE" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c2430"/></marker></defs>
+</svg>
+<figcaption>Fig. 8 — État composite « Etat 2 », détaillé par une sous machine d'état.</figcaption>
+</figure>
 </section>
 
-<section id="s9">
-<h2>9. Diagramme de définition de blocs (bdd)</h2>
-<p>Les diagrammes qui suivent (bdd et ibd) font appel aux <strong>solutions techniques</strong> du système, c'est-à-dire aux éléments réels le constituant, et permettent de décrire les blocs de la solution et leurs interactions. Ils sont en rapport avec la solution existante : il faut donc d'abord mettre en place les <strong>chaînes d'information et d'énergie</strong> du système afin d'en définir les constituants.</p>
+<section id="s4">
+<h2>4. Système réel</h2>
+<h3 id="s41">4.1. Diagrammes structurels</h3>
+<p>Les diagrammes qui suivent font appel aux <strong>solutions techniques du système</strong>, c'est-à-dire aux éléments réels le constituant, et permettent de décrire les blocs de la solution et leurs interactions.</p>
+<p>Les diagrammes de blocs sont en rapport avec la solution existante. Il faut donc mettre en place les <strong>chaînes d'information et d'énergie du système</strong> afin d'en définir les constituants.</p>
 <figure>
 <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11.5">
 <rect x="150" y="30" width="340" height="90" fill="none" stroke="#3b6fd8" stroke-width="1.5"/>
@@ -491,8 +575,8 @@ Un <strong>état composite</strong> peut être vu comme un « macro-état » : i
 <rect x="380" y="55" width="100" height="45" fill="#e9f1fd" stroke="#3b6fd8"/><text x="430" y="75" text-anchor="middle" font-weight="700">COMMUNIQUER</text>
 <line x1="250" y1="77" x2="270" y2="77" stroke="#1c2430" marker-end="url(#arBI)"/>
 <line x1="360" y1="77" x2="380" y2="77" stroke="#1c2430" marker-end="url(#arBI)"/>
-<line x1="20" y1="77" x2="160" y2="77" stroke="#1c2430" marker-end="url(#arBI)"/><text x="25" y="65" font-size="10.5">Ordres de position</text>
-<line x1="480" y1="77" x2="600" y2="77" stroke="#1c2430" marker-end="url(#arBI)"/><text x="490" y="65" font-size="10.5">Position, vidéo…</text>
+<line x1="20" y1="77" x2="160" y2="77" stroke="#1c2430" marker-end="url(#arBI)"/><text x="25" y="65" font-size="10.5">Image représentative de la grandeur à mesurer</text>
+<line x1="480" y1="77" x2="600" y2="77" stroke="#1c2430" marker-end="url(#arBI)"/><text x="490" y="65" font-size="10.5">Informations destinées à d'autres systèmes</text>
 <rect x="150" y="150" width="340" height="90" fill="none" stroke="#e07b9b" stroke-width="1.5"/>
 <text x="320" y="144" text-anchor="middle" fill="#c23b6c" font-weight="700">Chaîne d'énergie</text>
 <rect x="160" y="175" width="80" height="45" fill="#fde9f0" stroke="#e07b9b"/><text x="200" y="200" text-anchor="middle" font-weight="700" font-size="11">ALIMENTER</text>
@@ -509,20 +593,31 @@ Un <strong>état composite</strong> peut être vu comme un « macro-état » : i
 <line x1="620" y1="150" x2="640" y2="150" stroke="#1c2430" marker-end="url(#arBI)"/>
 <defs><marker id="arBI" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1c2430"/></marker></defs>
 </svg>
-<figcaption>Fig. 7 — Chaînes d'information (ACQUÉRIR / TRAITER / COMMUNIQUER) et d'énergie (ALIMENTER / DISTRIBUER / CONVERTIR / TRANSMETTRE) convergeant vers la fonction AGIR (structure fonctionnelle classique en SI).</figcaption>
+<figcaption>Fig. 9 — Chaînes d'information et d'énergie du drone.</figcaption>
 </figure>
-<div class="block def">
-<span class="label">Définition</span>
-Le diagramme de définition de bloc, noté <span class="mono">bdd</span> (<em>SysML Block Definition Diagram</em>), permet de décrire la structure du système, une partie de ses fonctions, et les liens entre les blocs.
-</div>
-<p><strong>Question posée par ce diagramme :</strong> « Qui contient quoi ? »</p>
-<p>Graphiquement, un bloc est représenté par un rectangle avec le stéréotype « <span class="mono">block</span> » comprenant un titre et des compartiments regroupant des propriétés particulières. Les blocs sont reliés par des liens dont la sémantique dépend de la relation : le plus souvent une <strong>composition</strong> (losange plein — l'élément supérieur possède l'élément inférieur), parfois une <strong>agrégation</strong> (losange vide). On peut préciser la multiplicité d'un bloc au bout du lien.</p>
+
+<h4>4.1.1. Diagramme de définition de bloc (bdd)</h4>
+<p>Le diagramme de définition de bloc noté <strong>bdd</strong> (<em>SysML Block Definition Diagram</em>) permet de :</p>
+<ul>
+<li>décrire la structure du système ;</li>
+<li>décrire une partie des fonctions du système ;</li>
+<li>représenter les liens entre les blocs.</li>
+</ul>
+<p class="question">« Qui contient quoi ? »</p>
+<p>Graphiquement, un bloc est représenté par un rectangle avec le stéréotype « <span class="mono">block</span> » comprenant un titre et des compartiments étagés regroupant des propriétés particulières. Il est ensuite possible de relier les blocs au moyen de liens dont la sémantique dépend de la nature particulière de la relation : en règle générale, le lien utilisé correspond à une composition, parfois à une agrégation (trait avec losange plein ou vide), indiquant que l'élément supérieur possède l'élément inférieur. Sur ces liens, il est possible de préciser la multiplicité d'un bloc en plaçant une valeur au bout du lien.</p>
+<p><em>Illustration :</em></p>
+<p>Pour le système étudié, il est possible de mettre en place le diagramme de définition de blocs qui fait apparaitre une hiérarchie de blocs, indiquant ce dont chaque bloc est composé, ainsi que les relations entre les blocs telles que :</p>
+<ul>
+<li>Relations de composition (trait avec losange plein) : le système de sustentation en vol est composé d'une batterie, d'un calculateur, d'un récepteur pour télécommande et de huit moteurs (le nombre à l'extrémité du lien indique la multiplicité). Cette relation sera celle la plus souvent rencontrée au niveau des CPGE.</li>
+<li>Relation d'agrégation (trait avec losange vide) : le système de sécurité est optionnel et non imposé par la norme rédigée par la DGAC.</li>
+<li>Relation d'association : le système de sustentation et la nacelle sont associées à un niveau d'importance équivalent (absence de flèche).</li>
+</ul>
 <figure>
 <svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11">
 <rect x="230" y="10" width="180" height="50" fill="#a8e6fb" stroke="#1c2430"/><text x="320" y="28" text-anchor="middle" font-size="10" font-style="italic">«system»</text><text x="320" y="46" text-anchor="middle" font-weight="700">Drone CinéDrone L</text>
 <rect x="60" y="90" width="150" height="45" fill="#e9f1fd" stroke="#3b6fd8"/><text x="135" y="107" text-anchor="middle" font-weight="700" font-size="10.5">Système de</text><text x="135" y="121" text-anchor="middle" font-weight="700" font-size="10.5">sustentation</text>
 <rect x="450" y="90" width="120" height="45" fill="#e9f1fd" stroke="#3b6fd8"/><text x="510" y="115" text-anchor="middle" font-weight="700">Nacelle</text>
-<rect x="240" y="90" width="160" height="45" fill="#fff" stroke="#8b8b85" stroke-dasharray="4,3"/><text x="320" y="107" text-anchor="middle" font-size="10">Système de sécurité</text><text x="320" y="121" text-anchor="middle" font-size="9.5">(parachute — optionnel)</text>
+<rect x="240" y="90" width="160" height="45" fill="#fff" stroke="#8b8b85" stroke-dasharray="4,3"/><text x="320" y="107" text-anchor="middle" font-size="10">Système de sécurité</text><text x="320" y="121" text-anchor="middle" font-size="9.5">(parachute, etc. — optionnel)</text>
 <line x1="320" y1="60" x2="320" y2="90" stroke="#1c2430" marker-start="url(#agBI)"/>
 <line x1="320" y1="60" x2="135" y2="90" stroke="#1c2430" marker-start="url(#coBI)"/>
 <line x1="320" y1="60" x2="510" y2="90" stroke="#1c2430" marker-start="url(#coBI)"/>
@@ -548,21 +643,25 @@ Le diagramme de définition de bloc, noté <span class="mono">bdd</span> (<em>Sy
 <marker id="agBI" markerWidth="14" markerHeight="14" refX="10" refY="5" orient="auto"><path d="M10,5 L5,0 L0,5 L5,10 Z" fill="#fff" stroke="#1c2430"/></marker>
 </defs>
 </svg>
-<figcaption>Fig. 8 — Diagramme de définition de blocs (extrait) : composition (losange plein) du système de sustentation et de la nacelle ; agrégation (losange vide) du système de sécurité optionnel.</figcaption>
+<figcaption>Fig. 10 — Diagramme de définition de blocs du drone.</figcaption>
 </figure>
-</section>
+<p>Les blocs peuvent être caractérisés par des propriétés : il en existe de plusieurs sortes mais les plus significatives sont :</p>
+<ul>
+<li>La propriété de type <em>value</em> permet d'exprimer une caractéristique quantifiable : pour un moteur par exemple, son couple, sa vitesse de rotation ou sa puissance nominale.</li>
+<li>La propriété de type <em>part</em> permet de représenter ce qui compose le bloc.</li>
+</ul>
 
-<section id="s10">
-<h2>10. Diagramme de bloc interne (ibd)</h2>
-<div class="block def">
-<span class="label">Définition</span>
-Le diagramme de bloc interne, noté <span class="mono">ibd</span> (<em>SysML Internal Block Diagram</em>), reprend les caractéristiques du diagramme de blocs, à la différence que les <strong>flux</strong> doivent y être intégrés. Ces flux peuvent être de tout type : <strong>M</strong>atière (métaux, matière composite…), <strong>É</strong>nergie (chaleur, électricité…), <strong>I</strong>nformation (signaux analogique/numérique, binaire…).
-</div>
-<p><strong>Question posée par ce diagramme :</strong> « Comment les blocs interagissent-ils ? »</p>
-<div class="block remark">
-<span class="label">Remarque</span>
-Le cadre du diagramme représente la frontière d'un bloc. Dans cet exemple, seuls les blocs directement reliés au bloc « source » (ici la motorisation) sont présents — ceux issus du diagramme de définition de blocs. La structure de ce diagramme se rapproche très fortement de celle de la chaîne d'énergie.
-</div>
+<h4>4.1.2. Diagramme de bloc interne (ibd)</h4>
+<p>Le diagramme de bloc interne (<em>SysML Internal Block Diagram</em>) reprend les caractéristiques du diagramme de blocs, à la différence que dans celui-ci les flux doivent être intégrés. Les flux peuvent être de tout type :</p>
+<ul>
+<li><strong style="color:#c0392b;">M</strong>atière (métaux rare, matière composite, …)</li>
+<li><strong style="color:#c0392b;">E</strong>nergie (chaleur, électricité, …)</li>
+<li><strong style="color:#c0392b;">I</strong>nformation (signaux analogique ou numérique, binaire, …)</li>
+</ul>
+<p class="question">« Comment les blocs interagissent-ils ? »</p>
+<p><u>Remarque</u> : Le cadre du diagramme représentant la frontière d'un bloc.</p>
+<p><em>Illustration :</em></p>
+<p>Pour la partie motorisation du système étudié, il est possible de mettre en place le diagramme de bloc interne suivant :</p>
 <figure>
 <svg viewBox="0 0 640 160" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
 <rect x="4" y="4" width="632" height="152" fill="none" stroke="#e07b9b" stroke-width="1.5"/>
@@ -582,35 +681,42 @@ Le cadre du diagramme représente la frontière d'un bloc. Dans cet exemple, seu
 <text x="575" y="120" text-anchor="middle" font-size="10">Énergie mécanique de rotation</text>
 <defs><marker id="arIB" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1c2430"/></marker></defs>
 </svg>
-<figcaption>Fig. 9 — Diagramme de bloc interne de la motorisation : flux d'énergie électrique transformé en énergie mécanique de rotation, de proche en proche.</figcaption>
+<figcaption>Fig. 11 — Diagramme de bloc interne de la motorisation.</figcaption>
 </figure>
+<p><u>Remarques</u> :</p>
+<ul>
+<li>Dans cet exemple de diagramme de bloc interne de la partie motorisation, les seuls blocs présents sont ceux directement reliés au bloc « source » présentés sur le diagramme de définition de blocs.</li>
+<li>Les interconnexions des différents blocs <em>via</em> les ports standard et flux représentés sur un diagramme de blocs internes renseignent sur les relations entre les blocs : ainsi, par exemple, ici, les flux entre les différents blocs sont des énergies, dont on précise, si possible, de quel type il s'agit.</li>
+<li><strong>La structure de ce diagramme se rapproche très fortement de celle de la chaîne d'énergie.</strong></li>
+</ul>
 </section>
 
-<section id="s11">
-<h2>11. Rappel de vocabulaire</h2>
-<h3>11.1. Liens spécifiques aux exigences et cas d'utilisation</h3>
+<section id="s5">
+<h2>5. Rappel sur le vocabulaire</h2>
+<h3>5.1. Rappel sur les éléments d'association</h3>
 <table>
-<thead><tr><th>Lien</th><th>Signification</th></tr></thead>
+<thead><tr><th>Terme</th><th>Signification</th></tr></thead>
 <tbody>
-<tr><td class="mono">include</td><td>Le cas d'utilisation source comprend obligatoirement le cas inclus</td></tr>
-<tr><td class="mono">extend</td><td>Le cas d'utilisation source est une extension possible du cas destination</td></tr>
-<tr><td class="mono">refine</td><td>Un ou plusieurs éléments du modèle redéfinissent (précisent) une exigence</td></tr>
-<tr><td class="mono">derive</td><td>Une ou plusieurs exigences sont dérivées d'une exigence</td></tr>
-<tr><td class="mono">deriveReqt</td><td>Relie une exigence d'un niveau général à une exigence plus spécialisée exprimant la même contrainte</td></tr>
-<tr><td class="mono">satisfy</td><td>Un ou plusieurs éléments du modèle permettent de satisfaire une exigence</td></tr>
-<tr><td class="mono">verify</td><td>Un ou plusieurs éléments du modèle permettent de vérifier et valider une exigence</td></tr>
+<tr><td class="mono">Include</td><td>Le cas d'utilisation source comprend obligatoirement le cas inclus</td></tr>
+<tr><td class="mono">Extend</td><td>Le cas d'utilisation source est une extension possible du cas d'utilisation destination</td></tr>
+<tr><td class="mono">Refine</td><td>Un ou plusieurs éléments du modèle redéfinissent une exigence</td></tr>
+<tr><td class="mono">Derive</td><td>Une ou plusieurs exigences sont dérivées d'une exigence</td></tr>
+<tr><td class="mono">DeriveReqt</td><td>Permet de relier une exigence d'un niveau général à une exigence d'un niveau plus spécialisée mais exprimant la même contrainte</td></tr>
+<tr><td class="mono">Satisfy</td><td>Un ou plusieurs éléments du modèle permettent de satisfaire une exigence</td></tr>
+<tr><td class="mono">Verify</td><td>Un ou plusieurs éléments du modèle permettent de vérifier et valider une exigence</td></tr>
 </tbody>
 </table>
-<h3>11.2. Relations génériques entre blocs</h3>
+
+<h3>5.2. Rappel sur les relations</h3>
 <table>
-<thead><tr><th>Relation</th><th>Notation</th><th>Diagrammes</th><th>Signification</th></tr></thead>
+<thead><tr><th>Relation</th><th>Notation</th><th>Diagrammes concernés</th><th>Signification</th></tr></thead>
 <tbody>
-<tr><td>Association</td><td class="mono">X → Y</td><td>uc, bdd, ibd</td><td>X utilise Y</td></tr>
-<tr><td>Dépendance</td><td class="mono">X ⇢→ Y</td><td>uc, req, bdd</td><td>X dépend de Y</td></tr>
-<tr><td>Agrégation</td><td class="mono">X —◇ Y</td><td>req, bdd</td><td>X entre dans la composition de Y, sans être indispensable à son fonctionnement</td></tr>
-<tr><td>Composition</td><td class="mono">X —◆ Y</td><td>req, bdd</td><td>X entre dans la composition de Y et est indispensable à son fonctionnement</td></tr>
-<tr><td>Généralisation</td><td class="mono">X —▷ Y</td><td>req, bdd, ibd</td><td>X est une sorte de Y</td></tr>
-<tr><td>Conteneur</td><td class="mono">X —⊕ Y</td><td>req, bdd</td><td>Y contient X</td></tr>
+<tr><td>Association</td><td class="mono">X ⎯→ Y</td><td>uc – bdd – ibd</td><td>X utilise Y</td></tr>
+<tr><td>Dépendance</td><td class="mono">X ⇢→ Y</td><td>uc – req – bdd</td><td>X dépend de Y</td></tr>
+<tr><td>Agrégation</td><td class="mono">X ⎯◇ Y</td><td>req – bdd</td><td>X entre dans la composition de Y <u>sans être indispensable</u> à son fonctionnement</td></tr>
+<tr><td>Composition</td><td class="mono">X ⎯◆ Y</td><td>req – bdd</td><td>X entre dans la composition de Y <u>et est indispensable</u> à son fonctionnement</td></tr>
+<tr><td>Généralisation</td><td class="mono">X ⎯▷ Y</td><td>req – bdd – ibd</td><td>X est une sorte de Y</td></tr>
+<tr><td>Conteneur</td><td class="mono">X ⎯⊕ Y</td><td>req – bdd</td><td>Y contient X</td></tr>
 </tbody>
 </table>
 </section>
@@ -620,52 +726,52 @@ Le cadre du diagramme représente la frontière d'un bloc. Dans cet exemple, seu
 
 <div class="quiz-item">
 <div class="quiz-q">1. SysML est-il une méthode d'ingénierie système ?</div>
-<div class="quiz-a"><span class="tag">Réponse</span> Non : SysML est un <em>langage</em> de modélisation graphique. Il outille et documente une démarche d'ingénierie système, mais ne définit pas lui-même la méthode (le processus) à suivre.</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Non : SysML est un <em>langage</em> de modélisation graphique. Il ne faut pas confondre la méthode Ingénierie Système avec l'outil SysML qui favorise sa mise en place — « SysML n'est pas une méthode ».</div>
 </div>
 
 <div class="quiz-item">
 <div class="quiz-q">2. Quelle est la différence entre un système et une instance ?</div>
-<div class="quiz-a"><span class="tag">Réponse</span> Le système est le modèle générique réalisé (ex. « Motocyclette ») ; l'instance est un exemplaire réel particulier correspondant à ce modèle (ex. « Honda Gold Wing 1832 cm³ »).</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Le système est le modèle réalisé (ex. « Motocyclette ») ; l'instance est un système particulier réel correspondant à ce modèle (ex. « Honda Gold Wing 1832 cc »).</div>
 </div>
 
 <div class="quiz-item">
 <div class="quiz-q">3. Le diagramme de bloc interne (ibd) du système de motorisation indique une énergie mécanique de rotation en sortie du variateur. Est-ce correct ?</div>
-<div class="quiz-a"><span class="tag">Réponse</span> Non : le variateur convertit l'énergie électrique brute en énergie électrique <em>utilisable</em> (toujours électrique). C'est seulement après le moteur que le flux devient une énergie mécanique de rotation.</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Non : le variateur convertit l'énergie électrique en énergie électrique <em>utilisable</em> (toujours électrique). C'est seulement après le moteur que le flux devient une énergie mécanique de rotation.</div>
 </div>
 
 <div class="quiz-item">
-<div class="quiz-q">4. Sur le diagramme d'exigences (Fig. 2), l'exigence « Transporter une charge » (Id 1.2.2.1) est reliée à « Avoir une autonomie correcte » (Id 1.2.2) par un lien « refine ». Que signifie ce lien ?</div>
-<div class="quiz-a"><span class="tag">Réponse</span> Le lien « refine » signifie que l'exigence de niveau inférieur <em>précise</em> (ajoute des données quantitatives à) l'exigence de niveau supérieur — ici la charge maximale admissible pendant le vol stabilisé.</div>
+<div class="quiz-q">4. Sur le diagramme d'exigences, l'exigence « Transporter une charge » est reliée à « Avoir une autonomie correcte » par un lien « refine ». Que signifie ce lien ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Le raffinement (« refine ») consiste en l'ajout de précisions, ici une donnée quantitative (charge maximale de 3 kg pendant le vol stabilisé) qui précise l'exigence de niveau supérieur.</div>
 </div>
 
 <div class="quiz-item">
 <div class="quiz-q">5. Pourquoi le diagramme des cas d'utilisation ne représente-t-il pas l'installation ou l'entretien du drone ?</div>
-<div class="quiz-a"><span class="tag">Réponse</span> Parce que le diagramme de contexte (et donc l'ensemble de l'étude) a été délimité à la <em>phase de vol</em> : l'installation et l'entretien sont hors du périmètre (hors frontière) défini pour cette étude.</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Le professeur précise explicitement : « il n'est pas nécessaire ici de mettre les cas d'utilisation correspondant à l'installation du drone ou d'entretien du drone » — ils sortent du périmètre de la phase de vol étudiée.</div>
 </div>
 
 <div class="quiz-item">
 <div class="quiz-q">6. Que se passe-t-il si l'on omet le point de vue (dernier crochet) dans le cartouche d'un diagramme ?</div>
-<div class="quiz-a"><span class="tag">Réponse</span> Rien de bloquant : le point de vue est <em>informatif et optionnel</em>. Seuls le type de diagramme normalisé, le type d'élément et le nom du système sont attendus dans le cartouche.</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Rien de bloquant : le point de vue est informatif et optionnel. Seuls le type de diagramme normalisé, le type d'élément et le nom du système modélisé sont les éléments essentiels du cartouche.</div>
 </div>
 
 <div class="quiz-item">
-<div class="quiz-q">7. Piège classique : sur un diagramme de définition de blocs, un lien affiche un losange <em>vide</em> entre le drone et le « système de sécurité ». Peut-on en conclure que le drone ne fonctionne pas sans ce système ?</div>
-<div class="quiz-a"><span class="tag">Réponse</span> Non, c'est l'inverse : le losange vide code une <strong>agrégation</strong>, c'est-à-dire un composant qui participe à l'ensemble <em>sans être indispensable</em> à son fonctionnement (ici, le parachute est optionnel, non imposé par la norme). Le losange plein (composition) code au contraire l'indispensabilité.</div>
+<div class="quiz-q">7. Piège classique : sur le diagramme de définition de blocs, un lien affiche un losange <em>vide</em> entre le drone et le « système de sécurité ». Que signifie ce losange vide ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Il s'agit d'une relation d'<strong>agrégation</strong> : le système de sécurité est optionnel, non imposé par la norme rédigée par la DGAC. Le losange plein (composition) code au contraire un élément indispensable au fonctionnement.</div>
 </div>
 
 <div class="quiz-item">
-<div class="quiz-q">8. Un élève confond le diagramme de séquence (sd) et le diagramme d'états (stm) : il dessine des rectangles à coins arrondis reliés par des flèches temporelles pour représenter un scénario. Où est l'erreur ?</div>
-<div class="quiz-a"><span class="tag">Réponse</span> Le diagramme d'états décrit les <em>états stables</em> du système et les évènements qui les font changer (« comment représenter les états du système ? »). Le diagramme de séquence décrit un <em>scénario chronologique d'échanges de messages entre acteurs et système</em> (« comment est réalisé ce cas d'utilisation ? ») via des lignes de vie verticales, pas des états.</div>
+<div class="quiz-q">8. Un élève confond le diagramme de séquence (sd) et le diagramme d'états (stm). Comment les distinguer par la question à laquelle chacun répond ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Le diagramme d'états répond à « comment représenter les différents états du système ? » (rectangles à coins arrondis, transitions liées à des évènements). Le diagramme de séquence répond à « comment est réalisé ce cas d'utilisation ? » (lignes de vie verticales, messages échangés dans le temps).</div>
 </div>
 
 <div class="quiz-item">
-<div class="quiz-q">9. En reliant le diagramme des exigences (req) et le diagramme de définition de blocs (bdd) via un lien « satisfy » entre le bloc « Hélices » et l'exigence « Voler », que vérifie-t-on ?</div>
-<div class="quiz-a"><span class="tag">Réponse</span> Ce lien indique que le bloc « Hélices » (élément de solution réelle) contribue à <em>satisfaire</em> l'exigence « Voler » (élément de besoin) — c'est le pont entre le monde du besoin (req) et le monde de la solution (bdd), permettant de vérifier qu'aucune exigence n'est laissée sans solution associée.</div>
+<div class="quiz-q">9. À quoi sert un lien « satisfy » entre le bloc « Hélices » et l'exigence « Voler » ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Il permet de préciser, par une condition « satisfy », qu'un ou plusieurs éléments de la solution (ici le bloc Hélices) permettent de satisfaire une exigence ciblée — c'est le pont entre le monde du besoin (req) et celui de la solution (bdd).</div>
 </div>
 
 <div class="quiz-item">
-<div class="quiz-q">10. Synthèse : pour concevoir entièrement le drone CinéDrone, dans quel ordre logique (pas chronologique imposé) les diagrammes req, uc, bdd et ibd interviennent-ils conceptuellement ?</div>
-<div class="quiz-a"><span class="tag">Réponse</span> req (exprimer le besoin) → uc (identifier les services rendus pour satisfaire ce besoin) → bdd (définir la structure/les blocs de la solution qui rendent ces services) → ibd (détailler les flux internes entre ces blocs). En pratique SysML n'impose aucun ordre : les diagrammes s'enrichissent en parallèle au fil de l'étude, mais cette progression besoin → service → structure → flux reste la logique sous-jacente de l'ingénierie système.</div>
+<div class="quiz-q">10. Synthèse : dans quel ordre logique (pas chronologique imposé) les diagrammes req, uc, bdd et ibd interviennent-ils conceptuellement ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> req (exprimer le besoin) → uc (identifier les services rendus) → bdd (définir la structure de la solution) → ibd (détailler les flux internes). Le document précise toutefois qu'« il n'y a pas d'ordre pour commencer les diagrammes » : ils s'enrichissent en parallèle au fil de l'étude.</div>
 </div>
 
 </section>
@@ -675,8 +781,7 @@ Le cadre du diagramme représente la frontière d'un bloc. Dans cet exemple, seu
 <ul class="sources">
 <li>Cours « Le langage SysML », A. Roux, Lycée Gustave Eiffel (Bordeaux), PCSI/PSI — SII : <a href="https://aroux-sii.fr/" target="_blank" rel="noopener">aroux-sii.fr</a> (site protégé par mot de passe — mot de passe d'accès : <code>psi*2627</code>).</li>
 <li>Document original (PDF) : <a href="./09-2026-09-19_SI_Cours_SysML.pdf" target="_blank">09-2026-09-19_SI_Cours_SysML.pdf</a>.</li>
-<li>OMG Systems Modeling Language (SysML), spécification officielle (9 diagrammes, 3 familles) : <a href="https://www.omg.org/spec/SysML/" target="_blank" rel="noopener">omg.org/spec/SysML</a>.</li>
-<li>Programme officiel de Sciences Industrielles pour l'Ingénieur, CPGE 1<sup>re</sup> année (filière PCSI) : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank" rel="noopener">enseignementsup-recherche.gouv.fr</a>.</li>
+<li>OMG Systems Modeling Language (SysML), spécification officielle : <a href="https://www.omg.org/spec/SysML/" target="_blank" rel="noopener">omg.org/spec/SysML</a>.</li>
 </ul>
 </section>
 
