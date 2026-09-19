@@ -139,7 +139,13 @@ mjx-container{overflow-x:auto; max-width:100%;}
 <p>$$\{T_{i\to S}\}=\left\{\begin{array}{l}\overrightarrow{R_{i\to S}}=\sum_i \overrightarrow{dR_{i\to S}}=\sum_i \vec{F_i}\\ \overrightarrow{M_{A,i\to S}}=\sum_i \overrightarrow{dM_{A,i\to S}}=\sum_i \overrightarrow{AP_i}\wedge \vec{F_i}\end{array}\right\}_A$$</p>
 
 <h3>1.2. Modèle de torseur des actions mécaniques locales</h3>
-<p>Le domaine $\Omega$ représente soit un volume, une surface, soit une ligne. On fait l'hypothèse que l'action mécanique élémentaire agissant sur un élément de domaine $d\Omega$ est proportionnelle à la mesure de cet élément. On définit alors le torseur des actions mécaniques locales au point M du domaine :</p>
+<p>Dans cette partie, le domaine $\Omega$ représente soit :</p>
+<ul>
+<li>Un volume</li>
+<li>Une surface</li>
+<li>Une ligne</li>
+</ul>
+<p>Pour définir la forme du torseur des actions mécaniques locales agissant sur un élément de domaine $d\Omega$, on fait l'hypothèse que l'action mécanique élémentaire agissant sur un élément de domaine $d\Omega$ est proportionnelle à la mesure de cet élément de domaine. On définit alors le torseur des actions mécaniques locales au point M du domaine :</p>
 <div class="block def">
 <span class="label">Définition — densité d'efforts</span>
 $$\{dT\}=\left\{\begin{array}{l}\overrightarrow{dF(M)}=\overrightarrow{eff(M)}.\,d\Omega\\ \vec{0}\end{array}\right\}_M$$
@@ -246,7 +252,7 @@ avec $g$ l'accélération de la pesanteur (m/s²) et $\rho$ la masse volumique d
 <p>où $\vec P$ représente le poids du solide S.</p>
 <div class="block remark">
 <span class="label">Remarque — ordre de grandeur</span>
-L'action de $\vec g$ est souvent négligée dans les problèmes technologiques. Exemple : une pince de robot dont le mors pèse 2,2 kg (poids ≈ 21,56 N) doit exercer un effort de serrage de 1000 N sur la pièce : le poids du mors est bien négligeable devant l'effort du vérin.
+L'action de $\vec g$ est souvent négligée dans beaucoup de problèmes. Prenons l'exemple d'une pince de robot dont le mors pèse 2,2 kg, donc la pesanteur est un glisseur de 21,56 N. L'action à imposer sur la pièce à serrer est 1000 N. On voit bien que l'action de $\vec g$ est négligeable devant celle du fluide.
 </div>
 
 <h4>2.1.1. Définition du centre de gravité d'un solide</h4>
