@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SI — Introduction à l'Automatique</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.9rem; margin:0 0 .2rem 0;}
+h2{font-size:1.35rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.1rem; margin-top:1.6rem;}
+h4{font-size:1rem; margin-top:1.2rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:265px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc ol ol{margin:.15rem 0 .4rem 1rem;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+table{border-collapse:collapse; margin:1rem 0; width:100%;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.92rem;}
+th{background:#f3f2ee;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+.footnote{font-size:.8rem; color:#7a7a72; border-top:1px dashed var(--line); margin-top:.6rem; padding-top:.4rem;}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.5rem;} h2{font-size:1.15rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+.crosslinks-course{text-align:center; padding:0 0 .6rem 0; font-size:.82rem;}.crosslinks-course a{color:var(--blue-bd); text-decoration:none; font-weight:600; margin:0 .6rem;}
+.access-note{font-size:.82rem; color:#7a7a72; text-align:center; margin:0 0 1rem 0;}
+.access-note code{background:#f3f2ee; padding:.1rem .4rem; border-radius:4px;}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Présentation des systèmes automatisés</a></li>
+  <li class="top"><a href="#s2">2. Signaux d'entrée usuels</a></li>
+  <li class="top"><a href="#s3">3. Critères de performance</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<div class="crosslinks-course"><a href="../../../index.html">🏠 Accueil</a><a href="../index.html">🏫 Prépa Barthou</a></div>
+
+<header class="title">
+<h1>Introduction à l'Automatique</h1>
+<div class="meta">SI (Sciences Industrielles) — Automatique / SLCI · MPSI-PCSI1 · Lycée Gustave Eiffel (Bordeaux) · Enseignant : A. Roux · mis au propre le 19/09/2026</div>
+</header>
+
+<p class="access-note">Document original (PDF professeur) protégé par mot de passe sur le site source — voir la section <a href="#sources">Sources</a> ci-dessous pour le mot de passe d'accès au site <code>aroux-sii.fr</code>.</p>
+
+<p><strong>Compétences attendues :</strong></p>
+<ul>
+<li>Identifier la structure d'un système asservi.</li>
+<li>Modéliser le signal d'entrée.</li>
+<li>Déterminer les performances d'un système asservi.</li>
+<li>Proposer une démarche permettant d'évaluer les performances des systèmes asservis.</li>
+</ul>
+
+<section id="s1">
+<h2>1. Présentation des systèmes automatisés</h2>
+<h3>1.1. Systèmes automatisés</h3>
+<h4>1.1.1. Définition</h4>
+<div class="block def">
+<span class="label">Définition d'un système automatisé</span>
+Un <strong>système automatisé</strong> ou automatique est un système réalisant des opérations et pour lequel l'intervention humaine est limitée à la programmation du système et à son réglage préalable.
+</div>
+<p>L'automatique est la discipline scientifique traitant, d'une part, de la caractérisation des systèmes automatisés et, d'autre part, du choix, de la conception et de la réalisation du système de commande.</p>
+<h4>1.1.2. Buts et motivations</h4>
+<p>Les systèmes automatisés ont pour buts :</p>
+<ul>
+<li>de réaliser des tâches impossibles pour l'homme ou dangereuses afin d'améliorer la sécurité (exploration spatiale par exemple) ;</li>
+<li>de réaliser des tâches pénibles ou répétitives afin d'améliorer le confort (assemblage de pièces dans l'industrie) ;</li>
+<li>d'améliorer la précision, la qualité et la productivité des tâches (système de découpe laser).</li>
+</ul>
+<figure>
+<img src="./img/13-fig1-exemples-systemes.png" alt="Imprimante 3D, drone, robot d'exploration">
+<figcaption>Figure 1 : A. Imprimante 3D. B. Un drone. C. Un robot d'exploration.</figcaption>
+</figure>
+<p>On peut également citer d'autres systèmes automatisés plus courants : système d'ouverture de portail, pilote automatique de bateau…</p>
+
+<h4>1.1.3. Classification selon la nature de l'information</h4>
+<p>Les systèmes automatisés illustrent la fonction <strong>Acquérir et Traiter l'information</strong> de la chaîne d'information.</p>
+<figure>
+<img src="./img/13-fig2-chaine-info-puissance.png" alt="Chaîne d'information et chaîne de puissance">
+</figure>
+<p>Il est ainsi possible de classer les systèmes automatisés selon la nature des informations traitées :</p>
+<ul>
+<li><strong>les grandeurs analogiques</strong> : leur mesure donne des valeurs réelles de manière continue dans un intervalle. Il existe une infinité de valeurs pour une grandeur analogique. Elles sont généralement associées à des unités (ex : 25,2°C) ;</li>
+<li><strong>les grandeurs numériques</strong> : elles sont restreintes à ne prendre qu'un nombre fini de valeurs. Par exemple, les ordinateurs ne traitent qu'une suite de nombres binaires ;</li>
+<li>enfin, une dernière classe est formée par les systèmes logiques, qui utilisent des <strong>informations logiques</strong> (0 ou 1). On en distingue deux types :
+<ul>
+<li><strong>systèmes logiques combinatoires</strong> : chaque état des données d'entrée correspond à une seule sortie, les effets disparaissant en même temps que la cause ;</li>
+<li><strong>systèmes logiques séquentiels</strong> : la sortie dépend des entrées <strong>ET</strong> des évolutions précédentes du système ; une même entrée peut donc correspondre à plusieurs sorties.</li>
+</ul>
+</li>
+</ul>
+<p>Les systèmes séquentiels et combinatoires traitent des informations discrètes ; les systèmes continus traitent des informations continues.</p>
+<figure>
+<img src="./img/13-fig3-amplitude-continue-discrete.png" alt="Représentation de l'information : continue/discrète, en amplitude/en temps">
+<figcaption>Figure 2 : Représentation de l'information.</figcaption>
+</figure>
+
+<h4>1.1.4. Différents types de systèmes</h4>
+<p>Il est possible de classer les systèmes en deux groupes :</p>
+<ul>
+<li>les systèmes instantanés : la sortie est directement déduite de l'entrée à un instant donné ;</li>
+<li>les systèmes dynamiques : la sortie dépend de l'état actuel de l'entrée et des états antérieurs du système.</li>
+</ul>
+<p>En réalité, il n'existe que peu de systèmes instantanés, car tout effet présente une certaine inertie (ou mémoire). L'appellation « système instantané » relève donc souvent de l'approximation. C'est la raison pour laquelle le contrôle des systèmes n'est pas toujours évident ; en effet, la consigne correspondant à une sortie donnée à un instant <strong>t</strong> n'est pas unique, elle dépend de l'état du système.</p>
+
+<h3>1.2. Système asservi</h3>
+<h4>1.2.1. Définition</h4>
+<div class="block def">
+<span class="label">Définition d'un système asservi</span>
+Un <strong>système asservi</strong> est un <strong>système automatisé bouclé</strong>, c'est-à-dire un système pour lequel on asservit la valeur de la sortie à la valeur de la consigne.
+</div>
+
+<h4>1.2.2. Structure</h4>
+<p>Les systèmes asservis possèdent une <strong>boucle de retour</strong> qui permet d'élaborer la commande du système en connaissant l'état de la sortie à l'instant t, généralement par l'intermédiaire de <strong>capteurs</strong>.</p>
+<p>Pour élaborer cette consigne de commande, on va le plus souvent <strong>comparer</strong> la sortie à la consigne actuelle (mesurer l'<strong>écart</strong> entre les deux valeurs), puis construire une consigne adaptée à cette situation.</p>
+<p>On parle également pour les systèmes asservis de systèmes à <strong>commande en chaîne fermée.</strong></p>
+<figure>
+<img src="./img/13-fig4-organisation-systeme-boucle.png" alt="Organisation d'un système bouclé">
+<figcaption>Figure 3 : Organisation d'un système bouclé.</figcaption>
+</figure>
+<p><em>Remarque :</em> En opposition au système asservi, un système sans boucle de retour est appelé système à <strong>commande en chaîne directe</strong>.</p>
+<p><em>Exemple :</em> Analogie entre les systèmes bouclés et l'homme :</p>
+<figure>
+<img src="./img/13-fig5-analogie-homme.png" alt="Analogie entre les systèmes bouclés et l'homme">
+</figure>
+
+<h4>1.2.3. Classification selon la nature de la consigne</h4>
+<p>Deux grandes familles permettent de réaliser ces asservissements :</p>
+<ul>
+<li>les systèmes asservis de <strong>régulation</strong> dans lesquels la consigne d'entrée est <strong>fixe</strong> comme par exemple pour une régulation de température, de débit… Ils sont destinés à maintenir une sortie constante pour une consigne d'entrée constante.</li>
+<li>les systèmes asservis <strong>suiveurs ou en poursuite</strong> d'une loi de référence dans lesquels la consigne d'entrée <strong>varie en permanence</strong> comme par exemple pour une machine-outil à commande numérique, un radar… L'objectif de ce système est d'ajuster en permanence le signal de sortie au signal d'entrée.</li>
+</ul>
+</section>
+
+<section id="s2">
+<h2>2. Signaux d'entrée usuels</h2>
+<p>Pour étudier le comportement dynamique d'un système, la première solution consiste à mettre en équation l'ensemble des lois physiques qui régissent ce système afin d'obtenir un modèle théorique de son comportement.</p>
+<div class="block remark">
+<span class="label">Attention</span>
+Néanmoins, dans certains cas, étant donnée la complexité du système, il peut être plus intéressant de tester ses réactions à des consignes élémentaires afin d'observer directement (et donc rapidement) le comportement du système à des sollicitations classiques. Ainsi, l'observation directe de la sortie permet d'éviter les erreurs de modélisation et de connaître les premières caractéristiques de ce système.
+</div>
+
+<h3>2.1. Impulsion de Dirac</h3>
+<p>Ce signal est aussi appelé <strong>impulsion unité</strong>. Il est noté δ(t) et est défini par : $\forall t\ne0,\ \delta(t)=0$.</p>
+<figure>
+<img src="./img/13-fig6-dirac.png" alt="Impulsion de Dirac">
+<figcaption>Figure 4 : Impulsion de Dirac.</figcaption>
+</figure>
+<p>Cette fonction modélise une action s'exerçant pendant un temps très court (exemples : action d'un marteau, la frappe d'une corde de piano, etc…).</p>
+<p><strong>Définition :</strong> La réponse à une <strong>impulsion de Dirac</strong> est appelée <strong>réponse impulsionnelle.</strong></p>
+
+<h3>2.2. Échelon unité</h3>
+<p>L'échelon unité est défini par : $\forall t<0,\ u(t)=0\ \ et\ \ \forall t\ge0,\ u(t)=1$.</p>
+<figure>
+<img src="./img/13-fig7-echelon.png" alt="Échelon unité">
+<figcaption>Figure 5 : Echelon unité.</figcaption>
+</figure>
+<p>Cette fonction modélise un signal qui passe de la valeur nulle à la valeur 1 très rapidement et qui reste ensuite constant égal à 1 (exemple : appui sur un interrupteur).</p>
+<p><strong>Définition :</strong> La réponse à un <strong>échelon unité</strong> est appelée <strong>réponse indicielle</strong>.</p>
+
+<h3>2.3. Rampe de pente unitaire</h3>
+<p>La rampe de pente unitaire est définie par : $\forall t<0,\ r(t)=0\ \ et\ \ \forall t\ge0,\ r(t)=t$.</p>
+<figure>
+<img src="./img/13-fig8-rampe.png" alt="Rampe de pente unitaire">
+<figcaption>Figure 6 : Rampe de pente unitaire.</figcaption>
+</figure>
+
+<h3>2.4. Fonction sinusoïdale</h3>
+<p>La fonction sinusoïdale peut être définie par :</p>
+<p>$$\forall t\in\mathbb{R},\ f(t)=u(t).\sin(\omega t)\ \text{où}\ u(t)\ \text{est la fonction échelon.}$$</p>
+<figure>
+<img src="./img/13-fig9-sinusoide.png" alt="Fonction sinusoïdale">
+<figcaption>Figure 7 : Fonction sinusoïdale.</figcaption>
+</figure>
+<p><strong>Remarques importantes :</strong></p>
+<ul>
+<li>Pour les temps t négatifs, tous les signaux seront considérés à valeur nulle.</li>
+<li>Tout signal nul pour un temps négatif peut s'écrire comme la somme de signaux élémentaires en utilisant la fonction échelon.</li>
+</ul>
+
+<h3>2.5. Signaux complexes</h3>
+<p>Tout signal peut s'écrire comme la somme de signaux élémentaires en utilisant la fonction échelon et des fonctions retardées. On est alors en mesure de modéliser tout type d'entrée.</p>
+<p>La fonction retard est une fonction échelon, dont le passage de 0 à 1 ne s'effectue qu'à un temps $t_1$. On note cette fonction $u(t-t_1)$.</p>
+<figure>
+<img src="./img/13-fig10-retard.png" alt="Fonction retard u(t-t1)">
+<figcaption>Figure 8 : Fonction retard u(t-t<sub>1</sub>).</figcaption>
+</figure>
+<p><em>Exemple :</em> Pour une succession de rampes avec des pentes différentes, on a donc :</p>
+<figure>
+<img src="./img/13-fig11-signal-complexe.png" alt="Signal complexe : succession de deux rampes de pentes différentes">
+<figcaption>Figure 9 : Signal complexe.</figcaption>
+</figure>
+<figure>
+<img src="./img/13-fig12-signal-decompose.png" alt="Signal décomposé en signaux élémentaires">
+<figcaption>Figure 10 : Signal décomposé en signaux élémentaires.</figcaption>
+</figure>
+<p>On peut donc construire deux rampes de pentes successives comme signal d'entrée en superposant une rampe classique avec une autre rampe dont l'origine est décalée (avec une fonction retard).</p>
+</section>
+
+<section id="s3">
+<h2>3. Critères de performance d'un système asservi</h2>
+<p>La réponse donnée par le système aux différentes sollicitations doit donner satisfaction par rapport aux critères du cahier des charges. Il est donc nécessaire de définir des critères qui permettront d'évaluer l'efficacité de la réponse d'un système par rapport aux données d'entrées. Pour un système asservi, on utilise 4 critères :</p>
+<ul>
+<li><strong>Rapidité</strong></li>
+<li><strong>Précision</strong></li>
+<li><strong>Stabilité</strong></li>
+<li><strong>Amortissement</strong></li>
+</ul>
+
+<h3>3.1. Rapidité d'un système</h3>
+<div class="block def">
+<span class="label">Définition de la rapidité</span>
+La <strong>rapidité</strong> d'un système est le <strong>temps que met celui-ci à réagir</strong> à une variation brusque de la grandeur d'entrée.
+</div>
+<p>Dans la plupart des cas, la valeur finale est atteinte de manière asymptotique voire oscillante, on retient alors comme principal critère d'évaluation de la rapidité d'un système le temps de réponse à n%.</p>
+<p>Dans la pratique, c'est le temps de réponse à 5%, noté $t_{5\%}$, qui est le plus souvent utilisé. Il correspond au temps mis par le système pour se stabiliser à la valeur du régime permanent (quand le temps tend vers l'infini) à ±5% près ; c'est-à-dire lorsque la sortie s(t) entre dans la bande à ±5%.</p>
+<figure>
+<img src="./img/13-fig13-t5pct.png" alt="Temps de réponse à 5 %">
+</figure>
+<div class="block correction">
+<span class="label">Attention</span>
+Il faut prendre la bande à ±5% par rapport à la <strong>valeur finale du signal de sortie</strong> ($s_\infty$) et non par rapport à la consigne d'entrée !
+</div>
+<figure>
+<img src="./img/13-fig14-t5pct-comparaison.png" alt="Comparaison de la bande à 5% prise sur la sortie et sur la consigne">
+</figure>
+
+<h3>3.2. Précision d'un système</h3>
+<div class="block def">
+<span class="label">Définition de la précision</span>
+La <strong>précision</strong> qualifie <strong>l'aptitude</strong> du système à atteindre la <strong>valeur visée</strong>. Elle est caractérisée par <strong>l'écart</strong> entre la consigne et la valeur effectivement atteinte par la grandeur de sortie.
+</div>
+<p>L'écart éventuel s'exprime dans la même unité que la grandeur de sortie. On distingue deux types de précision :</p>
+<ul>
+<li><strong>Précision statique</strong></li>
+<li><strong>Précision dynamique</strong></li>
+</ul>
+<h4>3.2.1. Ecart statique $\varepsilon_s$</h4>
+<p>Le système est en mode régulation (entrée fixe). On définit alors l'écart statique $\varepsilon_s$ comme l'écart entre la consigne fixe $E_0$ et la réponse s(t) en régime permanent.</p>
+<p>$$\varepsilon_s=\lim_{t\to+\infty}\big(e(t)-s(t)\big)=\lim_{t\to+\infty}\big(E_0.u(t)-s(t)\big)$$</p>
+<p>Un système régulateur est précis si l'écart statique est nul.</p>
+<figure>
+<img src="./img/13-fig15-ecart-statique.png" alt="Écart statique">
+</figure>
+
+<h4>3.2.2. Ecart dynamique $\varepsilon_t$</h4>
+<p>L'écart dynamique, aussi appelé écart (erreur) de trainage ou écart (erreur) de poursuite, il représente la différence entre la consigne variable et la réponse en régime permanent.</p>
+<p>$$\varepsilon_t=\lim_{t\to+\infty}\big(e(t)-s(t)\big)$$</p>
+<figure>
+<img src="./img/13-fig16-ecart-dynamique.png" alt="Écart dynamique">
+</figure>
+
+<h3>3.3. Stabilité d'un système</h3>
+<div class="block def">
+<span class="label">Définition de la stabilité</span>
+Un système est <strong>stable</strong>, si, à une entrée bornée, correspond une sortie bornée.
+</div>
+<p>Exemples de systèmes stables :</p>
+<figure>
+<img src="./img/13-fig17-stable-aperiodique.png" alt="Système stable — réponse apériodique">
+</figure>
+<figure>
+<img src="./img/13-fig18-stable-oscillant.png" alt="Système stable — réponse oscillante amortie">
+</figure>
+<p><em>Remarque :</em> Le bouclage peut déstabiliser un système.</p>
+<p>Exemples de systèmes instables :</p>
+<figure>
+<img src="./img/13-fig19-instable-divergent.png" alt="Système instable — réponse divergente">
+</figure>
+<figure>
+<img src="./img/13-fig20-instable-oscillant.png" alt="Système instable — oscillations d'amplitude croissante">
+</figure>
+
+<h3>3.4. Amortissement d'un système</h3>
+<p>L'amortissement est caractérisé par le rapport entre les amplitudes successives des oscillations de la sortie. Plus ces oscillations s'atténuent rapidement, plus le système est amorti.</p>
+<figure>
+<img src="./img/13-fig21-amortissements.png" alt="Système peu amorti, trop amorti, bien amorti">
+<figcaption>Figure 11 : Différents amortissements.</figcaption>
+</figure>
+<p>Pour caractériser la qualité de l'amortissement on peut retenir deux critères :</p>
+<ul>
+<li>le <strong>taux de dépassement</strong> (en pourcentage) qui caractérise l'amplitude maximale des oscillations ;</li>
+</ul>
+<p>$$D_{1\%}=\left|\frac{s(t_1)-s_\infty}{s_\infty}\right|$$</p>
+<figure>
+<img src="./img/13-fig22-depassement.png" alt="Premier dépassement s(t1)">
+</figure>
+<ul>
+<li>le <strong>temps de réponse à 5%</strong> qui correspond au temps de stabilisation du système.</li>
+</ul>
+<p>Il est à noter que pour certaines applications (l'usinage par exemple), un comportement oscillant n'est pas autorisé et tout dépassement est inacceptable.</p>
+
+<h3>3.5. Bilan sur les critères de performance</h3>
+<p>L'asservissement idéal d'un système implique une bonne stabilité et une bonne précision ; le régime transitoire doit ainsi être rapide et bien amorti (le système fait vite et bien ce qui lui est demandé). Ces critères de performances ne sont pas toujours compatibles.</p>
+<p>Par exemple, en mécanique, un système de faible inertie réagira rapidement à une consigne de positionnement. En revanche, du fait de cette faible inertie, il risque d'être peu amorti, voire instable, à la moindre perturbation.</p>
+<p><strong>N.B.</strong> Inertie : Résistance qu'un corps oppose à la variation de son mouvement, et qui résulte de sa masse.</p>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Quelle est la différence entre un système « asservi » et un système « automatisé » en général ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Tout système asservi est automatisé, mais l'inverse n'est pas vrai : un système asservi est spécifiquement un système automatisé <em>bouclé</em>, qui possède une chaîne de retour comparant la sortie à la consigne. Un système automatisé sans boucle de retour fonctionne en chaîne directe (commande ouverte), sans comparaison ni correction de l'écart.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Pourquoi l'appellation « système instantané » relève-t-elle souvent d'une approximation ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Parce que tout système physique réel présente une certaine inertie (mécanique, thermique, électrique…) : sa sortie ne peut jamais réagir à une entrée de façon rigoureusement immédiate. Un système est qualifié d'« instantané » seulement lorsque cette inertie est négligeable à l'échelle de temps étudiée.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Un système reçoit un échelon de consigne $e(t)=5.u(t)$ et sa sortie tend vers $s_\infty=4{,}8$ en régime permanent. Calculer l'écart statique $\varepsilon_s$. Le système est-il précis ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> $\varepsilon_s=\lim_{t\to\infty}(e(t)-s(t))=5-4{,}8=0{,}2$. Comme $\varepsilon_s\ne0$, le système n'est pas précis (il subsiste un écart statique permanent entre la consigne et la sortie).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Pourquoi utilise-t-on plus souvent une entrée en échelon qu'une entrée en impulsion de Dirac pour caractériser expérimentalement un système réel ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> L'impulsion de Dirac est une abstraction mathématique (amplitude infinie sur une durée nulle), physiquement impossible à générer exactement. L'échelon (passage brusque d'une valeur à une autre, comme l'appui sur un interrupteur) est en revanche facilement réalisable expérimentalement et suffit à observer directement la rapidité, la précision, la stabilité et l'amortissement du système.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Piège classique : un élève mesure le temps de réponse à 5 % d'un système en traçant la bande $\pm5\%$ autour de la valeur de la consigne d'entrée $e(t)=u(t)$. Où est l'erreur ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> La bande à $\pm5\%$ doit être prise par rapport à la <strong>valeur finale de la sortie</strong> $s_\infty$ (valeur asymptotique réellement atteinte par le système), et non par rapport à la consigne d'entrée. Si le système n'est pas précis ($s_\infty\ne e_\infty$), les deux bandes sont différentes et donnent des $t_{5\%}$ différents.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passe-t-il si l'on bloque de force le bouclage d'un système asservi initialement stable (on le fait fonctionner en chaîne directe) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Rien ne garantit que la stabilité soit conservée ou perdue dans un sens ou dans l'autre : le bouclage peut aussi bien stabiliser un système instable en chaîne directe que déstabiliser un système par ailleurs stable. C'est justement pour cela que la stabilité d'un système bouclé doit être étudiée spécifiquement, et ne se déduit pas directement de celle du système en chaîne directe.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Un système présente un premier dépassement $s(t_1)=1{,}25$ pour une valeur asymptotique $s_\infty=1$. Calculer le taux de dépassement $D_{1\%}$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span> $D_{1\%}=\left|\dfrac{s(t_1)-s_\infty}{s_\infty}\right|=\left|\dfrac{1{,}25-1}{1}\right|=0{,}25=25\%$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : un élève affirme qu'un système « trop amorti » est nécessairement un bon système, puisqu'il ne présente aucun dépassement. Qu'en penser ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> C'est faux en général : un système trop amorti est certes très stable et sans dépassement, mais il est <em>lent</em> (temps de réponse $t_{5\%}$ élevé). Le meilleur compromis est un système « bien amorti », qui limite le dépassement tout en restant rapide — un système trop amorti sacrifie la rapidité au profit d'un amortissement excessif.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Pourquoi la rapidité et l'amortissement (ou la stabilité) sont-ils souvent des critères contradictoires, comme l'illustre l'exemple d'un système mécanique de faible inertie ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Une faible inertie permet au système de réagir vite à une consigne (bonne rapidité), car peu d'énergie est nécessaire pour changer son état de mouvement. Mais cette même faible inertie le rend aussi très sensible aux perturbations et aux oscillations non amorties (un système « léger » a moins de résistance naturelle aux variations) : il risque donc d'être peu amorti, voire instable, ce qui illustre le compromis rapidité/stabilité qu'un cahier des charges doit arbitrer.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : pour un système asservi suiveur (poursuite, ex. radar suivant une cible), quel écart (statique ou dynamique) est le plus pertinent à surveiller, et pourquoi l'autre l'est moins ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> L'écart <strong>dynamique</strong> $\varepsilon_t$ (erreur de traînage/poursuite) est le plus pertinent, car la consigne d'un système suiveur varie en permanence (elle n'est jamais un simple échelon fixe) : c'est la capacité du système à suivre une consigne mobile qui importe. L'écart statique $\varepsilon_s$, défini pour une consigne fixe (mode régulation), n'a de sens que pour les systèmes de régulation et n'est pas directement pertinent pour caractériser un système en poursuite continue.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Cours « Introduction à l'Automatique », A. Roux, Lycée Gustave Eiffel (Bordeaux), PCSI/PSI — SII : <a href="https://aroux-sii.fr/" target="_blank" rel="noopener">aroux-sii.fr</a> (site protégé par mot de passe — mot de passe d'accès : <code>psi*2627</code>).</li>
+<li>Document original (PDF) : <a href="./13-2026-09-19_SI_Cours_Automatique-Introduction.pdf" target="_blank">13-2026-09-19_SI_Cours_Automatique-Introduction.pdf</a>.</li>
+<li>Critères de performance (rapidité, précision, stabilité BIBO, amortissement) : tout manuel de référence de SI/automatique prépa (ex. H-Prépa Sciences Industrielles) ou programme officiel de Sciences Industrielles pour l'Ingénieur, CPGE 1<sup>re</sup> année (filière PCSI) : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank" rel="noopener">enseignementsup-recherche.gouv.fr</a>.</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>

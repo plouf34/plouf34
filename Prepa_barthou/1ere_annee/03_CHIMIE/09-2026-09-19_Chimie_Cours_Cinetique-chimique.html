@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie — Cinétique chimique</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.85rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+table{border-collapse:collapse; width:100%; margin:.8rem 0; font-size:.9rem;}
+th,td{border:1px solid var(--line); padding:.35rem .5rem; text-align:left;}
+th{background:var(--gray-bg);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.45rem;} h2{font-size:1.1rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+.crosslinks-course{text-align:center; padding:0 0 .6rem 0; font-size:.82rem;}.crosslinks-course a{color:var(--blue-bd); text-decoration:none; font-weight:600; margin:0 .6rem;}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Suivi expérimental d'une réaction</a></li>
+  <li class="top"><a href="#s2">2. Lois de vitesse expérimentales</a></li>
+  <li class="top"><a href="#s3">3. Profil énergétique d'un acte élémentaire</a></li>
+  <li class="top"><a href="#s4">4. Mécanismes réactionnels</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<div class="crosslinks-course"><a href="../../../index.html">🏠 Accueil</a><a href="../index.html">🏫 Prépa Barthou</a></div>
+
+<header class="title">
+<h1>Cinétique chimique</h1>
+<div class="meta">Chimie — Résumé de cours · PCSI · Source : Lycée Janson de Sailly (Paris) · mis au propre le 19/09/2026</div>
+</header>
+
+<div class="block remark">
+<span class="label">Remarque sur la source de ce document</span>
+Ce chapitre est construit sous forme de « documents » à partir desquels les notions du cours sont dégagées. La loi d'Arrhenius (citée dans le plan du cours et utilisée dans les exercices) n'apparaît pas sous forme d'une formule encadrée explicite dans les documents fournis : seule la notion d'<strong>énergie d'activation microscopique</strong> (§3) y est formellement définie. La formule macroscopique de la loi d'Arrhenius n'est donc pas transcrite ici en tant que contenu du professeur, pour ne pas lui attribuer une formulation qu'il n'a pas lui-même rédigée dans ce document.
+</div>
+
+<section id="s1">
+<h2>1. Suivi expérimental d'une réaction</h2>
+<div class="block def">
+<span class="label">Définition 1 — Courbe cinétique</span>
+On appelle <strong>courbe cinétique</strong> la représentation graphique de la concentration d'un constituant $A_i$ en fonction du temps.
+</div>
+<div class="block remark">
+<span class="label">Remarque — méthodes de suivi cinétique</span>
+<ul>
+<li><strong>Méthodes chimiques</strong> : titrage de $A_i$ dans le milieu réactionnel à chaque instant $t_n$. Ce sont des méthodes <strong>destructives</strong> : il faut doser des prélèvements, après les avoir « trempés » (versés dans une grande quantité de solvant froid) pour abaisser brusquement température et concentrations, et ainsi bloquer la réaction le temps du titrage.</li>
+<li><strong>Méthodes physiques</strong> : mesure en temps réel d'une grandeur physique reliée à la concentration :
+<ul>
+<li>manomètre : pression $p$, reliée à la quantité de matière totale de gaz par $pV=nRT$ ;</li>
+<li>conductimètre : conductivité $\sigma=\sum_{\text{ions } i}\lambda_i[A_i]$ ;</li>
+<li>spectrophotomètre : absorbance, loi de Beer-Lambert $A=\epsilon_i\ell[A_i]$ ;</li>
+<li>polarimètre : pouvoir rotatoire, loi de Biot $\alpha=[\alpha]_i\ell[A_i]$ (substance chirale).</li>
+</ul>
+Les méthodes physiques sont non destructives, automatisables, et permettent d'obtenir un grand nombre de points.</li>
+</ul>
+</div>
+<div class="block remark">
+<span class="label">Exemple — réduction des ions mercuriques par les ions ferreux</span>
+$$2\text{Hg}^{2+} + 2\text{Fe}^{2+} = \text{Hg}_2^{2+} + 2\text{Fe}^{3+}$$
+Suivie par spectrophotométrie (mesure de $[\text{Fe}^{3+}]$), avec $[\text{Hg}^{2+}]_0=1{,}000\times10^{-3}\,\text{mol/L}$ et $[\text{Fe}^{2+}]_0=0{,}100\,\text{mol/L}$ (très large excès). En notant $x$ l'avancement volumique : $[\text{Hg}^{2+}]=1{,}000\times10^{-3}-2x$, $[\text{Fe}^{2+}]=0{,}100-2x$, $[\text{Hg}_2^{2+}]=x$, $[\text{Fe}^{3+}]=2x$. Le réactif Fe$^{2+}$, en large excès, voit sa concentration quasiment inchangée pendant l'expérience (variation maximale de 1 %).
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Lois de vitesse expérimentales</h2>
+<div class="block remark">
+<span class="label">Remarque — convention</span>
+On s'intéresse à des réactions se déroulant dans le sens direct ($Q<K°$ à chaque instant étudié). Les lois indiquées ne sont pas toujours valables aux temps très courts ($t\to0$) ou très longs ($t\to+\infty$).
+</div>
+<table>
+<tr><th>Équation de la réaction</th><th>Loi de vitesse expérimentale</th><th>Ordre global</th></tr>
+<tr><td>$S_2O_8^{2-}+2I^-=2SO_4^{2-}+I_2$</td><td>$v=k_1[S_2O_8^{2-}][I^-]$</td><td>2</td></tr>
+<tr><td>$HO^-+C_2H_5Br=C_2H_5OH+Br^-$</td><td>$v=k_2[HO^-][C_2H_5Br]$</td><td>2</td></tr>
+<tr><td>cyclopropane → propène</td><td>$v=k_3[\text{cyclopropane}]$</td><td>1</td></tr>
+<tr><td>$CH_3OCH_3=CH_4+HCHO$</td><td>$v=k_4[CH_3OCH_3]^2$</td><td>2</td></tr>
+<tr><td>$2N_2O_5=4NO_2+O_2$</td><td>$v=k_5[N_2O_5]$</td><td>1</td></tr>
+<tr><td>$2NO+2H_2=2H_2O+N_2$</td><td>$v=k_6[NO]^2[H_2]$</td><td>3</td></tr>
+<tr><td>$2NO+O_2=2NO_2$</td><td>$v=k_7[NO]^2[O_2]$</td><td>3</td></tr>
+<tr><td>$2SO_2+O_2=2SO_3$</td><td>$v=k_8[SO_2][SO_3]^{-1/2}$</td><td>pas d'ordre</td></tr>
+<tr><td>$H_2+Br_2=2HBr$</td><td>$v=\dfrac{k[H_2]\sqrt{[Br_2]}}{1+k'[HBr]/[Br_2]}$</td><td>pas d'ordre</td></tr>
+</table>
+<div class="block theorem">
+<span class="label">Théorème 1 — Loi de vitesse d'une réaction admettant un ordre</span>
+Pour une réaction $s_AA+s_BB\to\text{produits}$ admettant un ordre :
+$$v = k\cdot[A]^\alpha\cdot[B]^\beta$$
+avec $v>0$ la vitesse de la réaction (mol·L$^{-1}$·s$^{-1}$), $\alpha,\beta\geq0$ les ordres partiels de A et B (nombres rationnels déterminés expérimentalement, $\alpha+\beta$ = ordre global), $k>0$ la constante cinétique (constante vis-à-vis des concentrations, mais dépendant des autres facteurs cinétiques, notamment la température ; unité dépendant de $\alpha+\beta$).
+</div>
+<div class="block remark">
+<span class="label">Remarque — réactions sans ordre</span>
+Certaines réactions (ex. $2SO_2+O_2=2SO_3$, $H_2+Br_2=2HBr$ ci-dessus) n'admettent pas de loi de vitesse de la forme du Théorème 1 : on parle de <strong>réactions sans ordre</strong>. Toutes sortes de lois de vitesse peuvent alors apparaître (concentration des produits, réactifs au dénominateur, sommes de termes…).
+</div>
+</section>
+
+<section id="s3">
+<h2>3. Profil énergétique d'un acte élémentaire</h2>
+<div class="block def">
+<span class="label">Définition 2 — Coordonnée de réaction et profil énergétique</span>
+La <strong>coordonnée de réaction</strong> (C.R.) est la projection de toutes les coordonnées d'espace en une seule abscisse curviligne représentant le déroulement de la réaction, en passant par le col d'énergie potentielle. Le <strong>profil énergétique</strong> est la courbe $E_p=f(\text{C.R.})$.
+</div>
+<div class="block def">
+<span class="label">Définition 3 — État de transition, complexe activé</span>
+L'<strong>état de transition</strong> (noté $\ddagger$) est l'état du système lorsqu'il se trouve au col de potentiel (sommet de la barrière). L'association des atomes à l'état de transition s'appelle le <strong>complexe activé</strong> : il n'a pas de durée de vie mesurable, donc n'est pas détectable expérimentalement.
+</div>
+<div class="block def">
+<span class="label">Définition 4 — Énergie d'activation microscopique</span>
+$$E_{p_a} = E_{p_\ddagger} - E_{p_\text{réactifs}}$$
+C'est la hauteur de la barrière de potentiel : l'énergie cinétique initiale minimale que doivent avoir les molécules qui se rencontrent pour donner lieu à un choc réactif.
+</div>
+<figure>
+<svg viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<g transform="translate(0,0)">
+<line x1="40" y1="220" x2="280" y2="220" stroke="#333" stroke-width="1.2"/><text x="270" y="235" font-size="10">C.R.</text>
+<line x1="40" y1="220" x2="40" y2="30" stroke="#333" stroke-width="1.2"/><text x="15" y="30" font-size="10">Ep</text>
+<path d="M60 190 C 100 190, 130 60, 170 60 C 200 60, 220 170, 260 190" stroke="#3b6fd8" stroke-width="1.8" fill="none"/>
+<text x="170" y="50" font-size="10" text-anchor="middle">‡</text>
+<line x1="60" y1="190" x2="100" y2="190" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/><text x="65" y="205" font-size="9">réactifs</text>
+<text x="235" y="205" font-size="9">produits</text>
+<line x1="60" y1="190" x2="60" y2="60" stroke="#c0392b" stroke-width="1.2" marker-end="url(aC2)"/><text x="65" y="120" font-size="9" fill="#c0392b">Epa</text>
+<text x="150" y="245" text-anchor="middle" font-size="10">exothermique</text>
+</g>
+<g transform="translate(320,0)">
+<line x1="40" y1="220" x2="280" y2="220" stroke="#333" stroke-width="1.2"/><text x="270" y="235" font-size="10">C.R.</text>
+<line x1="40" y1="220" x2="40" y2="30" stroke="#333" stroke-width="1.2"/><text x="15" y="30" font-size="10">Ep</text>
+<path d="M60 195 C 100 195, 130 50, 170 50 C 200 50, 220 130, 260 130" stroke="#c0392b" stroke-width="1.8" fill="none"/>
+<text x="170" y="40" font-size="10" text-anchor="middle">‡</text>
+<line x1="60" y1="195" x2="100" y2="195" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/><text x="65" y="210" font-size="9">réactifs</text>
+<text x="230" y="145" font-size="9">produits</text>
+<line x1="60" y1="195" x2="60" y2="50" stroke="#c0392b" stroke-width="1.2" marker-end="url(aC2)"/><text x="65" y="120" font-size="9" fill="#c0392b">Epa</text>
+<text x="150" y="245" text-anchor="middle" font-size="10">endothermique</text>
+</g>
+<defs><marker id="aC2" markerWidth="6" markerHeight="6" refX="3" refY="5" orient="auto"><path d="M0,0 L6,0 L3,5 Z" fill="#c0392b"/></marker></defs>
+</svg>
+<figcaption>Fig. 1 — Profils énergétiques d'un acte élémentaire exothermique (gauche) et endothermique (droite) : $E_{p_a}$ = hauteur de la barrière depuis les réactifs (Définition 4).</figcaption>
+</figure>
+<div class="block remark">
+<span class="label">Exemple — choc colinéaire H + H₂ → H₂ + H</span>
+La surface d'énergie potentielle $E_p(d_1,d_2)$ (avec $d_1=d_{H^1H^2}$, $d_2=d_{H^2H^3}$) présente un « col » (point selle) reliant la vallée des réactifs (R) à celle des produits (P) : le chemin réactionnel de plus basse énergie traverse ce col, dont le sommet correspond au complexe activé (Définition 3).
+</div>
+</section>
+
+<section id="s4">
+<h2>4. Mécanismes réactionnels</h2>
+<div class="block def">
+<span class="label">Définition 5 — Intermédiaire réactionnel</span>
+Un <strong>intermédiaire réactionnel</strong> est une espèce qui ne figure pas dans l'équation chimique d'une réaction mais qui apparaît dans le milieu réactionnel au cours de la transformation. D'un point de vue énergétique, c'est une espèce située à un minimum local d'énergie potentielle, donc possédant une durée de vie et étant détectable (bien qu'en général instable, très réactive, de concentration faible devant celle des réactifs et produits).
+</div>
+<div class="block def">
+<span class="label">Définition 6 — Acte élémentaire</span>
+Un <strong>acte élémentaire</strong> est une étape du chemin réactionnel entre deux minima locaux d'énergie : il n'apparaît pas d'intermédiaire au sein d'un acte élémentaire, qui est donc un processus microscopique <strong>irréductible</strong> (par exemple, une liaison rompue et une liaison formée simultanément).
+</div>
+<div class="block def">
+<span class="label">Définition 7 — Molécularité</span>
+La <strong>molécularité</strong> $m$ d'un acte élémentaire est le nombre d'entités microscopiques qui se rencontrent effectivement lors de cet acte élémentaire. C'est nécessairement un entier, qui ne peut prendre que trois valeurs :
+<ul>
+<li>$m=1$ : décomposition spontanée (ex. désintégration radioactive) ;</li>
+<li>$m=2$ : cas le plus fréquent, un choc (ex. $H+H_2\to H_2+H$ ; $F+H_2\to FH+H$) ;</li>
+<li>$m=3$ : choc rare de trois entités simultanément, nécessaire par exemple lors de la formation d'une liaison covalente par rencontre de deux atomes, la troisième espèce M étant un « partenaire de choc » emportant l'excès d'énergie ($A+B+M\to AB+M^*$).</li>
+</ul>
+</div>
+<div class="block remark">
+<span class="label">Attention !</span>
+Lorsqu'on écrit un acte élémentaire par une équation chimique, les nombres stœchiométriques représentent le nombre d'entités qui se rencontrent effectivement lors de ce processus microscopique ; leur somme (côté réactifs) est la molécularité $m$. L'écriture de l'équation d'un acte élémentaire est donc <strong>unique</strong> : il n'est permis ni de multiplier tous les nombres stœchiométriques par un même facteur $\lambda$, ni de simplifier des espèces apparaissant à droite et à gauche.
+</div>
+<div class="block def">
+<span class="label">Définition 8 — Mécanisme réactionnel</span>
+Le <strong>mécanisme réactionnel</strong> est la décomposition en actes élémentaires d'une réaction chimique.
+</div>
+<figure>
+<svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<line x1="30" y1="190" x2="450" y2="190" stroke="#333" stroke-width="1.2"/><text x="440" y="205" font-size="10">C.R.</text>
+<line x1="30" y1="190" x2="30" y2="30" stroke="#333" stroke-width="1.2"/><text x="8" y="30" font-size="10">Ep</text>
+<path d="M50 160 C 80 160,95 60,120 60 C 145 60,150 140,175 140 C 195 140,205 90,230 90 C 250 90,260 150,285 150 C 305 150,315 40,340 40 C 360 40,375 175,400 175"
+ stroke="#3b6fd8" stroke-width="1.8" fill="none"/>
+<text x="60" y="150" font-size="9">réactifs</text>
+<text x="150" y="155" font-size="9">I₁</text>
+<text x="260" y="165" font-size="9">I₂</text>
+<text x="390" y="190" font-size="9">produits</text>
+<text x="120" y="50" font-size="10">‡₁</text><text x="230" y="80" font-size="10">‡₂</text><text x="340" y="30" font-size="10">‡₃</text>
+</svg>
+<figcaption>Fig. 2 — Mécanisme réactionnel à trois actes élémentaires, faisant intervenir deux intermédiaires réactionnels $I_1$ et $I_2$ (minima locaux d'énergie, Définitions 5, 6, 8).</figcaption>
+</figure>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Donner la définition d'un intermédiaire réactionnel et d'un acte élémentaire (Définitions 5, 6).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Un intermédiaire réactionnel est une espèce qui n'apparaît pas dans l'équation globale de la réaction mais qui existe dans le milieu réactionnel (minimum local d'énergie potentielle). Un acte élémentaire est une étape du mécanisme entre deux minima locaux d'énergie, sans intermédiaire détectable à l'intérieur.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Quelles sont les trois valeurs possibles de la molécularité $m$ d'un acte élémentaire (Définition 7), et laquelle est la plus fréquente ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$m=1$ (décomposition spontanée), $m=2$ (choc, le cas le plus fréquent), $m=3$ (choc rare à trois entités, avec un partenaire de choc).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. La réaction $2NO+O_2=2NO_2$ a pour loi de vitesse $v=k_7[NO]^2[O_2]$ (§2). Quel est l'ordre partiel par rapport à O$_2$, et l'ordre global ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Ordre partiel par rapport à O$_2$ : 1 (exposant de $[O_2]$). Ordre global : $2+1=3$ (somme des exposants, Théorème 1).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Pour la réaction $2N_2O_5=4NO_2+O_2$, $v=k_5[N_2O_5]$ avec $k_5=0{,}0021\,\text{s}^{-1}$ à une température donnée et $[N_2O_5]=0{,}05\,\text{mol/L}$. Calculer $v$.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$v=k_5[N_2O_5]=0{,}0021\times0{,}05=1{,}05\times10^{-4}\,\text{mol}\cdot\text{L}^{-1}\cdot\text{s}^{-1}$ (Théorème 1, ordre 1).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi le complexe activé (Définition 3) n'est-il jamais détectable expérimentalement, contrairement à un intermédiaire réactionnel (Définition 5) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le complexe activé correspond à l'état de transition, situé au sommet (maximum local) de la barrière d'énergie potentielle — il n'a donc, par nature, aucune durée de vie mesurable (toute perturbation infinitésimale le fait évoluer immédiatement vers les réactifs ou les produits). Un intermédiaire réactionnel, en revanche, est situé à un minimum local d'énergie (Définition 5) : il possède une stabilité temporaire, donc une durée de vie non nulle, ce qui le rend détectable.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passerait-il si l'on essayait de multiplier par 2 tous les nombres stœchiométriques d'un acte élémentaire $H+H_2\to H_2+H$ pour obtenir $2H+2H_2\to2H_2+2H$ (Attention ! du §4) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Ce serait incorrect : l'écriture d'un acte élémentaire est unique et ses nombres stœchiométriques ont un sens physique précis (nombre d'entités qui se rencontrent réellement, donc la molécularité). Multiplier par 2 changerait la signification physique de l'équation (elle prétendrait alors décrire un choc à 6 entités simultanées, $m=6$, ce qui ne correspond à aucun processus microscopique réel plausible).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : peut-on utiliser $v=k[A]^\alpha[B]^\beta$ (Théorème 1) pour une réaction comme $2SO_2+O_2=2SO_3$ (§2) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — cette réaction est explicitement une réaction <strong>sans ordre</strong> (§2, Remarque) : sa loi de vitesse expérimentale $v=k_8[SO_2][SO_3]^{-1/2}$ fait intervenir un produit de la réaction (SO$_3$) avec un exposant négatif, ce qui ne correspond pas à la forme du Théorème 1 (qui ne concerne que des concentrations de réactifs à exposants positifs).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : les ordres partiels $\alpha$ et $\beta$ (Théorème 1) sont-ils nécessairement égaux aux nombres stœchiométriques $s_A$ et $s_B$ de l'équation de réaction ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — les ordres partiels sont déterminés expérimentalement et ne coïncident pas forcément avec les nombres stœchiométriques de l'équation globale (qui ne renseigne que sur les proportions de matière consommées/produites, pas sur le mécanisme réel). Par exemple, $CH_3OCH_3=CH_4+HCHO$ a un nombre stœchiométrique de 1 pour le réactif, mais un ordre expérimental de 2 (§2, tableau) — une différence qui trahit un mécanisme réactionnel non élémentaire.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : reliez la Définition 4 (énergie d'activation microscopique) à la Fig. 1 pour expliquer pourquoi une réaction exothermique peut malgré tout être lente à température ambiante.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le caractère exothermique d'une réaction ne renseigne que sur le bilan énergétique global (énergie des produits inférieure à celle des réactifs, Fig. 1 gauche) ; il ne dit rien sur la hauteur $E_{p_a}$ de la barrière d'énergie à franchir (Définition 4), qui peut être très élevée même pour une réaction très exothermique. Si $E_{p_a}$ est grande, très peu de molécules disposent, par agitation thermique, d'une énergie cinétique suffisante pour franchir la barrière lors d'un choc : la réaction est alors lente, malgré son caractère thermodynamiquement favorable.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : à partir de la Fig. 2 (mécanisme à trois actes élémentaires) et de la Définition 8, expliquer pourquoi la loi de vitesse globale observée expérimentalement (§2) peut être plus complexe que celle d'un acte élémentaire unique, et relier cela à l'exemple de la question 8.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Lorsqu'une réaction se déroule selon un mécanisme réactionnel comportant plusieurs actes élémentaires (Fig. 2, Définition 8), la vitesse globale observée résulte de la combinaison des vitesses de chacun de ces actes (souvent limitée par l'acte le plus lent, l'« étape cinétiquement déterminante », ou par un équilibre rapide entre intermédiaires) : la loi de vitesse macroscopique qui en résulte n'a alors aucune raison de coïncider avec une loi simple en puissance des seuls réactifs de l'équation globale. C'est exactement ce qui explique l'écart observé à la question 8 entre le nombre stœchiométrique (1) et l'ordre expérimental (2) de $CH_3OCH_3=CH_4+HCHO$ : cette réaction, bien qu'écrite de façon simple, se déroule en réalité via un mécanisme à plusieurs actes élémentaires (non détaillé dans ce document), qui produit une loi de vitesse d'ordre 2.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Cinétique chimique » (résumé de cours, Lycée Janson de Sailly, Paris)</li>
+<li>Programme officiel de Chimie, CPGE 1<sup>re</sup> année (filière PCSI), bloc « I.2 Évolution temporelle d'un système, mécanismes réactionnels » (arrêté du 5 janvier 2021) : <a href="https://cache.media.enseignementsup-recherche.gouv.fr/file/CPGE/65/7/Programme_Chimie_voie_PCSI_233657.pdf" target="_blank" rel="noopener">enseignementsup-recherche.gouv.fr</a></li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>

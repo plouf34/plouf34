@@ -22,11 +22,28 @@ BASE_URL = "https://plouf34.github.io/prepabarthou/Prepa_barthou/1ere_annee"
 
 # Établissement(s) source des documents "Cours Profs" pour chaque matière
 # (ville affichée à titre indicatif, sans classement — ce n'est pas le Kit de révision).
+# 5e élément = (num_min, num_max) des fichiers "Cours Profs" attribués à cette source
+# (None = source unique, capte tous les fichiers profs de la matière).
 SUBJECT_SOURCES = {
-    "01_MATHS": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png")],
-    "02_PHYSIQUE": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png")],
-    "03_CHIMIE": [("Sainte-Geneviève — S. Falcou", "Versailles", None, None)],
-    "04_SI": [("Jean Perrin — N. Mesnier", "Lyon", "http://nmesnier.free.fr/SII-PCSI.html", None)],
+    "01_MATHS": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png", None, None)],
+    "02_PHYSIQUE": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png", None, None)],
+    "03_CHIMIE": [
+        ("Sainte-Geneviève — S. Falcou", "Versailles", "http://www.pcsi1.bginette.com/Chim/Polys.php", None, (1, 7), None),
+        ("Janson de Sailly", "Paris", "http://chimie-pcsi-jds.net", None, (8, 11), None),
+    ],
+    "04_SI": [
+        ("Jean Perrin — N. Mesnier", "Lyon", "http://nmesnier.free.fr/SII-PCSI.html", None, (0, 8), None),
+        ("Gustave Eiffel — A. Roux", "Bordeaux", "https://aroux-sii.fr/", None, (9, 13), "psi*2627"),
+    ],
+}
+
+# Manuel de référence (PDF perso, hébergé sur Google Drive — jamais copié dans
+# le dépôt public, pour respecter les droits d'auteur) affiché sous le titre
+# de chaque matière, quand disponible.
+SUBJECT_MANUALS = {
+    "01_MATHS": ("Mathématiques PCSI — Ellipses 2021", "https://drive.google.com/file/d/1pgP4lA-lETFYa24RO_a7e2bStSglxtm2/view?usp=drive_link"),
+    "02_PHYSIQUE": ("Physique PCSI — Ellipses 2021", "https://drive.google.com/file/d/1sdiMgJytsKeblo_JYJce7kWVb5OXh9l4/view?usp=drive_link"),
+    "04_SI": ("Sciences industrielles de l'ingénieur — Vuibert", "https://drive.google.com/file/d/1klTB2dhumRg6bxomyXZvD9_3dm-pKHxR/view?usp=drive_link"),
 }
 
 
@@ -49,38 +66,41 @@ def parse_number_and_title(filename):
     return num, rest.strip()
 
 
-def sources_bar(folder):
-    items = SUBJECT_SOURCES.get(folder, [])
-    if not items:
+def source_chip_html(name, ville, url, icon, password=None):
+    icon_html = f'<img src="{esc(icon)}" class="source-icon" alt="">' if icon else "🏫"
+    pin = f'<span class="source-pin">📍 {esc(ville)}</span>'
+    if password:
+        pin += f'<span class="source-pin">🔑 {esc(password)}</span>'
+    if url:
+        return (f'<a class="source-chip-inline" href="{esc(url)}" target="_blank" rel="noopener">'
+                f'{icon_html} {esc(name)} {pin} <span class="arrow">↗</span></a>')
+    return f'<span class="source-chip-inline source-chip-static">{icon_html} {esc(name)} {pin}</span>'
+
+
+def manual_line_html(folder):
+    entry = SUBJECT_MANUALS.get(folder)
+    if not entry:
         return ""
-    chips = ""
-    for name, ville, url, icon in items:
-        icon_html = f'<img src="{esc(icon)}" class="source-icon" alt="">' if icon else "🏫"
-        meta = f'<div class="source-meta">📍 {esc(ville)}</div>'
-        if url:
-            chips += (f'<div class="source-block">'
-                      f'<a class="source-chip" href="{esc(url)}" target="_blank" rel="noopener">{icon_html} {esc(name)} <span class="arrow">↗</span></a>'
-                      f'{meta}</div>')
-        else:
-            chips += (f'<div class="source-block">'
-                      f'<span class="source-chip source-chip-static">{icon_html} {esc(name)}</span>'
-                      f'{meta}</div>')
-    label = "Source" if len(items) == 1 else "Sources"
-    return f'<div class="sources-bar"><span class="sources-label">{label} :</span>{chips}</div>'
+    title, url = entry
+    return (f'<div class="manual-line"><a class="manual-chip" href="{esc(url)}" target="_blank" rel="noopener">'
+            f'📘 Manuel : {esc(title)} <span class="arrow">↗</span></a></div>')
 
 
-def table_row(num, titre, url):
+def table_row(num, titre, url, pdf_url=None):
     n_html = esc(num) if num else "—"
     if url:
         link_html = f'<a class="pill pill-sujet" href="{esc(url)}" target="_blank" rel="noopener">📄 Ouvrir</a>'
     else:
         link_html = '<span class="pill pill-off">—</span>'
+    if pdf_url:
+        link_html += f'<a class="pill pill-pdf" href="{esc(pdf_url)}" target="_blank" rel="noopener">📕 PDF</a>'
     return (f'<tr><td class="col-n">{n_html}</td><td class="col-titre">{esc(titre)}</td>'
             f'<td class="col-link">{link_html}</td></tr>')
 
 
-def section_row(title):
-    return f'<tr class="section-row"><td colspan="3">{esc(title)}</td></tr>'
+def section_row(title, chip_html=""):
+    sep = " — " if chip_html else ""
+    return f'<tr class="section-row"><td colspan="3">{esc(title)}{sep}{chip_html}</td></tr>'
 
 
 def empty_row():
@@ -95,6 +115,14 @@ def table_open():
 
 def table_close():
     return '</tbody></table>'
+
+
+def pdf_url_for(dir_path, folder, f):
+    """Si un PDF source du même nom existe à côté du HTML, renvoie son URL."""
+    pdf_name = f[:-5] + ".pdf" if f.endswith(".html") else None
+    if pdf_name and os.path.isfile(os.path.join(dir_path, pdf_name)):
+        return f"{BASE_URL}/{folder}/{pdf_name}"
+    return None
 
 
 def build_subject_block(repo_root, folder, emoji, label, anchor):
@@ -112,22 +140,63 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
         for f in clarisse_files:
             num, titre = parse_number_and_title(f)
             url = f"{BASE_URL}/{folder}/{f}"
-            body += table_row(num, titre, url)
+            body += table_row(num, titre, url, pdf_url_for(dir_path, folder, f))
     else:
         body += empty_row()
-    body += section_row("2. Cours Profs")
-    if profs_files:
-        for f in profs_files:
-            num, titre = parse_number_and_title(f)
-            url = f"{BASE_URL}/{folder}/{f}"
-            body += table_row(num, titre, url)
+
+    sources = SUBJECT_SOURCES.get(folder, [])
+    if len(sources) <= 1:
+        # Source unique (ou aucune) : un seul pavé "Cours Profs", avec la
+        # puce source (nom + ville + lien cliquable) directement dans l'en-tête.
+        if sources:
+            name, ville, url, icon, _num_range, password = sources[0]
+            chip = source_chip_html(name, ville, url, icon, password)
+        else:
+            chip = ""
+        body += section_row("2. Cours Profs", chip)
+        if profs_files:
+            for f in profs_files:
+                num, titre = parse_number_and_title(f)
+                url = f"{BASE_URL}/{folder}/{f}"
+                body += table_row(num, titre, url, pdf_url_for(dir_path, folder, f))
+        else:
+            body += empty_row()
     else:
-        body += empty_row()
+        # Plusieurs sources : un pavé "Cours Profs — <source>" par source,
+        # avec la puce source dans l'en-tête, les fichiers étant attribués
+        # selon leur numéro (num_range).
+        assigned = set()
+        section_idx = 2
+        for name, ville, url, icon, num_range, password in sources:
+            chip = source_chip_html(name, ville, url, icon, password)
+            body += section_row(f"{section_idx}. Cours Profs", chip)
+            section_idx += 1
+            matched = []
+            for f in profs_files:
+                num, _titre = parse_number_and_title(f)
+                if num_range and num.isdigit() and num_range[0] <= int(num) <= num_range[1]:
+                    matched.append(f)
+                    assigned.add(f)
+            if matched:
+                for f in matched:
+                    num, titre = parse_number_and_title(f)
+                    url = f"{BASE_URL}/{folder}/{f}"
+                    body += table_row(num, titre, url, pdf_url_for(dir_path, folder, f))
+            else:
+                body += empty_row()
+        leftover = [f for f in profs_files if f not in assigned]
+        if leftover:
+            body += section_row(f"{section_idx}. Cours Profs — autres")
+            for f in leftover:
+                num, titre = parse_number_and_title(f)
+                url = f"{BASE_URL}/{folder}/{f}"
+                body += table_row(num, titre, url, pdf_url_for(dir_path, folder, f))
     body += table_close()
 
     return (f'<section id="{anchor}" class="subject">'
             f'<h2 class="subject-title">{emoji} {esc(label)}</h2>'
-            f'{sources_bar(folder)}{body}</section>')
+            f'{manual_line_html(folder)}'
+            f'{body}</section>')
 
 
 def main():
@@ -193,19 +262,20 @@ def main():
   html {{ scroll-behavior: smooth; }}
   nav#tabs {{
     position: sticky; top: 0; z-index: 20;
-    display: flex; gap: 6px; overflow-x: auto;
-    padding: 8px 12px; backdrop-filter: blur(20px);
-    background: var(--nav-bg);
-    border-bottom: 1px solid var(--border);
+    display: flex; gap: 4px; overflow-x: auto;
+    max-width: 760px; margin: 0 auto;
+    padding: 6px 8px;
     -webkit-overflow-scrolling: touch;
   }}
   nav#tabs a {{
-    flex: 0 0 auto; border-radius: 18px;
-    padding: 7px 14px; font-size: 13px; font-weight: 600;
+    flex: 1 1 0; border-radius: 16px;
+    padding: 6px 4px; font-size: 12px; font-weight: 600;
     background: var(--card-bg); color: var(--text);
     text-decoration: none; white-space: nowrap;
     border: 1px solid var(--border);
+    text-align: center;
   }}
+  nav#tabs a.tab-home {{ flex: 0 0 auto; padding: 6px 10px; }}
   main {{ padding: 10px 8px 40px 8px; max-width: 760px; margin: 0 auto; }}
   .subject {{ scroll-margin-top: 56px; padding-top: 4px; }}
   .subject-title {{
@@ -214,19 +284,26 @@ def main():
   }}
   .subject:first-of-type .subject-title {{ border-top: none; margin-top: 4px; }}
 
-  .sources-bar {{ display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 8px 6px 10px 6px; font-size: 12px; }}
-  .sources-label {{ color: var(--sub); font-weight: 600; }}
-  .source-chip {{
+  .source-chip-inline {{
     display: inline-flex; align-items: center; gap: 4px;
     background: var(--card-bg); border: 1px solid var(--border);
-    padding: 5px 10px; border-radius: 14px;
-    color: var(--accent); font-weight: 600; text-decoration: none; font-size: 12px;
+    padding: 3px 9px; border-radius: 12px; margin-left: 4px;
+    color: var(--accent); font-weight: 600; text-decoration: none;
+    font-size: 11px; text-transform: none; letter-spacing: normal;
   }}
-  .source-chip-static {{ color: var(--text); }}
-  .source-chip .arrow {{ opacity: .6; }}
-  .source-icon {{ height:14px; width:auto; border-radius:2px; vertical-align:middle; }}
-  .source-block {{ display: flex; flex-direction: column; gap: 2px; }}
-  .source-meta {{ font-size: 10.5px; color: var(--sub); padding-left: 4px; }}
+  .source-chip-inline.source-chip-static {{ color: var(--section-text); }}
+  .source-chip-inline .arrow {{ opacity: .6; }}
+  .source-icon {{ height:13px; width:auto; border-radius:2px; vertical-align:middle; }}
+  .source-pin {{ opacity: .7; font-weight: 500; }}
+
+  .manual-line {{ margin: 2px 4px 8px 4px; }}
+  .manual-chip {{
+    display: inline-flex; align-items: center; gap: 4px;
+    background: rgba(10,138,74,0.10); border: 1px solid var(--border);
+    padding: 4px 10px; border-radius: 12px;
+    color: var(--accent-2); font-weight: 600; text-decoration: none; font-size: 12px;
+  }}
+  .manual-chip .arrow {{ opacity: .6; }}
 
   table {{
     width: 100%; border-collapse: collapse;
@@ -252,13 +329,14 @@ def main():
   .col-link {{ width: 1%; white-space: nowrap; text-align: center; }}
   .empty-cell {{ color: var(--sub); font-size: 12.5px; font-style: italic; text-align: center; }}
 
-  .pill {{ display: inline-block; font-size: 11px; font-weight: 700; text-decoration: none; padding: 4px 8px; border-radius: 8px; white-space: nowrap; }}
+  .pill {{ display: inline-block; font-size: 11px; font-weight: 700; text-decoration: none; padding: 4px 8px; border-radius: 8px; white-space: nowrap; margin: 2px; }}
   .pill-sujet {{ background: rgba(10,99,211,0.12); color: var(--accent); }}
+  .pill-pdf {{ background: rgba(214,40,40,0.12); color:#d62828; }}
   .pill-off {{ color: var(--sub); font-size: 12px; }}
 
   footer {{ text-align: center; padding: 16px; color: var(--sub); font-size: 10.5px; }}
 
-  @media (max-width: 420px) {{ table {{ font-size: 11.5px; }} }}
+  @media (max-width: 420px) {{ table {{ font-size: 11.5px; }} nav#tabs a {{ font-size: 11px; padding: 6px 2px; }} }}
 </style>
 </head>
 <body>
@@ -273,6 +351,7 @@ def main():
 </header>
 
 <nav id="tabs">
+  <a href="../../index.html" class="tab-home" title="Accueil">🏠</a>
 {nav_links}
 </nav>
 

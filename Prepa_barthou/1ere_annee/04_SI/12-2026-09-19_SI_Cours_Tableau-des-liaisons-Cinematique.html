@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SI — Tableau des liaisons normalisées (cinématique)</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.9rem; margin:0 0 .2rem 0;}
+h2{font-size:1.35rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.1rem; margin-top:1.6rem;}
+h4{font-size:1rem; margin-top:1.2rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:265px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc ol ol{margin:.15rem 0 .4rem 1rem;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.demo{background:var(--green-bg); border-color:var(--green-bd);} .demo>.label{color:var(--green-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+table{border-collapse:collapse; margin:1rem 0; width:100%;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.88rem; vertical-align:middle;}
+th{background:#f3f2ee;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+.footnote{font-size:.8rem; color:#7a7a72; border-top:1px dashed var(--line); margin-top:.6rem; padding-top:.4rem;}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.5rem;} h2{font-size:1.15rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} table{font-size:.72rem;} }
+.crosslinks-course{text-align:center; padding:0 0 .6rem 0; font-size:.82rem;}.crosslinks-course a{color:var(--blue-bd); text-decoration:none; font-weight:600; margin:0 .6rem;}
+.access-note{font-size:.82rem; color:#7a7a72; text-align:center; margin:0 0 1rem 0;}
+.access-note code{background:#f3f2ee; padding:.1rem .4rem; border-radius:4px;}
+.liaisons-table td:nth-child(4){font-size:.82rem;}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Torseur cinématique — rappel</a></li>
+  <li class="top"><a href="#s2">2. Géométries de contact</a></li>
+  <li class="top"><a href="#s3">3. Tableau des 11 liaisons normalisées</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<div class="crosslinks-course"><a href="../../../index.html">🏠 Accueil</a><a href="../index.html">🏫 Prépa Barthou</a></div>
+
+<header class="title">
+<h1>Tableau des liaisons normalisées (cinématique)</h1>
+<div class="meta">SI (Sciences Industrielles) — Cinématique · MPSI-PCSI1 · Papanicola Robert, Lycée Jacques Amyot · document retrouvé via aroux-sii.fr · mis au propre le 19/09/2026</div>
+</header>
+
+<p class="access-note">Document original (PDF professeur) protégé par mot de passe sur le site source — voir la section <a href="#sources">Sources</a> ci-dessous pour le mot de passe d'accès au site <code>aroux-sii.fr</code>.</p>
+
+<section id="s1">
+<h2>1. Torseur cinématique — rappel</h2>
+<p>Pour deux solides $S_2$ et $S_1$ en liaison, le torseur cinématique de $S_2$ par rapport à $S_1$, exprimé en un point M, s'écrit :</p>
+<p>$$\{\mathcal{V}_{S_2/S_1}\}=\left\{\overrightarrow{\Omega_{S_2/S_1}}\ ;\ \overrightarrow{V_{M\in S_2/S_1}}\right\}_M=\left\{\begin{array}{cc}\omega_x&v_x\\\omega_y&v_y\\\omega_z&v_z\end{array}\right\}_{M,(\vec x,\vec y,\vec z)}$$</p>
+<p>avec $\overrightarrow{\Omega_{S_2/S_1}}=\omega_x.\vec x+\omega_y.\vec y+\omega_z.\vec z$ et $\overrightarrow{V_{M\in S_2/S_1}}=v_x.\vec x+v_y.\vec y+v_z.\vec z$.</p>
+<div class="block remark">
+<span class="label">Remarque</span>
+Chaque composante non nulle du torseur représente un <strong>mouvement possible</strong> (un degré de liberté). Dans la notation générale ci-dessus, il est nécessaire de préciser le point de réduction M et la base d'écriture du torseur — le choix judicieux de ces deux éléments simplifie souvent considérablement l'écriture du torseur d'une liaison donnée.
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Géométries de contact</h2>
+<p>La géométrie des contacts permet de caractériser la liaison. La zone de contact commune entre deux solides est obtenue par l'association de deux ou plusieurs surfaces. Les surfaces les plus couramment rencontrées (elles correspondent aux surfaces simples à usiner) sont le <strong>plan</strong>, le <strong>cylindre de révolution</strong>, la <strong>sphère</strong>…</p>
+<div class="block remark">
+<span class="label">Remarque</span>
+Sous l'effet des efforts, les zones de contact réelles entre deux solides se déforment, créant ainsi une zone surfacique (et non ponctuelle/linéique au sens strict). La modélisation cinématique adoptée dans ce tableau ne prend pas en compte ce phénomène (hypothèse de solides indéformables).
+</div>
+</section>
+
+<section id="s3">
+<h2>3. Tableau des 11 liaisons normalisées</h2>
+<p>Chaque liaison ci-dessous résulte de l'association de surfaces élémentaires (plan, cylindre, sphère, hélicoïde) en contact. Le nombre de degrés de liberté d'une liaison est égal à 6 moins le nombre de mouvements relatifs supprimés par le contact.</p>
+<table class="liaisons-table">
+<thead><tr><th>Surfaces en contact</th><th>Nom de la liaison</th><th>Schématisation</th><th>Degrés de liberté / Torseur cinématique</th></tr></thead>
+<tbody>
+<tr><td>Plan/Plan</td><td>Liaison appui-plan</td><td><img src="./img/12-fig1-appui-plan.png" alt="Schématisation liaison appui-plan"></td><td>2 translations / 1 rotation<br>$\{\mathcal V_{2/1}\}=\underset{\forall M}{\left\{\begin{array}{cc}0&v_x\\0&v_y\\\omega_z&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Cylindre/plan</td><td>Liaison linéaire-rectiligne</td><td><img src="./img/12-fig2-lineaire-rectiligne.png" alt="Schématisation liaison linéaire-rectiligne"></td><td>2 translations / 2 rotations<br>$\{\mathcal V_{2/1}\}=\underset{\forall M\in(O,\vec y,\vec z)}{\left\{\begin{array}{cc}0&v_x\\\omega_y&v_y\\\omega_z&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Cylindre/cylindre</td><td>Liaison pivot-glissant</td><td><img src="./img/12-fig3-pivot-glissant.png" alt="Schématisation liaison pivot-glissant"></td><td>1 translation / 1 rotation<br>$\{\mathcal V_{2/1}\}=\underset{\forall M\in(O,\vec x)}{\left\{\begin{array}{cc}\omega_x&v_x\\0&0\\0&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Sphère/plan</td><td>Liaison ponctuelle ou sphère-plan</td><td><img src="./img/12-fig4-ponctuelle-sphere-plan.png" alt="Schématisation liaison ponctuelle ou sphère-plan"></td><td>2 translations / 3 rotations<br>$\{\mathcal V_{2/1}\}=\underset{\forall M\in(I,\vec z)}{\left\{\begin{array}{cc}\omega_x&v_x\\\omega_y&v_y\\\omega_z&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Sphère/cylindre</td><td>Liaison linéaire-annulaire ou sphère-cylindre</td><td><img src="./img/12-fig5-lineaire-annulaire.png" alt="Schématisation liaison linéaire-annulaire"></td><td>1 translation / 3 rotations<br>$\{\mathcal V_{2/1}\}=\underset{C}{\left\{\begin{array}{cc}\omega_x&v_x\\\omega_y&0\\\omega_z&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Sphère/sphère</td><td>Liaison rotule ou sphérique</td><td><img src="./img/12-fig6-rotule.png" alt="Schématisation liaison rotule"></td><td>0 translation / 3 rotations<br>$\{\mathcal V_{2/1}\}=\underset{C}{\left\{\begin{array}{cc}\omega_x&0\\\omega_y&0\\\omega_z&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Composée : cylindre/cylindre et plan/plan</td><td>Liaison pivot</td><td><img src="./img/12-fig7-pivot.png" alt="Schématisation liaison pivot"></td><td>0 translation / 1 rotation<br>$\{\mathcal V_{2/1}\}=\underset{\forall M\in(O,\vec x)}{\left\{\begin{array}{cc}\omega_x&0\\0&0\\0&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Composée : plan/plan et plan/plan</td><td>Liaison glissière</td><td><img src="./img/12-fig8-glissiere.png" alt="Schématisation liaison glissière"></td><td>1 translation / 0 rotation<br>$\{\mathcal V_{2/1}\}=\underset{\forall M}{\left\{\begin{array}{cc}0&v_x\\0&0\\0&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Hélicoïde/hélicoïde</td><td>Liaison hélicoïdale</td><td><img src="./img/12-fig9-helicoidale.png" alt="Schématisation liaison hélicoïdale"></td><td>1 translation liée à 1 rotation<br>$\{\mathcal V_{2/1}\}=\underset{\forall M\in(O,\vec x)}{\left\{\begin{array}{cc}\omega_x&v_x\\0&0\\0&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$<br>Avec $v_x=\dfrac{p}{2\pi}\omega_x$</td></tr>
+<tr><td>Composée : sphère/sphère et cylindre/plan</td><td>Liaison sphérique à doigt</td><td><img src="./img/12-fig10-spherique-a-doigt.png" alt="Schématisation liaison sphérique à doigt"></td><td>0 translation / 2 rotations<br>$\{\mathcal V_{2/1}\}=\underset{C}{\left\{\begin{array}{cc}\omega_x&0\\0&0\\\omega_z&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td></td><td>Liaison encastrement</td><td><img src="./img/12-fig11-encastrement.png" alt="Schématisation liaison encastrement"></td><td>0 translation / 0 rotation<br>$\{\mathcal V_{2/1}\}=\underset{\forall M}{\left\{\begin{array}{cc}0&0\\0&0\\0&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+</tbody>
+</table>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Pourquoi le nombre de degrés de liberté d'une liaison vaut-il au maximum 6 ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Parce qu'un solide libre dans l'espace possède exactement 6 degrés de liberté (3 translations + 3 rotations selon les 3 axes d'un repère). Une liaison ne peut que <em>supprimer</em> des mouvements relatifs par rapport à ce maximum, jamais en ajouter : le nombre de degrés de liberté d'une liaison est donc toujours compris entre 0 (encastrement) et 6 (liaison libre, cas limite non répertorié dans ce tableau).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Quelle est la différence essentielle, en termes de degrés de liberté, entre une liaison « ponctuelle » (sphère-plan) et une liaison « rotule » (sphérique) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> La ponctuelle autorise 2 translations + 3 rotations (5 DDL) : le contact ne bloque qu'une seule translation (selon la normale au plan). La rotule n'autorise que les 3 rotations (0 translation) : les deux sphères en contact restent centrées l'une sur l'autre, ce qui bloque les 3 translations.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Pour une liaison hélicoïdale d'axe $(O,\vec x)$ et de pas $p=5$ mm, la vis tourne à $\omega_x=4\pi$ rad/s. Quelle est la vitesse de translation $v_x$ ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> $v_x=\dfrac{p}{2\pi}.\omega_x=\dfrac{0{,}005}{2\pi}\times4\pi=0{,}01$ m/s $=10$ mm/s.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Pourquoi le torseur d'une liaison pivot garde-t-il la même forme en tout point de l'axe $(O,\vec x)$, alors que ce n'est pas vrai en un point quelconque hors de cet axe ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Parce que le champ des vitesses d'un solide en rotation pure autour de l'axe $(O,\vec x)$ est nul en tout point de cet axe (relation de transport des vitesses : $\vec V_M=\vec V_O+\vec\Omega\wedge\vec{OM}$, et $\vec\Omega\wedge\vec{OM}=\vec 0$ si M est sur l'axe puisque $\vec{OM}$ est colinéaire à $\vec\Omega=\omega_x.\vec x$). Hors de l'axe, $\vec{OM}$ n'est plus colinéaire à $\vec x$, et un terme de vitesse non nul apparaît.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Piège classique : un élève affirme qu'une liaison « linéaire annulaire » (sphère-cylindre) et une liaison « rotule » (sphère-sphère) sont équivalentes puisque les deux ont un centre C et autorisent les 3 rotations. Où est l'erreur ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> La linéaire annulaire autorise <strong>en plus</strong> une translation le long de l'axe $(C,\vec x)$ (1T + 3R, soit 4 DDL), car le cylindre peut coulisser dans la sphère le long de son axe. La rotule ne l'autorise pas (0T + 3R, soit 3 DDL) : le centre de la sphère intérieure reste fixe par rapport au centre de la sphère extérieure.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passe-t-il physiquement si l'on associe deux liaisons pivot d'axes concourants et perpendiculaires en un même point C ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> On obtient une liaison équivalente à une <strong>sphérique à doigt</strong> (0 translation, 2 rotations) et non une rotule complète : il manque la troisième rotation (autour de l'axe perpendiculaire aux deux axes des pivots), qui n'est permise par aucun des deux pivots pris séparément.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Pourquoi la liaison « linéaire rectiligne » possède-t-elle 2 rotations ($\omega_y$, $\omega_z$) et non une seule, alors que le contact cylindre/plan semble n'avoir qu'une ligne de contact ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Une rotation autour de $\vec y$ (pivotement du cylindre dans le plan tangent) ne modifie pas le contact, de même qu'une rotation autour de $\vec z$ (roulement du cylindre le long de la ligne de contact). Seule la rotation $\omega_x$ autour de la ligne de contact elle-même romprait le contact linéique (le cylindre basculerait hors du plan) — elle est donc la seule des trois rotations à être bloquée.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Un système présente une liaison « composée » obtenue par l'association d'un contact cylindre/cylindre et d'un contact plan/plan (butée axiale). Quelle liaison normalisée obtient-on, et pourquoi le contact plan/plan supplémentaire est-il nécessaire ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> On obtient une liaison <strong>pivot</strong> (0 translation, 1 rotation). Le contact cylindre/cylindre seul donnerait un pivot glissant (1T+1R) : il autorise encore la translation le long de l'axe. Le contact plan/plan (butée) supprime précisément cette translation résiduelle, ne laissant que la rotation.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Piège classique : pour une liaison appui-plan de normale $\vec z$, un élève écrit le torseur cinématique avec une composante $v_z\ne0$. Pourquoi est-ce impossible ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Parce que $v_z\ne0$ signifierait que les deux solides s'écartent ou s'enfoncent l'un dans l'autre selon la normale au plan de contact — ce qui contredit la définition même du contact plan/plan maintenu (les deux plans doivent rester coïncidents). La condition $\overrightarrow{V_{P\in2/1}}.\vec z=0$ est une conséquence directe du maintien du contact, pas une hypothèse indépendante.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : classer par nombre croissant de degrés de liberté les liaisons suivantes : encastrement, pivot, rotule, ponctuelle (sphère-plan). Que remarque-t-on sur la nature des surfaces en contact au fil de cette progression ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Encastrement (0 DDL) → pivot (1 DDL) → rotule (3 DDL) → ponctuelle/sphère-plan (5 DDL). On remarque que plus la surface de contact est « réduite » géométriquement (surface étendue pour l'encastrement, puis cylindre pour le pivot, puis sphère pour la rotule, puis contact quasi ponctuel pour la sphère-plan), moins elle impose de contraintes cinématiques, donc plus le nombre de degrés de liberté augmente.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>« Modélisation cinématique et géométrique des liaisons », Papanicola Robert, Lycée Jacques Amyot, document retrouvé via aroux-sii.fr : <a href="https://aroux-sii.fr/" target="_blank" rel="noopener">aroux-sii.fr</a> (site protégé par mot de passe — mot de passe d'accès : <code>psi*2627</code>).</li>
+<li>Document original (PDF) : <a href="./12-2026-09-19_SI_Cours_Tableau-des-liaisons-Cinematique.pdf" target="_blank">12-2026-09-19_SI_Cours_Tableau-des-liaisons-Cinematique.pdf</a>.</li>
+<li>Norme ISO 3952 (schématisation cinématique des liaisons) ; les 11 liaisons normalisées figurent dans tout manuel de référence de mécanique/SI prépa (ex. H-Prépa Sciences Industrielles).</li>
+<li>Programme officiel de Sciences Industrielles pour l'Ingénieur, CPGE 1<sup>re</sup> année (filière PCSI) : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank" rel="noopener">enseignementsup-recherche.gouv.fr</a>.</li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>

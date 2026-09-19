@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie — Atomes et molécules</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.85rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+table{border-collapse:collapse; width:100%; margin:.8rem 0; font-size:.88rem;}
+th,td{border:1px solid var(--line); padding:.3rem .5rem; text-align:left;}
+th{background:var(--gray-bg);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.45rem;} h2{font-size:1.1rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+.crosslinks-course{text-align:center; padding:0 0 .6rem 0; font-size:.82rem;}.crosslinks-course a{color:var(--blue-bd); text-decoration:none; font-weight:600; margin:0 .6rem;}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Constitution de l'atome, mole et masse molaire</a></li>
+  <li class="top"><a href="#s2">2. Orbitales atomiques et classification périodique</a></li>
+  <li class="top"><a href="#s3">3. Électronégativité, métaux/non-métaux/métalloïdes</a></li>
+  <li class="top"><a href="#s4">4. Écriture de Lewis des molécules</a></li>
+  <li class="top"><a href="#s5">5. Géométrie des liaisons et des molécules</a></li>
+  <li class="top"><a href="#s6">6. Méthode VSEPR</a></li>
+  <li class="top"><a href="#s7">7. Forces intermoléculaires</a></li>
+  <li class="top"><a href="#s8">8. Molécules amphiphiles</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<div class="crosslinks-course"><a href="../../../index.html">🏠 Accueil</a><a href="../index.html">🏫 Prépa Barthou</a></div>
+
+<header class="title">
+<h1>Atomes et molécules</h1>
+<div class="meta">Chimie — Résumé de cours · PCSI · Source : Lycée Janson de Sailly (Paris) · mis au propre le 19/09/2026</div>
+</header>
+
+<div class="block remark">
+<span class="label">Remarque sur la source de ce document</span>
+Ce chapitre est construit sous forme de « documents » numérotés à partir desquels les notions du cours sont dégagées. Le Document 6 du polycopié original (« Structure du tableau périodique ») est un <strong>document à compléter</strong> (grille vierge fournie aux élèves à remplir en classe) : il n'est donc pas reproduit ici pour ne pas inventer un contenu que le professeur n'a pas lui-même rédigé.
+</div>
+
+<section id="s1">
+<h2>1. Constitution de l'atome, mole et masse molaire</h2>
+<div class="block def">
+<span class="label">Définition 1 — Constitution de l'atome</span>
+Un atome est constitué d'un <strong>noyau</strong> (diamètre de l'ordre de $10^{-15}\,\text{m}$), lui-même composé de $Z$ <strong>protons</strong> et $N$ <strong>neutrons</strong>, et de $Z$ <strong>électrons</strong> qui l'entourent (diamètre de l'atome de l'ordre de $10^{-10}\,\text{m}$).
+<table>
+<tr><th></th><th>masse</th><th>charge</th></tr>
+<tr><td>proton</td><td>$m_p=1{,}6726\times10^{-27}\,\text{kg}$</td><td>$+e\approx+1{,}6\times10^{-19}\,\text{C}$</td></tr>
+<tr><td>neutron</td><td>$m_n=1{,}6749\times10^{-27}\,\text{kg}$</td><td>$0$</td></tr>
+<tr><td>électron</td><td>$m_e=9{,}1\times10^{-31}\,\text{kg}$</td><td>$-e$</td></tr>
+</table>
+</div>
+<div class="block remark">
+<span class="label">À retenir</span>
+<ul>
+<li>Les ordres de grandeur des masses : $m_p\approx m_n\approx2000\,m_e$ ; le noyau porte donc la quasi-totalité de la masse de l'atome ;</li>
+<li>l'ordre de grandeur des rayons : le rayon nucléaire est environ $10^5$ fois plus petit que le rayon électronique (quasi-totalité du volume de l'atome).</li>
+</ul>
+</div>
+<div class="block def">
+<span class="label">Définition 2 — Numéro atomique, nombre de masse, isotopes</span>
+$Z$ = <strong>numéro atomique</strong> (nombre de protons du noyau ; nombre d'électrons de l'atome neutre) : il caractérise l'élément chimique. $N$ = nombre de neutrons. $A=Z+N$ = <strong>nombre de masse</strong>. Notation : $^A_ZX$. Deux atomes de même numéro atomique $Z$ mais de nombre de masse $A$ différent sont des <strong>isotopes</strong> du même élément.
+</div>
+<div class="block def">
+<span class="label">Définition 3 — Mole et constante d'Avogadro</span>
+Une <strong>mole</strong> est un nombre d'entités exactement égal à $6{,}02214076\times10^{23}$ (définition valable depuis le 20 mai 2019). Ce nombre est appelé <strong>constante d'Avogadro</strong> $N_A$.
+$$N_A = 6{,}02214076\times10^{23}\,\text{mol}^{-1}$$
+</div>
+<div class="block theorem">
+<span class="label">Théorème 1 — Masse molaire d'un isotope</span>
+Comme le proton et le neutron ont approximativement la même masse, la masse d'une mole d'atomes de nombre de masse $A$ est approximativement égale à $A$ grammes :
+$$M(^A_ZX) \approx A\,\text{g}\cdot\text{mol}^{-1}$$
+Cette relation n'est qu'une approximation (le proton et le neutron n'ont pas rigoureusement la même masse, et il y a un défaut de masse dû aux forces de liaison nucléaires) mais elle est excellente : l'écart relatif ne dépasse jamais $0{,}24\%$ pour aucun isotope connu (ex. $^4_2$He : écart $0{,}08\%$ ; $^{15}_7$N : $0{,}03\%$ ; $^{55}_{25}$Mn : $0{,}12\%$ ; $^{238}_{92}$U : $0{,}24\%$).
+</div>
+<div class="block remark">
+<span class="label">Masse molaire d'un élément</span>
+La masse molaire d'un <strong>élément</strong> est la moyenne des masses molaires de ses isotopes, pondérée par leur abondance naturelle. Exemple, masse molaire du chlore : $M(\text{Cl})=\frac{75{,}78}{100}M(^{35}_{17}\text{Cl})+\frac{24{,}22}{100}M(^{37}_{17}\text{Cl})\approx0{,}7578\times35+0{,}2422\times37\approx35{,}5\,\text{g}\cdot\text{mol}^{-1}$.
+</div>
+<div class="block remark">
+<span class="label">Culture scientifique — les éléments « super-lourds »</span>
+Depuis 2011, des équipes internationales (Dubna, GSI Darmstadt, RIKEN…) synthétisent par bombardement d'ions lourds des éléments transuraniens de plus en plus lourds (jusqu'à $Z=118$, voire tentatives pour $119$ et $120$), au prix d'expériences d'une durée de plusieurs mois pour quelques atomes seulement, ces noyaux ayant une durée de demi-vie extrêmement courte (de l'ordre de la milliseconde ou moins).
+</div>
+</section>
+
+<section id="s2">
+<h2>2. Orbitales atomiques et classification périodique</h2>
+<div class="block def">
+<span class="label">Définition 4 — Types d'orbitales atomiques</span>
+Une <strong>orbitale atomique</strong> est une région de l'espace où la probabilité de présence d'un électron est significative. Il existe 4 grandes familles de formes d'orbitales : 1 orbitale $s$ (sphérique), 3 orbitales $p$ (bilobées, orientées selon 3 axes), 5 orbitales $d$, 7 orbitales $f$.
+</div>
+<figure>
+<svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<circle cx="60" cy="70" r="35" fill="#e9f1fd" stroke="#3b6fd8" stroke-width="1.5"/><text x="60" y="120" text-anchor="middle" font-size="11">orbitale s</text>
+<g transform="translate(220,70)">
+<ellipse cx="-30" cy="0" rx="28" ry="14" fill="#f2ecfd" stroke="#7c4fd6" stroke-width="1.3"/>
+<ellipse cx="30" cy="0" rx="28" ry="14" fill="#f2ecfd" stroke="#7c4fd6" stroke-width="1.3"/>
+</g>
+<text x="220" y="120" text-anchor="middle" font-size="11">orbitale p (une des 3)</text>
+</svg>
+<figcaption>Fig. 1 — Formes schématiques des orbitales $s$ et $p$ (Définition 4).</figcaption>
+</figure>
+<div class="block def">
+<span class="label">Définition 5 — Anatomie d'une case du tableau périodique</span>
+Chaque case du tableau périodique indique : le numéro atomique $Z$, le symbole de l'élément, son nom, sa configuration électronique, sa masse molaire (g·mol$^{-1}$), et (par un code couleur) son caractère métal/non-métal/métalloïde ainsi qu'une indication de son électronégativité.
+</div>
+<figure>
+<svg viewBox="0 0 220 200" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<rect x="30" y="20" width="160" height="160" fill="#fdf3dd" stroke="#c98a12" stroke-width="2"/>
+<text x="40" y="40" font-size="12">26</text>
+<text x="110" y="110" text-anchor="middle" font-size="34" font-weight="700">Fe</text>
+<text x="110" y="135" text-anchor="middle" font-size="11">fer</text>
+<text x="110" y="150" text-anchor="middle" font-size="9">[Ar]4s²3d⁶</text>
+<text x="110" y="170" text-anchor="middle" font-size="10">55,845</text>
+<text x="180" y="40" font-size="9" text-anchor="end">1,83</text>
+</svg>
+<figcaption>Fig. 2 — Exemple de case du tableau périodique : le fer (Document 5, Définition 5).</figcaption>
+</figure>
+</section>
+
+<section id="s3">
+<h2>3. Électronégativité, métaux / non-métaux / métalloïdes</h2>
+<div class="block def">
+<span class="label">Définition 6 — Électronégativité (échelle de Pauling, 1932)</span>
+L'échelle de Pauling définit la différence d'électronégativité entre deux éléments A et B à partir des énergies de liaison ($D$) des molécules diatomiques homonucléaires et hétéronucléaire :
+$$|\chi(A)-\chi(B)| = \sqrt{k_P\cdot\left(D_{AB}-\sqrt{D_{AA}\cdot D_{BB}}\right)}$$
+où $k_P=1\,\text{eV}^{-1}$, $D_{AB}$ = énergie de liaison entre A et B, et le zéro/l'origine de l'échelle nécessite un choix conventionnel (fixé historiquement à $\chi(\text{H})=2{,}20$). L'échelle de Pauling est historiquement la première développée et reste la plus couramment utilisée en chimie.
+</div>
+<div class="block def">
+<span class="label">Définition 7 — Métaux, non-métaux, métalloïdes</span>
+<ul>
+<li>Les <strong>métaux</strong> (majorité des éléments) sont malléables, ductiles, bons conducteurs électriques et thermiques, brillants (sauf mercure liquide et cuivre coloré), bons réducteurs (sauf métaux nobles), à oxydes basiques.</li>
+<li>Les <strong>non-métaux</strong> sont, dans les CNTP, gazeux ou solides (rarement liquides comme le dibrome), sans éclat métallique, mauvais conducteurs, isolants électriques et thermiques, bons oxydants, à oxydes acides.</li>
+<li>Les <strong>métalloïdes</strong> (bore, silicium, germanium, arsenic, antimoine, tellure, astate) ont des propriétés intermédiaires : le silicium, par exemple, est un semi-conducteur dont la conductivité électrique augmente quand la température augmente (contrairement à un métal), et peut être dopée par des impuretés appropriées.</li>
+</ul>
+</div>
+</section>
+
+<section id="s4">
+<h2>4. Écriture de Lewis des molécules</h2>
+<div class="block theorem">
+<span class="label">Théorème 2 — Étapes de construction d'une structure de Lewis</span>
+<ol>
+<li>Choisir l'atome central A (souvent le moins électronégatif) ;</li>
+<li>écrire la structure de Lewis en respectant la règle de l'octet, en plaçant d'abord les doublets liants entre A et les atomes périphériques $X_i$, puis les doublets non liants restants pour saturer l'octet de chaque atome $X_i$, puis, s'il en reste, sur l'atome central A ;</li>
+<li>si nécessaire, constituer des liaisons multiples pour compléter l'octet de A tout en préservant l'octet des $X_i$ (exception : les atomes possédant 1 à 3 électrons de valence restent souvent lacunaires) ;</li>
+<li>attribuer à chaque atome sa charge formelle et déterminer les meilleures formules mésomères (les moins chargées, avec les charges négatives sur les atomes les plus électronégatifs) en cas d'hyperformules mésomères possibles.</li>
+</ol>
+</div>
+</section>
+
+<section id="s5">
+<h2>5. Géométrie des liaisons et des molécules</h2>
+<div class="block remark">
+<span class="label">Document 10 — Longueurs de liaison moyennes (en pm)</span>
+<table>
+<tr><th>Liaison A−B</th><th>simple</th><th>double</th><th>triple</th></tr>
+<tr><td>C−C</td><td>154</td><td>134</td><td>120</td></tr>
+<tr><td>C−N</td><td>147</td><td>126</td><td>116</td></tr>
+<tr><td>C−O</td><td>143</td><td>120</td><td>113</td></tr>
+<tr><td>N−N</td><td>145</td><td>125</td><td>110</td></tr>
+<tr><td>N−O</td><td>145</td><td>120</td><td>−</td></tr>
+<tr><td>O−O</td><td>147</td><td>121</td><td>−</td></tr>
+</table>
+</div>
+<div class="block remark">
+<span class="label">Document 11 — Caractère ionique des halogénures d'hydrogène H−X</span>
+<table>
+<tr><th>H−X</th><th>$\mu$ (D)</th><th>$L$ (pm)</th><th>%I (caractère ionique)</th></tr>
+<tr><td>H−F</td><td>1,82</td><td>92</td><td>41 %</td></tr>
+<tr><td>H−Cl</td><td>1,08</td><td>127</td><td>18 %</td></tr>
+<tr><td>H−Br</td><td>0,79</td><td>142</td><td>12 %</td></tr>
+<tr><td>H−I</td><td>0,38</td><td>161</td><td>5 %</td></tr>
+</table>
+</div>
+</section>
+
+<section id="s6">
+<h2>6. Méthode VSEPR</h2>
+<div class="block def">
+<span class="label">Définition 8 — Méthode VSEPR</span>
+La méthode <strong>VSEPR</strong> (<em>Valence Shell Electron Pair Repulsion</em>, R.J. Gillespie, 1957) — en français « Répulsion des Paires d'Électrons de la Couche de Valence » — repose sur le principe suivant : en raison de la répulsion qu'ils exercent entre eux, les doublets entourant un atome central se placent, autour de ce dernier, de manière à former entre eux des angles les plus obtus possibles.
+</div>
+<table>
+<tr><th>$n$ = nb. de coordination</th><th>nom de la géométrie</th><th>angles caractéristiques</th></tr>
+<tr><td>2</td><td>linéaire</td><td>180°</td></tr>
+<tr><td>3</td><td>triangle équilatéral</td><td>120°</td></tr>
+<tr><td>4</td><td>tétraèdre</td><td>109,47°</td></tr>
+<tr><td>5</td><td>bipyramide à base triangulaire</td><td>90° et 120°</td></tr>
+<tr><td>6</td><td>octaèdre</td><td>90°</td></tr>
+</table>
+<figure>
+<svg viewBox="0 0 460 150" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<g transform="translate(50,75)">
+<circle r="6" fill="#0f2b4c"/>
+<circle cx="-40" cy="0" r="4" fill="#3b6fd8"/><line x1="-6" y1="0" x2="-36" y2="0" stroke="#333" stroke-width="1.4"/>
+<circle cx="40" cy="0" r="4" fill="#3b6fd8"/><line x1="6" y1="0" x2="36" y2="0" stroke="#333" stroke-width="1.4"/>
+<text x="0" y="40" text-anchor="middle" font-size="10">n=2, linéaire</text>
+</g>
+<g transform="translate(180,75)">
+<circle r="6" fill="#0f2b4c"/>
+<circle cx="0" cy="-35" r="4" fill="#3b6fd8"/><line x1="0" y1="-6" x2="0" y2="-31" stroke="#333" stroke-width="1.4"/>
+<circle cx="30" cy="18" r="4" fill="#3b6fd8"/><line x1="5" y1="3" x2="26" y2="15" stroke="#333" stroke-width="1.4"/>
+<circle cx="-30" cy="18" r="4" fill="#3b6fd8"/><line x1="-5" y1="3" x2="-26" y2="15" stroke="#333" stroke-width="1.4"/>
+<text x="0" y="45" text-anchor="middle" font-size="10">n=3, trigonal</text>
+</g>
+<g transform="translate(320,75)">
+<circle r="6" fill="#0f2b4c"/>
+<circle cx="-25" cy="-20" r="4" fill="#3b6fd8"/><line x1="-4" y1="-4" x2="-21" y2="-17" stroke="#333" stroke-width="1.4"/>
+<circle cx="25" cy="-20" r="4" fill="#3b6fd8"/><line x1="4" y1="-4" x2="21" y2="-17" stroke="#333" stroke-width="1.4"/>
+<circle cx="-25" cy="20" r="4" fill="#3b6fd8" opacity="0.6"/><line x1="-4" y1="4" x2="-21" y2="17" stroke="#333" stroke-width="1.4" stroke-dasharray="2,2"/>
+<circle cx="25" cy="20" r="4" fill="#3b6fd8"/><line x1="4" y1="4" x2="21" y2="17" stroke="#333" stroke-width="1.4"/>
+<text x="0" y="45" text-anchor="middle" font-size="10">n=4, tétraédrique</text>
+</g>
+</svg>
+<figcaption>Fig. 3 — Géométries VSEPR pour $n=2,3,4$ (Définition 8, tableau ci-dessus).</figcaption>
+</figure>
+<div class="block remark">
+<span class="label">Méthode (étapes)</span>
+<ol>
+<li>Écrire la molécule selon Lewis (Théorème 2) ;</li>
+<li>déterminer le type VSEPR $AX_pE_q$ adapté à l'atome central A ($p$ = nombre d'atomes X liés à A, $q$ = nombre de doublets non liants portés par A) et en déduire $n=p+q$ (nombre de coordination) et la géométrie de référence (tableau ci-dessus) ;</li>
+<li>prédire et dessiner les déformations éventuelles des angles (répulsions dissymétriques entre doublets liants et non liants : un doublet non liant « pousse » davantage qu'un doublet liant).</li>
+</ol>
+</div>
+</section>
+
+<section id="s7">
+<h2>7. Forces intermoléculaires</h2>
+<div class="block remark">
+<span class="label">Ordres de grandeur</span>
+L'énergie de la liaison covalente est comprise entre $100$ et $1000\,\text{kJ}\cdot\text{mol}^{-1}$. Les interactions intermoléculaires, bien plus faibles, se répartissent en deux catégories : les forces de van der Waals ($0{,}1$ à $30\,\text{kJ}\cdot\text{mol}^{-1}$) et la liaison hydrogène (typiquement $5$ à $25\,\text{kJ}\cdot\text{mol}^{-1}$).
+</div>
+<div class="block def">
+<span class="label">Définition 9 — Les trois forces de van der Waals</span>
+<ul>
+<li><strong>Forces de Keesom</strong> : entre deux molécules polaires permanentes, interaction dipôle permanent/dipôle permanent, en $1/d^6$ ;</li>
+<li><strong>Forces de Debye</strong> (polarisation) : entre une molécule polaire et une molécule apolaire polarisable (ou entre deux dipôles instantané/induit), en $1/d^6$ ;</li>
+<li><strong>Forces de London</strong> (dispersion) : de nature quantique, entre deux dipôles instantanés, présentes entre <strong>toutes</strong> les molécules (polaires ou non), en $1/d^6$. C'est la seule à intervenir entre molécules apolaires, et elle est souvent largement majoritaire même entre molécules polaires.
+</ul>
+Les trois forces de van der Waals varient en $1/d^6$ pour l'énergie potentielle (donc en $1/d^7$ pour la force), et sont donc à courte portée. Aux distances trop proches, une répulsion stérique s'ajoute (en $1/d^{12}$).
+</div>
+<div class="block def">
+<span class="label">Définition 10 — Liaison hydrogène</span>
+La <strong>liaison hydrogène</strong> est une interaction attractive qui s'établit entre un atome d'hydrogène fortement polarisé positivement (lié à un atome fortement électronégatif : $X=F,O,N$) d'une molécule A, et un atome fortement électronégatif d'une autre molécule B portant un doublet non liant. Son intensité (typiquement $5$ à $25\,\text{kJ}\cdot\text{mol}^{-1}$) est intermédiaire entre celle des forces de van der Waals et celle d'une liaison covalente. Elle est essentiellement de nature électrostatique, mais possède aussi un caractère partiellement covalent, et est <strong>directionnelle</strong> (optimale lorsque X, H et X' sont alignés).
+</div>
+<div class="block remark">
+<span class="label">Conséquences de la liaison hydrogène</span>
+<ul>
+<li>Cohésion de la glace et du liquide eau (réseau de liaisons hydrogène) ; la glace flotte sur l'eau liquide car sa structure est moins dense ;</li>
+<li>appariement des bases de l'ADN (adénine-thymine, guanine-cytosine) ;</li>
+<li>affaiblissement (et allongement en spectroscopie infrarouge, avec diminution de la fréquence de vibration) de la liaison covalente X−H lors de l'établissement d'une liaison hydrogène ;</li>
+<li>étape possible d'un transfert de proton dans une réaction acide-base : $X-H\cdots Y \rightleftharpoons X^-\cdots H-Y^+$.</li>
+</ul>
+</div>
+</section>
+
+<section id="s8">
+<h2>8. Molécules amphiphiles</h2>
+<div class="block def">
+<span class="label">Définition 11 — Molécule amphiphile</span>
+Une molécule <strong>amphiphile</strong> possède à la fois une partie hydrophile (souvent une tête ionique ou très polaire) et une partie hydrophobe (souvent une longue chaîne carbonée apolaire). On distingue les amphiphiles anioniques, cationiques, non ioniques et zwitterioniques selon la nature de la tête polaire.
+</div>
+<figure>
+<svg viewBox="0 0 460 160" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<g transform="translate(70,80)">
+<circle r="55" fill="none" stroke="#3b6fd8" stroke-width="1.3"/>
+<g id="tail-group"></g>
+<circle cx="0" cy="-45" r="6" fill="#c98a12"/><line x1="0" y1="-39" x2="0" y2="-15" stroke="#333" stroke-width="1.2"/>
+<circle cx="30" cy="-33" r="6" fill="#c98a12"/><line x1="27" y1="-28" x2="15" y2="-8" stroke="#333" stroke-width="1.2"/>
+<circle cx="45" cy="0" r="6" fill="#c98a12"/><line x1="39" y1="0" x2="16" y2="0" stroke="#333" stroke-width="1.2"/>
+<circle cx="30" cy="33" r="6" fill="#c98a12"/><line x1="27" y1="28" x2="15" y2="8" stroke="#333" stroke-width="1.2"/>
+<circle cx="0" cy="45" r="6" fill="#c98a12"/><line x1="0" y1="39" x2="0" y2="15" stroke="#333" stroke-width="1.2"/>
+<circle cx="-30" cy="33" r="6" fill="#c98a12"/><line x1="-27" y1="28" x2="-15" y2="8" stroke="#333" stroke-width="1.2"/>
+<circle cx="-45" cy="0" r="6" fill="#c98a12"/><line x1="-39" y1="0" x2="-16" y2="0" stroke="#333" stroke-width="1.2"/>
+<circle cx="-30" cy="-33" r="6" fill="#c98a12"/><line x1="-27" y1="-28" x2="-15" y2="-8" stroke="#333" stroke-width="1.2"/>
+</g>
+<text x="70" y="150" text-anchor="middle" font-size="11">micelle</text>
+<g transform="translate(220,80)">
+<circle cx="0" cy="-25" r="5" fill="#c98a12"/><line x1="0" y1="-20" x2="0" y2="-3" stroke="#333" stroke-width="1.2"/>
+<circle cx="30" cy="-25" r="5" fill="#c98a12"/><line x1="30" y1="-20" x2="30" y2="-3" stroke="#333" stroke-width="1.2"/>
+<circle cx="60" cy="-25" r="5" fill="#c98a12"/><line x1="60" y1="-20" x2="60" y2="-3" stroke="#333" stroke-width="1.2"/>
+<circle cx="0" cy="25" r="5" fill="#c98a12"/><line x1="0" y1="20" x2="0" y2="3" stroke="#333" stroke-width="1.2"/>
+<circle cx="30" cy="25" r="5" fill="#c98a12"/><line x1="30" y1="20" x2="30" y2="3" stroke="#333" stroke-width="1.2"/>
+<circle cx="60" cy="25" r="5" fill="#c98a12"/><line x1="60" y1="20" x2="60" y2="3" stroke="#333" stroke-width="1.2"/>
+</g>
+<text x="250" y="150" text-anchor="middle" font-size="11">bicouche</text>
+<g transform="translate(380,80)">
+<circle r="30" fill="none" stroke="#7c4fd6" stroke-width="1.3"/>
+<circle cx="0" cy="-25" r="4" fill="#c98a12"/><line x1="0" y1="-21" x2="0" y2="-30" stroke="#333" stroke-width="1"/>
+<circle cx="21" cy="-15" r="4" fill="#c98a12"/><line x1="19" y1="-18" x2="26" y2="-25" stroke="#333" stroke-width="1"/>
+</g>
+<text x="380" y="150" text-anchor="middle" font-size="11">micelle inverse</text>
+</svg>
+<figcaption>Fig. 4 — Structures d'association de molécules amphiphiles : micelle (têtes polaires vers l'extérieur), bicouche (membrane), micelle inverse (têtes polaires vers l'intérieur, en milieu apolaire) — Document 17.</figcaption>
+</figure>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Donner la définition d'un isotope (Définition 2) et donner un exemple.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Deux isotopes sont deux atomes de même numéro atomique $Z$ (même élément) mais de nombre de masse $A$ différent (nombre de neutrons différent). Exemple : $^{35}_{17}$Cl et $^{37}_{17}$Cl (Document 1).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Énoncer le principe de la méthode VSEPR (Définition 8).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Les doublets d'électrons entourant un atome central se répartissent dans l'espace de manière à minimiser leur répulsion mutuelle, c'est-à-dire en formant entre eux des angles aussi obtus que possible.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Le méthane CH$_4$ a un atome central de type $AX_4$ (4 liaisons, 0 doublet non liant). Quelle est sa géométrie et son angle caractéristique (tableau §6) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$n=p+q=4+0=4$ : géométrie tétraédrique, angle caractéristique $109{,}47°$ (Théorème/tableau §6).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. Calculer la masse molaire approximative de l'isotope $^{238}_{92}$U (Théorème 1), et donner l'écart relatif connu avec la valeur exacte.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$M(^{238}_{92}\text{U})\approx238\,\text{g/mol}$ (Théorème 1, $M\approx A$). L'écart relatif avec la valeur exacte est de $0{,}24\%$ — le plus grand écart connu parmi tous les isotopes (Théorème 1).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi la liaison hydrogène (Définition 10) n'est-elle observable qu'entre atomes très électronégatifs (F, O, N) et pas, par exemple, entre un hydrogène et un chlore ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La liaison hydrogène nécessite que l'atome d'hydrogène porte une polarisation partielle $\delta+$ suffisamment importante (Définition 10, remarque « important »), ce qui exige que l'atome auquel il est lié (X) soit très électronégatif. Le chlore, bien qu'assez électronégatif, l'est nettement moins que F, O ou N (Document 5/électronégativités de Pauling) : la polarisation de la liaison H−Cl est insuffisante pour produire une liaison hydrogène significative.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passerait-il, en termes de température d'ébullition, si l'on remplaçait l'eau (H$_2$O, liée par liaison hydrogène) par un composé de même masse molaire mais sans liaison hydrogène (comme le méthane CH$_4$, comparaison qualitative) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+La température d'ébullition serait beaucoup plus basse : la liaison hydrogène (Définition 10) ajoute une cohésion intermoléculaire supplémentaire (de l'ordre de $5$–$25\,\text{kJ/mol}$ par liaison) bien supérieure aux seules forces de van der Waals (Définition 9) qui domineraient pour une molécule apolaire de masse comparable — c'est exactement ce qui explique que l'eau (masse molaire 18 g/mol) soit liquide à température ambiante alors que le méthane (masse molaire 16 g/mol, comparable) est gazeux.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : la force de London (Définition 9) existe-t-elle uniquement entre molécules apolaires ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — c'est une erreur fréquente : la force de London est présente entre <strong>toutes</strong> les molécules, polaires ou non (Définition 9), car elle provient de fluctuations quantiques instantanées de la distribution électronique, indépendantes de l'existence d'un moment dipolaire permanent. C'est simplement la <strong>seule</strong> des trois forces de van der Waals à subsister entre molécules apolaires (qui n'ont ni dipôle permanent pour Keesom, ni la même pertinence pour Debye).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : un composé %I proche de 100 % (caractère ionique, Document 11) signifierait-il une liaison purement ionique ? Est-ce le cas pour H−F (41 %) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Un %I de 100 % correspondrait effectivement à une liaison purement ionique (transfert complet de charge), mais ce n'est jamais observé en pratique : même les liaisons les plus polarisées (comme dans les sels de métaux très électropositifs avec des halogènes très électronégatifs) restent partiellement covalentes. Pour H−F (41 %), la liaison est significativement polarisée mais reste majoritairement covalente : ce n'est absolument pas une liaison ionique, malgré sa forte polarité (Document 11).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : reliez la Définition 6 (électronégativité de Pauling) et le Document 11 (caractère ionique de H−X) pour expliquer pourquoi %I diminue systématiquement de HF à HI.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Le caractère ionique d'une liaison A−B est lié à la différence d'électronégativité $|\chi(A)-\chi(B)|$ (Définition 6) : plus cette différence est grande, plus la liaison est polarisée, donc plus %I est élevé. En descendant la colonne des halogènes (F→Cl→Br→I), l'électronégativité $\chi(X)$ diminue progressivement (l'atome devient plus volumineux, le noyau moins attractif pour les électrons de liaison), donc la différence $\chi(H)-\chi(X)$ diminue, ce qui explique la décroissance de 41 % (HF) à 5 % (HI) observée dans le Document 11.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : à partir des Définitions 9-10 (forces intermoléculaires) et 11 (molécules amphiphiles), expliquer pourquoi une micelle se forme spontanément dans l'eau avec les têtes polaires à l'extérieur et les queues apolaires à l'intérieur (Fig. 4), et non l'inverse.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Dans l'eau (solvant très polaire, riche en liaisons hydrogène, Définition 10), les têtes polaires/ioniques des molécules amphiphiles (Définition 11) peuvent établir des interactions favorables avec les molécules d'eau (liaisons hydrogène ou forces de Keesom/Debye, Définition 9), ce qui est énergétiquement favorable en surface du micelle. En revanche, les longues chaînes apolaires ne peuvent établir avec l'eau que de faibles forces de London, bien moins favorables que les liaisons hydrogène eau-eau qu'elles rompraient si elles étaient exposées au solvant. En repliant les queues apolaires vers l'intérieur (loin de l'eau) et en exposant les têtes polaires vers l'extérieur (en contact avec l'eau), le système minimise son énergie globale — c'est exactement la structure observée (Fig. 4). Une organisation inverse serait défavorable, car elle exposerait les chaînes apolaires à l'eau tout en cachant les têtes polaires qui, elles, « voudraient » interagir avec le solvant.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Atomes et molécules » (résumé de cours, Lycée Janson de Sailly, Paris)</li>
+<li>Programme officiel de Chimie, CPGE 1<sup>re</sup> année (filière PCSI), bloc « II. Architecture de la matière » (arrêté du 5 janvier 2021) : <a href="https://cache.media.enseignementsup-recherche.gouv.fr/file/CPGE/65/7/Programme_Chimie_voie_PCSI_233657.pdf" target="_blank" rel="noopener">enseignementsup-recherche.gouv.fr</a></li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>
