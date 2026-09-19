@@ -123,10 +123,26 @@ Nécessite de stopper la réaction dans la prise d'essai : <strong>trempe</stron
 <span class="label">Méthodes physiques (mesure <em>in situ</em>, non destructives)</span>
 <strong>Conductimétrie</strong> (réactions avec ions) : conductivité $\sigma=\sum_i\lambda_i^0(M_i^{z_i+})c_i$ (solutions diluées), mesurée via la conductance $G=\sigma/K$ ($K$ = constante de cellule). <strong>Spectrophotométrie d'absorption moléculaire</strong> (produits absorbant dans le visible/UV proche) : loi de Beer-Lambert $A=\mathrm{DO}=\log(I_0/I)=\varepsilon\ell c$ (additive si plusieurs espèces absorbent : $A=\sum_i\varepsilon_i\ell c_i$), valable pour $A\lesssim1{,}2$.
 </div>
+<figure>
+<img src="img/05-fig1-conductivites-ioniques-table.png" alt="Table des conductivités ioniques molaires limites λ° de différents cations et anions en mS.m2.mol-1" style="max-width:500px;">
+<figcaption>Fig. 1 — Conductivités ioniques molaires limites $\lambda_i^0$ (mS·m²·mol⁻¹) de quelques ions usuels, à utiliser dans $\sigma=\sum_i\lambda_i^0(M_i^{z_i+})c_i$.</figcaption>
+</figure>
+<figure>
+<img src="img/05-fig2-cellule-conductimetrie.png" alt="Schéma d'une cellule de conductimétrie : deux plaques de platine platiné reliées par des fils de connexion, plongées dans la solution" style="max-width:340px;">
+<figcaption>Fig. 2 — Cellule de conductimétrie : deux plaques de platine platiné distantes de $\ell$, de surface $S$, définissant la constante de cellule $K=\ell/S$.</figcaption>
+</figure>
+<figure>
+<img src="img/05-fig3-spectrophotometre.png" alt="Schéma d'un spectrophotomètre : source lumineuse, réseau ou prisme, miroir, fente, cuve contenant la solution, détecteur" style="max-width:420px;">
+<figcaption>Fig. 3 — Principe d'un spectrophotomètre d'absorption moléculaire : la lumière issue de la source traverse le réseau/prisme puis la cuve avant d'atteindre le détecteur, qui mesure l'absorbance.</figcaption>
+</figure>
 <div class="block remark">
 <span class="label">Détermination de la vitesse par pente de tangente</span>
 La concentration d'un produit (ex. [I₂]) mesurée en fonction du temps donne, par tracé des tangentes à différents instants, la vitesse $v=d[I_2]/dt$ à chaque instant. On observe en général que la vitesse <strong>diminue</strong> avec le temps (sauf réactions autocatalytiques : phase d'accélération initiale, puis diminution nécessaire car $v\to0$ à $t\to\infty$).
 </div>
+<figure>
+<img src="img/05-fig4-I2-fonction-t.png" alt="Graphe [I2] en fonction de t : courbe croissante et concave, avec deux tangentes tracées en un point t1 pour illustrer la mesure de la vitesse" style="max-width:340px;">
+<figcaption>Fig. 4 — Détermination de la vitesse $v=d[I_2]/dt$ par la pente de la tangente à la courbe $[I_2]=f(t)$ à l'instant $t_1$ : la pente diminue au cours du temps.</figcaption>
+</figure>
 </section>
 
 <section id="s2">
@@ -150,16 +166,28 @@ Conditions stœchiométriques ($[A]=[\mathrm{OH^-}]=a$, suivi par dosage acido-b
 $$\ln[A]=\ln[A]_0-kt \qquad [A]=[A]_0e^{-kt}$$
 On trace $\ln[A]=f(t)$ : une droite (pente $-k$) valide l'ordre 1. Sur l'exemple : droite obtenue, $k=0{,}145\,\mathrm{h^{-1}}$ — <strong>la réaction admet un ordre 1</strong>.
 </div>
+<figure>
+<img src="img/05-fig5-ordre1-lnA-fonction-t.png" alt="Graphe ln[A] en fonction de t : points expérimentaux alignés sur une droite décroissante, équation ln[A]=-0,145t+2,975" style="max-width:440px;">
+<figcaption>Fig. 5 — Tracé $\ln[A]=f(t)$ pour l'exemple SN1 : droite obtenue ($\ln[A]=-0{,}145t+2{,}975$), l'hypothèse d'ordre 1 est validée avec $k=0{,}145\,\mathrm{h^{-1}}$.</figcaption>
+</figure>
 <div class="block theorem">
 <span class="label">Ordre 2 : $-d[A]/dt=k[A]^2$</span>
 $$\frac{1}{[A]}=kt+\frac{1}{[A]_0}$$
 On trace $1/[A]=f(t)$ : sur l'exemple, points non alignés — <strong>la réaction n'admet pas d'ordre 2</strong>.
 </div>
+<figure>
+<img src="img/05-fig6-ordre2-inverseA-fonction-t.png" alt="Graphe 1/[A] en fonction de t : points expérimentaux non alignés, courbe distincte de la droite de régression" style="max-width:440px;">
+<figcaption>Fig. 6 — Tracé $1/[A]=f(t)$ pour l'exemple SN1 : les points ne sont pas alignés (courbe s'écartant de la droite bleue tracée), l'hypothèse d'ordre 2 n'est pas validée.</figcaption>
+</figure>
 <div class="block theorem">
 <span class="label">Ordre 0 : $-d[A]/dt=k$</span>
 $$[A]=-kt+[A]_0$$
 Sur l'exemple, points non alignés — <strong>la réaction n'admet pas d'ordre 0</strong>.
 </div>
+<figure>
+<img src="img/05-fig7-ordre0-A-fonction-t.png" alt="Graphe [A] en fonction de t : points expérimentaux non alignés, courbe s'écartant de la droite de régression" style="max-width:440px;">
+<figcaption>Fig. 7 — Tracé $[A]=f(t)$ pour l'exemple SN1 : les points ne sont pas alignés (courbe s'écartant de la droite bleue tracée), l'hypothèse d'ordre 0 n'est pas validée.</figcaption>
+</figure>
 <div class="block remark">
 <span class="label">Généralisation et mise en garde</span>
 Pour un ordre $n\neq1$ quelconque : $\dfrac{1}{[A]^{n-1}}=(n-1)kt+\dfrac{1}{[A]_0^{n-1}}$. Ne pas avoir validé une hypothèse d'ordre ne prouve pas que la réaction n'admet pas d'ordre : cela prouve seulement que la valeur testée n'est pas la bonne — cette méthode ne permet donc pas de conclure qu'une réaction n'a pas d'ordre (il faudrait tester toutes les valeurs).
@@ -206,6 +234,10 @@ $$k=A\exp\!\left(-\frac{E_a}{RT}\right) \qquad \ln k = \ln A - \frac{E_a}{RT}$$
 <span class="label">Vérification expérimentale</span>
 On mesure $k(T)$ à plusieurs températures et on trace $\ln k=f(1/T)$ : une droite valide la loi d'Arrhénius, de pente $-E_a/R$ et d'ordonnée à l'origine $\ln A$. Exemple traité ($\mathrm{CH_3I+C_2H_5ONa}\rightleftharpoons\mathrm{CH_3OC_2H_5+NaI}$, ordre global 2) : droite obtenue, $\ln A=26{,}47$, pente $-9905$, d'où $E_a=32\,\mathrm{kJ\cdot mol^{-1}}$.
 </div>
+<figure>
+<img src="img/05-fig8-arrhenius-lnk-fonction-invT.png" alt="Graphe ln k en fonction de 1/T : points expérimentaux alignés sur une droite décroissante" style="max-width:480px;">
+<figcaption>Fig. 8 — Tracé $\ln k=f(1/T)$ pour l'exemple $\mathrm{CH_3I+C_2H_5ONa}$ : droite obtenue, d'ordonnée à l'origine $\ln A=26{,}47$ et de pente $-E_a/R=-9905$, d'où $E_a=32\,\mathrm{kJ\cdot mol^{-1}}$.</figcaption>
+</figure>
 <div class="block correction">
 <span class="label">⚠️ Remarque — énergie d'activation apparemment négative</span>
 La réaction $2\,\mathrm{NO}+\mathrm{O_2}\to2\,\mathrm{NO_2}$ a une vitesse qui <strong>diminue</strong> quand la température augmente, ce qui correspondrait formellement à $E_a<0$ dans la loi d'Arrhénius — un résultat qui semble contredire l'interprétation microscopique usuelle de $E_a$ (barrière d'énergie à franchir). Le document source annonce que l'explication réside dans l'interprétation microscopique des mécanismes réactionnels (traitée dans un chapitre ultérieur : mécanisme à plusieurs étapes dont l'une, un équilibre rapide défavorisé par la température, contrôle la vitesse globale).
