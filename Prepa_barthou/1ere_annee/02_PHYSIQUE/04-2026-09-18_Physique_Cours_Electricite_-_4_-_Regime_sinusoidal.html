@@ -53,6 +53,7 @@ p{margin:.6rem 0;}
 .retenir>.label{color:#cfe0f5;}
 figure{margin:1.2rem 0; text-align:center;}
 figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figure img{max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px;}
 figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
 table{border-collapse:collapse; margin:1rem 0; width:100%;}
 th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.9rem;}
@@ -129,17 +130,7 @@ $$A_1 e^{j(\omega t+\varphi_1)} + A_2 e^{j(\omega t+\varphi_2)} + A_3 e^{j(\omeg
 
 <h3>Circuit 1 — RLC série (loi des mailles)</h3>
 <figure>
-<svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<line x1="20" y1="80" x2="60" y2="80" stroke="#333" stroke-width="1.6"/>
-<rect x="60" y="65" width="45" height="30" fill="#eaf2fd" stroke="#3b6fd8"/><text x="82" y="83" text-anchor="middle" font-size="10">R</text>
-<line x1="105" y1="80" x2="130" y2="80" stroke="#333" stroke-width="1.6"/>
-<path d="M130 80 q7 -14 14 0 q7 -14 14 0 q7 -14 14 0" stroke="#3b6fd8" stroke-width="1.6" fill="none"/><text x="158" y="60" font-size="10">L</text>
-<line x1="172" y1="80" x2="200" y2="80" stroke="#333" stroke-width="1.6"/>
-<line x1="200" y1="60" x2="200" y2="100" stroke="#3b6fd8" stroke-width="2"/><line x1="215" y1="60" x2="215" y2="100" stroke="#3b6fd8" stroke-width="2"/><text x="222" y="83" font-size="10">C</text>
-<line x1="20" y1="30" x2="20" y2="100" stroke="#333" stroke-width="1.6"/><text x="0" y="65" font-size="10">U</text>
-<line x1="215" y1="80" x2="260" y2="80" stroke="#333" stroke-width="1.6" marker-end="url(#aF4)"/><text x="240" y="70" font-size="10">I</text>
-<defs><marker id="aF4" markerWidth="6" markerHeight="6" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#333"/></marker></defs>
-</svg>
+<img src="./img/04-fig1-circuit-rlc-serie.png" alt="Circuit RLC série avec U_R, U_L, U_C, U_Total et I">
 <figcaption>Fig. 1 — Circuit RLC série ; l'intensité $I$ commune aux dipôles est choisie comme origine des phases.</figcaption>
 </figure>
 <div class="block theorem">
@@ -148,28 +139,13 @@ $$\underline{U}_{Total} = \underline{U}_R+\underline{U}_L+\underline{U}_C = R\un
 </div>
 <p>En choisissant $I(t)=I_{max}\cos(\omega t)$ (origine des phases sur $I$) et $U_{Total}(t)=U_{max}\cos(\omega t+\phi)$, $\phi$ est le déphasage de la tension totale par rapport à l'intensité.</p>
 <figure>
-<svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<line x1="30" y1="180" x2="270" y2="180" stroke="#999" stroke-dasharray="3,2"/><text x="275" y="184" font-size="10">I (origine des phases)</text>
-<line x1="30" y1="180" x2="130" y2="180" stroke="#0f2b4c" stroke-width="2" marker-end="url(#aF5)"/><text x="80" y="195" font-size="10">U_R</text>
-<line x1="130" y1="180" x2="130" y2="60" stroke="#c0392b" stroke-width="2" marker-end="url(#aF5)"/><text x="135" y="70" font-size="10">U_L</text>
-<line x1="130" y1="180" x2="130" y2="230" stroke="#2fa365" stroke-width="2" marker-end="url(#aF5)" transform="translate(0,-70)"/>
-<line x1="130" y1="110" x2="130" y2="180" stroke="#2fa365" stroke-width="2" marker-start="url(#aF5)"/><text x="135" y="150" font-size="10">U_C</text>
-<line x1="30" y1="180" x2="130" y2="110" stroke="#7c4fd6" stroke-width="2.4" marker-end="url(#aF5)"/><text x="45" y="140" font-size="10" fill="#7c4fd6">U_Total</text>
-<defs><marker id="aF5" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
-</svg>
+<img src="./img/04-fig2-fresnel-circuit1.png" alt="Diagramme de Fresnel du circuit 1 : U_R, U_L, U_C, U_Total">
 <figcaption>Fig. 2 — Diagramme de Fresnel du circuit 1, cas $L\omega<1/(C\omega)$ (donc $\phi<0$) : $U_C$ domine $U_L$, la tension totale est en retard sur le courant.</figcaption>
 </figure>
 
 <h3>Circuit 2 — RLC parallèle (loi des nœuds)</h3>
 <figure>
-<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<line x1="30" y1="30" x2="30" y2="120" stroke="#333" stroke-width="1.6"/><circle cx="30" cy="75" r="16" fill="none" stroke="#333" stroke-width="1.3"/><text x="30" y="79" text-anchor="middle" font-size="10">e</text>
-<line x1="30" y1="30" x2="240" y2="30" stroke="#333" stroke-width="1.6"/>
-<line x1="30" y1="120" x2="240" y2="120" stroke="#333" stroke-width="1.6"/>
-<rect x="85" y="60" width="24" height="30" fill="#eaf2fd" stroke="#3b6fd8"/><text x="97" y="55" text-anchor="middle" font-size="9">R</text><line x1="97" y1="30" x2="97" y2="60" stroke="#333"/><line x1="97" y1="90" x2="97" y2="120" stroke="#333"/>
-<line x1="150" y1="30" x2="150" y2="65" stroke="#3b6fd8" stroke-width="2"/><line x1="140" y1="65" x2="160" y2="65" stroke="#3b6fd8" stroke-width="2"/><line x1="140" y1="80" x2="160" y2="80" stroke="#3b6fd8" stroke-width="2"/><line x1="150" y1="80" x2="150" y2="120" stroke="#333"/><text x="150" y="55" text-anchor="middle" font-size="9">C</text>
-<path d="M195 60 q7 -12 14 0 q7 -12 14 0" stroke="#3b6fd8" stroke-width="1.4" fill="none"/><text x="205" y="52" font-size="9">L</text><line x1="205" y1="30" x2="205" y2="60" stroke="#333"/><line x1="220" y1="60" x2="220" y2="120" stroke="#333"/>
-</svg>
+<img src="./img/04-fig3-circuit-rlc-parallele.png" alt="Circuit RLC parallèle avec e(t), I_R, I_C, I_L et I_total">
 <figcaption>Fig. 3 — Circuit RLC parallèle alimenté par $e(t)$ ; la tension $e(t)$, commune aux dipôles, est choisie comme origine des phases.</figcaption>
 </figure>
 <div class="block theorem">
@@ -177,6 +153,10 @@ $$\underline{U}_{Total} = \underline{U}_R+\underline{U}_L+\underline{U}_C = R\un
 $$\underline I_{Total} = \underline I_R+\underline I_L+\underline I_C = \frac{\underline e}{R}+\frac{\underline e}{jL\omega}+\underline e\,jC\omega = \frac{\underline e}{\underline Z_{Total}}, \qquad \frac{1}{\underline Z_{Total}} = \frac1R+\frac{1}{jL\omega}+jC\omega$$
 </div>
 <p>En choisissant $e(t)=U_{max}\cos(\omega t)$ (origine des phases) et $I_{Total}(t)=I_{max}\cos(\omega t+\phi)$, $\phi$ est ici le déphasage de l'intensité totale par rapport à la tension $e(t)$.</p>
+<figure>
+<img src="./img/04-fig4-fresnel-circuit2.png" alt="Diagramme de Fresnel du circuit 2 : I_R, I_C, I_L, I_Total">
+<figcaption>Fig. 4 — Diagramme de Fresnel du circuit 2, cas $C\omega<1/(L\omega)$ (donc $\phi<0$).</figcaption>
+</figure>
 <div class="block remark">
 <span class="label">Remarque</span>
 Cas $C\omega<1/(L\omega)$ (branche inductive dominante) $\Rightarrow \phi<0$ : le courant total est en retard sur la tension $e(t)$, symétrique du cas du circuit 1.
@@ -210,7 +190,6 @@ $Z_{Total}=50+j(80-30)=50+50j$. $|Z_{Total}|=\sqrt{50^2+50^2}=50\sqrt2\approx70{
 Puisque $L\omega>1/(C\omega)$ (80>30), la partie imaginaire de $Z_{Total}$ est positive, $\phi=+45°>0$ : la tension totale est en <strong>avance</strong> sur le courant (circuit à dominante inductive) — cas opposé à celui illustré en Fig. 2.</div>
 </div>
 
-<div class="quiz-image-q"></div>
 <div class="quiz-item">
 <div class="quiz-q">5. Pourquoi choisit-on l'intensité comme origine des phases pour un circuit série (Fig. 1-2), mais la tension pour un circuit parallèle (Fig. 3) ?</div>
 <div class="quiz-a"><span class="tag">Réponse</span><br>
