@@ -142,9 +142,9 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
         # les fichiers étant attribués selon leur numéro (num_range).
         assigned = set()
         section_idx = 2
-        for name, _ville, _url, _icon, num_range, _password in sources:
+        for name, ville, _url, _icon, num_range, _password in sources:
             short_name = name.split(" — ")[0]
-            body += section_row(f"{section_idx}. Cours Profs — {short_name}")
+            body += section_row(f"{section_idx}. Cours Profs — {short_name} ({ville})")
             section_idx += 1
             matched = []
             for f in profs_files:
