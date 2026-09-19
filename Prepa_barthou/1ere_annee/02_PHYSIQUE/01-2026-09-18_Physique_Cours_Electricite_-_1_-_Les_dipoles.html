@@ -55,6 +55,7 @@ p{margin:.6rem 0;}
 .retenir>.label{color:#cfe0f5;}
 figure{margin:1.2rem 0; text-align:center;}
 figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figure img{max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px;}
 figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
 table{border-collapse:collapse; margin:1rem 0; width:100%;}
 th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.9rem; vertical-align:middle;}
@@ -112,44 +113,13 @@ Le courant électrique résulte d'un déplacement de charges : $i = \dfrac{dq}{d
 </div>
 
 <figure>
-<svg viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<text x="150" y="20" text-anchor="middle" font-size="12" font-weight="700" fill="#0f2b4c">Exemple — loi des mailles</text>
-<line x1="60" y1="60" x2="60" y2="180" stroke="#333" stroke-width="1.6"/>
-<line x1="60" y1="180" x2="240" y2="180" stroke="#333" stroke-width="1.6"/>
-<line x1="60" y1="60" x2="240" y2="60" stroke="#333" stroke-width="1.6"/>
-<line x1="150" y1="60" x2="150" y2="180" stroke="#333" stroke-width="1.6"/>
-<line x1="240" y1="60" x2="240" y2="180" stroke="#333" stroke-width="1.6"/>
-<rect x="46" y="100" width="28" height="20" fill="#2fa365" opacity="0.5" stroke="#333"/>
-<rect x="136" y="100" width="28" height="20" fill="#2fa365" opacity="0.5" stroke="#333"/>
-<rect x="180" y="53" width="24" height="14" fill="#2fa365" opacity="0.5" stroke="#333"/>
-<rect x="226" y="100" width="28" height="20" fill="#2fa365" opacity="0.5" stroke="#333"/>
-<text x="35" y="95" font-size="12">U1</text><text x="125" y="95" font-size="12">U2</text>
-<text x="190" y="48" font-size="12">U3</text><text x="260" y="95" font-size="12">U4</text>
-<line x1="60" y1="90" x2="60" y2="70" stroke="#c0392b" stroke-width="1.4" marker-end="url(#aE1)"/>
-<line x1="150" y1="90" x2="150" y2="70" stroke="#c0392b" stroke-width="1.4" marker-end="url(#aE1)"/>
-<line x1="192" y1="58" x2="212" y2="58" stroke="#c0392b" stroke-width="1.4" marker-end="url(#aE1)"/>
-<line x1="240" y1="90" x2="240" y2="70" stroke="#c0392b" stroke-width="1.4" marker-end="url(#aE1)"/>
-<defs><marker id="aE1" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#c0392b"/></marker></defs>
-<text x="330" y="120" font-size="12">$U_3+U_4-U_2=0$</text>
-<text x="330" y="140" font-size="12">$U_3+U_4-U_1=0$</text>
-<text x="330" y="160" font-size="12">$U_1-U_2=0$</text>
-</svg>
-<figcaption>Fig. 1 — Loi des mailles : $U_1$ et $U_2$ relient les deux mêmes nœuds (donc égales) ; $U_3+U_4$ relie ces mêmes nœuds par l'autre chemin.</figcaption>
+<img src="./img/01-fig1-loi-mailles.png" alt="Circuit avec 4 tensions U1, U2, U3, U4 illustrant la loi des mailles">
+<figcaption>Fig. 1 — Loi des mailles : $U_3+U_4-U_2=0$ ; $U_3+U_4-U_1=0$ ; $U_1-U_2=0$.</figcaption>
 </figure>
 
 <figure>
-<svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<circle cx="200" cy="140" r="4" fill="#0f2b4c"/>
-<text x="215" y="130" font-size="11">Nœud</text>
-<line x1="200" y1="140" x2="90" y2="60" stroke="#8b2e2e" stroke-width="1.8" marker-end="url(#aE2)"/><text x="80" y="55" font-size="13" fill="#8b2e2e">I₁</text>
-<line x1="200" y1="140" x2="90" y2="220" stroke="#3b6fd8" stroke-width="1.8" marker-end="url(#aE2)"/><text x="80" y="230" font-size="13" fill="#3b6fd8">I₂</text>
-<line x1="200" y1="140" x2="330" y2="70" stroke="#c0392b" stroke-width="1.8" marker-start="url(#aE2)"/><text x="335" y="65" font-size="13" fill="#c0392b">I₃</text>
-<line x1="200" y1="140" x2="330" y2="140" stroke="#2fa365" stroke-width="1.8" marker-start="url(#aE2)"/><text x="335" y="135" font-size="13" fill="#2fa365">I₄</text>
-<line x1="200" y1="140" x2="330" y2="210" stroke="#7c4fd6" stroke-width="1.8" marker-start="url(#aE2)"/><text x="335" y="215" font-size="13" fill="#7c4fd6">I₅</text>
-<defs><marker id="aE2" markerWidth="8" markerHeight="8" refX="6" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4 Z" fill="#333"/></marker></defs>
-<text x="200" y="250" text-anchor="middle" font-size="13">$I_1+I_2=I_3+I_4+I_5$</text>
-</svg>
-<figcaption>Fig. 2 — Loi des nœuds : les courants $I_1,I_2$ entrent au nœud, $I_3,I_4,I_5$ en sortent.</figcaption>
+<img src="./img/01-fig2-loi-noeuds.png" alt="Nœud avec 5 courants I1 à I5 illustrant la loi des nœuds">
+<figcaption>Fig. 2 — Loi des nœuds : $I_1+I_2=I_3+I_4+I_5$.</figcaption>
 </figure>
 
 </section>
@@ -160,29 +130,13 @@ Le courant électrique résulte d'un déplacement de charges : $i = \dfrac{dq}{d
 <span class="label">Définition 2</span>
 Pour un dipôle quelconque, on choisit une orientation pour la tension $u$ et le courant $i$ à ses bornes :
 <ul>
-<li><strong>Convention récepteur</strong> : les flèches $i$ et $u$ sont dans le <strong>même sens</strong>.</li>
-<li><strong>Convention générateur</strong> : les flèches $i$ et $u$ sont en <strong>sens opposés</strong>.</li>
+<li><strong>Convention récepteur</strong> : les flèches $i$ et $u$ sont en <strong>sens opposés</strong>.</li>
+<li><strong>Convention générateur</strong> : les flèches $i$ et $u$ sont dans le <strong>même sens</strong>.</li>
 </ul>
 </div>
 <figure>
-<svg viewBox="0 0 460 140" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<g transform="translate(0,0)">
-<text x="105" y="20" text-anchor="middle" font-size="12" font-weight="700">Convention récepteur</text>
-<rect x="60" y="55" width="90" height="30" fill="#eaf2fd" stroke="#3b6fd8"/>
-<line x1="20" y1="70" x2="58" y2="70" stroke="#333" stroke-width="1.6" marker-end="url(#aE3)"/><text x="20" y="60" font-size="12">I</text>
-<line x1="150" y1="70" x2="190" y2="70" stroke="#333" stroke-width="1.6" marker-end="url(#aE3)"/>
-<line x1="60" y1="105" x2="150" y2="105" stroke="#c0392b" stroke-width="1.6" marker-end="url(#aE3)"/><text x="95" y="120" font-size="12" fill="#c0392b">V (même sens que I)</text>
-</g>
-<g transform="translate(240,0)">
-<text x="105" y="20" text-anchor="middle" font-size="12" font-weight="700">Convention générateur</text>
-<rect x="60" y="55" width="90" height="30" fill="#fde9d0" stroke="#c98a12"/>
-<line x1="20" y1="70" x2="58" y2="70" stroke="#333" stroke-width="1.6" marker-end="url(#aE3)"/><text x="20" y="60" font-size="12">I</text>
-<line x1="150" y1="70" x2="190" y2="70" stroke="#333" stroke-width="1.6" marker-end="url(#aE3)"/>
-<line x1="150" y1="105" x2="60" y2="105" stroke="#c0392b" stroke-width="1.6" marker-end="url(#aE3)"/><text x="95" y="120" font-size="12" fill="#c0392b">V (sens opposé à I)</text>
-</g>
-<defs><marker id="aE3" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
-</svg>
-<figcaption>Fig. 3 — Convention récepteur ($u,i$ même sens) et convention générateur ($u,i$ sens opposés).</figcaption>
+<img src="./img/01-fig3-convention-recepteur-generateur.png" alt="Convention récepteur et convention générateur">
+<figcaption>Fig. 3 — Convention récepteur (flèches $I$ et $V$ en sens opposés sur le schéma) et convention générateur (flèches $I$ et $V$ dans le même sens).</figcaption>
 </figure>
 </section>
 
@@ -194,30 +148,8 @@ Un générateur de tension réel (générateur de Thévenin, f.é.m. $E$ et rés
 $$I = \frac{E}{R}$$
 </div>
 <figure>
-<svg viewBox="0 0 460 160" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<g transform="translate(0,0)">
-<line x1="40" y1="30" x2="40" y2="130" stroke="#333" stroke-width="1.6"/>
-<circle cx="40" cy="80" r="18" fill="none" stroke="#333" stroke-width="1.4"/><text x="40" y="84" text-anchor="middle" font-size="11">E</text>
-<line x1="40" y1="30" x2="130" y2="30" stroke="#333" stroke-width="1.6"/>
-<rect x="80" y="18" width="45" height="24" fill="#eaf2fd" stroke="#3b6fd8"/><text x="102" y="35" text-anchor="middle" font-size="11">R</text>
-<line x1="125" y1="30" x2="160" y2="30" stroke="#333" stroke-width="1.6"/>
-<line x1="160" y1="30" x2="160" y2="130" stroke="#333" stroke-width="2" marker-end="url(#aE4)"/><text x="170" y="60" font-size="12">u</text>
-<line x1="40" y1="130" x2="160" y2="130" stroke="#333" stroke-width="1.6"/>
-<text x="130" y="50" font-size="12" text-anchor="end">A</text><text x="130" y="150" font-size="12" text-anchor="end">B</text>
-</g>
-<text x="200" y="85" font-size="20" text-anchor="middle">⇔</text>
-<g transform="translate(230,0)">
-<line x1="40" y1="30" x2="40" y2="130" stroke="#333" stroke-width="1.6"/>
-<circle cx="40" cy="80" r="18" fill="none" stroke="#333" stroke-width="1.4"/><text x="40" y="60" text-anchor="middle" font-size="10">I=E/R</text>
-<line x1="40" y1="30" x2="130" y2="30" stroke="#333" stroke-width="1.6"/>
-<rect x="105" y="45" width="24" height="70" fill="#eaf2fd" stroke="#3b6fd8"/><text x="117" y="83" text-anchor="middle" font-size="11" transform="rotate(90,117,83)">R</text>
-<line x1="130" y1="30" x2="170" y2="30" stroke="#333" stroke-width="1.6"/>
-<line x1="170" y1="30" x2="170" y2="130" stroke="#333" stroke-width="2"/><text x="180" y="60" font-size="12">u</text>
-<line x1="40" y1="130" x2="170" y2="130" stroke="#333" stroke-width="1.6"/>
-</g>
-<defs><marker id="aE4" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
-</svg>
-<figcaption>Fig. 4 — Générateur de Thévenin (gauche) et son équivalent de Norton (droite).</figcaption>
+<img src="./img/01-fig4-thevenin-norton.png" alt="Générateur de Thévenin et son équivalent de Norton">
+<figcaption>Fig. 4 — Générateur de Thévenin (gauche, f.é.m. $E$ et résistance $R$ en série) et son équivalent de Norton (droite, source de courant $I=E/R$ et résistance $R$ en parallèle).</figcaption>
 </figure>
 </section>
 
@@ -256,78 +188,30 @@ $$I_1 = I\,\frac{R_2}{R_1+R_2} \qquad I_2 = I\,\frac{R_1}{R_1+R_2}$$
 Dans le diviseur de courant, le courant dans une branche est proportionnel à la résistance de <strong>l'autre</strong> branche : plus une résistance est grande, moins elle laisse passer de courant.
 </div>
 <figure>
-<svg viewBox="0 0 620 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<g transform="translate(0,0)">
-<text x="120" y="18" text-anchor="middle" font-size="12" font-weight="700">Diviseur de tension</text>
-<line x1="60" y1="40" x2="60" y2="180" stroke="#333" stroke-width="1.6"/>
-<text x="30" y="115" font-size="12">Ve</text>
-<line x1="60" y1="40" x2="120" y2="40" stroke="#333" stroke-width="1.6"/>
-<rect x="105" y="45" width="30" height="45" fill="#eaf2fd" stroke="#3b6fd8"/><text x="120" y="72" text-anchor="middle" font-size="11">R2</text>
-<line x1="120" y1="90" x2="120" y2="110" stroke="#333" stroke-width="1.6"/>
-<rect x="105" y="110" width="30" height="45" fill="#eaf2fd" stroke="#3b6fd8"/><text x="120" y="137" text-anchor="middle" font-size="11">R1</text>
-<line x1="120" y1="155" x2="120" y2="180" stroke="#333" stroke-width="1.6"/>
-<line x1="60" y1="180" x2="120" y2="180" stroke="#333" stroke-width="1.6"/>
-<line x1="180" y1="40" x2="180" y2="180" stroke="#333" stroke-width="2"/><text x="190" y="115" font-size="12">Vs</text>
-<line x1="120" y1="40" x2="180" y2="40" stroke="#333" stroke-width="1.6"/>
-<line x1="120" y1="180" x2="180" y2="180" stroke="#333" stroke-width="1.6"/>
-<circle cx="120" cy="100" r="2.5" fill="#333"/>
-</g>
-<g transform="translate(320,0)">
-<text x="140" y="18" text-anchor="middle" font-size="12" font-weight="700">Diviseur de courant</text>
-<line x1="30" y1="100" x2="90" y2="100" stroke="#333" stroke-width="1.8" marker-end="url(#aE5)"/><text x="35" y="90" font-size="12">I</text>
-<line x1="90" y1="100" x2="90" y2="60" stroke="#333" stroke-width="1.6"/>
-<line x1="90" y1="60" x2="140" y2="60" stroke="#333" stroke-width="1.8" marker-end="url(#aE5)"/><text x="100" y="52" font-size="11">I1</text>
-<rect x="140" y="45" width="60" height="30" fill="#eaf2fd" stroke="#3b6fd8"/><text x="170" y="65" text-anchor="middle" font-size="11">R1</text>
-<line x1="200" y1="60" x2="250" y2="60" stroke="#333" stroke-width="1.6"/>
-<line x1="90" y1="100" x2="90" y2="140" stroke="#333" stroke-width="1.6"/>
-<line x1="90" y1="140" x2="140" y2="140" stroke="#333" stroke-width="1.8" marker-end="url(#aE5)"/><text x="100" y="132" font-size="11">I2</text>
-<rect x="140" y="125" width="60" height="30" fill="#eaf2fd" stroke="#3b6fd8"/><text x="170" y="145" text-anchor="middle" font-size="11">R2</text>
-<line x1="200" y1="140" x2="250" y2="140" stroke="#333" stroke-width="1.6"/>
-<line x1="250" y1="60" x2="250" y2="140" stroke="#333" stroke-width="1.6"/>
-<line x1="250" y1="100" x2="290" y2="100" stroke="#333" stroke-width="1.8" marker-end="url(#aE5)"/><text x="255" y="90" font-size="12">I</text>
-</g>
-<defs><marker id="aE5" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
-</svg>
-<figcaption>Fig. 5 — Diviseur de tension ($V_s$ pris aux bornes de $R_1$) et diviseur de courant ($R_1,R_2$ en parallèle).</figcaption>
+<img src="./img/01-fig5a-diviseur-tension.png" alt="Diviseur de tension : R2 en haut, R1 en bas, Vs pris aux bornes de R1">
+<figcaption>Fig. 5a — Diviseur de tension : $V_s$ est pris aux bornes de $R_1$.</figcaption>
+</figure>
+<figure>
+<img src="./img/01-fig5b-diviseur-courant.png" alt="Diviseur de courant : R1 et R2 en parallèle">
+<figcaption>Fig. 5b — Diviseur de courant : $R_1,R_2$ en parallèle, courant total $I$.</figcaption>
 </figure>
 </section>
 
 <section id="s6">
 <h2>6. Les principaux dipôles</h2>
-<div class="block def">
-<span class="label">Définition 4 — dipôles usuels</span>
-<table>
-<tr><th>Dipôle</th><th>Caractéristique $i(u)$</th></tr>
-<tr><td>Résistance $R$ (convention 1)</td><td>$u = R\,i$</td></tr>
-<tr><td>Résistance $R$ (convention opposée)</td><td>$u = -R\,i$</td></tr>
-<tr><td>Condensateur $C$</td><td>$u = \dfrac{q}{C}$ ; $\ i = \dfrac{dq}{dt}$ (signes $\pm$ selon l'armature référencée)</td></tr>
-<tr><td>Bobine $L$</td><td>$u = L\,\dfrac{di}{dt}$</td></tr>
-<tr><td>Générateur réel</td><td>$u = e_g - R_g\,i$</td></tr>
-<tr><td>Diode (modèle seuil)</td><td>$u\leqslant u_s : i=0$ ; $\ u>u_s : u=R_d\,i+u_s$</td></tr>
-</table>
-</div>
+<p>Pour chaque dipôle, le tableau ci-dessous donne le symbole (avec l'orientation choisie pour $u$ et $i$), l'allure de la caractéristique $i(u)$, puis l'équation correspondante.</p>
 <figure>
-<svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<g transform="translate(0,0)">
-<line x1="20" y1="100" x2="150" y2="100" stroke="#333" stroke-width="1.2" marker-end="url(#aE6)"/><line x1="80" y1="180" x2="80" y2="20" stroke="#333" stroke-width="1.2" marker-end="url(#aE6)"/>
-<line x1="80" y1="100" x2="140" y2="40" stroke="#3b6fd8" stroke-width="2"/>
-<text x="80" y="195" font-size="10" text-anchor="middle">R : droite par l'origine</text>
-</g>
-<g transform="translate(200,0)">
-<line x1="20" y1="100" x2="150" y2="100" stroke="#333" stroke-width="1.2" marker-end="url(#aE6)"/><line x1="80" y1="180" x2="80" y2="20" stroke="#333" stroke-width="1.2" marker-end="url(#aE6)"/>
-<line x1="80" y1="100" x2="110" y2="100" stroke="#3b6fd8" stroke-width="2"/><line x1="110" y1="100" x2="150" y2="45" stroke="#3b6fd8" stroke-width="2"/>
-<text x="110" y="115" font-size="9">us</text>
-<text x="80" y="195" font-size="10" text-anchor="middle">Diode : seuil puis droite</text>
-</g>
-<g transform="translate(400,0)">
-<line x1="20" y1="100" x2="150" y2="100" stroke="#333" stroke-width="1.2" marker-end="url(#aE6)"/><line x1="80" y1="180" x2="80" y2="20" stroke="#333" stroke-width="1.2" marker-end="url(#aE6)"/>
-<line x1="80" y1="30" x2="80" y2="170" stroke="#3b6fd8" stroke-width="2"/>
-<text x="80" y="195" font-size="10" text-anchor="middle">C,L en régime continu : u seul (i=0) ou i seul</text>
-</g>
-<defs><marker id="aE6" markerWidth="6" markerHeight="6" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#333"/></marker></defs>
-</svg>
-<figcaption>Fig. 6 — Allure des caractéristiques $i(u)$ : résistance (droite par l'origine), diode à seuil (nulle puis linéaire), et cas particulier d'un condensateur en régime purement continu (caractéristique verticale : $u$ quelconque à $i=0$).</figcaption>
+<img src="./img/01-fig6a-dipoles-diode-zener-resistances.png" alt="Tableau des dipôles : diode à seuil, diode Zener, résistance (deux conventions)">
+<figcaption>Fig. 6a — Diode à seuil ($u\leqslant u_s: i=0$ ; $u>u_s: u=R_d i+u_s$) ; diode Zener/bidirectionnelle ($u>u_1: u=R_1 i+u_1$ ; $u<u_2\ (u_2<0): u=R_2 i+u_2$) ; résistance $R$ dans les deux conventions ($u=Ri$ puis $u=-Ri$).</figcaption>
 </figure>
+<figure>
+<img src="./img/01-fig6b-dipoles-condensateur-bobine-generateur.png" alt="Tableau des dipôles : condensateur (deux orientations), bobine, générateur réel">
+<figcaption>Fig. 6b — Condensateur $C$ dans les deux orientations possibles ($u=+q/C$ puis, cas général, $u=\pm q/C$ selon l'armature référencée) ; bobine $L$ ($u=L\,di/dt$) ; générateur réel ($u=e_g-R_g i$).</figcaption>
+</figure>
+<div class="block remark">
+<span class="label">Remarque — condensateur, cas général</span>
+Pour le condensateur, $u$ vaut $\pm q/C$ selon que l'armature chargée $+q$ correspond ou non à la pointe de la flèche $u$ ; de même $i=\pm dq/dt$ selon l'armature vers laquelle pointe la flèche $i$. Dans l'exemple de la seconde orientation (Fig. 6b), on a $u=-q/C$ et $i=\dfrac{d(+q)}{dt}$.
+</div>
 </section>
 
 <section id="quiz">
@@ -336,7 +220,7 @@ Dans le diviseur de courant, le courant dans une branche est proportionnel à la
 <div class="quiz-item">
 <div class="quiz-q">1. Quelle est la différence entre la convention récepteur et la convention générateur ?</div>
 <div class="quiz-a"><span class="tag">Réponse</span><br>
-En convention récepteur, les flèches $u$ et $i$ sont orientées dans le même sens à travers le dipôle ; en convention générateur, elles sont orientées en sens opposés (Définition 2). C'est cette convention qui donne son sens à la formule $P=ui$ (puissance reçue positive si le dipôle consomme réellement).</div>
+En convention récepteur, les flèches $u$ et $i$ sont orientées en sens opposés à travers le dipôle ; en convention générateur, elles sont orientées dans le même sens (Définition 2). C'est cette convention qui donne son sens à la formule $P=ui$ (puissance reçue positive si le dipôle consomme réellement).</div>
 </div>
 
 <div class="quiz-item">
