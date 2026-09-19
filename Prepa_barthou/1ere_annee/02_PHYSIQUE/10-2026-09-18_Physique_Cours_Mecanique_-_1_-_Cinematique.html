@@ -53,6 +53,7 @@ p{margin:.6rem 0;}
 .retenir>.label{color:#cfe0f5;}
 figure{margin:1.2rem 0; text-align:center;}
 figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figure img{max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px;}
 figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
 .quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
 .quiz-q{font-weight:700;}
@@ -97,33 +98,12 @@ $$\text{Sphériques : } \overrightarrow{OM}=r\,\vec e_r = (r\sin\theta\cos\varph
 $$\text{Curvilignes : } s(M)=\text{longueur de l'arc } \overset{\frown}{OM}, \ O \text{ point fixe (origine des arcs)}$$
 </div>
 <figure>
-<svg viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<g transform="translate(0,0)">
-<text x="130" y="18" text-anchor="middle" font-size="12" font-weight="700">Cylindriques</text>
-<line x1="40" y1="200" x2="240" y2="200" stroke="#333" stroke-width="1" marker-end="url(#aC1)"/><text x="245" y="204" font-size="10">x</text>
-<line x1="40" y1="200" x2="40" y2="40" stroke="#333" stroke-width="1" marker-end="url(#aC1)"/><text x="30" y="35" font-size="10">z</text>
-<line x1="40" y1="200" x2="180" y2="230" stroke="#333" stroke-width="1" marker-end="url(#aC1)"/><text x="185" y="235" font-size="10">y</text>
-<line x1="40" y1="200" x2="150" y2="150" stroke="#c0392b" stroke-width="1.8"/><text x="140" y="140" font-size="10">r</text>
-<circle cx="150" cy="150" r="2.5" fill="#333"/><line x1="150" y1="150" x2="150" y2="90" stroke="#c0392b" stroke-width="1.8" stroke-dasharray="3,2"/><text x="155" y="90" font-size="11">M</text>
-<line x1="150" y1="90" x2="150" y2="150" stroke="#2fa365" stroke-width="1.4" marker-end="url(#aC1)"/><text x="158" y="70" font-size="10" fill="#2fa365">z</text>
-<path d="M75 200 A 40 15 0 0 0 130 190" fill="none" stroke="#7c4fd6" stroke-width="1.2"/><text x="90" y="185" font-size="10" fill="#7c4fd6">θ</text>
-<line x1="150" y1="90" x2="185" y2="80" stroke="#3b6fd8" stroke-width="1.6" marker-end="url(#aC1)"/><text x="188" y="78" font-size="9">e_r</text>
-<line x1="150" y1="90" x2="145" y2="55" stroke="#e91e8c" stroke-width="1.6" marker-end="url(#aC1)"/><text x="148" y="52" font-size="9">e_θ</text>
-</g>
-<g transform="translate(340,0)">
-<text x="130" y="18" text-anchor="middle" font-size="12" font-weight="700">Sphériques</text>
-<line x1="40" y1="200" x2="240" y2="200" stroke="#333" stroke-width="1" marker-end="url(#aC1)"/><text x="245" y="204" font-size="10">x</text>
-<line x1="40" y1="200" x2="40" y2="40" stroke="#333" stroke-width="1" marker-end="url(#aC1)"/><text x="30" y="35" font-size="10">z</text>
-<line x1="40" y1="200" x2="180" y2="230" stroke="#333" stroke-width="1" marker-end="url(#aC1)"/><text x="185" y="235" font-size="10">y</text>
-<line x1="40" y1="200" x2="160" y2="80" stroke="#c0392b" stroke-width="1.8"/><text x="90" y="130" font-size="10">r</text>
-<circle cx="160" cy="80" r="2.5" fill="#333"/><text x="165" y="75" font-size="11">M</text>
-<path d="M40 150 A 60 60 0 0 0 100 95" fill="none" stroke="#7c4fd6" stroke-width="1.2"/><text x="65" y="140" font-size="10" fill="#7c4fd6">θ</text>
-<path d="M75 200 A 40 15 0 0 0 110 195" fill="none" stroke="#c98a12" stroke-width="1.2"/><text x="90" y="192" font-size="10" fill="#c98a12">φ</text>
-<line x1="160" y1="80" x2="185" y2="60" stroke="#3b6fd8" stroke-width="1.6" marker-end="url(#aC1)"/><text x="188" y="58" font-size="9">e_r</text>
-</g>
-<defs><marker id="aC1" markerWidth="6" markerHeight="6" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#333"/></marker></defs>
-</svg>
-<figcaption>Fig. 1 — Coordonnées cylindriques $(r,\theta,z)$ et sphériques $(r,\theta,\varphi)$, avec leurs vecteurs de base locaux.</figcaption>
+<img src="./img/10-fig1-coord-cylindriques.png" alt="Coordonnées cylindriques : élément de volume dV=r dr dz dθ et base locale (e_r, e_θ, k)">
+<figcaption>Fig. 1 — Coordonnées cylindriques $(r,\theta,z)$ : élément de volume $dV=r\,dr\,dz\,d\theta$ et base locale $(\vec e_r,\vec e_\theta,\vec k)$.</figcaption>
+</figure>
+<figure>
+<img src="./img/10-fig2-coord-spheriques.png" alt="Coordonnées sphériques : élément de volume dV=r² sinθ dr dθ dφ et base locale (e_r, e_θ, e_φ)">
+<figcaption>Fig. 2 — Coordonnées sphériques $(r,\theta,\varphi)$ : élément de volume $dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$ et base locale $(\vec e_r,\vec e_\theta,\vec e_\varphi)$.</figcaption>
 </figure>
 </section>
 
@@ -147,17 +127,6 @@ $$\text{Curvilignes : } \vec v = \frac{d\overrightarrow{OM}}{dt} = \frac{ds}{dt}
 $$\text{Cylindriques : } \vec a = \frac{d^2\overrightarrow{OM}}{dt^2} = \left[\frac{d^2r}{dt^2}-r\left(\frac{d\theta}{dt}\right)^2\right]\vec e_r + \left[r\frac{d^2\theta}{dt^2}+2\frac{dr}{dt}\frac{d\theta}{dt}\right]\vec e_\theta + \frac{d^2z}{dt^2}\vec e_z$$
 $$\text{Curvilignes : } \vec a = \frac{d^2s}{dt^2}\vec e_T + \frac{(ds/dt)^2}{\rho}\vec e_N \qquad \left(\frac{d\vec e_T}{ds}=\frac{\vec e_N}{\rho},\ \vec e_N\text{ unitaire centripète}\right)$$
 </div>
-<figure>
-<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<path d="M40 180 Q 150 40 360 100" stroke="#333" stroke-width="1.6" fill="none"/>
-<circle cx="200" cy="95" r="3" fill="#0f2b4c"/><text x="205" y="88" font-size="11">M</text>
-<line x1="200" y1="95" x2="255" y2="80" stroke="#3b6fd8" stroke-width="1.8" marker-end="url(#aC2)"/><text x="258" y="75" font-size="11" fill="#3b6fd8">$\vec e_T$</text>
-<line x1="200" y1="95" x2="220" y2="150" stroke="#c0392b" stroke-width="1.8" marker-end="url(#aC2)"/><text x="225" y="160" font-size="11" fill="#c0392b">$\vec e_N$</text>
-<circle cx="240" cy="230" r="60" fill="none" stroke="#999" stroke-dasharray="4,3" transform="translate(0,-80)"/>
-<defs><marker id="aC2" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
-</svg>
-<figcaption>Fig. 2 — Repère de Frenet local : $\vec e_T$ tangent à la trajectoire, $\vec e_N$ normal, orienté vers le centre de courbure (centripète).</figcaption>
-</figure>
 </section>
 
 <section id="s4">
@@ -203,7 +172,7 @@ Ce terme traduit l'accélération <strong>centripète</strong>, nécessaire pour
 </div>
 
 <div class="quiz-item">
-<div class="quiz-q">6. Que se passerait-il dans le repère de Frenet (Fig. 2, Théorème 3) si la trajectoire devenait rectiligne (rayon de courbure $\rho\to\infty$) ?</div>
+<div class="quiz-q">6. Que se passerait-il dans le repère de Frenet (Théorème 3) si la trajectoire devenait rectiligne (rayon de courbure $\rho\to\infty$) ?</div>
 <div class="quiz-a"><span class="tag">Réponse</span><br>
 Le terme $(ds/dt)^2/\rho \to 0$ : l'accélération se réduit à sa seule composante tangentielle $\ddot s\,\vec e_T$ — cohérent avec le fait qu'en ligne droite, il n'y a plus d'accélération centripète (pas de changement de direction de la vitesse), seulement une éventuelle variation de sa norme.</div>
 </div>
