@@ -53,6 +53,7 @@ p{margin:.6rem 0;}
 .retenir>.label{color:#cfe0f5;}
 figure{margin:1.2rem 0; text-align:center;}
 figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figure img{max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px;}
 figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
 .quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
 .quiz-q{font-weight:700;}
@@ -98,19 +99,6 @@ Une <strong>onde</strong> est la propagation d'une grandeur physique consécutiv
 Une onde progressive $s(x,t)$ se propageant selon les $x$ croissants est de la forme générale $s(x,t)=f\!\left(t-\dfrac{x}{c}\right)$ : l'état de perturbation à l'abscisse $x$ est celui qu'avait la source $x/c$ secondes plus tôt.<br>
 Une onde progressive se propageant selon les $x$ décroissants est de la forme $s(x,t)=f\!\left(t+\dfrac{x}{c}\right)$.
 </div>
-<figure>
-<svg viewBox="0 0 460 180" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<line x1="30" y1="140" x2="430" y2="140" stroke="#333" stroke-width="1.3" marker-end="url(#aS1)"/><text x="435" y="144" font-size="11">x</text>
-<path d="M60 140 Q80 90 100 140 Q120 190 140 140" stroke="#3b6fd8" stroke-width="2.2" fill="none"/>
-<path d="M220 140 Q240 90 260 140 Q280 190 300 140" stroke="#c0392b" stroke-width="2.2" stroke-dasharray="5,3" fill="none"/>
-<line x1="100" y1="150" x2="260" y2="150" stroke="#7a7a72" stroke-width="1" marker-end="url(#aS1)"/>
-<text x="170" y="165" font-size="11" fill="#7a7a72">déplacement = $c\cdot\Delta t$</text>
-<text x="65" y="80" font-size="11" fill="#3b6fd8">à $t=t_1$</text>
-<text x="225" y="80" font-size="11" fill="#c0392b">à $t=t_2>t_1$</text>
-<defs><marker id="aS1" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
-</svg>
-<figcaption>Fig. 1 — Onde progressive $s(x,t)=f(t-x/c)$ : la perturbation se translate sans déformation vers les $x$ croissants, de $c\cdot\Delta t$ entre $t_1$ et $t_2$.</figcaption>
-</figure>
 </section>
 
 <section id="s2">
@@ -135,28 +123,8 @@ $$T = \frac{2\pi}{\omega} \qquad k = \frac{2\pi}{\lambda} \qquad \lambda = cT \q
 <section id="s4">
 <h2>4. Ordre de grandeur (spectre électromagnétique)</h2>
 <figure>
-<svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<defs>
-<linearGradient id="specGradS1" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0%" stop-color="#7a0099"/><stop offset="30%" stop-color="#1e90ff"/><stop offset="55%" stop-color="#2ecc71"/><stop offset="70%" stop-color="#e6d800"/><stop offset="85%" stop-color="#ff8c00"/><stop offset="100%" stop-color="#d90000"/>
-</linearGradient>
-</defs>
-<rect x="60" y="60" width="780" height="45" fill="#dfe3ea" stroke="#8a8a85"/>
-<text x="95" y="88" font-size="12" text-anchor="middle">1 pm</text><line x1="170" y1="60" x2="170" y2="105" stroke="#8a8a85"/>
-<text x="230" y="88" font-size="12" text-anchor="middle">1 nm</text><line x1="290" y1="60" x2="290" y2="105" stroke="#8a8a85"/>
-<text x="350" y="88" font-size="12" text-anchor="middle">UV</text><line x1="410" y1="60" x2="410" y2="105" stroke="#8a8a85"/>
-<rect x="410" y="60" width="70" height="45" fill="url(#specGradS1)"/><text x="445" y="53" font-size="11" text-anchor="middle">visible</text>
-<line x1="480" y1="60" x2="480" y2="105" stroke="#8a8a85"/><text x="540" y="88" font-size="12" text-anchor="middle">I.R.</text>
-<line x1="600" y1="60" x2="600" y2="105" stroke="#8a8a85"/><text x="670" y="88" font-size="12" text-anchor="middle">Micro-Ondes</text>
-<line x1="740" y1="60" x2="740" y2="105" stroke="#8a8a85"/><text x="800" y="88" font-size="12" text-anchor="middle">Ondes radio</text>
-<text x="90" y="120" font-size="12" text-anchor="start">Rayons γ</text><text x="230" y="120" font-size="12" text-anchor="middle">Rayons X</text>
-<text x="450" y="155" text-anchor="middle" font-size="13" fill="#0f2b4c">λ croissante →</text>
-<line x1="410" y1="105" x2="150" y2="190" stroke="#b7b7ae" stroke-dasharray="3,3"/><line x1="480" y1="105" x2="750" y2="190" stroke="#b7b7ae" stroke-dasharray="3,3"/>
-<rect x="150" y="190" width="600" height="35" fill="url(#specGradS1)"/>
-<text x="150" y="240" font-size="13" text-anchor="middle">400 nm (violet)</text>
-<text x="750" y="240" font-size="13" text-anchor="middle">800 nm (rouge)</text>
-</svg>
-<figcaption>Fig. 2 — Spectre électromagnétique et zoom sur le domaine visible (400–800 nm).</figcaption>
+<img src="./img/06-fig1-spectre-electromagnetique.png" alt="Spectre électromagnétique complet et zoom sur le domaine visible">
+<figcaption>Fig. 1 — Spectre électromagnétique (rayons γ, rayons X, U.V., visible, I.R., micro-ondes, ondes radio) et zoom sur le domaine visible (400–800 nm).</figcaption>
 </figure>
 </section>
 
@@ -190,7 +158,7 @@ $f=c_0/\lambda=3\times10^8/(600\times10^{-9})=5\times10^{14}\,\text{Hz}$, donc $
 <div class="quiz-item">
 <div class="quiz-q">5. Pourquoi l'écriture $s(x,t)=f(t-x/c)$ traduit-elle une propagation « sans déformation » de la perturbation ?</div>
 <div class="quiz-a"><span class="tag">Réponse</span><br>
-Parce que $s$ ne dépend de $x$ et $t$ qu'à travers la combinaison $t-x/c$ : la forme de la fonction $f$ ne change pas, seul l'instant « effectif » vu par chaque abscisse $x$ est décalé de $x/c$ — la perturbation garde exactement le même profil, juste translaté dans l'espace au fil du temps (Fig. 1).</div>
+Parce que $s$ ne dépend de $x$ et $t$ qu'à travers la combinaison $t-x/c$ : la forme de la fonction $f$ ne change pas, seul l'instant « effectif » vu par chaque abscisse $x$ est décalé de $x/c$ — la perturbation garde exactement le même profil, juste translaté dans l'espace au fil du temps (Théorème 1).</div>
 </div>
 
 <div class="quiz-item">
@@ -206,9 +174,9 @@ Non — $T$ (en secondes) est la durée après laquelle le signal se répète en
 </div>
 
 <div class="quiz-item">
-<div class="quiz-q">8. Piège classique : dans le spectre électromagnétique (Fig. 2), la lumière visible occupe-t-elle une bande étroite ou large par rapport à l'ensemble du spectre ?</div>
+<div class="quiz-q">8. Piège classique : dans le spectre électromagnétique (Fig. 1), la lumière visible occupe-t-elle une bande étroite ou large par rapport à l'ensemble du spectre ?</div>
 <div class="quiz-a"><span class="tag">Réponse</span><br>
-Une bande extrêmement <strong>étroite</strong> (400–800 nm, soit à peine un facteur 2 en longueur d'onde) comparée à l'ensemble du spectre électromagnétique qui s'étend sur plus de 15 ordres de grandeur (du picomètre au kilomètre, Fig. 2) — un piège classique est de sous-estimer à quel point notre perception visuelle ne couvre qu'une fraction infime du spectre réel.</div>
+Une bande extrêmement <strong>étroite</strong> (400–800 nm, soit à peine un facteur 2 en longueur d'onde) comparée à l'ensemble du spectre électromagnétique qui s'étend sur plus de 15 ordres de grandeur (du picomètre au kilomètre, Fig. 1) — un piège classique est de sous-estimer à quel point notre perception visuelle ne couvre qu'une fraction infime du spectre réel.</div>
 </div>
 
 <div class="quiz-item">
