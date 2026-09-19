@@ -123,60 +123,21 @@ Sous l'effet des efforts, les zones de contact réelles entre deux solides se d�
 <h2>3. Tableau des 11 liaisons normalisées</h2>
 <p>Chaque liaison ci-dessous résulte de l'association de surfaces élémentaires (plan, cylindre, sphère, hélicoïde) en contact. Le nombre de degrés de liberté d'une liaison est égal à 6 moins le nombre de mouvements relatifs supprimés par le contact.</p>
 <table class="liaisons-table">
-<thead><tr><th>Surfaces en contact</th><th>Nom de la liaison</th><th>Degrés de liberté</th><th>Torseur cinématique $\{\mathcal V_{2/1}\}$</th></tr></thead>
+<thead><tr><th>Surfaces en contact</th><th>Nom de la liaison</th><th>Schématisation</th><th>Degrés de liberté / Torseur cinématique</th></tr></thead>
 <tbody>
-<tr><td>Plan / Plan</td><td><strong>Appui-plan</strong> (normale $\vec y$)</td><td>2T (x,z) / 1R (y)</td><td>$\forall P:\ \left\{\begin{array}{cc}0&v_x\\\omega_y&0\\0&v_z\end{array}\right\}_{(\vec x,\vec y,\vec z)}$</td></tr>
-<tr><td>Cylindre / Plan</td><td><strong>Linéaire rectiligne</strong> (droite $(O,\vec x)$, normale $\vec z$)</td><td>2T (x,z) / 2R (x,y)</td><td>$\forall P\in(O,\vec x):\ \left\{\begin{array}{cc}\omega_x&v_x\\\omega_y&0\\0&v_z\end{array}\right\}_{(\vec x,\vec y,\vec z)}$</td></tr>
-<tr><td>Cylindre / Cylindre</td><td><strong>Pivot glissant</strong> (axe $(O,\vec x)$)</td><td>1T (x) / 1R (x)</td><td>$\forall P\in(O,\vec x):\ \left\{\begin{array}{cc}\omega_x&v_x\\0&0\\0&0\end{array}\right\}_{(\vec x,\vec y,\vec z)}$</td></tr>
-<tr><td>Sphère / Plan</td><td><strong>Ponctuelle</strong> (sphère-plan, normale $\vec y$, point I)</td><td>2T (x,z) / 3R</td><td>en I : $\left\{\begin{array}{cc}\omega_x&v_x\\\omega_y&0\\\omega_z&v_z\end{array}\right\}_{(\vec x,\vec y,\vec z)}$</td></tr>
-<tr><td>Sphère / Cylindre</td><td><strong>Linéaire annulaire</strong> (sphère-cylindre, axe $(C,\vec x)$)</td><td>1T (x) / 3R</td><td>en C : $\left\{\begin{array}{cc}\omega_x&v_x\\\omega_y&0\\\omega_z&0\end{array}\right\}_{(\vec x,\vec y,\vec z)}$</td></tr>
-<tr><td>Sphère / Sphère</td><td><strong>Rotule</strong> (sphérique, centre C)</td><td>0T / 3R</td><td>en C : $\left\{\begin{array}{cc}\omega_x&0\\\omega_y&0\\\omega_z&0\end{array}\right\}_{(\vec x,\vec y,\vec z)}$</td></tr>
-<tr><td>Composée : cylindre/cylindre + plan/plan</td><td><strong>Pivot</strong> (axe $(O,\vec x)$)</td><td>0T / 1R (x)</td><td>$\forall P\in(O,\vec x):\ \left\{\begin{array}{cc}\omega_x&0\\0&0\\0&0\end{array}\right\}_{(\vec x,\vec y,\vec z)}$</td></tr>
-<tr><td>Composée : plan/plan + plan/plan</td><td><strong>Glissière</strong> (direction $\vec x$)</td><td>1T (x) / 0R</td><td>$\forall P:\ \left\{\begin{array}{cc}0&v_x\\0&0\\0&0\end{array}\right\}_{(\vec x,\vec y,\vec z)}$</td></tr>
-<tr><td>Hélicoïde / Hélicoïde</td><td><strong>Hélicoïdale</strong> (axe $(O,\vec x)$, pas $p$)</td><td>1T liée à 1R (x)</td><td>$\forall P\in(O,\vec x):\ \left\{\begin{array}{cc}\omega_x&v_x\\0&0\\0&0\end{array}\right\}_{(\vec x,\vec y,\vec z)}$ avec $v_x=\dfrac{p}{2\pi}.\omega_x$</td></tr>
-<tr><td>Composée : sphère/sphère + cylindre/plan</td><td><strong>Sphérique à doigt</strong> (centre C, doigt selon $\vec z$)</td><td>0T / 2R (y,z)</td><td>en C : $\left\{\begin{array}{cc}0&0\\\omega_y&0\\\omega_z&0\end{array}\right\}_{(\vec x,\vec y,\vec z)}$</td></tr>
-<tr><td>(surfaces confondues)</td><td><strong>Encastrement</strong></td><td>0T / 0R</td><td>$\forall P:\ \left\{\begin{array}{cc}0&0\\0&0\\0&0\end{array}\right\}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Plan/Plan</td><td>Liaison appui-plan</td><td><img src="./img/12-fig1-appui-plan.png" alt="Schématisation liaison appui-plan"></td><td>2 translations / 1 rotation<br>$\{\mathcal V_{2/1}\}=\underset{\forall M}{\left\{\begin{array}{cc}0&v_x\\0&v_y\\\omega_z&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Cylindre/plan</td><td>Liaison linéaire-rectiligne</td><td><img src="./img/12-fig2-lineaire-rectiligne.png" alt="Schématisation liaison linéaire-rectiligne"></td><td>2 translations / 2 rotations<br>$\{\mathcal V_{2/1}\}=\underset{\forall M\in(O,\vec y,\vec z)}{\left\{\begin{array}{cc}0&v_x\\\omega_y&v_y\\\omega_z&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Cylindre/cylindre</td><td>Liaison pivot-glissant</td><td><img src="./img/12-fig3-pivot-glissant.png" alt="Schématisation liaison pivot-glissant"></td><td>1 translation / 1 rotation<br>$\{\mathcal V_{2/1}\}=\underset{\forall M\in(O,\vec x)}{\left\{\begin{array}{cc}\omega_x&v_x\\0&0\\0&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Sphère/plan</td><td>Liaison ponctuelle ou sphère-plan</td><td><img src="./img/12-fig4-ponctuelle-sphere-plan.png" alt="Schématisation liaison ponctuelle ou sphère-plan"></td><td>2 translations / 3 rotations<br>$\{\mathcal V_{2/1}\}=\underset{\forall M\in(I,\vec z)}{\left\{\begin{array}{cc}\omega_x&v_x\\\omega_y&v_y\\\omega_z&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Sphère/cylindre</td><td>Liaison linéaire-annulaire ou sphère-cylindre</td><td><img src="./img/12-fig5-lineaire-annulaire.png" alt="Schématisation liaison linéaire-annulaire"></td><td>1 translation / 3 rotations<br>$\{\mathcal V_{2/1}\}=\underset{C}{\left\{\begin{array}{cc}\omega_x&v_x\\\omega_y&0\\\omega_z&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Sphère/sphère</td><td>Liaison rotule ou sphérique</td><td><img src="./img/12-fig6-rotule.png" alt="Schématisation liaison rotule"></td><td>0 translation / 3 rotations<br>$\{\mathcal V_{2/1}\}=\underset{C}{\left\{\begin{array}{cc}\omega_x&0\\\omega_y&0\\\omega_z&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Composée : cylindre/cylindre et plan/plan</td><td>Liaison pivot</td><td><img src="./img/12-fig7-pivot.png" alt="Schématisation liaison pivot"></td><td>0 translation / 1 rotation<br>$\{\mathcal V_{2/1}\}=\underset{\forall M\in(O,\vec x)}{\left\{\begin{array}{cc}\omega_x&0\\0&0\\0&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Composée : plan/plan et plan/plan</td><td>Liaison glissière</td><td><img src="./img/12-fig8-glissiere.png" alt="Schématisation liaison glissière"></td><td>1 translation / 0 rotation<br>$\{\mathcal V_{2/1}\}=\underset{\forall M}{\left\{\begin{array}{cc}0&v_x\\0&0\\0&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td>Hélicoïde/hélicoïde</td><td>Liaison hélicoïdale</td><td><img src="./img/12-fig9-helicoidale.png" alt="Schématisation liaison hélicoïdale"></td><td>1 translation liée à 1 rotation<br>$\{\mathcal V_{2/1}\}=\underset{\forall M\in(O,\vec x)}{\left\{\begin{array}{cc}\omega_x&v_x\\0&0\\0&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$<br>Avec $v_x=\dfrac{p}{2\pi}\omega_x$</td></tr>
+<tr><td>Composée : sphère/sphère et cylindre/plan</td><td>Liaison sphérique à doigt</td><td><img src="./img/12-fig10-spherique-a-doigt.png" alt="Schématisation liaison sphérique à doigt"></td><td>0 translation / 2 rotations<br>$\{\mathcal V_{2/1}\}=\underset{C}{\left\{\begin{array}{cc}\omega_x&0\\0&0\\\omega_z&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
+<tr><td></td><td>Liaison encastrement</td><td><img src="./img/12-fig11-encastrement.png" alt="Schématisation liaison encastrement"></td><td>0 translation / 0 rotation<br>$\{\mathcal V_{2/1}\}=\underset{\forall M}{\left\{\begin{array}{cc}0&0\\0&0\\0&0\end{array}\right\}}_{(\vec x,\vec y,\vec z)}$</td></tr>
 </tbody>
 </table>
-<div class="block remark">
-<span class="label">Remarque — point et base d'écriture</span>
-Pour les liaisons à symétrie de révolution autour d'un axe (pivot, glissière, pivot glissant, hélicoïdale), le torseur garde la même forme en <strong>tout point de l'axe</strong>, et dans toute base contenant l'axe principal. Pour les liaisons à centre (rotule, linéaire annulaire, sphérique à doigt), le torseur doit être écrit <strong>au centre de la sphère</strong>. Pour l'appui-plan, il garde la même forme en tout point du plan, dans toute base contenant la normale.
-</div>
-<figure>
-<svg viewBox="0 0 640 190" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11.5">
-<g transform="translate(20,20)">
-<rect x="0" y="30" width="50" height="14" fill="#a8e6fb" stroke="#1c2430"/>
-<line x1="25" y1="30" x2="25" y2="0" stroke="#1c2430" marker-end="url(#arL)"/><line x1="25" y1="44" x2="25" y2="70" stroke="#1c2430"/>
-<path d="M10,70 l30,0 M14,76 l6,-6 M24,76 l6,-6 M34,76 l6,-6" stroke="#1c2430" fill="none"/>
-<text x="25" y="95" text-anchor="middle" font-weight="700">Pivot</text>
-</g>
-<g transform="translate(140,20)">
-<rect x="0" y="30" width="60" height="14" fill="#a8e6fb" stroke="#1c2430"/>
-<line x1="0" y1="37" x2="-20" y2="37" stroke="#1c2430" marker-end="url(#arL)" marker-start="url(#arL)"/>
-<path d="M0,50 l50,0 M4,56 l6,-6 M14,56 l6,-6 M24,56 l6,-6 M34,56 l6,-6" stroke="#1c2430" fill="none"/>
-<text x="20" y="95" text-anchor="middle" font-weight="700">Glissière</text>
-</g>
-<g transform="translate(260,10)">
-<circle cx="25" cy="45" r="16" fill="#a8e6fb" stroke="#1c2430"/>
-<line x1="25" y1="29" x2="25" y2="10" stroke="#1c2430" marker-end="url(#arL)"/>
-<text x="25" y="95" text-anchor="middle" font-weight="700">Rotule</text>
-</g>
-<g transform="translate(360,20)">
-<rect x="0" y="30" width="55" height="14" fill="#a8e6fb" stroke="#1c2430"/>
-<path d="M0,44 q5,10 10,0 q5,10 10,0 q5,10 10,0 q5,10 10,0 q5,10 10,0" stroke="#1c2430" fill="none"/>
-<path d="M0,60 l45,0 M4,66 l6,-6 M14,66 l6,-6 M24,66 l6,-6 M34,66 l6,-6" stroke="#1c2430" fill="none"/>
-<text x="25" y="95" text-anchor="middle" font-weight="700">Hélicoïdale</text>
-</g>
-<g transform="translate(470,15)">
-<path d="M0,50 L60,50 L45,20 L15,20 Z" fill="#a8e6fb" stroke="#1c2430"/>
-<line x1="30" y1="20" x2="30" y2="0" stroke="#1c2430" marker-end="url(#arL)"/>
-<path d="M0,55 l60,0 M4,61 l6,-6 M14,61 l6,-6 M24,61 l6,-6 M34,61 l6,-6 M44,61 l6,-6" stroke="#1c2430" fill="none"/>
-<text x="30" y="95" text-anchor="middle" font-weight="700">Appui-plan</text>
-</g>
-<defs><marker id="arL" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#1c2430"/></marker></defs>
-</svg>
-<figcaption>Fig. 1 — Symboles normalisés (schématisation plane, vue « nf ») de quelques liaisons usuelles : pivot, glissière, rotule, hélicoïdale, appui-plan.</figcaption>
-</figure>
 </section>
 
 <section id="quiz">
@@ -213,8 +174,8 @@ Pour les liaisons à symétrie de révolution autour d'un axe (pivot, glissière
 </div>
 
 <div class="quiz-item">
-<div class="quiz-q">7. Pourquoi la liaison « linéaire rectiligne » possède-t-elle 2 rotations (Rx, Ry) et non une seule, alors que le contact cylindre/plan semble n'avoir qu'une ligne de contact ?</div>
-<div class="quiz-a"><span class="tag">Réponse</span> La ligne de contact est portée par l'axe $(O,\vec x)$ du cylindre : une rotation autour de $\vec x$ (roulement du cylindre sur le plan, $R_x$) ne modifie pas le contact, de même qu'une rotation autour de $\vec y$ (pivotement du cylindre dans le plan tangent, $R_y$, qui fait juste tourner la ligne de contact autour de la normale locale). Seule la rotation autour de $\vec z$ (la normale au plan) romprait l'alignement de la ligne de contact avec le plan — elle est donc bloquée.</div>
+<div class="quiz-q">7. Pourquoi la liaison « linéaire rectiligne » possède-t-elle 2 rotations ($\omega_y$, $\omega_z$) et non une seule, alors que le contact cylindre/plan semble n'avoir qu'une ligne de contact ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Une rotation autour de $\vec y$ (pivotement du cylindre dans le plan tangent) ne modifie pas le contact, de même qu'une rotation autour de $\vec z$ (roulement du cylindre le long de la ligne de contact). Seule la rotation $\omega_x$ autour de la ligne de contact elle-même romprait le contact linéique (le cylindre basculerait hors du plan) — elle est donc la seule des trois rotations à être bloquée.</div>
 </div>
 
 <div class="quiz-item">
@@ -223,8 +184,8 @@ Pour les liaisons à symétrie de révolution autour d'un axe (pivot, glissière
 </div>
 
 <div class="quiz-item">
-<div class="quiz-q">9. Piège classique : pour une liaison appui-plan de normale $\vec y$, un élève écrit le torseur cinématique avec une composante $v_y\ne0$. Pourquoi est-ce impossible ?</div>
-<div class="quiz-a"><span class="tag">Réponse</span> Parce que $v_y\ne0$ signifierait que les deux solides s'écartent ou s'enfoncent l'un dans l'autre selon la normale au plan de contact — ce qui contredit la définition même du contact plan/plan maintenu (les deux plans doivent rester coïncidents). La condition $\overrightarrow{V_{P\in2/1}}.\vec y=0$ est une conséquence directe du maintien du contact, pas une hypothèse indépendante.</div>
+<div class="quiz-q">9. Piège classique : pour une liaison appui-plan de normale $\vec z$, un élève écrit le torseur cinématique avec une composante $v_z\ne0$. Pourquoi est-ce impossible ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span> Parce que $v_z\ne0$ signifierait que les deux solides s'écartent ou s'enfoncent l'un dans l'autre selon la normale au plan de contact — ce qui contredit la définition même du contact plan/plan maintenu (les deux plans doivent rester coïncidents). La condition $\overrightarrow{V_{P\in2/1}}.\vec z=0$ est une conséquence directe du maintien du contact, pas une hypothèse indépendante.</div>
 </div>
 
 <div class="quiz-item">
