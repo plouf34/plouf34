@@ -41,9 +41,9 @@ SUBJECT_SOURCES = {
 # le dépôt public, pour respecter les droits d'auteur) affiché sous le titre
 # de chaque matière, quand disponible.
 SUBJECT_MANUALS = {
-    "01_MATHS": ("Mathématiques PCSI — Ellipses 2021", "https://drive.google.com/uc?export=view&id=1pgP4lA-lETFYa24RO_a7e2bStSglxtm2"),
-    "02_PHYSIQUE": ("Physique PCSI — Ellipses 2021", "https://drive.google.com/uc?export=view&id=1sdiMgJytsKeblo_JYJce7kWVb5OXh9l4"),
-    "04_SI": ("Sciences industrielles de l'ingénieur — Vuibert", "https://drive.google.com/uc?export=view&id=1klTB2dhumRg6bxomyXZvD9_3dm-pKHxR"),
+    "01_MATHS": ("Mathématiques PCSI — Ellipses 2021", "https://drive.google.com/file/d/1pgP4lA-lETFYa24RO_a7e2bStSglxtm2/view?usp=drive_link"),
+    "02_PHYSIQUE": ("Physique PCSI — Ellipses 2021", "https://drive.google.com/file/d/1sdiMgJytsKeblo_JYJce7kWVb5OXh9l4/view?usp=drive_link"),
+    "04_SI": ("Sciences industrielles de l'ingénieur — Vuibert", "https://drive.google.com/file/d/1klTB2dhumRg6bxomyXZvD9_3dm-pKHxR/view?usp=drive_link"),
 }
 
 # Ressources complémentaires libres (chaînes vidéo, sites tiers...) affichées
