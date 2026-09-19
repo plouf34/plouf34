@@ -109,24 +109,32 @@ def source_chip_html(name, ville, url, icon, password=None):
     return f'<span class="source-chip-inline source-chip-static">{icon_html} {esc(name)} {pin}</span>'
 
 
-def manual_line_html(folder):
+def manual_chip_html(folder):
     entry = SUBJECT_MANUALS.get(folder)
     if not entry:
         return ""
     title, url = entry
-    return (f'<div class="manual-line"><a class="manual-chip" href="{esc(url)}" target="_blank" rel="noopener">'
-            f'📘 Manuel : {esc(title)} <span class="arrow">↗</span></a></div>')
+    return (f'<a class="manual-chip" href="{esc(url)}" target="_blank" rel="noopener">'
+            f'📘 {esc(title)} <span class="arrow">↗</span></a>')
 
 
-def extra_links_html(folder):
+def extra_links_chips_html(folder):
     entries = SUBJECT_EXTRA_LINKS.get(folder, [])
-    if not entries:
-        return ""
-    lines = ""
+    chips = ""
     for emoji, label, url in entries:
-        lines += (f'<div class="manual-line"><a class="manual-chip video-chip" href="{esc(url)}" target="_blank" rel="noopener">'
-                  f'{esc(emoji)} {esc(label)} <span class="arrow">↗</span></a></div>')
-    return lines
+        chips += (f'<a class="manual-chip video-chip" href="{esc(url)}" target="_blank" rel="noopener">'
+                  f'{esc(emoji)} {esc(label)} <span class="arrow">↗</span></a>')
+    return chips
+
+
+def manual_line_html(folder):
+    """Ligne regroupant la puce manuel et les puces liens complémentaires
+    (chaînes vidéo, sites tiers) côte à côte, dans un conteneur flex qui
+    ne passe à la ligne que si la largeur disponible l'exige."""
+    chips = manual_chip_html(folder) + extra_links_chips_html(folder)
+    if not chips:
+        return ""
+    return f'<div class="manual-line">{chips}</div>'
 
 
 def table_row(num, titre, url, pdf_url=None):
@@ -257,7 +265,6 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
     return (f'<section id="{anchor}" class="subject">'
             f'<h2 class="subject-title">{emoji} {esc(label)}</h2>'
             f'{manual_line_html(folder)}'
-            f'{extra_links_html(folder)}'
             f'{body}</section>')
 
 
@@ -364,12 +371,12 @@ def main():
   .source-icon {{ height:13px; width:auto; border-radius:2px; vertical-align:middle; }}
   .source-pin {{ opacity: .7; font-weight: 500; }}
 
-  .manual-line {{ margin: 2px 4px 8px 4px; }}
+  .manual-line {{ display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 4px 8px 4px; }}
   .manual-chip {{
-    display: inline-flex; align-items: center; gap: 4px;
+    display: inline-flex; align-items: center; gap: 3px;
     background: rgba(10,138,74,0.10); border: 1px solid var(--border);
-    padding: 4px 10px; border-radius: 12px;
-    color: var(--accent-2); font-weight: 600; text-decoration: none; font-size: 12px;
+    padding: 3px 8px; border-radius: 10px;
+    color: var(--accent-2); font-weight: 600; text-decoration: none; font-size: 10.5px;
   }}
   .manual-chip .arrow {{ opacity: .6; }}
   .manual-chip.video-chip {{ background: rgba(214,40,40,0.08); color: #d62828; }}
@@ -405,7 +412,7 @@ def main():
 
   footer {{ text-align: center; padding: 16px; color: var(--sub); font-size: 10.5px; }}
 
-  @media (max-width: 420px) {{ table {{ font-size: 11.5px; }} nav#tabs a {{ font-size: 11px; padding: 6px 2px; }} }}
+  @media (max-width: 420px) {{ table {{ font-size: 11.5px; }} nav#tabs a {{ font-size: 11px; padding: 6px 2px; }} .manual-chip {{ font-size: 9.5px; padding: 3px 6px; }} }}
 </style>
 </head>
 <body>
