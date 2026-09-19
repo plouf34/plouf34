@@ -24,8 +24,9 @@
   h1 img { height:30px; width:auto; vertical-align:middle; }
   a.card { display:block; background:var(--card-bg); border:1px solid var(--border);
     border-radius:16px; padding:20px; margin-bottom:14px; text-decoration:none; color:var(--text); }
-  a.card .emoji { font-size:28px; }
+  a.card .emoji { font-size:28px; display:flex; align-items:center; gap:10px; }
   a.card .emoji img { height:28px; width:auto; vertical-align:middle; }
+  a.card .card-label { font-size:24px; font-weight:800; letter-spacing:0.04em; color:var(--text); }
   a.card .title { font-size:17px; font-weight:700; margin-top:8px; }
   a.card .sub { font-size:13px; color:var(--sub); margin-top:2px; }
 </style>
@@ -34,17 +35,17 @@
 <main>
   <h1><img src="icon-pcsi-title.png" alt="">Prépa PCSI</h1>
   <a class="card" href="Prepa_barthou/1ere_annee/index.html">
-    <div class="emoji"><img src="logo-barthou.png" alt=""></div>
+    <div class="emoji"><img src="logo-barthou.png" alt=""><span class="card-label">COURS</span></div>
     <div class="title">Prépa Barthou — 1ère année</div>
     <div class="sub">Cours, TD et exercices donnés en classe</div>
   </a>
   <a class="card" href="Kit_Revision_PCSI.html">
-    <div class="emoji">🎯</div>
+    <div class="emoji">🎯<span class="card-label">DS</span></div>
     <div class="title">Kit de révision PCSI</div>
     <div class="sub">DS des meilleures prépas — Maths, Physique, Chimie, SI</div>
   </a>
   <a class="card" href="Ressources_MP.html">
-    <div class="emoji">🔗</div>
+    <div class="emoji">🔗<span class="card-label">LIENS</span></div>
     <div class="title">Ressources & liens utiles</div>
     <div class="sub">Sites et dossiers partagés — pour les 2 années de prépa</div>
   </a>
