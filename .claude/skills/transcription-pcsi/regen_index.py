@@ -4,7 +4,7 @@ Usage: python3 regen_index.py <repo_root>
 
 Rendu aligné sur celui de Kit_Revision_PCSI.html : onglets sticky, bandeau
 "Sources" par matière, tableau N° / Intitulé / Lien avec lignes de section
-("1. Cours Clarisse" / "2. Cours Profs").
+("1. Cours de Clarisse" / "2. Cours Profs").
 """
 import sys
 import os
@@ -46,6 +46,14 @@ SUBJECT_MANUALS = {
     "04_SI": ("Sciences industrielles de l'ingénieur — Vuibert", "https://drive.google.com/file/d/1klTB2dhumRg6bxomyXZvD9_3dm-pKHxR/view?usp=drive_link"),
 }
 
+# Ressources complémentaires libres (chaînes vidéo, sites tiers...) affichées
+# sous le manuel, sous forme de puces cliquables. Liste de (emoji, label, url).
+SUBJECT_EXTRA_LINKS = {
+    "01_MATHS": [
+        ("🎥", "Chaîne YouTube — Maths PCSI, Lycée du Parc (Giraud-Laignel)", "https://www.youtube.com/@Giraud-Laignel-hy9hb"),
+    ],
+}
+
 
 def esc(s):
     return html.escape(s or "")
@@ -63,6 +71,7 @@ def parse_number_and_title(filename):
     num, rest = (m.group(1), m.group(2)) if m else ("", display)
     rest = re.sub(r'^\d{4}-\d{2}-\d{2}\s+', '', rest)
     rest = re.sub(r'\s+\d{4}-\d{2}-\d{2}\s*$', '', rest)
+    rest = re.sub(r'\bCours Clarisse\b', 'Cours de Clarisse', rest)
     return num, rest.strip()
 
 
@@ -84,6 +93,17 @@ def manual_line_html(folder):
     title, url = entry
     return (f'<div class="manual-line"><a class="manual-chip" href="{esc(url)}" target="_blank" rel="noopener">'
             f'📘 Manuel : {esc(title)} <span class="arrow">↗</span></a></div>')
+
+
+def extra_links_html(folder):
+    entries = SUBJECT_EXTRA_LINKS.get(folder, [])
+    if not entries:
+        return ""
+    lines = ""
+    for emoji, label, url in entries:
+        lines += (f'<div class="manual-line"><a class="manual-chip video-chip" href="{esc(url)}" target="_blank" rel="noopener">'
+                  f'{esc(emoji)} {esc(label)} <span class="arrow">↗</span></a></div>')
+    return lines
 
 
 def table_row(num, titre, url, pdf_url=None):
@@ -135,7 +155,7 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
     profs_files = [f for f in files if not is_clarisse(f)]
 
     body = table_open()
-    body += section_row("1. Cours Clarisse")
+    body += section_row("1. Cours de Clarisse")
     if clarisse_files:
         for f in clarisse_files:
             num, titre = parse_number_and_title(f)
@@ -196,6 +216,7 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
     return (f'<section id="{anchor}" class="subject">'
             f'<h2 class="subject-title">{emoji} {esc(label)}</h2>'
             f'{manual_line_html(folder)}'
+            f'{extra_links_html(folder)}'
             f'{body}</section>')
 
 
@@ -304,6 +325,7 @@ def main():
     color: var(--accent-2); font-weight: 600; text-decoration: none; font-size: 12px;
   }}
   .manual-chip .arrow {{ opacity: .6; }}
+  .manual-chip.video-chip {{ background: rgba(214,40,40,0.08); color: #d62828; }}
 
   table {{
     width: 100%; border-collapse: collapse;
