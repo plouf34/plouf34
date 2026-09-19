@@ -51,8 +51,9 @@
     padding: max(env(safe-area-inset-top, 14px), 14px) 16px 8px 16px;
     text-align: center;
   }
-  .crosslinks { display:flex; justify-content:center; gap:14px; margin-bottom:6px; }
-  .crosslinks a { font-size:12px; font-weight:600; color:var(--accent); text-decoration:none; }
+  .crosslinks { display:flex; justify-content:center; align-items:center; gap:14px; margin-bottom:6px; flex-wrap:wrap; }
+  .crosslinks a { display:inline-flex; align-items:center; gap:4px; font-size:12px; font-weight:600; color:var(--accent); text-decoration:none; }
+  .crosslinks img { height:16px; width:auto; border-radius:3px; vertical-align:middle; }
   header h1 { font-size: 19px; margin: 4px 0 2px 0; font-weight: 700; }
   header p { margin: 0; color: var(--sub); font-size: 12px; }
   html { scroll-behavior: smooth; }
@@ -153,7 +154,7 @@
 <body>
 
 <header>
-  <div class="crosslinks"><a href="index.html">🏠 Accueil</a><a href="Prepa_barthou/1ere_annee/index.html">🏫 Prépa Barthou</a></div>
+  <div class="crosslinks"><a href="index.html">🏠 Accueil</a><a href="Prepa_barthou/1ere_annee/index.html"><img src="logo-barthou.png" alt="">Prépa Barthou</a></div>
   <h1>🎯 Kit de révision PCSI</h1>
   <p>Maths · Physique · Chimie · SI</p>
 </header>
