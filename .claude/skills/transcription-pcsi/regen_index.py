@@ -59,7 +59,17 @@ SUBJECT_MANUALS = {
 # sous le manuel, sous forme de puces cliquables. Liste de (emoji, label, url).
 SUBJECT_EXTRA_LINKS = {
     "01_MATHS": [
-        ("🎥", "Chaîne YouTube — Maths PCSI, Lycée du Parc (Giraud-Laignel)", "https://www.youtube.com/@Giraud-Laignel-hy9hb"),
+        ("▶", "Chaîne YouTube — Maths PCSI, Lycée du Parc (Giraud-Laignel)", "https://www.youtube.com/@Giraud-Laignel-hy9hb"),
+    ],
+    "02_PHYSIQUE": [
+        ("▶", "Cours YouTube — Physique Chimie Prépa", "https://www.youtube.com/@physiquechimieprepa/featured"),
+        ("▶", "Cours YouTube — e-Learning Physique", "https://www.youtube.com/@e-learningphysique4910/featured"),
+    ],
+    "03_CHIMIE": [
+        ("▶", "Cours YouTube — Prépa Chimie", "https://www.youtube.com/@Pr%C3%A9paChimie/videos"),
+    ],
+    "04_SI": [
+        ("▶", "Cours YouTube — Sciences de l'ingénieur", "https://www.youtube.com/@sciences-ingenieur0/courses"),
     ],
 }
 
