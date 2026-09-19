@@ -5,6 +5,16 @@ Usage: python3 regen_index.py <repo_root>
 Rendu aligné sur celui de Kit_Revision_PCSI.html : onglets sticky, bandeau
 "Sources" par matière, tableau N° / Intitulé / Lien avec lignes de section
 ("1. Cours de Clarisse" / "2. Cours Profs").
+
+⚠️ AVANT DE LANCER CE SCRIPT : faire un `git fetch` + `git merge` (ou pull)
+sur la branche courante. Une autre session travaille en parallèle sur ce
+dépôt et pousse régulièrement sur cette même branche ; lancer ce script
+depuis un checkout périmé régénère index.html en écrasant silencieusement
+les correctifs poussés entre-temps (libellés, favicons, liens...). Le
+fichier généré n'est JAMAIS à éditer à la main : toute modification passe
+par les constantes ci-dessous (SUBJECT_SOURCES / SUBJECT_MANUALS /
+SUBJECT_EXTRA_LINKS) ou par les fonctions de rendu, jamais par un patch
+direct sur Prepa_barthou/1ere_annee/index.html.
 """
 import sys
 import os
@@ -37,13 +47,12 @@ SUBJECT_SOURCES = {
     ],
 }
 
-# Manuel de référence (PDF perso, hébergé sur Google Drive — jamais copié dans
-# le dépôt public, pour respecter les droits d'auteur) affiché sous le titre
-# de chaque matière, quand disponible.
+# Manuel de référence (PDF perso, hébergé localement dans manuels/ à la racine
+# du dépôt) affiché sous le titre de chaque matière, quand disponible.
 SUBJECT_MANUALS = {
-    "01_MATHS": ("Mathématiques PCSI — Ellipses 2021", "https://drive.google.com/file/d/1pgP4lA-lETFYa24RO_a7e2bStSglxtm2/view?usp=drive_link"),
-    "02_PHYSIQUE": ("Physique PCSI — Ellipses 2021", "https://drive.google.com/file/d/1sdiMgJytsKeblo_JYJce7kWVb5OXh9l4/view?usp=drive_link"),
-    "04_SI": ("Sciences industrielles de l'ingénieur — Vuibert", "https://drive.google.com/file/d/1klTB2dhumRg6bxomyXZvD9_3dm-pKHxR/view?usp=drive_link"),
+    "01_MATHS": ("Mathématiques PCSI — Ellipses 2021", "../../manuels/Maths_PCSI_Ellipses_2021.pdf"),
+    "02_PHYSIQUE": ("Physique PCSI — Ellipses 2021", "../../manuels/Physique_PCSI_Ellipses_2021.pdf"),
+    "04_SI": ("Sciences industrielles de l'ingénieur — Vuibert", "../../manuels/SI_Vuibert.pdf"),
 }
 
 # Ressources complémentaires libres (chaînes vidéo, sites tiers...) affichées
@@ -65,7 +74,11 @@ def is_clarisse(filename):
 
 def parse_number_and_title(filename):
     """Extrait le numéro de séquence et un intitulé lisible depuis le nom de fichier."""
-    name = filename[:-5] if filename.endswith(".html") else filename
+    name = filename
+    for ext in (".html", ".pdf"):
+        if name.endswith(ext):
+            name = name[: -len(ext)]
+            break
     display = name.replace("_", " ")
     m = re.match(r'^(\d+)[\s-]+(.*)$', display)
     num, rest = (m.group(1), m.group(2)) if m else ("", display)
@@ -108,12 +121,12 @@ def extra_links_html(folder):
 
 def table_row(num, titre, url, pdf_url=None):
     n_html = esc(num) if num else "—"
+    parts = []
     if url:
-        link_html = f'<a class="pill pill-sujet" href="{esc(url)}" target="_blank" rel="noopener">📄 HTML</a>'
-    else:
-        link_html = '<span class="pill pill-off">—</span>'
+        parts.append(f'<a class="pill pill-sujet" href="{esc(url)}" target="_blank" rel="noopener">📄 HTML</a>')
     if pdf_url:
-        link_html += f'<a class="pill pill-pdf" href="{esc(pdf_url)}" target="_blank" rel="noopener">📕 PDF</a>'
+        parts.append(f'<a class="pill pill-pdf" href="{esc(pdf_url)}" target="_blank" rel="noopener">📕 PDF</a>')
+    link_html = "".join(parts) if parts else '<span class="pill pill-off">—</span>'
     return (f'<tr><td class="col-n">{n_html}</td><td class="col-titre">{esc(titre)}</td>'
             f'<td class="col-link">{link_html}</td></tr>')
 
@@ -145,22 +158,42 @@ def pdf_url_for(dir_path, folder, f):
     return None
 
 
+def list_entries(dir_path, folder):
+    """Liste les cours à afficher sous forme de tuples
+    (nom_representatif, url_html_ou_None, url_pdf_ou_None), triés par nom.
+    Un cours qui n'a plus de .html (juste le PDF, par ex. après suppression
+    d'une page jugée non fidèle) reste affiché avec uniquement le pill PDF."""
+    if not os.path.isdir(dir_path):
+        return []
+    all_files = os.listdir(dir_path)
+    html_files = sorted(f for f in all_files if f.endswith(".html"))
+    pdf_files = sorted(f for f in all_files if f.endswith(".pdf"))
+    html_basenames = {f[:-5] for f in html_files}
+
+    entries = []
+    for f in html_files:
+        entries.append((f, f"{BASE_URL}/{folder}/{f}", pdf_url_for(dir_path, folder, f)))
+    for f in pdf_files:
+        if f[:-4] in html_basenames:
+            continue
+        entries.append((f, None, f"{BASE_URL}/{folder}/{f}"))
+    entries.sort(key=lambda e: e[0])
+    return entries
+
+
 def build_subject_block(repo_root, folder, emoji, label, anchor):
     dir_path = os.path.join(repo_root, "Prepa_barthou", "1ere_annee", folder)
-    files = []
-    if os.path.isdir(dir_path):
-        files = sorted(f for f in os.listdir(dir_path) if f.endswith(".html"))
+    entries = list_entries(dir_path, folder)
 
-    clarisse_files = [f for f in files if is_clarisse(f)]
-    profs_files = [f for f in files if not is_clarisse(f)]
+    clarisse_entries = [e for e in entries if is_clarisse(e[0])]
+    profs_entries = [e for e in entries if not is_clarisse(e[0])]
 
     body = table_open()
     body += section_row("1. Cours de Clarisse")
-    if clarisse_files:
-        for f in clarisse_files:
+    if clarisse_entries:
+        for f, url, pdf_url in clarisse_entries:
             num, titre = parse_number_and_title(f)
-            url = f"{BASE_URL}/{folder}/{f}"
-            body += table_row(num, titre, url, pdf_url_for(dir_path, folder, f))
+            body += table_row(num, titre, url, pdf_url)
     else:
         body += empty_row()
 
@@ -174,11 +207,10 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
         else:
             chip = ""
         body += section_row("2. Cours Profs", chip)
-        if profs_files:
-            for f in profs_files:
+        if profs_entries:
+            for f, url, pdf_url in profs_entries:
                 num, titre = parse_number_and_title(f)
-                url = f"{BASE_URL}/{folder}/{f}"
-                body += table_row(num, titre, url, pdf_url_for(dir_path, folder, f))
+                body += table_row(num, titre, url, pdf_url)
         else:
             body += empty_row()
     else:
@@ -192,25 +224,24 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
             body += section_row(f"{section_idx}. Cours Profs", chip)
             section_idx += 1
             matched = []
-            for f in profs_files:
+            for e in profs_entries:
+                f = e[0]
                 num, _titre = parse_number_and_title(f)
                 if num_range and num.isdigit() and num_range[0] <= int(num) <= num_range[1]:
-                    matched.append(f)
+                    matched.append(e)
                     assigned.add(f)
             if matched:
-                for f in matched:
+                for f, url, pdf_url in matched:
                     num, titre = parse_number_and_title(f)
-                    url = f"{BASE_URL}/{folder}/{f}"
-                    body += table_row(num, titre, url, pdf_url_for(dir_path, folder, f))
+                    body += table_row(num, titre, url, pdf_url)
             else:
                 body += empty_row()
-        leftover = [f for f in profs_files if f not in assigned]
+        leftover = [e for e in profs_entries if e[0] not in assigned]
         if leftover:
             body += section_row(f"{section_idx}. Cours Profs — autres")
-            for f in leftover:
+            for f, url, pdf_url in leftover:
                 num, titre = parse_number_and_title(f)
-                url = f"{BASE_URL}/{folder}/{f}"
-                body += table_row(num, titre, url, pdf_url_for(dir_path, folder, f))
+                body += table_row(num, titre, url, pdf_url)
     body += table_close()
 
     return (f'<section id="{anchor}" class="subject">'
@@ -227,7 +258,13 @@ def main():
     nav_links = "".join(f'<a href="#{anchor}">{emoji} {esc(label)}</a>'
                          for _, emoji, label, anchor in SUBJECTS)
 
-    out = f"""<!DOCTYPE html>
+    out = f"""<!-- FICHIER GÉNÉRÉ AUTOMATIQUEMENT — NE PAS ÉDITER À LA MAIN.
+     Toute modification doit passer par .claude/skills/transcription-pcsi/regen_index.py
+     (constantes SUBJECT_SOURCES / SUBJECT_MANUALS / SUBJECT_EXTRA_LINKS, ou fonctions de rendu),
+     puis relancer : python3 .claude/skills/transcription-pcsi/regen_index.py <repo_root>
+     Faire un git fetch + merge AVANT de relancer ce script : une autre session
+     travaille en parallèle sur ce dépôt et pousse régulièrement sur cette branche. -->
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
