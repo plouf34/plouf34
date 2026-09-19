@@ -112,27 +112,15 @@ mjx-container{overflow-x:auto; max-width:100%;}
 </ul>
 </div>
 <figure>
-<svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
-<path d="M40,140 L160,150 L170,100 L230,60 L280,90 L260,150 L40,140 Z" fill="#dff5fa" stroke="#1c2430"/>
-<circle cx="90" cy="130" r="6" fill="#3b6fd8"/><circle cx="150" cy="115" r="6" fill="#3b6fd8"/>
-<line x1="90" y1="130" x2="70" y2="180" stroke="#c23b6c" marker-end="url(#arSt)"/><text x="45" y="195" font-size="10.5">$\vec{F_1}$</text>
-<line x1="150" y1="115" x2="135" y2="170" stroke="#c23b6c" marker-end="url(#arSt)"/><text x="115" y="185" font-size="10.5">$\vec{F_2}$</text>
-<line x1="220" y1="100" x2="210" y2="160" stroke="#c23b6c" marker-end="url(#arSt)"/><text x="190" y="175" font-size="10.5">$\vec{F_i}$</text>
-<text x="130" y="20" text-anchor="middle" font-weight="700">Modèle local — champ de vecteurs $\vec{F_i}$</text>
-<path d="M420,140 L540,150 L550,100 L610,60 L660,90 L640,150 L420,140 Z" fill="#dff5fa" stroke="#1c2430"/>
-<circle cx="530" cy="105" r="4" fill="#1c2430"/>
-<line x1="530" y1="105" x2="530" y2="180" stroke="#c23b6c" stroke-width="2" marker-end="url(#arSt)"/><text x="540" y="175" font-size="11">$\overrightarrow{R_{ext \to S}}$</text>
-<path d="M550,130 A22,22 0 1 1 560,150" fill="none" stroke="#2fa365" stroke-width="2" marker-end="url(#arSt2)"/><text x="565" y="150" font-size="11" fill="#2fa365">$\overrightarrow{M_{O,ext \to S}}$</text>
-<text x="540" y="20" text-anchor="middle" font-weight="700">Modèle global — champ de torseurs $\{T_{ext\to S}\}$</text>
-<defs>
-<marker id="arSt" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#c23b6c"/></marker>
-<marker id="arSt2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2fa365"/></marker>
-</defs>
-</svg>
-<figcaption>Fig. 1 — Un même système d'actions mécaniques peut être décrit localement (un vecteur par point) ou globalement (un torseur résultant, en un point choisi).</figcaption>
+<img src="./img/10-fig1-local-global.png" alt="">
+<figcaption>Fig. 1 — Un même système d'actions mécaniques peut être décrit localement (un vecteur par point) ou globalement (un torseur résultant, en un point choisi) — ici sur l'exemple d'une pince à doigt.</figcaption>
 </figure>
 
 <h3>1.1. Répartition des actions mécaniques</h3>
+<figure>
+<img src="./img/10-fig1b-forces-solide.png" alt="" style="max-width:420px;">
+<figcaption>Un solide caractérisé par ses points matériels $P_1$, $P_2$, ..., $P_i$, chacun soumis à une action mécanique élémentaire.</figcaption>
+</figure>
 <p>La modélisation locale fait intervenir les forces élémentaires $\vec{F_i}$ qui agissent sur chaque point matériel $P_i$. L'effet local de l'action $\vec{F_i}$ en $P_i$ se modélise par le torseur :</p>
 <p>$$\{dT_{i\to S}\}=\left\{\begin{array}{l}\overrightarrow{dR_{i\to S}}=\vec{F_i}\\ \overrightarrow{dM_{P_i,i\to S}}=\vec{0}\end{array}\right\}_{P_i}$$</p>
 <p>L'effet global de l'ensemble des actions élémentaires $\vec{F_i}$, exprimé en un point A, se modélise par :</p>
@@ -176,6 +164,10 @@ $\overrightarrow{eff(M)}$ est appelée <strong>densité d'efforts</strong> : ell
 <div class="block demo">
 <span class="label">Exemple — force de pression dans un piston</span>
 Une pression $p$ uniforme s'exerce sur une surface $S$ (fond du piston), de normale $\vec n$ orientée vers l'extérieur du solide isolé :
+<figure>
+<img src="./img/10-fig2-piston.png" alt="" style="max-width:420px;">
+<figcaption>Force de pression uniforme sur le fond d'un piston, dans une chambre à la pression p.</figcaption>
+</figure>
 $$\vec F=\int_{M\in S}\overrightarrow{dF(M)}=\int_{M\in S}p.\overrightarrow{dS(M)}=p.\int_{M\in S}dS(M)$$
 $$\vec F=-p.\int_{M\in S}dS.\vec n=-p.S.\vec n$$
 </div>
@@ -184,26 +176,8 @@ $$\vec F=-p.\int_{M\in S}dS.\vec n=-p.S.\vec n$$
 <span class="label">Exemple — couple sur un coussinet</span>
 La répartition de pression sur un coussinet (palier lisse) de rayon $R$ et de largeur $L$ suit la loi $p(\theta)=p_M.\sin(\theta)$, avec $0\le\theta\le\pi$ et $-\frac{L}{2}\le z\le\frac{L}{2}$.
 <figure style="margin:.8rem 0;">
-<svg viewBox="0 0 420 210" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11">
-<circle cx="110" cy="110" r="70" fill="#f1f1ef" stroke="#1c2430"/>
-<circle cx="110" cy="110" r="2.5" fill="#1c2430"/><text x="100" y="128" font-size="10.5">O</text>
-<line x1="110" y1="110" x2="150" y2="80" stroke="#1c2430"/><text x="140" y="95" font-size="10">M</text>
-<path d="M110,110 A70,70 0 0 1 150,80" fill="none" stroke="#1c2430" stroke-dasharray="2,2"/><text x="125" y="98" font-size="9.5">θ</text>
-<g stroke="#c23b6c" marker-end="url(#arCo)">
-<line x1="55" y1="45" x2="63" y2="53"/><line x1="80" y1="35" x2="86" y2="45"/><line x1="110" y1="30" x2="110" y2="42"/><line x1="140" y1="35" x2="134" y2="45"/><line x1="165" y1="45" x2="157" y2="53"/>
-</g>
-<text x="110" y="20" text-anchor="middle" font-size="10.5" fill="#c23b6c">$p(\theta)=p_M.\sin\theta$</text>
-<line x1="180" y1="110" x2="240" y2="110" stroke="#1c2430" marker-end="url(#arCo)"/><text x="245" y="114" font-size="11">x</text>
-<line x1="110" y1="110" x2="110" y2="40" stroke="#1c2430" marker-end="url(#arCo)"/><text x="115" y="35" font-size="11">y</text>
-<rect x="300" y="40" width="60" height="140" fill="#f1f1ef" stroke="#1c2430"/>
-<line x1="300" y1="30" x2="300" y2="190" stroke="#1c2430" stroke-dasharray="3,3"/><line x1="360" y1="30" x2="360" y2="190" stroke="#1c2430" stroke-dasharray="3,3"/>
-<line x1="290" y1="30" x2="290" y2="190" stroke="#1c2430" marker-start="url(#arCo)" marker-end="url(#arCo)"/><text x="270" y="115" font-size="11">L</text>
-<circle cx="330" cy="90" r="2.5" fill="#1c2430"/><text x="335" y="88" font-size="10">M</text>
-<text x="330" y="200" text-anchor="middle" font-size="11">O</text>
-<g stroke="#c23b6c" marker-end="url(#arCo)"><line x1="305" y1="45" x2="313" y2="55"/><line x1="330" y1="40" x2="330" y2="50"/><line x1="355" y1="45" x2="347" y2="55"/></g>
-<defs><marker id="arCo" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c2430"/></marker></defs>
-</svg>
-<figcaption>Fig. 2 — Coussinet : répartition de pression $p(\theta)=p_M\sin\theta$ sur la circonférence (vue de face) et sur la largeur $L$ (vue de côté).</figcaption>
+<img src="./img/10-fig3-coussinet.png" alt="">
+<figcaption>Fig. 2 — Coussinet : répartition de pression $p(\theta)=p_M\sin\theta$ sur la circonférence (vue de face, gauche) et sur la largeur $L$ (vue de côté, centre) — à droite, coussinets réels (paliers lisses).</figcaption>
 </figure>
 Calcul du moment en O, avec $\vec n=\vec{e_r}$, $dS=R.d\theta.dz$, $\overrightarrow{OM}=R.\vec{e_r}+z.\vec z$ :
 $$\overrightarrow{M_O}=\int_S \overrightarrow{OM}\wedge \overrightarrow{eff(M)}.dS=\int_0^\pi\int_{-L/2}^{L/2}(R.\vec{e_r}+z.\vec z)\wedge(-p_M.\sin\theta.\vec{e_r}).R.d\theta.dz$$
@@ -283,27 +257,12 @@ Le volume engendré par une surface plane S tournant autour d'un axe $\Delta$ de
 $$V=2\pi.r_G.S$$
 </div>
 <figure>
-<svg viewBox="0 0 640 230" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
-<path d="M50,170 L170,20" stroke="#1c2430" stroke-width="1"/>
-<path d="M100,150 L160,60" stroke="#1c2430" stroke-width="1"/>
-<line x1="100" y1="150" x2="50" y2="170" stroke="#1c2430"/>
-<line x1="160" y1="60" x2="170" y2="20" stroke="#1c2430"/>
-<line x1="115" y1="30" x2="140" y2="185" stroke="#1c2430" stroke-dasharray="3,3"/><text x="145" y="190" font-size="11">Δ</text>
-<path d="M85,95 C60,80 70,50 100,55 C130,60 135,90 120,100 C105,110 90,105 85,95" fill="none" stroke="#c23b6c" stroke-width="1.5"/>
-<text x="70" y="75" font-size="11" fill="#c23b6c">(C)</text>
-<circle cx="102" cy="80" r="3" fill="#1c2430"/><text x="106" y="78" font-size="10.5">G</text>
-<ellipse cx="127" cy="80" rx="70" ry="18" fill="none" stroke="#c23b6c" stroke-dasharray="2,2"/>
-<text x="127" y="120" text-anchor="middle" font-weight="700">$S=2\pi.R_G.L$</text>
-<rect x="330" y="60" width="70" height="90" fill="none" stroke="#3b6fd8" stroke-width="1.5"/>
-<line x1="365" y1="45" x2="365" y2="165" stroke="#1c2430" stroke-dasharray="3,3"/><text x="368" y="180" font-size="11">Δ</text>
-<text x="365" y="40" text-anchor="middle" font-weight="700" font-size="11">Cylindre</text>
-<line x1="365" y1="105" x2="440" y2="105" stroke="#1c2430" marker-end="url(#arGu)"/><text x="410" y="100" font-size="10.5">G</text>
-<line x1="400" y1="60" x2="440" y2="60" stroke="#1c2430" marker-end="url(#arGu)" marker-start="url(#arGu)"/><text x="450" y="65" font-size="11">h</text>
-<line x1="330" y1="160" x2="400" y2="160" stroke="#1c2430" marker-end="url(#arGu)" marker-start="url(#arGu)"/><text x="360" y="175" font-size="11">R</text>
-<text x="365" y="205" text-anchor="middle" font-weight="700">$S=2\pi.R.h$ (surface) — $V=2\pi.\dfrac{R}{2}.R.h=\pi R^2h$ (volume)</text>
-<defs><marker id="arGu" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c2430"/></marker></defs>
-</svg>
-<figcaption>Fig. 3 — Application des théorèmes de Guldin au cylindre de révolution : surface latérale $S=2\pi Rh$ (segment de longueur $h$ à distance $R$ de l'axe) et volume $V=\pi R^2h$ (rectangle de centre de gravité à $R/2$ de l'axe).</figcaption>
+<img src="./img/10-fig4a-guldin1.png" alt="">
+<figcaption>Fig. 3 — Premier théorème de Guldin, et son application au calcul de la surface latérale d'un cylindre de révolution : $S=2\pi.R.h$.</figcaption>
+</figure>
+<figure>
+<img src="./img/10-fig4b-guldin2.png" alt="">
+<figcaption>Fig. 4 — Second théorème de Guldin, et son application au calcul du volume d'un cylindre : $V=2\pi.\dfrac{R}{2}.R.h=\pi R^2h$.</figcaption>
 </figure>
 </section>
 
@@ -326,6 +285,10 @@ $$V=2\pi.r_G.S$$
 Si une liaison n'est pas parfaite (frottements), c'est le torseur d'inter-efforts qui est modifié — le torseur cinématique reste le même. La puissance dissipée dans la liaison est alors <strong>négative</strong>.
 </div>
 <p>En admettant ces hypothèses, les efforts transmis entre deux solides sont perpendiculaires au plan tangent commun aux deux solides. Soient deux solides $S_1$ et $S_2$ en contact selon une surface S ; on isole $S_2$ et on note $\overrightarrow{dF_{1\to 2}(M)}$ l'action élémentaire exercée par $S_1$ sur $S_2$ au point M, dirigée vers l'intérieur du solide isolé.</p>
+<figure>
+<img src="./img/10-fig6-contact-s1s2.png" alt="" style="max-width:380px;">
+<figcaption>Fig. 5 — Deux solides $S_1$ et $S_2$ en contact selon une surface $S$ ; élément de surface $dS$ autour du point M.</figcaption>
+</figure>
 <div class="block def">
 <span class="label">Modèle du contact parfait</span>
 $$\overrightarrow{dF_{1\to2}(M)}=-p(M).dS.\vec n(M)$$
@@ -336,6 +299,14 @@ $p(M)$ : pression de contact au point M (Pa = N/m²) ; $\vec n(M)$ : vecteur uni
 
 <h3>3.2. Actions mécaniques dans une liaison parfaite</h3>
 <p>Considérons une liaison appui-plan de normale $\vec z$, avec $(O,\vec x,\vec y,\vec z)$ un repère local. Le torseur des actions mécaniques exercées par 1 sur 2 s'écrit, dans le cas général :</p>
+<figure>
+<img src="./img/10-fig7-appui-plan.png" alt="" style="max-width:420px;">
+<figcaption>Fig. 6 — Liaison appui-plan de normale $\vec z$ : répartition de pression entre les solides 1 et 2.</figcaption>
+</figure>
+<figure>
+<img src="./img/10-fig7b-surface-3D.png" alt="" style="max-width:340px;">
+<figcaption>Répartition de pression quelconque $p(M)$ sur une surface de contact plane — cas général dont l'appui-plan uniforme est un cas particulier.</figcaption>
+</figure>
 <p>$$\{T_{1\to2}\}=\left\{\overrightarrow{R_{1\to2}}\atop \overrightarrow{M_{O,1\to2}}\right\}_O=\begin{pmatrix}X_{12}&L_{12}\\Y_{12}&M_{12}\\Z_{12}&N_{12}\end{pmatrix}_{(O,\vec x,\vec y,\vec z)}$$</p>
 <p>L'objectif est de simplifier ce torseur compte tenu de la nature du contact. Deux méthodes le permettent (la seconde est à privilégier) :</p>
 <h4>3.2.1. Passage local-global</h4>
@@ -359,19 +330,8 @@ Les forces de pression exercent une action mécanique perpendiculairement à la 
 </div>
 <p>Soit M un point d'un fluide à l'altitude z (axe $\vec z$ vertical descendant). La pression varie selon la loi $p(z)=\rho.g.z+cste$, la constante étant fixée par la connaissance de la pression en au moins un point de l'espace (elle dépend du paramétrage retenu pour chaque exercice).</p>
 <figure>
-<svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11.5">
-<line x1="40" y1="60" x2="380" y2="60" stroke="#1c2430" stroke-dasharray="4,3"/><text x="10" y="63">z=0</text>
-<rect x="40" y="60" width="150" height="120" fill="#dff5fa" opacity="0.6"/><text x="90" y="150" font-size="11">Fluide</text>
-<rect x="190" y="30" width="150" height="150" fill="#e6e3da" stroke="#1c2430"/><text x="290" y="150" font-size="11">Solide</text>
-<line x1="20" y1="110" x2="180" y2="110" stroke="#1c2430" stroke-dasharray="3,3"/><text x="5" y="114">z</text>
-<circle cx="190" cy="110" r="3" fill="#1c2430"/><text x="180" y="100">M</text>
-<line x1="190" y1="110" x2="240" y2="110" stroke="#c23b6c" stroke-width="2" marker-end="url(#arHy)"/><text x="245" y="105" fill="#c23b6c">$\overrightarrow{dF_P}$</text>
-<line x1="190" y1="110" x2="150" y2="110" stroke="#1c2430" marker-end="url(#arHy)"/><text x="120" y="100">$\vec n(M)$</text>
-<text x="290" y="205" text-anchor="middle" font-size="11">ds</text>
-<line x1="190" y1="10" x2="190" y2="200" stroke="#1c2430" stroke-width="2" marker-end="url(#arHy)"/><text x="196" y="15">$\vec z$</text>
-<defs><marker id="arHy" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c2430"/></marker></defs>
-</svg>
-<figcaption>Fig. 4 — Action d'un fluide sur une paroi solide : force de pression $\overrightarrow{dF_P}=-p(M).dS.\vec n(M)$, normale à la paroi, avec $\vec n(M)$ dirigé vers l'extérieur du solide isolé.</figcaption>
+<img src="./img/10-fig5-hydrostatique.png" alt="">
+<figcaption>Fig. 7 — Action d'un fluide sur une paroi solide : force de pression $\overrightarrow{dF_P}=-p(M).dS.\vec n(M)$, normale à la paroi, avec $\vec n(M)$ dirigé vers l'extérieur du solide isolé.</figcaption>
 </figure>
 <p>L'effort élémentaire $\overrightarrow{dF_P}$ agissant sur un élément de surface $dS$ est donné par $\overrightarrow{dF_P}=-p(M).dS.\vec n(M)$, d'où la forme générale du torseur des actions mécaniques exercées par le fluide sur une paroi :</p>
 <p>$$\{T_{Fluide\to S}\}=\left\{\begin{array}{l}\overrightarrow{R_{Fluide\to S}}=\displaystyle\int_{M\in S}-p(M).dS.\vec n(M)\\[4pt] \overrightarrow{M_{O,Fluide\to S}}=\displaystyle\int_{M\in S}\overrightarrow{OM}\wedge-p(M).dS.\vec n(M)\end{array}\right\}_O$$</p>
@@ -383,6 +343,10 @@ Les forces de pression exercent une action mécanique perpendiculairement à la 
 <p>Les lois de Coulomb concernant le frottement de glissement ne sont valables strictement que pour un contact ponctuel ou « quasi ponctuel ». Or, très souvent, le contact entre deux solides s'effectue sur une surface entière. Il suffit alors de considérer de petites zones « quasi ponctuelles » autour de chaque point de la zone de contact, et d'<strong>écrire les lois de Coulomb sur les densités surfaciques d'actions mécaniques</strong>.</p>
 <h3>4.2. Modèle local avec frottement</h3>
 <p>Dans la pratique, le contact ne s'effectue jamais sur des surfaces parfaitement lisses, mais présente des aspérités à l'échelle microscopique — d'où la nécessité d'étudier ce phénomène au niveau local.</p>
+<figure>
+<img src="./img/10-fig8-surfaces-rugueuses.png" alt="" style="max-width:420px;">
+<figcaption>Fig. 8 — Contact réel entre deux surfaces rugueuses : les aspérités à l'échelle microscopique justifient l'étude locale du frottement.</figcaption>
+</figure>
 <p>On considère un domaine de contact $\Omega$ (surface S ou ligne de longueur L) et un élément de domaine $d\Omega$ autour d'un point P de normale $\vec n(P)$ (normale extérieure à 2, dirigée de 2 vers 1). Le torseur élémentaire d'action mécanique de 1 sur 2 est donné en P par :</p>
 <p>$$\{dT_{1\to2}\}=\left\{\begin{array}{l}\overrightarrow{dF_{1\to2}(P)}=\overrightarrow{eff(P)}\,d\Omega\\ \vec 0\end{array}\right\}_P$$</p>
 <p>où $\overrightarrow{eff(P)}$ est la densité d'efforts en P : densité linéique (N/m) si le contact est linéique, densité surfacique (N/m²) s'il est surfacique.</p>
@@ -395,30 +359,22 @@ $p(P)$ : densité normale d'efforts (pression de contact) en P ; $\vec q(P)$ : d
 
 <h3>4.3. Lois de Coulomb locales</h3>
 <p>Les lois de Coulomb locales sont les mêmes que celles obtenues pour le contact ponctuel, mais portent sur les densités de forces. On note $\vec t(P)$ le vecteur unitaire directeur de la vitesse de glissement $\overrightarrow{V_{P\in2/1}}$ : $\vec t(P)=\dfrac{\overrightarrow{V_{P\in2/1}}}{\|\overrightarrow{V_{P\in2/1}}\|}$.</p>
-<figure>
-<svg viewBox="0 0 460 210" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11.5">
-<rect x="60" y="140" width="120" height="50" fill="#e6e3da" stroke="#1c2430"/><text x="120" y="170" text-anchor="middle" font-size="12" font-weight="700">1</text>
-<rect x="60" y="100" width="120" height="40" fill="#dff5fa" stroke="#1c2430"/><text x="120" y="124" text-anchor="middle" font-size="12" font-weight="700">2</text>
-<line x1="120" y1="140" x2="120" y2="60" stroke="#1c2430" marker-end="url(#arFr)"/><text x="126" y="65">$\vec n(P)$</text>
-<line x1="120" y1="140" x2="180" y2="90" stroke="#3b6fd8" marker-end="url(#arFr)"/><text x="185" y="88" fill="#3b6fd8">$\vec t(P)$</text>
-<line x1="120" y1="140" x2="60" y2="115" stroke="#c23b6c" marker-end="url(#arFr)"/><text x="20" y="112" fill="#c23b6c">$\vec q(P)$</text>
-<line x1="120" y1="140" x2="150" y2="60" stroke="#1c2430" stroke-width="1" stroke-dasharray="2,2"/>
-<line x1="120" y1="140" x2="90" y2="60" stroke="#1c2430" stroke-width="1" stroke-dasharray="2,2"/>
-<text x="145" y="55" font-size="10.5">φ</text>
-<circle cx="120" cy="140" r="3" fill="#1c2430"/><text x="125" y="148" font-size="10.5">P</text>
-<text x="120" y="205" text-anchor="middle" font-size="11">Glissement : $\vec q(P)=-q(P).\vec t(P)$, $q(P)=f.p(P)$</text>
-<defs><marker id="arFr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c2430"/></marker></defs>
-</svg>
-<figcaption>Fig. 5 — Contact local avec frottement en P : le cône de frottement (demi-angle φ) contient la densité tangentielle $\vec q(P)$ opposée à la vitesse de glissement.</figcaption>
-</figure>
 <div class="block theorem">
 <span class="label">Cas du glissement</span>
 $\overrightarrow{V_{P\in2/1}}\ne\vec0$ : $\vec q(P)$ est opposé à la vitesse de glissement, $\vec q(P)=-q(P).\vec t(P)$ avec $q(P)=f.p(P)>0$ ($f$ : coefficient de frottement).
 </div>
+<figure>
+<img src="./img/10-fig9a-glissement.png" alt="" style="max-width:360px;">
+<figcaption>Fig. 9 — Cas du glissement : le cône de frottement (demi-angle φ) contient la densité tangentielle $\vec q(P)$, opposée à la vitesse de glissement.</figcaption>
+</figure>
 <div class="block theorem">
 <span class="label">Cas du non-glissement</span>
 $\overrightarrow{V_{P\in2/1}}=\vec0$ : on ne connaît pas la direction de $\vec q(P)$, seulement l'inégalité $q(P)<f.p(P)$.
 </div>
+<figure>
+<img src="./img/10-fig9b-non-glissement.png" alt="" style="max-width:360px;">
+<figcaption>Fig. 10 — Cas du non-glissement : la direction de $\vec q(P)$ n'est pas connue, seule l'inégalité $q(P)<f.p(P)$ est assurée.</figcaption>
+</figure>
 
 <h3>4.4. De l'action mécanique locale à l'action mécanique globale</h3>
 <p>La détermination du torseur d'action mécanique global nécessite l'écriture du torseur local en un point fixé, puis une intégration sur le domaine :</p>
