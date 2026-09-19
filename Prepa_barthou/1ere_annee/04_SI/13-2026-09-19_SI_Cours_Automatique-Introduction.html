@@ -98,300 +98,257 @@ mjx-container{overflow-x:auto; max-width:100%;}
 
 <p class="access-note">Document original (PDF professeur) protégé par mot de passe sur le site source — voir la section <a href="#sources">Sources</a> ci-dessous pour le mot de passe d'accès au site <code>aroux-sii.fr</code>.</p>
 
-<p><strong>Compétences attendues :</strong> identifier la structure d'un système asservi ; modéliser le signal d'entrée ; déterminer les performances d'un système asservi ; proposer une démarche permettant d'évaluer les performances des systèmes asservis.</p>
+<p><strong>Compétences attendues :</strong></p>
+<ul>
+<li>Identifier la structure d'un système asservi.</li>
+<li>Modéliser le signal d'entrée.</li>
+<li>Déterminer les performances d'un système asservi.</li>
+<li>Proposer une démarche permettant d'évaluer les performances des systèmes asservis.</li>
+</ul>
 
 <section id="s1">
 <h2>1. Présentation des systèmes automatisés</h2>
-<h3>1.1. Définition</h3>
+<h3>1.1. Systèmes automatisés</h3>
+<h4>1.1.1. Définition</h4>
 <div class="block def">
-<span class="label">Définition — système automatisé</span>
-Un <strong>système automatisé</strong> (ou automatique) est un système réalisant des opérations et pour lequel l'intervention humaine est limitée à la programmation du système et à son réglage préalable.
+<span class="label">Définition d'un système automatisé</span>
+Un <strong>système automatisé</strong> ou automatique est un système réalisant des opérations et pour lequel l'intervention humaine est limitée à la programmation du système et à son réglage préalable.
 </div>
-<p>L'<strong>automatique</strong> est la discipline scientifique traitant, d'une part, de la caractérisation des systèmes automatisés et, d'autre part, du choix, de la conception et de la réalisation du système de commande.</p>
-<h3>1.2. Buts et motivations</h3>
+<p>L'automatique est la discipline scientifique traitant, d'une part, de la caractérisation des systèmes automatisés et, d'autre part, du choix, de la conception et de la réalisation du système de commande.</p>
+<h4>1.1.2. Buts et motivations</h4>
 <p>Les systèmes automatisés ont pour buts :</p>
 <ul>
-<li>de réaliser des tâches impossibles pour l'homme ou dangereuses, afin d'améliorer la sécurité (exploration spatiale par exemple) ;</li>
+<li>de réaliser des tâches impossibles pour l'homme ou dangereuses afin d'améliorer la sécurité (exploration spatiale par exemple) ;</li>
 <li>de réaliser des tâches pénibles ou répétitives afin d'améliorer le confort (assemblage de pièces dans l'industrie) ;</li>
 <li>d'améliorer la précision, la qualité et la productivité des tâches (système de découpe laser).</li>
 </ul>
-<p>Exemples courants : imprimante 3D, drone, robot d'exploration, système d'ouverture de portail, pilote automatique de bateau…</p>
-
-<h3>1.3. Classification selon la nature de l'information</h3>
-<p>Les systèmes automatisés illustrent la fonction <strong>Acquérir et traiter l'information</strong> de la chaîne d'information, en interaction avec la chaîne de puissance (ou d'énergie).</p>
 <figure>
-<svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11">
-<rect x="4" y="4" width="632" height="95" fill="none" stroke="#3b6fd8" stroke-width="1.5"/><text x="320" y="18" text-anchor="middle" fill="#3b6fd8" font-weight="700">Chaîne d'information</text>
-<rect x="20" y="30" width="90" height="50" fill="#e9f1fd" stroke="#3b6fd8"/><text x="65" y="50" text-anchor="middle">ACQUÉRIR</text><text x="65" y="65" text-anchor="middle" font-size="9.5">Capteurs</text>
-<rect x="130" y="30" width="90" height="50" fill="#e9f1fd" stroke="#3b6fd8"/><text x="175" y="50" text-anchor="middle">TRAITER</text><text x="175" y="65" text-anchor="middle" font-size="9.5">API, µcontrôleur</text>
-<rect x="240" y="30" width="100" height="50" fill="#e9f1fd" stroke="#3b6fd8"/><text x="290" y="50" text-anchor="middle">COMMUNIQUER</text><text x="290" y="65" text-anchor="middle" font-size="9.5">Module de sortie, bus</text>
-<line x1="0" y1="55" x2="20" y2="55" stroke="#1c2430" marker-end="url(#arA)"/><text x="0" y="20" font-size="9.5">Informations</text>
-<line x1="110" y1="55" x2="130" y2="55" stroke="#1c2430" marker-end="url(#arA)"/>
-<line x1="220" y1="55" x2="240" y2="55" stroke="#1c2430" marker-end="url(#arA)"/>
-<line x1="340" y1="55" x2="420" y2="55" stroke="#1c2430" marker-end="url(#arA)"/><text x="345" y="20" font-size="9.5">Infos vers d'autres systèmes</text>
-<line x1="65" y1="80" x2="65" y2="180" stroke="#1c2430" marker-end="url(#arA)"/>
-<line x1="290" y1="80" x2="290" y2="180" stroke="#1c2430"/>
-<rect x="4" y="130" width="632" height="80" fill="none" stroke="#c23b6c" stroke-width="1.5"/><text x="320" y="215" text-anchor="middle" fill="#c23b6c" font-weight="700">Chaîne de puissance (d'énergie)</text>
-<rect x="20" y="155" width="80" height="45" fill="#fde9f0" stroke="#c23b6c" font-size="10"/><text x="60" y="175" text-anchor="middle">ALIMENTER</text>
-<rect x="120" y="155" width="80" height="45" fill="#fde9f0" stroke="#c23b6c" font-size="10"/><text x="160" y="175" text-anchor="middle">DISTRIBUER</text><text x="160" y="188" text-anchor="middle" font-size="9">(préactionneur)</text>
-<rect x="220" y="155" width="80" height="45" fill="#fde9f0" stroke="#c23b6c" font-size="10"/><text x="260" y="175" text-anchor="middle">CONVERTIR</text><text x="260" y="188" text-anchor="middle" font-size="9">(actionneur)</text>
-<rect x="320" y="155" width="90" height="45" fill="#fde9f0" stroke="#c23b6c" font-size="10"/><text x="365" y="175" text-anchor="middle">TRANSMETTRE</text>
-<rect x="430" y="140" width="90" height="65" fill="#e9f8ee" stroke="#2fa365" font-size="10"/><text x="475" y="165" text-anchor="middle">AGIR</text><text x="475" y="178" text-anchor="middle" font-size="9">Effecteur</text>
-<line x1="0" y1="177" x2="20" y2="177" stroke="#1c2430" marker-end="url(#arA)"/><text x="0" y="150" font-size="9.5">Énergie</text>
-<line x1="100" y1="177" x2="120" y2="177" stroke="#1c2430" marker-end="url(#arA)"/>
-<line x1="200" y1="177" x2="220" y2="177" stroke="#1c2430" marker-end="url(#arA)"/>
-<line x1="300" y1="177" x2="320" y2="177" stroke="#1c2430" marker-end="url(#arA)"/>
-<line x1="410" y1="177" x2="430" y2="177" stroke="#1c2430" marker-end="url(#arA)"/>
-<line x1="520" y1="172" x2="600" y2="172" stroke="#2fa365" marker-end="url(#arA2)"/><text x="525" y="160" font-size="9.5" fill="#2fa365">MO + VA</text>
-<defs><marker id="arA" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#1c2430"/></marker>
-<marker id="arA2" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#2fa365"/></marker></defs>
-</svg>
-<figcaption>Fig. 1 — Interaction chaîne d'information (Acquérir/Traiter/Communiquer) et chaîne de puissance (Alimenter/Distribuer/Convertir/Transmettre/Agir).</figcaption>
+<img src="./img/13-fig1-exemples-systemes.png" alt="Imprimante 3D, drone, robot d'exploration">
+<figcaption>Figure 1 : A. Imprimante 3D. B. Un drone. C. Un robot d'exploration.</figcaption>
 </figure>
-<p>On classe les systèmes automatisés selon la nature des informations traitées :</p>
+<p>On peut également citer d'autres systèmes automatisés plus courants : système d'ouverture de portail, pilote automatique de bateau…</p>
+
+<h4>1.1.3. Classification selon la nature de l'information</h4>
+<p>Les systèmes automatisés illustrent la fonction <strong>Acquérir et Traiter l'information</strong> de la chaîne d'information.</p>
+<figure>
+<img src="./img/13-fig2-chaine-info-puissance.png" alt="Chaîne d'information et chaîne de puissance">
+</figure>
+<p>Il est ainsi possible de classer les systèmes automatisés selon la nature des informations traitées :</p>
 <ul>
-<li><strong>Grandeurs analogiques</strong> : mesure continue dans un intervalle, infinité de valeurs possibles (ex. 25,2 °C).</li>
-<li><strong>Grandeurs numériques</strong> : nombre fini de valeurs (ex. suite de nombres binaires traités par un ordinateur).</li>
-<li><strong>Informations logiques</strong> (0 ou 1) — systèmes logiques :
+<li><strong>les grandeurs analogiques</strong> : leur mesure donne des valeurs réelles de manière continue dans un intervalle. Il existe une infinité de valeurs pour une grandeur analogique. Elles sont généralement associées à des unités (ex : 25,2°C) ;</li>
+<li><strong>les grandeurs numériques</strong> : elles sont restreintes à ne prendre qu'un nombre fini de valeurs. Par exemple, les ordinateurs ne traitent qu'une suite de nombres binaires ;</li>
+<li>enfin, une dernière classe est formée par les systèmes logiques, qui utilisent des <strong>informations logiques</strong> (0 ou 1). On en distingue deux types :
 <ul>
-<li><em>combinatoires</em> : chaque état d'entrée correspond à une seule sortie (les effets disparaissent avec la cause) ;</li>
-<li><em>séquentiels</em> : la sortie dépend des entrées <strong>ET</strong> des évolutions précédentes du système (une même entrée peut correspondre à plusieurs sorties).</li>
+<li><strong>systèmes logiques combinatoires</strong> : chaque état des données d'entrée correspond à une seule sortie, les effets disparaissant en même temps que la cause ;</li>
+<li><strong>systèmes logiques séquentiels</strong> : la sortie dépend des entrées <strong>ET</strong> des évolutions précédentes du système ; une même entrée peut donc correspondre à plusieurs sorties.</li>
 </ul>
 </li>
 </ul>
-<div class="block remark">
-<span class="label">Remarque</span>
-Les systèmes séquentiels et combinatoires traitent des informations <strong>discrètes</strong> ; les systèmes continus traitent des informations <strong>continues</strong>. On distingue ainsi 4 catégories croisées (continu/discret en temps) × (continu/discret en amplitude) : signal analogique, signal quantifié, signal échantillonné, signal numérique $x_q(t_k)=x(k)$.
-</div>
-
-<h3>1.4. Différents types de systèmes</h3>
-<ul>
-<li><strong>Systèmes instantanés</strong> : la sortie est directement déduite de l'entrée à un instant donné.</li>
-<li><strong>Systèmes dynamiques</strong> : la sortie dépend de l'état actuel de l'entrée <em>et</em> des états antérieurs du système.</li>
-</ul>
-<div class="block remark">
-<span class="label">Remarque</span>
-En réalité, il n'existe que peu de systèmes réellement instantanés, car tout effet présente une certaine inertie (ou mémoire). L'appellation « système instantané » relève donc souvent de l'approximation. C'est la raison pour laquelle le contrôle des systèmes n'est pas toujours évident : la consigne correspondant à une sortie donnée à un instant $t$ n'est pas unique, elle dépend de l'état du système.
-</div>
-
-<h3>1.5. Système asservi</h3>
-<div class="block def">
-<span class="label">Définition — système asservi</span>
-Un <strong>système asservi</strong> est un système automatisé <strong>bouclé</strong>, c'est-à-dire un système pour lequel on asservit la valeur de la sortie à la valeur de la consigne.
-</div>
-<p>Les systèmes asservis possèdent une <strong>boucle de retour</strong> qui permet d'élaborer la commande du système en connaissant l'état de la sortie à l'instant $t$, généralement par l'intermédiaire de capteurs. Pour élaborer cette commande, on compare le plus souvent la sortie à la consigne actuelle (mesure de l'<strong>écart</strong> entre les deux valeurs), puis on construit une commande adaptée à cette situation — on parle de systèmes à <strong>commande en chaîne fermée</strong>.</p>
+<p>Les systèmes séquentiels et combinatoires traitent des informations discrètes ; les systèmes continus traitent des informations continues.</p>
 <figure>
-<svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="12">
-<rect x="4" y="4" width="552" height="90" fill="none" stroke="#c23b6c" stroke-width="1.5"/><text x="280" y="20" text-anchor="middle" fill="#c23b6c" font-weight="700">Chaîne d'action (ou chaîne directe)</text>
-<rect x="170" y="40" width="110" height="40" fill="#e9f1fd" stroke="#3b6fd8"/><text x="225" y="64" text-anchor="middle">Comparaison</text>
-<rect x="360" y="40" width="110" height="40" fill="#e9f8ee" stroke="#2fa365"/><text x="415" y="64" text-anchor="middle">Action</text>
-<line x1="30" y1="60" x2="170" y2="60" stroke="#1c2430" marker-end="url(#arB)"/><text x="35" y="45" font-size="10.5">Tâche à réaliser</text>
-<line x1="280" y1="60" x2="360" y2="60" stroke="#1c2430" marker-end="url(#arB)"/>
-<line x1="470" y1="60" x2="540" y2="60" stroke="#1c2430" marker-end="url(#arB)"/><text x="475" y="45" font-size="10.5">Tâche réalisée</text>
-<rect x="4" y="120" width="552" height="76" fill="none" stroke="#c23b6c" stroke-width="1.5"/><text x="280" y="192" text-anchor="middle" fill="#c23b6c" font-weight="700">Chaîne de retour (ou chaîne d'information)</text>
-<rect x="360" y="140" width="110" height="40" fill="#fde9f0" stroke="#c23b6c"/><text x="415" y="164" text-anchor="middle">Observation</text>
-<line x1="415" y1="80" x2="415" y2="140" stroke="#1c2430" marker-start="url(#arB)"/>
-<line x1="360" y1="160" x2="225" y2="160" stroke="#1c2430"/>
-<line x1="225" y1="160" x2="225" y2="80" stroke="#1c2430" marker-end="url(#arB)"/>
-<defs><marker id="arB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1c2430"/></marker></defs>
-</svg>
-<figcaption>Fig. 2 — Organisation d'un système bouclé : la chaîne de retour (observation) fournit à la comparaison l'état de la sortie, permettant de calculer l'écart avec la tâche à réaliser.</figcaption>
+<img src="./img/13-fig3-amplitude-continue-discrete.png" alt="Représentation de l'information : continue/discrète, en amplitude/en temps">
+<figcaption>Figure 2 : Représentation de l'information.</figcaption>
 </figure>
-<div class="block remark">
-<span class="label">Analogie — l'homme comme système bouclé</span>
-Désirs → comparaison (calcul de l'écart) → cerveau → muscle → actions, avec une chaîne de retour « 5 sens » qui renvoie les sensations vers la comparaison. Les imprévus (perturbations) agissent entre le cerveau et le muscle, sur la chaîne d'action.
-</div>
-<div class="block remark">
-<span class="label">Remarque</span>
-En opposition au système asservi, un système sans boucle de retour est appelé système à <strong>commande en chaîne directe</strong>.
-</div>
-<h3>1.6. Classification selon la nature de la consigne</h3>
+
+<h4>1.1.4. Différents types de systèmes</h4>
+<p>Il est possible de classer les systèmes en deux groupes :</p>
 <ul>
-<li><strong>Systèmes asservis de régulation</strong> : la consigne d'entrée est <strong>fixe</strong> (ex. régulation de température, de débit) — destinés à maintenir une sortie constante pour une consigne constante.</li>
-<li><strong>Systèmes asservis suiveurs (ou en poursuite)</strong> : la consigne d'entrée <strong>varie en permanence</strong> (ex. machine-outil à commande numérique, radar) — l'objectif est d'ajuster en permanence la sortie à l'entrée.</li>
+<li>les systèmes instantanés : la sortie est directement déduite de l'entrée à un instant donné ;</li>
+<li>les systèmes dynamiques : la sortie dépend de l'état actuel de l'entrée et des états antérieurs du système.</li>
+</ul>
+<p>En réalité, il n'existe que peu de systèmes instantanés, car tout effet présente une certaine inertie (ou mémoire). L'appellation « système instantané » relève donc souvent de l'approximation. C'est la raison pour laquelle le contrôle des systèmes n'est pas toujours évident ; en effet, la consigne correspondant à une sortie donnée à un instant <strong>t</strong> n'est pas unique, elle dépend de l'état du système.</p>
+
+<h3>1.2. Système asservi</h3>
+<h4>1.2.1. Définition</h4>
+<div class="block def">
+<span class="label">Définition d'un système asservi</span>
+Un <strong>système asservi</strong> est un <strong>système automatisé bouclé</strong>, c'est-à-dire un système pour lequel on asservit la valeur de la sortie à la valeur de la consigne.
+</div>
+
+<h4>1.2.2. Structure</h4>
+<p>Les systèmes asservis possèdent une <strong>boucle de retour</strong> qui permet d'élaborer la commande du système en connaissant l'état de la sortie à l'instant t, généralement par l'intermédiaire de <strong>capteurs</strong>.</p>
+<p>Pour élaborer cette consigne de commande, on va le plus souvent <strong>comparer</strong> la sortie à la consigne actuelle (mesurer l'<strong>écart</strong> entre les deux valeurs), puis construire une consigne adaptée à cette situation.</p>
+<p>On parle également pour les systèmes asservis de systèmes à <strong>commande en chaîne fermée.</strong></p>
+<figure>
+<img src="./img/13-fig4-organisation-systeme-boucle.png" alt="Organisation d'un système bouclé">
+<figcaption>Figure 3 : Organisation d'un système bouclé.</figcaption>
+</figure>
+<p><em>Remarque :</em> En opposition au système asservi, un système sans boucle de retour est appelé système à <strong>commande en chaîne directe</strong>.</p>
+<p><em>Exemple :</em> Analogie entre les systèmes bouclés et l'homme :</p>
+<figure>
+<img src="./img/13-fig5-analogie-homme.png" alt="Analogie entre les systèmes bouclés et l'homme">
+</figure>
+
+<h4>1.2.3. Classification selon la nature de la consigne</h4>
+<p>Deux grandes familles permettent de réaliser ces asservissements :</p>
+<ul>
+<li>les systèmes asservis de <strong>régulation</strong> dans lesquels la consigne d'entrée est <strong>fixe</strong> comme par exemple pour une régulation de température, de débit… Ils sont destinés à maintenir une sortie constante pour une consigne d'entrée constante.</li>
+<li>les systèmes asservis <strong>suiveurs ou en poursuite</strong> d'une loi de référence dans lesquels la consigne d'entrée <strong>varie en permanence</strong> comme par exemple pour une machine-outil à commande numérique, un radar… L'objectif de ce système est d'ajuster en permanence le signal de sortie au signal d'entrée.</li>
 </ul>
 </section>
 
 <section id="s2">
 <h2>2. Signaux d'entrée usuels</h2>
-<p>Pour étudier le comportement dynamique d'un système, la première solution consiste à mettre en équation l'ensemble des lois physiques qui le régissent, afin d'obtenir un modèle théorique de son comportement.</p>
+<p>Pour étudier le comportement dynamique d'un système, la première solution consiste à mettre en équation l'ensemble des lois physiques qui régissent ce système afin d'obtenir un modèle théorique de son comportement.</p>
 <div class="block remark">
 <span class="label">Attention</span>
-Dans certains cas, étant donnée la complexité du système, il peut être plus intéressant de tester ses réactions à des consignes élémentaires afin d'observer directement (et donc rapidement) le comportement du système à des sollicitations classiques. L'observation directe de la sortie permet d'éviter les erreurs de modélisation et de connaître les premières caractéristiques du système.
+Néanmoins, dans certains cas, étant donnée la complexité du système, il peut être plus intéressant de tester ses réactions à des consignes élémentaires afin d'observer directement (et donc rapidement) le comportement du système à des sollicitations classiques. Ainsi, l'observation directe de la sortie permet d'éviter les erreurs de modélisation et de connaître les premières caractéristiques de ce système.
 </div>
-<figure>
-<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11">
-<g transform="translate(10,10)">
-<line x1="0" y1="70" x2="140" y2="70" stroke="#1c2430"/><line x1="0" y1="80" x2="0" y2="0" stroke="#1c2430" marker-end="url(#arS)"/>
-<line x1="50" y1="70" x2="50" y2="5" stroke="#c23b6c" stroke-width="2"/>
-<text x="55" y="15" fill="#c23b6c">δ(t)</text><text x="130" y="85">t</text>
-<text x="60" y="95" text-anchor="middle" font-weight="700">Impulsion de Dirac</text>
-</g>
-<g transform="translate(180,10)">
-<line x1="0" y1="70" x2="140" y2="70" stroke="#1c2430"/><line x1="0" y1="80" x2="0" y2="0" stroke="#1c2430" marker-end="url(#arS)"/>
-<line x1="0" y1="70" x2="50" y2="70" stroke="#c23b6c" stroke-width="2"/><line x1="50" y1="70" x2="50" y2="20" stroke="#c23b6c" stroke-width="2"/><line x1="50" y1="20" x2="140" y2="20" stroke="#c23b6c" stroke-width="2"/>
-<text x="-8" y="24" font-size="10">1</text><text x="130" y="85">t</text>
-<text x="60" y="95" text-anchor="middle" font-weight="700">Échelon unité u(t)</text>
-</g>
-<g transform="translate(350,10)">
-<line x1="0" y1="70" x2="140" y2="70" stroke="#1c2430"/><line x1="0" y1="80" x2="0" y2="0" stroke="#1c2430" marker-end="url(#arS)"/>
-<line x1="0" y1="70" x2="50" y2="70" stroke="#c23b6c" stroke-width="2"/><line x1="50" y1="70" x2="120" y2="10" stroke="#c23b6c" stroke-width="2"/>
-<text x="130" y="85">t</text>
-<text x="60" y="95" text-anchor="middle" font-weight="700">Rampe unitaire r(t)</text>
-</g>
-<g transform="translate(10,140)">
-<line x1="0" y1="50" x2="140" y2="50" stroke="#1c2430"/><line x1="0" y1="90" x2="0" y2="10" stroke="#1c2430" marker-end="url(#arS)"/>
-<path d="M0,50 Q20,10 40,50 T80,50 T120,50" stroke="#c23b6c" stroke-width="2" fill="none"/>
-<text x="130" y="65">t</text>
-<text x="60" y="105" text-anchor="middle" font-weight="700">Fonction sinusoïdale</text>
-</g>
-<g transform="translate(200,140)">
-<line x1="0" y1="50" x2="180" y2="50" stroke="#1c2430"/><line x1="0" y1="90" x2="0" y2="10" stroke="#1c2430" marker-end="url(#arS)"/>
-<line x1="0" y1="50" x2="80" y2="50" stroke="#c23b6c" stroke-width="2"/><line x1="80" y1="50" x2="80" y2="15" stroke="#c23b6c" stroke-width="2"/><line x1="80" y1="15" x2="170" y2="15" stroke="#c23b6c" stroke-width="2"/>
-<text x="76" y="65" font-size="10">$t_1$</text><text x="170" y="65">t</text>
-<text x="90" y="105" text-anchor="middle" font-weight="700">Retard $u(t-t_1)$</text>
-</g>
-<defs><marker id="arS" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#1c2430"/></marker></defs>
-</svg>
-<figcaption>Fig. 3 — Signaux d'entrée usuels utilisés pour caractériser un système : Dirac, échelon, rampe, sinusoïde, retard.</figcaption>
-</figure>
 
 <h3>2.1. Impulsion de Dirac</h3>
-<p>Ce signal est aussi appelé <strong>impulsion unité</strong>. Il est noté $\delta(t)$ et défini par : $\forall t\ne0,\ \delta(t)=0$. Cette fonction modélise une action s'exerçant pendant un temps très court (exemples : action d'un marteau, frappe d'une corde de piano).</p>
-<div class="block def">
-<span class="label">Définition</span>
-La réponse à une impulsion de Dirac est appelée <strong>réponse impulsionnelle</strong>.
-</div>
+<p>Ce signal est aussi appelé <strong>impulsion unité</strong>. Il est noté δ(t) et est défini par : $\forall t\ne0,\ \delta(t)=0$.</p>
+<figure>
+<img src="./img/13-fig6-dirac.png" alt="Impulsion de Dirac">
+<figcaption>Figure 4 : Impulsion de Dirac.</figcaption>
+</figure>
+<p>Cette fonction modélise une action s'exerçant pendant un temps très court (exemples : action d'un marteau, la frappe d'une corde de piano, etc…).</p>
+<p><strong>Définition :</strong> La réponse à une <strong>impulsion de Dirac</strong> est appelée <strong>réponse impulsionnelle.</strong></p>
 
 <h3>2.2. Échelon unité</h3>
-<p>$$\forall t<0,\ u(t)=0 \qquad \text{et}\qquad \forall t\ge0,\ u(t)=1$$</p>
-<p>Modélise un signal qui passe de la valeur nulle à la valeur 1 très rapidement et qui reste ensuite constant (exemple : appui sur un interrupteur).</p>
-<div class="block def">
-<span class="label">Définition</span>
-La réponse à un échelon unité est appelée <strong>réponse indicielle</strong>.
-</div>
+<p>L'échelon unité est défini par : $\forall t<0,\ u(t)=0\ \ et\ \ \forall t\ge0,\ u(t)=1$.</p>
+<figure>
+<img src="./img/13-fig7-echelon.png" alt="Échelon unité">
+<figcaption>Figure 5 : Echelon unité.</figcaption>
+</figure>
+<p>Cette fonction modélise un signal qui passe de la valeur nulle à la valeur 1 très rapidement et qui reste ensuite constant égal à 1 (exemple : appui sur un interrupteur).</p>
+<p><strong>Définition :</strong> La réponse à un <strong>échelon unité</strong> est appelée <strong>réponse indicielle</strong>.</p>
 
 <h3>2.3. Rampe de pente unitaire</h3>
-<p>$$\forall t<0,\ r(t)=0 \qquad \text{et} \qquad \forall t\ge0,\ r(t)=t$$</p>
+<p>La rampe de pente unitaire est définie par : $\forall t<0,\ r(t)=0\ \ et\ \ \forall t\ge0,\ r(t)=t$.</p>
+<figure>
+<img src="./img/13-fig8-rampe.png" alt="Rampe de pente unitaire">
+<figcaption>Figure 6 : Rampe de pente unitaire.</figcaption>
+</figure>
 
 <h3>2.4. Fonction sinusoïdale</h3>
-<p>$$\forall t\in\mathbb{R},\ f(t)=u(t).\sin(\omega t) \quad \text{où } u(t) \text{ est la fonction échelon}$$</p>
+<p>La fonction sinusoïdale peut être définie par :</p>
+<p>$$\forall t\in\mathbb{R},\ f(t)=u(t).\sin(\omega t)\ \text{où}\ u(t)\ \text{est la fonction échelon.}$$</p>
+<figure>
+<img src="./img/13-fig9-sinusoide.png" alt="Fonction sinusoïdale">
+<figcaption>Figure 7 : Fonction sinusoïdale.</figcaption>
+</figure>
+<p><strong>Remarques importantes :</strong></p>
+<ul>
+<li>Pour les temps t négatifs, tous les signaux seront considérés à valeur nulle.</li>
+<li>Tout signal nul pour un temps négatif peut s'écrire comme la somme de signaux élémentaires en utilisant la fonction échelon.</li>
+</ul>
 
 <h3>2.5. Signaux complexes</h3>
 <p>Tout signal peut s'écrire comme la somme de signaux élémentaires en utilisant la fonction échelon et des fonctions retardées. On est alors en mesure de modéliser tout type d'entrée.</p>
-<p>La fonction retard est une fonction échelon dont le passage de 0 à 1 ne s'effectue qu'à un temps $t_1$ ; on la note $u(t-t_1)$. Par exemple, une succession de rampes de pentes différentes peut se construire en superposant une rampe classique avec une autre rampe dont l'origine est décalée (via une fonction retard).</p>
-<div class="block remark">
-<span class="label">Remarques importantes</span>
-<ul>
-<li>Pour les temps $t$ négatifs, tous les signaux usuels ci-dessus sont considérés à valeur nulle.</li>
-<li>Tout signal nul pour un temps négatif peut s'écrire comme la somme de signaux élémentaires en utilisant la fonction échelon (et ses versions retardées).</li>
-</ul>
-</div>
+<p>La fonction retard est une fonction échelon, dont le passage de 0 à 1 ne s'effectue qu'à un temps $t_1$. On note cette fonction $u(t-t_1)$.</p>
+<figure>
+<img src="./img/13-fig10-retard.png" alt="Fonction retard u(t-t1)">
+<figcaption>Figure 8 : Fonction retard u(t-t<sub>1</sub>).</figcaption>
+</figure>
+<p><em>Exemple :</em> Pour une succession de rampes avec des pentes différentes, on a donc :</p>
+<figure>
+<img src="./img/13-fig11-signal-complexe.png" alt="Signal complexe : succession de deux rampes de pentes différentes">
+<figcaption>Figure 9 : Signal complexe.</figcaption>
+</figure>
+<figure>
+<img src="./img/13-fig12-signal-decompose.png" alt="Signal décomposé en signaux élémentaires">
+<figcaption>Figure 10 : Signal décomposé en signaux élémentaires.</figcaption>
+</figure>
+<p>On peut donc construire deux rampes de pentes successives comme signal d'entrée en superposant une rampe classique avec une autre rampe dont l'origine est décalée (avec une fonction retard).</p>
 </section>
 
 <section id="s3">
 <h2>3. Critères de performance d'un système asservi</h2>
-<p>La réponse donnée par le système aux différentes sollicitations doit satisfaire les critères du cahier des charges. On utilise 4 critères pour évaluer un système asservi : <strong>rapidité</strong>, <strong>précision</strong>, <strong>stabilité</strong>, <strong>amortissement</strong>.</p>
+<p>La réponse donnée par le système aux différentes sollicitations doit donner satisfaction par rapport aux critères du cahier des charges. Il est donc nécessaire de définir des critères qui permettront d'évaluer l'efficacité de la réponse d'un système par rapport aux données d'entrées. Pour un système asservi, on utilise 4 critères :</p>
+<ul>
+<li><strong>Rapidité</strong></li>
+<li><strong>Précision</strong></li>
+<li><strong>Stabilité</strong></li>
+<li><strong>Amortissement</strong></li>
+</ul>
 
 <h3>3.1. Rapidité d'un système</h3>
 <div class="block def">
-<span class="label">Définition — rapidité</span>
-La <strong>rapidité</strong> d'un système est le temps que met celui-ci à réagir à une variation brusque de la grandeur d'entrée.
+<span class="label">Définition de la rapidité</span>
+La <strong>rapidité</strong> d'un système est le <strong>temps que met celui-ci à réagir</strong> à une variation brusque de la grandeur d'entrée.
 </div>
-<p>Dans la plupart des cas, la valeur finale est atteinte de manière asymptotique, voire oscillante. On retient alors comme principal critère d'évaluation de la rapidité le <strong>temps de réponse à $n\%$</strong> — dans la pratique, c'est le temps de réponse à 5 %, noté $t_{5\%}$, qui est le plus souvent utilisé : il correspond au temps mis par le système pour se stabiliser à la valeur du régime permanent (quand $t\to\infty$) à $\pm5\%$ près, c'est-à-dire lorsque la sortie $s(t)$ entre dans la bande à $\pm5\%$ (et n'en ressort plus).</p>
+<p>Dans la plupart des cas, la valeur finale est atteinte de manière asymptotique voire oscillante, on retient alors comme principal critère d'évaluation de la rapidité d'un système le temps de réponse à n%.</p>
+<p>Dans la pratique, c'est le temps de réponse à 5%, noté $t_{5\%}$, qui est le plus souvent utilisé. Il correspond au temps mis par le système pour se stabiliser à la valeur du régime permanent (quand le temps tend vers l'infini) à ±5% près ; c'est-à-dire lorsque la sortie s(t) entre dans la bande à ±5%.</p>
 <figure>
-<svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11">
-<line x1="30" y1="190" x2="540" y2="190" stroke="#1c2430" marker-end="url(#arR)"/><text x="545" y="195">temps t</text>
-<line x1="30" y1="200" x2="30" y2="10" stroke="#1c2430" marker-end="url(#arR)"/>
-<line x1="30" y1="60" x2="510" y2="60" stroke="#2fa365" stroke-width="1.5"/><text x="60" y="45" fill="#2fa365">Consigne $e(t)=a.u(t)$</text>
-<line x1="30" y1="45" x2="510" y2="45" stroke="#1c2430" stroke-dasharray="3,3"/><line x1="30" y1="75" x2="510" y2="75" stroke="#1c2430" stroke-dasharray="3,3"/>
-<text x="330" y="42" font-size="10">Bandes à ± 5 %</text>
-<path d="M30,190 L45,20 L70,95 L95,45 L120,72 L145,55 L170,64 L195,58 L220,62 L245,59 L270,61 L510,60" stroke="#c23b6c" stroke-width="2" fill="none"/>
-<line x1="220" y1="200" x2="220" y2="62" stroke="#1c2430" stroke-dasharray="2,2"/><text x="215" y="212" font-size="10">$t_{5\%}$</text>
-<text x="330" y="90" fill="#c23b6c">Réponse s(t)</text>
-<defs><marker id="arR" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#1c2430"/></marker></defs>
-</svg>
-<figcaption>Fig. 4 — Temps de réponse à 5 % : $t_{5\%}$ est l'instant à partir duquel la réponse reste dans la bande $\pm5\%$ autour de la valeur asymptotique $s_\infty$.</figcaption>
+<img src="./img/13-fig13-t5pct.png" alt="Temps de réponse à 5 %">
 </figure>
 <div class="block correction">
-<span class="label">Attention — piège classique</span>
-Il faut prendre la bande à $\pm5\%$ par rapport à la <strong>valeur finale du signal de sortie</strong> $s_\infty$, et non par rapport à la consigne d'entrée !
+<span class="label">Attention</span>
+Il faut prendre la bande à ±5% par rapport à la <strong>valeur finale du signal de sortie</strong> ($s_\infty$) et non par rapport à la consigne d'entrée !
 </div>
+<figure>
+<img src="./img/13-fig14-t5pct-comparaison.png" alt="Comparaison de la bande à 5% prise sur la sortie et sur la consigne">
+</figure>
 
 <h3>3.2. Précision d'un système</h3>
 <div class="block def">
-<span class="label">Définition — précision</span>
-La <strong>précision</strong> qualifie l'aptitude du système à atteindre la valeur visée. Elle est caractérisée par l'écart entre la consigne et la valeur effectivement atteinte par la grandeur de sortie (l'écart s'exprime dans la même unité que la grandeur de sortie).
+<span class="label">Définition de la précision</span>
+La <strong>précision</strong> qualifie <strong>l'aptitude</strong> du système à atteindre la <strong>valeur visée</strong>. Elle est caractérisée par <strong>l'écart</strong> entre la consigne et la valeur effectivement atteinte par la grandeur de sortie.
 </div>
-<p>On distingue deux types de précision :</p>
-<h4>3.2.1. Écart statique $\varepsilon_s$</h4>
-<p>Le système est en mode régulation (entrée fixe). On définit l'écart statique $\varepsilon_s$ comme l'écart entre la consigne fixe $E_0$ et la réponse $s(t)$ en régime permanent :</p>
+<p>L'écart éventuel s'exprime dans la même unité que la grandeur de sortie. On distingue deux types de précision :</p>
+<ul>
+<li><strong>Précision statique</strong></li>
+<li><strong>Précision dynamique</strong></li>
+</ul>
+<h4>3.2.1. Ecart statique $\varepsilon_s$</h4>
+<p>Le système est en mode régulation (entrée fixe). On définit alors l'écart statique $\varepsilon_s$ comme l'écart entre la consigne fixe $E_0$ et la réponse s(t) en régime permanent.</p>
 <p>$$\varepsilon_s=\lim_{t\to+\infty}\big(e(t)-s(t)\big)=\lim_{t\to+\infty}\big(E_0.u(t)-s(t)\big)$$</p>
-<div class="block remark">
-<span class="label">Remarque</span>
-Un système régulateur est <strong>précis</strong> si l'écart statique est nul.
-</div>
-<h4>3.2.2. Écart dynamique $\varepsilon_t$</h4>
-<p>L'écart dynamique, aussi appelé écart (ou erreur) de traînage ou de poursuite, représente la différence entre la consigne variable et la réponse en régime permanent :</p>
+<p>Un système régulateur est précis si l'écart statique est nul.</p>
+<figure>
+<img src="./img/13-fig15-ecart-statique.png" alt="Écart statique">
+</figure>
+
+<h4>3.2.2. Ecart dynamique $\varepsilon_t$</h4>
+<p>L'écart dynamique, aussi appelé écart (erreur) de trainage ou écart (erreur) de poursuite, il représente la différence entre la consigne variable et la réponse en régime permanent.</p>
 <p>$$\varepsilon_t=\lim_{t\to+\infty}\big(e(t)-s(t)\big)$$</p>
+<figure>
+<img src="./img/13-fig16-ecart-dynamique.png" alt="Écart dynamique">
+</figure>
 
 <h3>3.3. Stabilité d'un système</h3>
 <div class="block def">
-<span class="label">Définition — stabilité (BIBO)</span>
-Un système est <strong>stable</strong> si, à une entrée bornée, correspond une sortie bornée.
+<span class="label">Définition de la stabilité</span>
+Un système est <strong>stable</strong>, si, à une entrée bornée, correspond une sortie bornée.
 </div>
+<p>Exemples de systèmes stables :</p>
 <figure>
-<svg viewBox="0 0 620 190" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11">
-<g transform="translate(10,10)">
-<line x1="0" y1="140" x2="270" y2="140" stroke="#1c2430" marker-end="url(#arSt)"/><line x1="0" y1="150" x2="0" y2="0" stroke="#1c2430" marker-end="url(#arSt)"/>
-<line x1="0" y1="40" x2="220" y2="40" stroke="#2fa365"/><text x="30" y="30" fill="#2fa365">consigne</text>
-<path d="M0,140 Q40,20 220,40" stroke="#c23b6c" stroke-width="2" fill="none"/><text x="120" y="90" fill="#c23b6c">réponse</text>
-<text x="90" y="165" font-weight="700">Stable — 1er ordre</text>
-</g>
-<g transform="translate(320,10)">
-<line x1="0" y1="140" x2="270" y2="140" stroke="#1c2430" marker-end="url(#arSt)"/><line x1="0" y1="150" x2="0" y2="0" stroke="#1c2430" marker-end="url(#arSt)"/>
-<line x1="0" y1="60" x2="220" y2="60" stroke="#2fa365"/><text x="30" y="50" fill="#2fa365">consigne</text>
-<path d="M0,140 Q30,10 60,40 T120,58 T180,60 T220,60" stroke="#c23b6c" stroke-width="2" fill="none"/><text x="120" y="30" fill="#c23b6c">réponse</text>
-<text x="80" y="165" font-weight="700">Stable — oscillant amorti</text>
-</g>
-</svg>
-<figcaption>Fig. 5 — Deux exemples de systèmes stables : réponse apériodique (1<sup>er</sup> ordre) et réponse oscillante amortie, toutes deux convergeant vers une valeur finie.</figcaption>
+<img src="./img/13-fig17-stable-aperiodique.png" alt="Système stable — réponse apériodique">
 </figure>
-<div class="block remark">
-<span class="label">Remarque</span>
-Le bouclage peut <strong>déstabiliser</strong> un système : un système instable présente par exemple une réponse qui diverge (croissance non bornée) ou des oscillations d'amplitude croissante, sans jamais se stabiliser.
-</div>
+<figure>
+<img src="./img/13-fig18-stable-oscillant.png" alt="Système stable — réponse oscillante amortie">
+</figure>
+<p><em>Remarque :</em> Le bouclage peut déstabiliser un système.</p>
+<p>Exemples de systèmes instables :</p>
+<figure>
+<img src="./img/13-fig19-instable-divergent.png" alt="Système instable — réponse divergente">
+</figure>
+<figure>
+<img src="./img/13-fig20-instable-oscillant.png" alt="Système instable — oscillations d'amplitude croissante">
+</figure>
 
 <h3>3.4. Amortissement d'un système</h3>
-<p>L'amortissement est caractérisé par le rapport entre les amplitudes successives des oscillations de la sortie. Plus ces oscillations s'atténuent rapidement, plus le système est amorti. On distingue : système <strong>peu amorti</strong> (oscillations nombreuses avant stabilisation), système <strong>trop amorti</strong> (réponse lente, sans dépassement, proche d'une exponentielle), système <strong>bien amorti</strong> (compromis : peu de dépassement, stabilisation rapide).</p>
-<p>Pour caractériser la qualité de l'amortissement, on retient deux critères :</p>
-<div class="block def">
-<span class="label">Taux de dépassement (en %)</span>
-Caractérise l'amplitude maximale des oscillations, à partir du premier dépassement $s(t_1)$ :
-$$D_{1\%}=\left|\frac{s(t_1)-s_\infty}{s_\infty}\right|$$
-</div>
-<p>Le second critère est le <strong>temps de réponse à 5 %</strong>, qui correspond au temps de stabilisation du système (voir § 3.1).</p>
+<p>L'amortissement est caractérisé par le rapport entre les amplitudes successives des oscillations de la sortie. Plus ces oscillations s'atténuent rapidement, plus le système est amorti.</p>
 <figure>
-<svg viewBox="0 0 560 190" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11">
-<line x1="30" y1="170" x2="530" y2="170" stroke="#1c2430" marker-end="url(#arD)"/><text x="535" y="175">temps t</text>
-<line x1="30" y1="180" x2="30" y2="10" stroke="#1c2430" marker-end="url(#arD)"/>
-<line x1="30" y1="80" x2="500" y2="80" stroke="#2fa365" stroke-width="1.5"/><text x="330" y="70" fill="#2fa365">consigne</text>
-<path d="M30,170 L90,30 L130,105 L170,68 L200,90 L230,78 L260,84 L500,80" stroke="#c23b6c" stroke-width="2" fill="none"/>
-<line x1="90" y1="180" x2="90" y2="30" stroke="#1c2430" stroke-dasharray="2,2"/><text x="70" y="192" font-size="10">$t_1$</text>
-<text x="95" y="25" font-size="10.5">premier dépassement — $s(t_1)$</text>
-<text x="330" y="95" fill="#c23b6c">réponse</text>
-<defs><marker id="arD" markerWidth="7" markerHeight="7" refX="5" refY="2.5" orient="auto"><path d="M0,0 L5,2.5 L0,5 Z" fill="#1c2430"/></marker></defs>
-</svg>
-<figcaption>Fig. 6 — Taux de dépassement $D_{1\%}$ : rapport entre l'écart au premier pic $|s(t_1)-s_\infty|$ et la valeur asymptotique $s_\infty$.</figcaption>
+<img src="./img/13-fig21-amortissements.png" alt="Système peu amorti, trop amorti, bien amorti">
+<figcaption>Figure 11 : Différents amortissements.</figcaption>
 </figure>
+<p>Pour caractériser la qualité de l'amortissement on peut retenir deux critères :</p>
+<ul>
+<li>le <strong>taux de dépassement</strong> (en pourcentage) qui caractérise l'amplitude maximale des oscillations ;</li>
+</ul>
+<p>$$D_{1\%}=\left|\frac{s(t_1)-s_\infty}{s_\infty}\right|$$</p>
+<figure>
+<img src="./img/13-fig22-depassement.png" alt="Premier dépassement s(t1)">
+</figure>
+<ul>
+<li>le <strong>temps de réponse à 5%</strong> qui correspond au temps de stabilisation du système.</li>
+</ul>
+<p>Il est à noter que pour certaines applications (l'usinage par exemple), un comportement oscillant n'est pas autorisé et tout dépassement est inacceptable.</p>
 
 <h3>3.5. Bilan sur les critères de performance</h3>
-<p>L'asservissement idéal d'un système implique une bonne stabilité et une bonne précision ; le régime transitoire doit ainsi être rapide et bien amorti (le système fait vite et bien ce qui lui est demandé). <strong>Ces critères de performance ne sont pas toujours compatibles.</strong></p>
+<p>L'asservissement idéal d'un système implique une bonne stabilité et une bonne précision ; le régime transitoire doit ainsi être rapide et bien amorti (le système fait vite et bien ce qui lui est demandé). Ces critères de performances ne sont pas toujours compatibles.</p>
 <p>Par exemple, en mécanique, un système de faible inertie réagira rapidement à une consigne de positionnement. En revanche, du fait de cette faible inertie, il risque d'être peu amorti, voire instable, à la moindre perturbation.</p>
-<div class="block remark">
-<span class="label">N.B. — Inertie</span>
-Résistance qu'un corps oppose à la variation de son mouvement, et qui résulte de sa masse.
-</div>
+<p><strong>N.B.</strong> Inertie : Résistance qu'un corps oppose à la variation de son mouvement, et qui résulte de sa masse.</p>
 </section>
 
 <section id="quiz">
