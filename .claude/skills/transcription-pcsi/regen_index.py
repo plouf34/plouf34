@@ -89,7 +89,7 @@ def manual_line_html(folder):
 def table_row(num, titre, url, pdf_url=None):
     n_html = esc(num) if num else "—"
     if url:
-        link_html = f'<a class="pill pill-sujet" href="{esc(url)}" target="_blank" rel="noopener">📄 Ouvrir</a>'
+        link_html = f'<a class="pill pill-sujet" href="{esc(url)}" target="_blank" rel="noopener">📄 HTML</a>'
     else:
         link_html = '<span class="pill pill-off">—</span>'
     if pdf_url:
@@ -344,7 +344,8 @@ def main():
 <header>
   <div class="crosslinks">
     <a href="../../index.html">🏠 Accueil</a>
-    <a href="../../Kit_Revision_PCSI.html">🎯 Kit de révision PCSI</a>
+    <a href="../../Kit_Revision_PCSI.html">🎯 DS</a>
+    <a href="../../Ressources_MP.html">🔗 Liens</a>
   </div>
   <h1><a href="https://www.prepabarthou.fr/cours/my/courses.php" target="_blank" rel="noopener"><img src="../../logo-barthou.png" alt="">Prépa Barthou — 1ère année</a></h1>
   <p>Cours, TD et exercices — mis à jour au fil de l'année</p>

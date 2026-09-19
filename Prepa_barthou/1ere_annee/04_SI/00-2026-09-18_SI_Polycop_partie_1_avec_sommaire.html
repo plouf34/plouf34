@@ -642,7 +642,7 @@ $$s(t) = K\,E_0\left[1-\frac{e^{-\xi\omega_0 t}}{\sqrt{1-\xi^2}}\sin(\omega_p t+
 
 <div class="block correction">
 <span class="label">⚠️ Correction</span>
-Le document donne la formule finale sous la forme $s(t)=K.E_0\Big[1+\dfrac{1}{\sqrt{1-\xi^2}}e^{-\xi\omega_0 t}\sin(\omega_p t+\varphi)\Big]$ avec $\varphi=-\arctan\!\big(\sqrt{1-\xi^2}/\xi\big)$. Cette forme contredit la propriété <em>« Remarque : s(0)=0 »</em> énoncée immédiatement après dans le même document : en réinjectant $t=0$, on obtient $s(0)=K.E_0\big(1-\sqrt{1-\xi^2}\big)\neq 0$ pour $\xi\in\,]0,1[$ (par exemple $\xi=0{,}5\Rightarrow s(0)\approx0{,}13\,K.E_0$). En reprenant la décomposition en éléments simples donnée juste avant dans le même document ($s(t)=K.E_0\big[1-e^{-\xi\omega_0t}(\cos\omega_pt+\tfrac{\xi}{\sqrt{1-\xi^2}}\sin\omega_pt)\big]$, elle bien correcte et vérifie $s(0)=0$), on retrouve la forme condensée avec un signe <strong>moins</strong> devant le terme sinusoïdal et $\psi=+\arctan(\sqrt{1-\xi^2}/\xi)$ — c'est la forme usuelle donnée par les manuels de référence (H-Prépa SI, Précis Bréal SI) pour la réponse indicielle du second ordre sous-amorti.
+Le document donne la formule finale sous la forme $s(t)=K.E_0\Big[1+\dfrac{1}{\sqrt{1-\xi^2}}e^{-\xi\omega_0 t}\sin(\omega_p t+\varphi)\Big]$ avec $\varphi=-\arctan\!\big(\sqrt{1-\xi^2}/\xi\big)$. Cette forme donne bien $s(0)=0$ (le terme en $\sin\varphi$ se divise exactement par $\sqrt{1-\xi^2}$), donc l'erreur n'est pas là ; mais en dérivant, elle donne $s'(0)=2\,\xi\,\omega_0\neq0$ pour $\xi\in\,]0,1[$, ce qui contredit la propriété <em>« tangente à l'origine : horizontale »</em> (donc $s'(0)=0$) énoncée juste après dans le même document. En développant $\sin(\omega_pt+\varphi)$ avec cette valeur de $\varphi$, la formule du document se réduit à $s(t)=K.E_0\big[1-e^{-\xi\omega_0t}(\cos\omega_pt-\tfrac{\xi}{\sqrt{1-\xi^2}}\sin\omega_pt)\big]$ : le signe du terme en sinus y est inversé par rapport à la décomposition en éléments simples donnée juste avant dans le même document, $s(t)=K.E_0\big[1-e^{-\xi\omega_0t}(\cos\omega_pt+\tfrac{\xi}{\sqrt{1-\xi^2}}\sin\omega_pt)\big]$ — celle-ci découle directement des tables usuelles de Laplace ($\mathcal{L}^{-1}[(p+a)/((p+a)^2+b^2)]=e^{-at}\cos(bt)$, $\mathcal{L}^{-1}[b/((p+a)^2+b^2)]=e^{-at}\sin(bt)$) et se vérifie indépendamment par résolution directe de l'équation différentielle $\ddot s+2\xi\omega_0\dot s+\omega_0^2s=\omega_0^2KE_0$ : elle est correcte et vérifie à la fois $s(0)=0$ et $s'(0)=0$. En reprenant l'identité trigonométrique correctement, on retrouve la forme condensée avec un signe <strong>moins</strong> devant la fraction et $\psi=+\arctan(\sqrt{1-\xi^2}/\xi)$ (au lieu du signe plus et de l'angle opposé du document) — c'est la forme usuelle donnée par les manuels de référence (H-Prépa SI, Précis Bréal SI, Ogata) pour la réponse indicielle du second ordre sous-amorti.
 </div>
 
 <figure>
@@ -986,6 +986,12 @@ Soit $\dfrac{N(p)}{D(p)}=\dfrac{p^3+2}{p(p^2-2p+1)(p^3-2p^2+p-2)}$.
 <div class="step"><span>$\dfrac{N(p)}{D(p)} = -\dfrac1p+\dfrac{2}{5(p-1)}-\dfrac{3}{2(p-1)^2}+\dfrac{1}{p-2}-\dfrac{4p+3}{10(p^2+1)}$</span></div>
 </div>
 </div>
+<div class="block correction">
+<span class="label">⚠️ Correction</span>
+Le document source évalue $N(p)=p^3+2$ en $p=j$ comme $N(j)=j+2$, alors que $j^3=j^2\cdot j=-j$, donc $N(j)=j^3+2=2-j$ (et non $j+2$) : il y a une erreur de signe. En reprenant le calcul avec la bonne valeur, $E\,j+F = \dfrac{N(j)}{j(j-1)^2(j-2)} = \dfrac{2-j}{-4+2j} = -\dfrac12$ (un nombre <strong>réel</strong>, sans partie imaginaire), d'où $E=0$ et $F=-1/2$ — et non $E=-2/5$, $F=-3/10$. La relation à $p\to\infty$ utilisée pour $B$ ($A+B+D+E=-1$, car le degré de $N$ est strictement inférieur à celui de $D$) donne alors $B=-A-D-E=1-1-0=0$, et non $2/5$. La décomposition correcte, vérifiée indépendamment par calcul symbolique, est :
+$$\frac{N(p)}{D(p)} = -\frac1p-\frac{3}{2(p-1)^2}+\frac{1}{p-2}-\frac{1}{2(p^2+1)}$$
+(le terme en $1/(p-1)$ disparaît, $B=0$ ; le terme en $p/(p^2+1)$ disparaît aussi, $E=0$).
+</div>
 
 </section>
 
@@ -1060,7 +1066,7 @@ Un système trop rapide mais insuffisamment amorti ($\xi$ faible, pôles proches
 <li>Programme officiel de Sciences Industrielles pour l'Ingénieur, CPGE 1<sup>re</sup> année (filière PCSI) : <a href="https://www.enseignementsup-recherche.gouv.fr/" target="_blank">enseignementsup-recherche.gouv.fr</a></li>
 <li>H-Prépa Sciences Industrielles pour l'Ingénieur (Hachette Éducation) — chapitres « Modélisation », « Réponse temporelle des systèmes fondamentaux », « Schémas-blocs », « Systèmes bouclés »</li>
 <li>Précis Bréal Sciences de l'Ingénieur — formulaire de transformée de Laplace, réponse indicielle du second ordre sous-amorti (forme de référence utilisée pour la correction de la formule de §V.4)</li>
-<li>Correction de la formule de réponse oscillatoire (§V.4) : dérivation directe présentée dans l'encart ⚠️, à partir de la décomposition en éléments simples donnée par le document source lui-même et de la propriété $s(0)=0$ qu'il énonce.</li>
+<li>Correction de la formule de réponse oscillatoire (§V.4) : dérivation directe présentée dans l'encart ⚠️, à partir de la décomposition en éléments simples donnée par le document source lui-même, de la propriété $s'(0)=0$ (tangente horizontale) qu'il énonce, et d'une résolution indépendante de l'équation différentielle du second ordre.</li>
 </ul>
 </section>
 
