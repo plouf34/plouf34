@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ressources & liens utiles — Prépa</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  :root {
+    --bg: #f2f2f7;
+    --card-bg: #ffffff;
+    --text: #1c1c1e;
+    --sub: #6e6e73;
+    --accent: #0a63d3;
+    --border: #e2e2e7;
+    --section-bg: #dfe8f7;
+    --section-text: #1F4E78;
+    --row-alt: #fafafc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000;
+      --card-bg: #1c1c1e;
+      --text: #f5f5f7;
+      --sub: #9a9a9e;
+      --accent: #4da3ff;
+      --border: #2c2c2e;
+      --section-bg: #16344f;
+      --section-text: #bcd6f2;
+      --row-alt: #232325;
+    }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  header { padding: max(env(safe-area-inset-top, 14px), 14px) 16px 8px 16px; text-align: center; }
+  .crosslinks { display:flex; justify-content:center; align-items:center; gap:14px; margin-bottom:8px; flex-wrap:wrap; }
+  .crosslinks a { display:inline-flex; align-items:center; gap:4px; font-size:12px; font-weight:600; color:var(--accent); text-decoration:none; }
+  .crosslinks img { height:16px; width:auto; border-radius:3px; vertical-align:middle; }
+  header h1 { font-size: 19px; margin: 4px 0 2px 0; font-weight: 700; }
+  header p { margin: 0; color: var(--sub); font-size: 12px; }
+  html { scroll-behavior: smooth; }
+  nav#tabs {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; gap: 4px; overflow-x: auto;
+    max-width: 760px; margin: 0 auto;
+    padding: 6px 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  nav#tabs a {
+    flex: 1 1 0; border-radius: 16px;
+    padding: 6px 4px; font-size: 12px; font-weight: 600;
+    background: var(--card-bg); color: var(--text);
+    text-decoration: none; white-space: nowrap;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  nav#tabs a.tab-home { flex: 0 0 auto; padding: 6px 10px; }
+  main { padding: 10px 8px 40px 8px; max-width: 760px; margin: 0 auto; }
+  .subject { scroll-margin-top: 56px; padding-top: 4px; }
+  .subject-title {
+    font-size: 18px; font-weight: 700; margin: 22px 4px 6px 4px;
+    padding-top: 10px; border-top: 1px solid var(--border);
+  }
+  .subject:first-of-type .subject-title { border-top: none; margin-top: 4px; }
+  .intro { font-size: 12.5px; color: var(--sub); margin: 4px 6px 14px 6px; line-height: 1.5; }
+
+  table {
+    width: 100%; border-collapse: collapse;
+    background: var(--card-bg); border-radius: 12px;
+    overflow: hidden; font-size: 12.5px;
+    border: 1px solid var(--border);
+  }
+  thead th {
+    background: #1F4E78; color: #fff;
+    font-size: 11px; text-transform: uppercase; letter-spacing: .03em;
+    padding: 8px 6px; text-align: left; font-weight: 700;
+  }
+  tbody tr:nth-child(even):not(.section-row) { background: var(--row-alt); }
+  tbody tr:not(.section-row) { border-top: 1px solid var(--border); }
+  td { padding: 8px 6px; vertical-align: middle; word-break: break-word; }
+  .section-row td {
+    background: var(--section-bg); color: var(--section-text);
+    font-weight: 700; font-size: 11.5px; text-transform: uppercase;
+    letter-spacing: .02em; padding: 7px 8px;
+  }
+  .col-matiere { width: 120px; font-weight: 700; }
+  .col-lien a.pill {
+    display: inline-block; font-size: 11.5px; font-weight: 600; text-decoration: none;
+    padding: 4px 8px; border-radius: 8px; background: rgba(10,99,211,0.12); color: var(--accent);
+    word-break: break-all;
+  }
+  .col-lien .off { color: var(--sub); font-style: italic; font-size: 11.5px; }
+  .col-lien .multi a.pill { display: block; margin-bottom: 4px; }
+  .col-lien .multi a.pill:last-child { margin-bottom: 0; }
+
+  footer { text-align: center; padding: 16px; color: var(--sub); font-size: 10.5px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crosslinks">
+    <a href="index.html">🏠 Accueil</a>
+    <a href="Kit_Revision_PCSI.html">🎯 Kit de révision PCSI</a>
+    <a href="Prepa_barthou/1ere_annee/index.html"><img src="logo-barthou.png" alt="">Prépa Barthou</a>
+  </div>
+  <h1>🔗 Ressources & liens utiles</h1>
+  <p>Sites et dossiers partagés — pour les 2 années de prépa</p>
+</header>
+
+<nav id="tabs">
+  <a href="index.html" class="tab-home" title="Accueil">🏠</a>
+  <a href="#sites">🌐 Sites</a>
+  <a href="#drive">🗂️ Google Drive</a>
+</nav>
+
+<main>
+  <div class="intro">Liste de sites et dossiers partagés jugés utiles pour les deux années de prépa (sup et spé) — cours, sujets de concours, forums d'entraide. Transcrit depuis un document partagé par un professeur ; certains liens n'ont pas pu être vérifiés individuellement.</div>
+
+  <section id="sites" class="subject">
+    <h2 class="subject-title">🌐 Sites &amp; plateformes</h2>
+    <table>
+      <thead><tr><th class="col-matiere">Matière / objet</th><th class="col-lien">Lien</th></tr></thead>
+      <tbody>
+        <tr><td class="col-matiere">Presque tout</td><td class="col-lien"><a class="pill" href="https://www.cpge-paradise.com/sites.php" target="_blank" rel="noopener">🔗 cpge-paradise.com</a></td></tr>
+        <tr><td class="col-matiere">Sujets de concours</td><td class="col-lien"><a class="pill" href="https://concours-maths-cpge.fr/" target="_blank" rel="noopener">🔗 concours-maths-cpge.fr</a></td></tr>
+        <tr><td class="col-matiere">Sujets de concours</td><td class="col-lien"><a class="pill" href="https://www.doc-solus.fr/" target="_blank" rel="noopener">🔗 doc-solus.fr</a></td></tr>
+        <tr><td class="col-matiere">Sujets de concours CNC</td><td class="col-lien"><a class="pill" href="https://rtc.ma/" target="_blank" rel="noopener">🔗 rtc.ma</a></td></tr>
+        <tr><td class="col-matiere">Maths (Akouibaa)</td><td class="col-lien"><a class="pill" href="http://maths-mp.e-monsite.com/" target="_blank" rel="noopener">🔗 maths-mp.e-monsite.com</a></td></tr>
+        <tr><td class="col-matiere">Concours tunisiens</td><td class="col-lien"><a class="pill" href="https://ipeis.rnu.tn/fra/s1320/pages/451/Concours-nationaux" target="_blank" rel="noopener">🔗 ipeis.rnu.tn — Concours nationaux</a></td></tr>
+        <tr><td class="col-matiere">AlloSchool</td><td class="col-lien"><a class="pill" href="https://www.alloschool.com/" target="_blank" rel="noopener">🔗 alloschool.com</a></td></tr>
+        <tr><td class="col-matiere">Maths — Bibmath</td><td class="col-lien"><a class="pill" href="https://www.bibmath.net/" target="_blank" rel="noopener">🔗 bibmath.net</a></td></tr>
+        <tr><td class="col-matiere">Maths (dd)</td><td class="col-lien"><a class="pill" href="http://ddmaths.free.fr/" target="_blank" rel="noopener">🔗 ddmaths.free.fr</a></td></tr>
+        <tr><td class="col-matiere">Maths-France</td><td class="col-lien"><a class="pill" href="https://web.archive.org/web/20200725125649/http://maths-france.fr/MathSpe/Cours/index.php" target="_blank" rel="noopener">🔗 maths-france.fr (archive)</a></td></tr>
+        <tr><td class="col-matiere">Maths sup/spé (myismail)</td><td class="col-lien"><a class="pill" href="http://myismail.net/classes-prepas/math-sup-mpsi-pcsi-tsi/2013-07-18-17-31-15" target="_blank" rel="noopener">🔗 myismail.net</a></td></tr>
+        <tr><td class="col-matiere">Tout (e-learning)</td><td class="col-lien"><a class="pill" href="https://www.elearning-cpge.com/" target="_blank" rel="noopener">🔗 elearning-cpge.com</a></td></tr>
+        <tr><td class="col-matiere">Physique (CNC &amp; CF)</td><td class="col-lien"><div class="multi">
+          <a class="pill" href="http://b.louchart.free.fr/Concours_et_examens/CNC/CNC_MP.html" target="_blank" rel="noopener">🔗 b.louchart.free.fr — CNC MP</a>
+          <a class="pill" href="http://b.louchart.free.fr/Concours_et_examens/Concours_et_examens.html" target="_blank" rel="noopener">🔗 b.louchart.free.fr — Concours et examens</a>
+        </div></td></tr>
+        <tr><td class="col-matiere">Physique (CNC &amp; CF)</td><td class="col-lien"><a class="pill" href="https://cpgemaroc.com/index.php/session-2022" target="_blank" rel="noopener">🔗 cpgemaroc.com — session 2022</a></td></tr>
+        <tr><td class="col-matiere">Presque tout</td><td class="col-lien"><span class="off">CPGE-Student — By Ezzara Lahcen (URL non lisible sur la capture d'origine)</span></td></tr>
+        <tr><td class="col-matiere">SII — concours</td><td class="col-lien"><a class="pill" href="https://apsim.ma/docs-sii/filiere-MP_PSI" target="_blank" rel="noopener">🔗 apsim.ma — filière MP/PSI</a></td></tr>
+        <tr><td class="col-matiere">Info — concours</td><td class="col-lien"><a class="pill" href="http://www.cpge-sii.com/informatique/concours/" target="_blank" rel="noopener">🔗 cpge-sii.com — informatique</a></td></tr>
+        <tr><td class="col-matiere">Info — concours</td><td class="col-lien"><a class="pill" href="https://zbakhinfo.odoo.com/cnc" target="_blank" rel="noopener">🔗 zbakhinfo.odoo.com — CNC</a></td></tr>
+        <tr><td class="col-matiere">Info</td><td class="col-lien"><a class="pill" href="http://cpgebank.com/#" target="_blank" rel="noopener">🔗 cpgebank.com</a></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="drive" class="subject">
+    <h2 class="subject-title">🗂️ Dossiers Google Drive</h2>
+    <table>
+      <thead><tr><th class="col-matiere">Matière / objet</th><th class="col-lien">Lien</th></tr></thead>
+      <tbody>
+        <tr><td class="col-matiere">Généralités</td><td class="col-lien"><a class="pill" href="https://drive.google.com/drive/u/0/mobile/folders/1wUPkb2ZmziQhhamdN2ExJO1lI-4dRT9w" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+        <tr><td class="col-matiere">Elamdaoui</td><td class="col-lien"><a class="pill" href="https://drive.google.com/drive/u/0/mobile/folders/1oZfdOAyJMmvzuOWVrT60QEjEWWPp3i73?fbclid=IwAR0TWjM-2_HVklM0sy1Kh-Q6b9gEzhBxH38YSLqsmhOX2nJrQgOHArTNKVM" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+        <tr><td class="col-matiere">Proba</td><td class="col-lien"><a class="pill" href="https://drive.google.com/drive/u/0/mobile/folders/1RSdMS8RRAwPlamGqYij2_X2mkx6sm9dF/15h0iSf5N2iRafqxTnb4hQbC0DgXZlZGx?usp=sharing&sort=13&direction=a" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+        <tr><td class="col-matiere">Complément</td><td class="col-lien"><a class="pill" href="https://drive.google.com/drive/u/0/mobile/folders/1TxfNCVlLN0GpzlktEqM0-x14nKOB-IJo/1N_XAjqohbBOSAqHWtRQp-lOZIKpjW9Qv/1xWOoIKDRNJYb2MvuFP4i4EkrHu7BWBq0?sort=13&direction=a" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+        <tr><td class="col-matiere">Maths</td><td class="col-lien"><a class="pill" href="https://drive.google.com/drive/mobile/folders/1JoG_AwGjL_BPFlCH6alzOHRSlSmwkEIN?usp=sharing" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+        <tr><td class="col-matiere">Fiches Maths/PC</td><td class="col-lien"><a class="pill" href="https://drive.google.com/drive/u/0/mobile/folders/1SL7T9zRwn0wPWu5QI9XT1bKM9xo6fRO9" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+        <tr><td class="col-matiere">TIPE anciens</td><td class="col-lien"><div class="multi">
+          <a class="pill" href="https://drive.google.com/drive/mobile/folders/1rJHtnYEMXswykJQd2FSC9HUhrFDeuGNc?fbclid=IwAR3GN9ZUV_WA8455ncaS8smUIdSX0cRZT6DthEbAulmqoP3jTssPqzCfevI" target="_blank" rel="noopener">🗂️ Dossier 1</a>
+          <a class="pill" href="https://drive.google.com/drive/u/0/mobile/folders/18sxUkMT6LNvc2P351GMLqi9YkhjPE8ZN" target="_blank" rel="noopener">🗂️ Dossier 2</a>
+          <a class="pill" href="https://drive.google.com/drive/u/0/mobile/folders/18sxUkMT6LNvc2P351GMLqi9YkhjPE8ZN/1lLKsY5L8KjRqrf06qxkSnmBF-gWa-5Ek?sort=13&direction=a" target="_blank" rel="noopener">🗂️ Dossier 3</a>
+        </div></td></tr>
+        <tr><td class="col-matiere">Asservissement</td><td class="col-lien"><a class="pill" href="https://drive.google.com/drive/mobile/folders/1IazM9HXVh4r6o4ZFoWdazy1UShNEteSt?usp=sharing" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+        <tr><td class="col-matiere">SII (Lask)</td><td class="col-lien"><a class="pill" href="https://drive.google.com/drive/u/0/folders/1q8hY8E6qzBffVNJjz-JDk6F84vTYiRlA" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+        <tr><td class="col-matiere">Physique (Lask)</td><td class="col-lien"><div class="multi">
+          <a class="pill" href="https://drive.google.com/file/d/1kxK8gfQRLza5b1jea6aF5U4Pg5OkH-y5/view?usp=share_link" target="_blank" rel="noopener">🗂️ Fichier</a>
+          <a class="pill" href="https://drive.google.com/drive/folders/1arLePKrpODmrh5cbYC243eNEMW90dm5b" target="_blank" rel="noopener">🗂️ Dossier</a>
+        </div></td></tr>
+        <tr><td class="col-matiere">SII</td><td class="col-lien"><a class="pill" href="https://drive.google.com/drive/u/0/folders/1z3jvU9XqwDUKbNcV9MH0VbnLTLOKduwW" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+        <tr><td class="col-matiere">SII sup</td><td class="col-lien"><a class="pill" href="https://drive.google.com/drive/mobile/folders/1c346JAMsx-qkV65a6CNeJ0WT0uFClARf" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+        <tr><td class="col-matiere">Physique (Bouhamza)</td><td class="col-lien"><a class="pill" href="https://drive.google.com/drive/mobile/folders/1euMviKJSs_S0oVPyuDsW_4jqdqhA0MQi" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+        <tr><td class="col-matiere">Concours physique 2022</td><td class="col-lien"><a class="pill" href="https://drive.google.com/file/d/1iaZpsJw5L0lrU0iocqwAd-r_m5lO3c7C/view" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+        <tr><td class="col-matiere">Rédaction</td><td class="col-lien"><a class="pill" href="https://drive.google.com/drive/mobile/folders/1F-GDBm-S7EShZ_ps3Ed-tX06b05P6UgH" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+        <tr><td class="col-matiere">Résumés Maths (Lydex)</td><td class="col-lien"><a class="pill" href="https://drive.google.com/drive/folders/1ypyJnOUi1CSIptQPDP8zBLSIJzKYxCuK?usp=share_link" target="_blank" rel="noopener">🗂️ Ouvrir</a></td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<footer>Liens externes non hébergés sur ce site — vérifie leur disponibilité avant de t'appuyer sur eux.</footer>
+
+</body>
+</html>
