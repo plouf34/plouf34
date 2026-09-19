@@ -59,6 +59,7 @@ p{margin:.6rem 0;}
 .chain .step .why{color:#7a7a72; font-size:.82rem; font-style:italic;}
 figure{margin:1.2rem 0; text-align:center;}
 figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figure img{max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px;}
 figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
 .quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
 .quiz-q{font-weight:700;}
@@ -111,14 +112,22 @@ $$A = \sqrt{A_1^2+A_2^2+2A_1A_2\cos(\varphi_2-\varphi_1)}$$
 En représentant chaque terme par un vecteur $\vec{S_1},\vec{S_2}$ de norme $A_1,A_2$ et d'angle $\varphi_1,\varphi_2$ avec l'axe des phases, $\vec S=\vec{S_1}+\vec{S_2}$ a pour norme $A$, avec $A^2=A_1^2+A_2^2+2A_1A_2\cos(\varphi_2-\varphi_1)$ (loi des cosinus appliquée au triangle des vecteurs).
 </div>
 <figure>
-<svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<line x1="40" y1="180" x2="340" y2="180" stroke="#999" stroke-dasharray="3,2"/><text x="345" y="184" font-size="10">axe des phases</text>
-<line x1="40" y1="180" x2="180" y2="180" stroke="#c0392b" stroke-width="2.2" marker-end="url(#aS2)"/><text x="100" y="197" font-size="12" fill="#c0392b">$\vec{S_1}$ (φ₁)</text>
-<line x1="40" y1="180" x2="220" y2="60" stroke="#7c4fd6" stroke-width="2.2" marker-end="url(#aS2)"/><text x="130" y="120" font-size="12" fill="#7c4fd6">$\vec{S_2}$ (φ₂)</text>
-<line x1="180" y1="180" x2="220" y2="60" stroke="#7c4fd6" stroke-width="1.4" stroke-dasharray="4,2"/>
-<line x1="40" y1="180" x2="260" y2="80" stroke="#0f2b4c" stroke-width="2.6" marker-end="url(#aS2)"/><text x="230" y="85" font-size="12" fill="#0f2b4c">$\vec S$ (α)</text>
-<path d="M75 180 A 35 35 0 0 0 65 155" fill="none" stroke="#2fa365" stroke-width="1.3"/><text x="55" y="160" font-size="10" fill="#2fa365">α</text>
-<defs><marker id="aS2" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
+<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<line x1="60" y1="205" x2="60" y2="15" stroke="#333" stroke-width="1.2" marker-end="url(#aAxis)"/>
+<line x1="45" y1="190" x2="370" y2="190" stroke="#333" stroke-width="1.2" marker-end="url(#aAxis)"/>
+<text x="18" y="183" font-size="10">t = 0</text>
+<path d="M105,190 A45,45 0 0 0 92,159" fill="none" stroke="#2fa365" stroke-width="1.3"/><text x="78" y="178" font-size="10" fill="#2fa365">α</text>
+<line x1="60" y1="190" x2="173" y2="149" stroke="#c0392b" stroke-width="2.2" marker-end="url(#aS2)"/><text x="95" y="184" font-size="12" fill="#c0392b">$\vec{S_1}$</text>
+<line x1="60" y1="190" x2="119" y2="63" stroke="#7c4fd6" stroke-width="2.2" marker-end="url(#aS2)"/><text x="123" y="60" font-size="12" fill="#7c4fd6">$\vec{S_2}$</text>
+<line x1="173" y1="149" x2="232" y2="22" stroke="#7c4fd6" stroke-width="1.4" stroke-dasharray="4,2"/>
+<line x1="60" y1="190" x2="232" y2="22" stroke="#0f2b4c" stroke-width="2.6" marker-end="url(#aS2)"/><text x="236" y="20" font-size="12" fill="#0f2b4c">$\vec S$</text>
+<text x="325" y="70" font-size="11" fill="#c98a12">$\Delta\varphi=\varphi_2-\varphi_1$</text>
+<text x="325" y="90" font-size="11" fill="#7c4fd6">$\varphi_2$</text>
+<text x="325" y="110" font-size="11" fill="#c0392b">$\varphi_1$</text>
+<defs>
+<marker id="aS2" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker>
+<marker id="aAxis" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker>
+</defs>
 </svg>
 <figcaption>Fig. 1 — Construction de Fresnel : $\vec S=\vec{S_1}+\vec{S_2}$, somme vectorielle des deux phaseurs.</figcaption>
 </figure>
