@@ -55,6 +55,7 @@ p{margin:.6rem 0;}
 .retenir>.label{color:#cfe0f5;}
 figure{margin:1.2rem 0; text-align:center;}
 figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figure img{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
 figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
 table{border-collapse:collapse; margin:1rem 0; width:100%;}
 th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left; font-size:.9rem; vertical-align:middle;}
@@ -126,6 +127,10 @@ Dire qu'une grandeur est <strong>quantifiée</strong> signifie qu'elle ne peut p
 <h3>Ondes électromagnétiques, absorption et émission</h3>
 <p>Une onde électromagnétique (champs électrique et magnétique couplés se propageant dans l'espace) est caractérisée par sa longueur d'onde dans le vide $\lambda_0$, sa période $T$ ou sa fréquence $\nu=1/T$, reliées par $\lambda_0=cT=c/\nu$ ($c\approx3\times10^8\,\mathrm{m\cdot s^{-1}}$).</p>
 <figure>
+<img src="img/01-fig2-onde-electromagnetique-3d.png" alt="Représentation 3D d'une onde électromagnétique : champ électrique E (rouge) et champ magnétique H (bleu), perpendiculaires entre eux, oscillant en phase le long de la direction de propagation.">
+<figcaption>Onde électromagnétique : les champs électrique (E) et magnétique (H), perpendiculaires l'un à l'autre et à la direction de propagation, oscillent en phase ; la longueur d'onde $\lambda_0$ est la périodicité spatiale de cette double oscillation.</figcaption>
+</figure>
+<figure>
 <svg viewBox="0 0 620 140" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif" font-size="11">
 <line x1="10" y1="120" x2="610" y2="120" stroke="#333" stroke-width="1.4"/>
 <line x1="10" y1="120" x2="10" y2="20" stroke="#333" stroke-width="1.4"/>
@@ -151,8 +156,16 @@ La lumière peut être vue comme une onde ou comme un flux de particules sans ma
 L'énergie du photon émis ou absorbé par la matière est exactement égale à la différence d'énergie entre les deux niveaux énergétiques entre lesquels a lieu la transition :
 $$\Delta E=|E_n-E_m|=h\nu=\frac{hc}{\lambda}$$
 </div>
+<figure>
+<img src="img/01-fig3-niveaux-emission-absorption.png" alt="Diagramme des niveaux d'énergie En et Em : flèche descendante représentant l'émission d'un photon (désexcitation), flèche montante représentant l'absorption d'un photon (excitation).">
+<figcaption>Transition entre deux niveaux d'énergie $E_n$ et $E_m$ ($E_n>E_m$) : désexcitation avec émission d'un photon (flèche vers le bas), excitation avec absorption d'un photon (flèche vers le haut).</figcaption>
+</figure>
 <h3>Spectre d'émission de l'atome d'hydrogène</h3>
 <p>Un échantillon de $\mathrm{H_2}$ excité par décharge électrique ($\mathrm{H_2(g)}\to2\,\mathrm{H^*(g)}$) émet des photons dont le spectre présente des raies dans l'UV, le visible et l'IR (4 raies visibles seulement, série de Balmer, $n=2$). Chaque série de raies (Lyman $n=1$, Balmer $n=2$, Paschen $n=3$, Brackett $n=4$, Pfund $n=5$) vérifie :</p>
+<figure>
+<img src="img/01-fig4-spectre-emission-hydrogene.png" alt="Spectre d'émission de l'hydrogène : en haut, raies observées de l'infrarouge à l'ultraviolet ; en bas, spectre coloré réel avec les raies de la série de Lyman (UV) et de Balmer (violet à rouge, Hα à 656 nm) en fonction de la longueur d'onde en nanomètres.">
+<figcaption>Spectre d'émission (réel) de l'atome d'hydrogène : raies dans l'infrarouge, le visible et l'ultraviolet (haut) ; agrandissement coloré autour de la série de Balmer et de la limite de la série de Lyman à 91,2 nm (bas).</figcaption>
+</figure>
 $$\sigma=\frac1\lambda=R_H\left(\frac{1}{n^2}-\frac{1}{n'^2}\right)\qquad n'>n,\ n,n'\in\mathbb{N}^*$$
 <div class="block correction">
 <span class="label">⚠️ Correction — valeur de la constante de Rydberg $R_H$</span>
@@ -169,6 +182,10 @@ L'énergie de l'atome d'hydrogène (référence $E_\infty=0$) est quantifiée pa
 $$E_n=-\frac{R_y}{n^2}=-\frac{E_0}{n^2}=-\frac{13{,}6}{n^2}\,\mathrm{eV}\qquad R_y=2{,}18\times10^{-18}\,\mathrm{J}$$
 État fondamental ($n=1$) : $-13{,}6\,\mathrm{eV}$ ; premier état excité ($n=2$) : $-3{,}40\,\mathrm{eV}$ ; deuxième état excité ($n=3$) : $-1{,}51\,\mathrm{eV}$.
 </div>
+<figure>
+<img src="img/01-fig5-niveaux-energie-hydrogene.png" alt="Diagramme des niveaux d'énergie de l'atome d'hydrogène de n=1 à n=5 (13,6 eV à 0,54 eV), avec les transitions des séries de Lyman, Balmer, Paschen, Brackett et Pfund représentées par des flèches convergeant vers chaque niveau.">
+<figcaption>Diagramme énergétique de l'atome d'hydrogène : transitions correspondant à l'émission d'un photon vers les niveaux $n=1$ (Lyman), $n=2$ (Balmer), $n=3$ (Paschen), $n=4$ (Brackett) et $n=5$ (Pfund).</figcaption>
+</figure>
 <p>Pour un <strong>atome hydrogénoïde</strong> (noyau de charge $Ze$ et un seul électron, ex. $\mathrm{He^+}$, $\mathrm{Li^{2+}}$) : $E_n=-R_yZ^2/n^2$. Exemple : énergie d'ionisation de l'hydrogénoïde du carbone $\mathrm{C^{5+}}$ ($Z=6$, état fondamental) : $EI=E_\infty-E_1=E_0Z^2=489{,}6\,\mathrm{eV}$.</p>
 </section>
 
@@ -211,6 +228,10 @@ La présence d'électrons célibataires confère des propriétés magnétiques p
 <span class="label">⚠️ Exceptions à la règle de Klechkowsky</span>
 Des interactions électron-électron non prises en compte par la règle de Klechkowsky favorisent l'obtention d'un sous-groupe d'OA dégénérées vide, à moitié rempli ou complètement rempli (énergie d'appariement déstabilisante évitée). Exemples : Chrome Cr (Z=24) attendu $4s^23d^4$, réel $4s^13d^5$ ; Cuivre Cu (Z=29) attendu $4s^23d^9$, réel $4s^13d^{10}$ ; Palladium Pd (Z=46, promotion de 2 électrons) réel $5s^04d^{10}$ ; Lanthane La et Gadolinium Gd (promotion s/f→d). Ces exceptions se multiplient quand $Z$ augmente (niveaux de plus en plus proches en énergie).
 </div>
+<figure>
+<img src="img/01-fig6-tableau-exceptions-klechkowsky.png" alt="Classification périodique complète avec les exceptions à la règle de Klechkowsky marquées par un astérisque (*) : Cr, Cu, Nb, Mo, Ru, Rh, Pd, Ag, La, Pt, Au, Ac, Th, Pa, U, Ce, Gd, etc.">
+<figcaption>Classification périodique : les éléments dont la configuration électronique fondamentale déroge à la règle de Klechkowsky sont signalés par un astérisque (*).</figcaption>
+</figure>
 <h3>Électrons de cœur et de valence</h3>
 <div class="block def">
 <span class="label">Définition 4</span>
@@ -226,10 +247,18 @@ Les <strong>électrons de valence</strong> (plus haute énergie, plus externes) 
 <span class="label">Structure en blocs</span>
 Le tableau se répartit en 5 blocs, nommés d'après la dernière OA remplie dans la configuration fondamentale : bloc s (H, He, colonnes 1-2), bloc p (colonnes 13-18), bloc d (colonnes 3-12, à partir de la 3<sup>e</sup> ligne), bloc f (lanthanides, actinides, inséré entre s et d). Chaque ligne (période) débute par le remplissage d'une sous-couche $ns$ et finit par $np$ (si elle existe).
 </div>
+<figure>
+<img src="img/01-fig7-tableau-periodique-blocs-couleurs.png" alt="Classification périodique colorée par état physique (solide en cyan, liquide en vert, gaz en blanc, éléments artificiels encadrés) à 100°C et 101 kPa, avec les blocs s, p, d, f, les lanthanides et les actinides.">
+<figcaption>Classification périodique : état physique de chaque corps simple à 100 °C et 101 kPa (solide, liquide, gaz, élément artificiel) ; les noyaux radioactifs sont en blanc.</figcaption>
+</figure>
 <div class="block def">
 <span class="label">Définition 5 — élément de transition</span>
 Un élément de transition est caractérisé par un sous-niveau $d$ partiellement rempli, à l'état atomique ou dans un état d'oxydation usuel (ex. Sc, $[\mathrm{Ar}]4s^23d^1$, est un élément de transition ; Zn, $[\mathrm{Ar}]4s^23d^{10}$, existant aussi sous forme $\mathrm{Zn^{2+}}\,[\mathrm{Ar}]3d^{10}$, n'en est pas un). Ils forment souvent plusieurs cations (Fe²⁺/Fe³⁺), sont souvent paramagnétiques, et interviennent dans de nombreux processus biologiques via la formation de complexes (ex. hémoglobine, transport de l'O₂).
 </div>
+<figure>
+<img src="img/01-fig8-heme-fer-porphyrine.png" alt="Structure de l'hème : complexe de coordination [Fe]2+ entouré de quatre atomes d'azote N d'un macrocycle porphyrine (quatre cycles pyrrole reliés par des ponts), formant une structure plane tétracoordinée." style="max-width:520px;">
+<figcaption>Structure de l'hème : le cation Fe²⁺ (élément de transition) forme un complexe plan avec les quatre atomes d'azote d'un macrocycle porphyrine — motif présent dans l'hémoglobine pour le transport de l'O₂.</figcaption>
+</figure>
 <h3>Quelques familles</h3>
 <table>
 <tr><th>Colonne</th><th>Famille</th><th>Propriété clé</th></tr>
@@ -253,6 +282,10 @@ H n'appartient pas à la famille des alcalins (ce n'est pas un métal) : il form
 L'électronégativité $\chi$ (concept qualitatif, non mesurable directement) traduit l'affinité d'un atome pour les électrons. Si $\chi_A>\chi_B$ dans une liaison A–B, les électrons de liaison sont attirés vers A : la liaison est polarisée ($A^{-\delta}-B^{+\delta}$). Si $\chi_A=\chi_B$, liaison covalente non polaire ; si le transfert est complet, liaison ionique.
 </div>
 <p>Plusieurs échelles (cohérentes entre elles) : Pauling (référence historique, via les énergies de liaison AA/BB/AB — utilisée en chimie organique), Mulliken, Allred-Rochow (via la charge effective $Z^*$). Le fluor est l'élément le plus électronégatif de la classification, puis O, Cl, Br, I.</p>
+<figure>
+<img src="img/01-fig9-electronegativites-mulliken-pauling.png" alt="Classification périodique donnant, pour chaque élément, l'électronégativité de Mulliken (χM, ligne du haut) et de Pauling (χP, ligne du bas), par exemple χM=2,21 et χP=2,20 pour H, jusqu'à χ≈3,90-3,98 pour le fluor.">
+<figcaption>Électronégativités de Mulliken ($\chi_M$, valeur du haut) et de Pauling ($\chi_P$, valeur du bas) dans la classification périodique.</figcaption>
+</figure>
 <div class="block theorem">
 <span class="label">Tendance générale</span>
 $\chi$ augmente le long d'une <strong>ligne</strong> (période) et diminue le long d'une <strong>colonne</strong> (pour les électrons $ns,np$). Pour le bloc d, énergie d'ionisation et affinité électronique sont faibles : l'électronégativité (Mulliken) des métaux de transition est faible et varie peu.

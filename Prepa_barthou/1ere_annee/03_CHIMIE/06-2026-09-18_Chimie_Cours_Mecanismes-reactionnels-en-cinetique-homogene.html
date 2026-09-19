@@ -128,15 +128,35 @@ Tout acte élémentaire admet un ordre global égal à sa molécularité ; les o
 <span class="label">Coordonnée de réaction et surface d'énergie potentielle</span>
 Le système est décrit par plusieurs paramètres géométriques (ex. deux distances et un angle pour la réaction H+H₂) ; la mécanique quantique impose ici un angle de 180° pour la réaction. L'énergie potentielle en fonction des deux distances définit une <strong>surface d'énergie potentielle</strong> (représentée par des courbes de niveau) ; le chemin suivi par le système (chemin réactionnel) est celui demandant le moins d'énergie, passant par un <strong>col</strong> énergétique. La <strong>coordonnée de réaction</strong> est l'abscisse curviligne le long de ce chemin réactionnel.
 </div>
+<figure>
+<img src="img/06-fig1-surface-energie-3d.png" alt="Surface d'énergie potentielle en 3D pour la réaction H+H2, avec courbes de niveau et col énergétique">
+<figcaption>Fig. 2 — Surface d'énergie potentielle $E_p(d_1,d_2)$ pour la réaction $\mathrm{H_\alpha+H_\beta{-}H_\gamma\to H_\alpha{-}H_\beta+H_\gamma}$ (angle fixé à 180°) : les courbes de niveau font apparaître deux puits (molécules $\mathrm{H^\alpha{-}H^\beta}$ et $\mathrm{H^\beta{-}H^\gamma}$) séparés par un col ; le chemin réactionnel (pointillés, de O à R) suit la vallée en passant par le col.</figcaption>
+</figure>
+<figure>
+<img src="img/06-fig2-contour-h-h2.png" alt="Carte des courbes de niveau d'énergie potentielle en fonction de d1 et d2, avec le col à 0,38 eV et le chemin réactionnel">
+<figcaption>Fig. 3 — Projection en courbes de niveau (énergie potentielle en eV) de la surface précédente en fonction des distances $d_1$ et $d_2$ (nm) : le col, à 0,38 eV, correspond à la barrière d'activation $E_a$ mesurée expérimentalement ; le chemin réactionnel (pointillés) relie les réactifs (Q) au col puis aux produits (P).</figcaption>
+</figure>
 
 <h3>Intermédiaire réactionnel</h3>
 <div class="block def">
 <span class="label">Définition 2</span>
 Un <strong>intermédiaire réactionnel</strong> est une espèce chimique formée au cours d'une réaction mais n'apparaissant pas dans le bilan réactionnel. Contrairement à l'état de transition (durée de vie nulle, jamais observable), un intermédiaire réactionnel a une durée de vie non nulle (puits de potentiel relatif) : il est a priori observable ou détectable par des tests expérimentaux. Les intermédiaires réactionnels peuvent être des molécules, des ions ou des <strong>radicaux</strong> (espèce possédant au moins un électron célibataire, neutre ou chargée).
 </div>
+<figure>
+<img src="img/06-fig3-profil-rbr.png" alt="Diagramme énergétique de l'ionisation RBr vers R+ + Br-, une seule étape avec un maximum" style="max-width:420px;">
+<figcaption>Fig. 4 — Diagramme énergétique de la rupture hétérolytique $\mathrm{RBr\to R^++Br^-}$ (une seule étape) : l'état final peut être plus haut en énergie que l'état initial car le carbocation $R^+$, espèce haute en énergie (règle de l'octet non vérifiée), est ici un intermédiaire réactionnel.</figcaption>
+</figure>
+<figure>
+<img src="img/06-fig4-profil-2etapes.png" alt="Diagramme énergétique à deux étapes avec un intermédiaire réactionnel dans un plateau entre deux maxima" style="max-width:520px;">
+<figcaption>Fig. 5 — Diagramme énergétique à deux étapes successives (ex. $\mathrm{RBr\to R^++Br^-}$ puis $\mathrm{R^++Cl^-\to RCl}$) : l'intermédiaire réactionnel $R^++Br^-+Cl^-$ occupe un puits de potentiel relatif (plateau) entre les deux états de transition, contrairement à ceux-ci qui sont des maxima locaux.</figcaption>
+</figure>
 <div class="block demo">
 <span class="label">Mise en évidence historique — miroirs de Paneth</span>
 Un courant de diazote entraîne du plomb tétraméthyle $\mathrm{Pb(CH_3)_4}$ gazeux à travers un tube ; un four chauffe localement le gaz. Au niveau du four : $\mathrm{Pb(CH_3)_4\to Pb+4\,CH_3^\bullet}$ (dépôt de miroir de plomb métallique observé). En aval, les radicaux méthyle se recombinent : $2\,\mathrm{CH_3^\bullet}\to\mathrm{C_2H_6}$ (éthane recueilli dans un piège à azote liquide). En déplaçant le four vers l'aval, le premier miroir de plomb disparaît (les radicaux méthyle produits par le nouveau chauffage attaquent et redissolvent le plomb déjà déposé : $\mathrm{Pb+4\,CH_3^\bullet\to Pb(CH_3)_4}$), preuve directe de l'existence de radicaux méthyle à durée de vie courte mais non nulle.
+<figure>
+<img src="img/06-fig5-miroirs-paneth.png" alt="Schéma du montage des miroirs de Paneth : courant de diazote entraînant Pb(CH3)4 depuis un flacon, four F1/F2, pompage et piège à azote liquide">
+<figcaption>Fig. 6 — Montage de l'expérience des miroirs de Paneth : le courant de diazote entraîne $\mathrm{Pb(CH_3)_4}$ gazeux à travers le tube ; un four mobile (position F₁ puis F₂) crée le dépôt de plomb métallique, tandis que l'éthane formé en aval est recueilli dans un piège à azote liquide, sous pompage.</figcaption>
+</figure>
 </div>
 <div class="block theorem">
 <span class="label">Validité d'un mécanisme</span>
@@ -153,6 +173,18 @@ $$[A]=a_0e^{-k_1t} \qquad [B]=\frac{k_1a_0}{k_2-k_1}\left(e^{-k_1t}-e^{-k_2t}\ri
 <span class="label">Cas limites — étape cinétiquement déterminante</span>
 Si $k_2\ll k_1$ (B s'accumule) : aux temps longs, $[B]\approx a_0e^{-k_2t}$, $[C]\approx a_0(1-e^{-k_2t})$ — tout se passe comme si $A\to C$ directement avec la constante $k_2$ : c'est l'étape <strong>2</strong> qui limite la vitesse (étape cinétiquement déterminante, ECD). Si $k_2\gg k_1$ (B ne s'accumule pas, quasiment nul et constant après une brève période d'induction) : $[C]\approx a_0(1-e^{-k_1t})$ — c'est l'étape <strong>1</strong> qui est l'ECD. Si $k_1\approx k_2$, B s'accumule transitoirement (maximum intermédiaire).
 </div>
+<figure>
+<img src="img/06-fig6-concentrations-k2-inf-k1.png" alt="Graphe des concentrations a, b, c en fonction du temps pour k2 << k1 : A disparaît vite, B s'accumule puis décroît lentement, C croît lentement">
+<figcaption>Fig. 7 — Cas $k_2\ll k_1$ ($\rho=k_2/k_1=0{,}01$) : A est très vite transformé en B, qui s'accumule dans le milieu avant de se transformer lentement en C — c'est l'étape 2 (formation de C) qui est l'ECD.</figcaption>
+</figure>
+<figure>
+<img src="img/06-fig7-concentrations-k2-eq-k1.png" alt="Graphe des concentrations a, b, c en fonction du temps pour k2 proche de k1 : B présente un maximum intermédiaire net">
+<figcaption>Fig. 8 — Cas $k_1\approx k_2$ ($\rho=k_2/k_1=0{,}8$) : l'intermédiaire B s'accumule transitoirement, avec un maximum net à $t_M$, avant de disparaître au profit de C.</figcaption>
+</figure>
+<figure>
+<img src="img/06-fig8-concentrations-k2-sup-k1.png" alt="Graphe des concentrations a, b, c en fonction du temps pour k2 >> k1 : B reste quasi nul, A décroît et C croît en miroir">
+<figcaption>Fig. 9 — Cas $k_2\gg k_1$ ($\rho=k_2/k_1=50$) : B reste quasiment nul et constant (sauf brève période d'induction aux premiers instants) ; A et C évoluent quasiment en miroir — c'est l'étape 1 qui est l'ECD.</figcaption>
+</figure>
 <div class="block remark">
 <span class="label">Remarque</span>
 Contrairement à ce qui est vrai pour une réaction globale simple, les vitesses de disparition de A et d'apparition de C ne sont pas toujours égales pour un mécanisme à plusieurs étapes ; elles ne coïncident que dans le cas où la deuxième étape est beaucoup plus rapide que la première.

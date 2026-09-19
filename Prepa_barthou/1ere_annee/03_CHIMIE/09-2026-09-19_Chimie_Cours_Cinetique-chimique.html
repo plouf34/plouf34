@@ -119,6 +119,10 @@ Les méthodes physiques sont non destructives, automatisables, et permettent d'o
 <span class="label">Exemple — réduction des ions mercuriques par les ions ferreux</span>
 $$2\text{Hg}^{2+} + 2\text{Fe}^{2+} = \text{Hg}_2^{2+} + 2\text{Fe}^{3+}$$
 Suivie par spectrophotométrie (mesure de $[\text{Fe}^{3+}]$), avec $[\text{Hg}^{2+}]_0=1{,}000\times10^{-3}\,\text{mol/L}$ et $[\text{Fe}^{2+}]_0=0{,}100\,\text{mol/L}$ (très large excès). En notant $x$ l'avancement volumique : $[\text{Hg}^{2+}]=1{,}000\times10^{-3}-2x$, $[\text{Fe}^{2+}]=0{,}100-2x$, $[\text{Hg}_2^{2+}]=x$, $[\text{Fe}^{3+}]=2x$. Le réactif Fe$^{2+}$, en large excès, voit sa concentration quasiment inchangée pendant l'expérience (variation maximale de 1 %).
+<figure>
+<img src="img/09-fig1-courbes-cinetiques-fe-hg.png" alt="Courbes cinétiques expérimentales : [Fe3+] croît de 0 à 0,001 mol/L, [Hg2+] décroît symétriquement de 0,001 à 0, [Hg2 2+] croît jusqu'à environ 0,00044 mol/L, en fonction du temps de 0 à 200000 s">
+<figcaption>Fig. — Courbes cinétiques expérimentales de la réduction des ions mercuriques par les ions ferreux : $[\text{Fe}^{3+}]$ croît (spectrophotométrie), $[\text{Hg}^{2+}]$ décroît symétriquement, $[\text{Hg}_2^{2+}]$ croît vers un palier ; le réactif Fe$^{2+}$ en large excès n'est pas représenté (concentration quasi constante).</figcaption>
+</figure>
 </div>
 </section>
 
@@ -172,10 +176,10 @@ C'est la hauteur de la barrière de potentiel : l'énergie cinétique initiale m
 <g transform="translate(0,0)">
 <line x1="40" y1="220" x2="280" y2="220" stroke="#333" stroke-width="1.2"/><text x="270" y="235" font-size="10">C.R.</text>
 <line x1="40" y1="220" x2="40" y2="30" stroke="#333" stroke-width="1.2"/><text x="15" y="30" font-size="10">Ep</text>
-<path d="M60 190 C 100 190, 130 60, 170 60 C 200 60, 220 170, 260 190" stroke="#3b6fd8" stroke-width="1.8" fill="none"/>
+<path d="M60 190 C 100 190, 130 60, 170 60 C 205 60, 225 215, 260 215" stroke="#3b6fd8" stroke-width="1.8" fill="none"/>
 <text x="170" y="50" font-size="10" text-anchor="middle">‡</text>
 <line x1="60" y1="190" x2="100" y2="190" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/><text x="65" y="205" font-size="9">réactifs</text>
-<text x="235" y="205" font-size="9">produits</text>
+<line x1="220" y1="215" x2="260" y2="215" stroke="#888" stroke-width="1" stroke-dasharray="3,2"/><text x="222" y="231" font-size="9">produits</text>
 <line x1="60" y1="190" x2="60" y2="60" stroke="#c0392b" stroke-width="1.2" marker-end="url(#aC2)"/><text x="65" y="120" font-size="9" fill="#c0392b">Epa</text>
 <text x="150" y="245" text-anchor="middle" font-size="10">exothermique</text>
 </g>
@@ -196,6 +200,14 @@ C'est la hauteur de la barrière de potentiel : l'énergie cinétique initiale m
 <div class="block remark">
 <span class="label">Exemple — choc colinéaire H + H₂ → H₂ + H</span>
 La surface d'énergie potentielle $E_p(d_1,d_2)$ (avec $d_1=d_{H^1H^2}$, $d_2=d_{H^2H^3}$) présente un « col » (point selle) reliant la vallée des réactifs (R) à celle des produits (P) : le chemin réactionnel de plus basse énergie traverse ce col, dont le sommet correspond au complexe activé (Définition 3).
+<figure>
+<img src="img/09-fig2-surface-energie-3d-h-h2.png" alt="Surface d'énergie potentielle en 3D pour le choc colinéaire H+H2, avec la vallée des réactifs R, le col et le complexe activé CA, et la vallée des produits P">
+<figcaption>Fig. — Document 3, surface d'énergie potentielle $E_p(d_1,d_2)$ pour le choc colinéaire $\mathrm{H^1+H^2{-}H^3\to H^1{-}H^2+H^3}$ : la vallée des réactifs (R) et celle des produits (P) sont reliées par un col dont le sommet est le complexe activé (CA) (d'après Le Hir, <em>Chimie générale</em>, Masson 1996).</figcaption>
+</figure>
+<figure>
+<img src="img/09-fig3-carte-contours-h-h2.png" alt="Carte des courbes de niveau d'énergie potentielle en fonction de d1 et d2 pour le choc H+H2, avec le col à 0,38 eV et le chemin réactionnel de R vers P">
+<figcaption>Fig. — Carte des contours associée (projection de la surface précédente) : le col, à 0,38 eV, correspond à la barrière d'activation ; le chemin réactionnel relie les réactifs (R) au col puis aux produits (P) (d'après Scacchi, <em>Cinétique et catalyse</em>, Lavoisier 2011).</figcaption>
+</figure>
 </div>
 </section>
 

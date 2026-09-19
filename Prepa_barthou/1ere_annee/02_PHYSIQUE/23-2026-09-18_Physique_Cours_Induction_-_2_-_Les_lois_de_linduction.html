@@ -136,11 +136,27 @@ Le courant induit est tel que, par ses effets, il s'oppose à la cause qui lui a
 <strong>Cadre en rotation</strong> : $\vec B_{ext}$ et la rotation $\omega_{ext}$ sont imposés ; même principe, rotation convertie en électricité (alternateur).<br>
 Applications : alternateur de centrale, dynamo de vélo, freinage par induction (courants de Foucault).
 </div>
+<figure>
+<img src="img/23-fig3-rails-laplace.png" alt="Rails de Laplace : un aimant en U (pôles N et S) enjambe deux rails conducteurs sur lesquels une barre est déplacée à la main ; le circuit se referme sur un ampèremètre qui mesure le courant induit i_induit">
+<figcaption>Fig. 3 — Rails de Laplace (conversion méca → élec, translation) : le déplacement manuel de la barre dans le champ $\vec B_{ext}$ de l'aimant en U induit un courant $i_{induit}$ mesuré par l'ampèremètre.</figcaption>
+</figure>
+<figure>
+<img src="img/23-fig4-cadre-rotation.png" alt="Cadre en rotation : un cadre rectangulaire tourne à la vitesse angulaire omega_ext autour d'un axe vertical, avec le vecteur surface S faisant un angle theta avec le champ B_ext horizontal ; le courant induit circule dans le cadre">
+<figcaption>Fig. 4 — Cadre en rotation (conversion méca → élec) : le champ $\vec B_{ext}$ est imposé, la rotation à $\omega_{ext}$ fait varier l'angle $\theta$ entre $\vec S$ et $\vec B_{ext}$, d'où un courant induit (principe de l'alternateur).</figcaption>
+</figure>
 <div class="block remark">
 <span class="label">Conversion électrique → mécanique</span>
 <strong>Moteur à courant continu</strong> : $\vec B_{ext}$ et un générateur de fem $E_{ext}$ sont imposés ; $E_{ext}$ crée un courant $i$, qui crée une force de Laplace, qui met la barre en mouvement : l'électricité est convertie en mouvement.<br>
 <strong>Haut-parleur électrodynamique</strong> : même principe (rails de Laplace), le courant électrique du signal audio déplace la membrane.
 </div>
+<figure>
+<img src="img/23-fig5-moteur-continu.png" alt="Moteur à courant continu : un aimant en U crée un champ B_ext, une tige mobile posée sur les rails est reliée à un circuit avec interrupteur K et générateur de fem E_ext ; la tige se déplace sous l'effet de la force de Laplace">
+<figcaption>Fig. 5 — Moteur à courant continu (conversion élec → méca, translation) : le générateur $E_{ext}$ impose un courant $i$ dans la tige plongée dans $\vec B_{ext}$, d'où une force de Laplace qui déplace la tige.</figcaption>
+</figure>
+<figure>
+<img src="img/23-fig6-haut-parleur.png" alt="Haut-parleur électrodynamique : rails de Laplace avec champ B_ext, générateur de fem E_ext(t), résistance R, ressort de raideur k relié à une membrane ; le courant i déplace la membrane via la force de Laplace">
+<figcaption>Fig. 6 — Haut-parleur électrodynamique (conversion élec → méca) : le signal $E_{ext}(t)$ impose un courant $i$ qui, via la force de Laplace, déplace la membrane rappelée par un ressort de raideur $k$ (résistance $R$ du bobinage).</figcaption>
+</figure>
 </section>
 
 <section id="s4">
@@ -157,18 +173,8 @@ $$e = -\frac{d\varphi_{propre}}{dt} = -L\frac{di}{dt}$$
 Cette fem existe dans tout circuit parcouru par un courant variable, mais elle est souvent négligeable devant la fem due au flux extérieur ($e_{total}=e(\varphi_{ext})+e(\varphi_{propre})\approx e(\varphi_{ext})$), sauf dans les bobines.
 </div>
 <figure>
-<svg viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<line x1="40" y1="30" x2="40" y2="110" stroke="#333" stroke-width="1.3"/>
-<circle cx="40" cy="70" r="18" fill="none" stroke="#c98a12" stroke-width="1.3"/><text x="20" y="30" font-size="10">e0(t)</text>
-<rect x="90" y="95" width="50" height="18" fill="none" stroke="#333" stroke-width="1.2"/><text x="100" y="107" font-size="10">R</text>
-<path d="M170 30 q10 10 0 20 q10 10 0 20 q10 10 0 20" stroke="#3b6fd8" stroke-width="1.6" fill="none"/><text x="185" y="60" font-size="10" fill="#3b6fd8">L</text>
-<line x1="40" y1="30" x2="170" y2="30" stroke="#333" stroke-width="1.3"/>
-<line x1="40" y1="110" x2="90" y2="110" stroke="#333" stroke-width="1.3"/>
-<line x1="140" y1="110" x2="170" y2="110" stroke="#333" stroke-width="1.3"/>
-<line x1="170" y1="30" x2="170" y2="110" stroke="#333" stroke-width="0"/>
-<text x="55" y="25" font-size="9">i(t)</text>
-</svg>
-<figcaption>Fig. 2 — Circuit RL siège d'auto-induction : bilan énergétique $e_0i\,dt=Ri^2dt+d\left(\frac12Li^2\right)$.</figcaption>
+<img src="img/23-fig2-rl-circuit-equivalent.png" alt="Circuit RL siège d'auto-induction (générateur e0, résistance R, inductance L) et son schéma électrique équivalent, où la bobine L est remplacée par un générateur de fem e(t)=-L di/dt">
+<figcaption>Fig. 2 — Circuit RL siège d'auto-induction et son schéma électrique équivalent (la bobine $L$ est remplacée par un générateur de fem $e(t)=-L\,di/dt$) : bilan énergétique $e_0i\,dt=Ri^2dt+d\left(\frac12Li^2\right)$.</figcaption>
 </figure>
 </section>
 
@@ -180,19 +186,35 @@ Soient deux circuits $\Gamma_1$ et $\Gamma_2$ parcourus par $i_1(t)$ et $i_2(t)$
 $$\varphi_{1\to2} = Mi_1 \qquad \varphi_{2\to1} = Mi_2$$
 $M$ (coefficient d'inductance mutuelle, ou « mutuelle ») ne dépend que de la forme des circuits et de leurs positions relatives ; son signe dépend des conventions choisies ; son unité est le henry (H).
 </div>
+<figure>
+<img src="img/23-fig7-circuits-mutuelle.png" alt="Deux circuits Gamma1 et Gamma2 en interaction mutuelle : chaque circuit est parcouru par un courant i1 ou i2 et crée un champ B1 ou B2 qui traverse partiellement l'autre circuit">
+<figcaption>Fig. 7 — Deux circuits $\Gamma_1$ et $\Gamma_2$ en interaction mutuelle : $\Gamma_1$ (parcouru par $i_1$) crée le champ $\vec B_1$ qui traverse $\Gamma_2$, et réciproquement $\Gamma_2$ (parcouru par $i_2$) crée $\vec B_2$ qui traverse $\Gamma_1$.</figcaption>
+</figure>
 <div class="block remark">
 <span class="label">Exemple — deux solénoïdes infinis coaxiaux</span>
 $$M = \mu_0\frac{N_1N_2}{d}S_2$$
 </div>
+<figure>
+<img src="img/23-fig8-solenoides-coaxiaux.png" alt="Deux solénoïdes coaxiaux infinis, de sections S1 et S2, imbriqués sur une longueur d, parcourus par les courants i1 et i2 le long de l'axe z">
+<figcaption>Fig. 8 — Deux solénoïdes infinis coaxiaux, de sections $S_1$ et $S_2$, parcourus par $i_1$ et $i_2$ sur une longueur commune $d$ : $M=\mu_0\dfrac{N_1N_2}{d}S_2$.</figcaption>
+</figure>
 <div class="block theorem">
 <span class="label">Théorème 4 — Équations de deux circuits couplés</span>
 $$e_1(t) = R_1i_1(t) + L_1\frac{di_1}{dt} + M\frac{di_2}{dt} \qquad e_2(t) = R_2i_2(t) + L_2\frac{di_2}{dt} + M\frac{di_1}{dt}$$
 Énergie magnétique stockée : $E_{magn}=\dfrac12L_1i_1^2+\dfrac12L_2i_2^2+Mi_1i_2$.
 </div>
+<figure>
+<img src="img/23-fig9-circuits-couples-M.png" alt="Deux circuits couplés par une inductance mutuelle M, chacun comportant un générateur e1 ou e2, une inductance propre L1 ou L2 et une résistance R1 ou R2 ; en dessous, les deux circuits électriques équivalents où le couplage est remplacé par un générateur de fem -M di2/dt (resp. -M di1/dt)">
+<figcaption>Fig. 9 — Deux circuits couplés par $M$ (en haut) et leurs schémas électriques équivalents (en bas), où le couplage mutuel est remplacé par un générateur de fem $-M\,di_2/dt$ dans le circuit 1 (resp. $-M\,di_1/dt$ dans le circuit 2).</figcaption>
+</figure>
 <div class="block theorem">
 <span class="label">Théorème 5 — Transformateur parfait</span>
 $$u_2(t) = \frac{N_2}{N_1}u_1(t) \qquad \text{(valable uniquement si } i_2=0\text{)} \qquad M = \sqrt{L_1L_2} \ \text{(couplage parfait)}$$
 </div>
+<figure>
+<img src="img/23-fig10-transformateur.png" alt="Transformateur : deux bobinages de N1 et N2 spires enroulés sur un même noyau ferromagnétique, alimentés par u1(t) avec un courant i1, secondaire ouvert (i2=0) délivrant la tension u2(t)">
+<figcaption>Fig. 10 — Transformateur : deux bobinages de $N_1$ et $N_2$ spires sur un noyau commun ; à vide ($i_2=0$), $u_2(t)=\dfrac{N_2}{N_1}u_1(t)$.</figcaption>
+</figure>
 </section>
 
 <section id="quiz">
