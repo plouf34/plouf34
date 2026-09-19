@@ -236,7 +236,7 @@ def main():
     padding: 6px 8px; backdrop-filter: blur(20px);
     background: var(--nav-bg);
     border-bottom: 1px solid var(--border);
-    border-radius: 0 0 14px 14px;
+    border-radius: 14px;
     -webkit-overflow-scrolling: touch;
   }}
   nav#tabs a {{
