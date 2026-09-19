@@ -37,6 +37,15 @@ SUBJECT_SOURCES = {
     ],
 }
 
+# Manuel de référence (PDF perso, hébergé sur Google Drive — jamais copié dans
+# le dépôt public, pour respecter les droits d'auteur) affiché sous le titre
+# de chaque matière, quand disponible.
+SUBJECT_MANUALS = {
+    "01_MATHS": ("Mathématiques PCSI — Ellipses 2021", "https://drive.google.com/file/d/1pgP4lA-lETFYa24RO_a7e2bStSglxtm2/view?usp=drive_link"),
+    "02_PHYSIQUE": ("Physique PCSI — Ellipses 2021", "https://drive.google.com/file/d/1sdiMgJytsKeblo_JYJce7kWVb5OXh9l4/view?usp=drive_link"),
+    "04_SI": ("Sciences industrielles de l'ingénieur — Vuibert", "https://drive.google.com/file/d/1klTB2dhumRg6bxomyXZvD9_3dm-pKHxR/view?usp=drive_link"),
+}
+
 
 def esc(s):
     return html.escape(s or "")
@@ -66,6 +75,15 @@ def source_chip_html(name, ville, url, icon, password=None):
         return (f'<a class="source-chip-inline" href="{esc(url)}" target="_blank" rel="noopener">'
                 f'{icon_html} {esc(name)} {pin} <span class="arrow">↗</span></a>')
     return f'<span class="source-chip-inline source-chip-static">{icon_html} {esc(name)} {pin}</span>'
+
+
+def manual_line_html(folder):
+    entry = SUBJECT_MANUALS.get(folder)
+    if not entry:
+        return ""
+    title, url = entry
+    return (f'<div class="manual-line"><a class="manual-chip" href="{esc(url)}" target="_blank" rel="noopener">'
+            f'📘 Manuel : {esc(title)} <span class="arrow">↗</span></a></div>')
 
 
 def table_row(num, titre, url, pdf_url=None):
@@ -177,6 +195,7 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
 
     return (f'<section id="{anchor}" class="subject">'
             f'<h2 class="subject-title">{emoji} {esc(label)}</h2>'
+            f'{manual_line_html(folder)}'
             f'{body}</section>')
 
 
@@ -276,6 +295,15 @@ def main():
   .source-chip-inline .arrow {{ opacity: .6; }}
   .source-icon {{ height:13px; width:auto; border-radius:2px; vertical-align:middle; }}
   .source-pin {{ opacity: .7; font-weight: 500; }}
+
+  .manual-line {{ margin: 2px 4px 8px 4px; }}
+  .manual-chip {{
+    display: inline-flex; align-items: center; gap: 4px;
+    background: rgba(10,138,74,0.10); border: 1px solid var(--border);
+    padding: 4px 10px; border-radius: 12px;
+    color: var(--accent-2); font-weight: 600; text-decoration: none; font-size: 12px;
+  }}
+  .manual-chip .arrow {{ opacity: .6; }}
 
   table {{
     width: 100%; border-collapse: collapse;
