@@ -25,7 +25,10 @@ BASE_URL = "https://plouf34.github.io/prepabarthou/Prepa_barthou/1ere_annee"
 SUBJECT_SOURCES = {
     "01_MATHS": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png")],
     "02_PHYSIQUE": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png")],
-    "03_CHIMIE": [("Sainte-Geneviève — S. Falcou", "Versailles", None, None)],
+    "03_CHIMIE": [
+        ("Sainte-Geneviève — S. Falcou", "Versailles", None, None),
+        ("Janson de Sailly", "Paris", "http://chimie-pcsi-jds.net", None),
+    ],
     "04_SI": [("Jean Perrin — N. Mesnier", "Lyon", "http://nmesnier.free.fr/SII-PCSI.html", None)],
 }
 

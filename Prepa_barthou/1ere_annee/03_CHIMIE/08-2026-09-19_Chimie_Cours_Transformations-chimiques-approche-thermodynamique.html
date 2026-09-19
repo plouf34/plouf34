@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chimie — Transformations chimiques : approche thermodynamique</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-svg.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-title:'Spectral',Georgia,'Times New Roman',serif;
+  --font-body:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+  --font-mono:'IBM Plex Mono','Consolas',monospace;
+  --ink:#1c2430; --paper:#fbfaf7; --panel:#ffffff; --line:#e2e0da; --accent:#0f2b4c;
+  --blue-bg:#e9f1fd; --blue-bd:#3b6fd8;
+  --violet-bg:#f2ecfd; --violet-bd:#7c4fd6;
+  --green-bg:#e9f8ee; --green-bd:#2fa365;
+  --gray-bg:#f1f1ef; --gray-bd:#8b8b85;
+  --amber-bg:#fdf3dd; --amber-bd:#c98a12;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.55; font-size:16px;}
+h1,h2,h3,h4{font-family:var(--font-title); color:var(--accent); font-weight:600;}
+h1{font-size:1.85rem; margin:0 0 .2rem 0;}
+h2{font-size:1.3rem; border-bottom:2px solid var(--line); padding-bottom:.3rem; margin-top:2.2rem;}
+h3{font-size:1.05rem; margin-top:1.4rem;}
+code,.mono{font-family:var(--font-mono);}
+.layout{display:flex; max-width:1250px; margin:0 auto;}
+nav.toc{width:260px; flex-shrink:0; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto; padding:1.6rem 1rem 2rem 1.4rem; border-right:1px solid var(--line); font-size:.86rem;}
+nav.toc h4{margin-top:0; font-family:var(--font-body); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:.75rem; color:#7a7a72;}
+nav.toc ol{list-style:none; padding-left:0; margin:.3rem 0 1.1rem 0;}
+nav.toc a{color:var(--ink); text-decoration:none; display:block; padding:.15rem 0;}
+nav.toc a:hover{color:var(--blue-bd);}
+nav.toc .top>a{font-weight:600;}
+main{flex:1; min-width:0; padding:2.2rem 3rem 4rem 3rem;}
+header.title{margin-bottom:1.6rem;}
+.meta{color:#7a7a72; font-size:.85rem; font-family:var(--font-mono);}
+section{margin-bottom:1rem;}
+p{margin:.6rem 0;}
+.block{border-left:4px solid; border-radius:6px; padding:.85rem 1.1rem; margin:1rem 0; background:#fff;}
+.block>.label{font-weight:700; font-size:.82rem; letter-spacing:.03em; text-transform:uppercase; margin-bottom:.35rem; display:block;}
+.def{background:var(--blue-bg); border-color:var(--blue-bd);} .def>.label{color:var(--blue-bd);}
+.theorem{background:var(--violet-bg); border-color:var(--violet-bd);} .theorem>.label{color:var(--violet-bd);}
+.remark{background:var(--gray-bg); border-color:var(--gray-bd);} .remark>.label{color:#5c5c56;}
+.retenir{background:var(--accent); color:#fff; border:none; border-radius:8px; padding:1rem 1.2rem; margin:1.3rem 0;}
+.retenir>.label{color:#cfe0f5;}
+.correction{background:var(--amber-bg); border-color:var(--amber-bd);} .correction>.label{color:var(--amber-bd);}
+figure{margin:1.2rem 0; text-align:center;}
+figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
+.quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
+.quiz-q{font-weight:700;}
+.quiz-a{margin-top:.6rem; padding-top:.6rem; border-top:1px dashed var(--line); color:#333;}
+.quiz-a .tag{font-weight:700; color:var(--green-bd); font-size:.82rem; text-transform:uppercase;}
+.sources li{margin:.35rem 0; font-size:.92rem;}
+.sources a{color:var(--blue-bd);}
+table{border-collapse:collapse; width:100%; margin:.8rem 0; font-size:.92rem;}
+th,td{border:1px solid var(--line); padding:.4rem .6rem; text-align:left;}
+th{background:var(--gray-bg);}
+mjx-container{overflow-x:auto; max-width:100%;}
+@media (max-width:900px){ nav.toc{display:none;} main{padding:1.5rem 1.2rem;} }
+@media (max-width:480px){ main{padding:1rem .7rem;} h1{font-size:1.45rem;} h2{font-size:1.1rem;} .block,.retenir,.quiz-item{padding:.65rem .8rem;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h4>Sommaire</h4>
+<ol>
+  <li class="top"><a href="#s1">1. Vocabulaire des changements d'état physique</a></li>
+  <li class="top"><a href="#s2">2. Types d'espèces chimiques</a></li>
+  <li class="top"><a href="#s3">3. Aspect microscopique de la vaporisation</a></li>
+  <li class="top"><a href="#s4">4. Équation de réaction et nombres stœchiométriques algébriques</a></li>
+  <li class="top"><a href="#quiz">Quiz de fin de chapitre</a></li>
+  <li class="top"><a href="#sources">Sources</a></li>
+</ol>
+</nav>
+<main>
+<header class="title">
+<h1>Transformations chimiques — Approche thermodynamique</h1>
+<div class="meta">Chimie — Résumé de cours · PCSI · Source : Lycée Janson de Sailly (Paris) · mis au propre le 19/09/2026</div>
+</header>
+
+<div class="block remark">
+<span class="label">Remarque sur la source de ce document</span>
+Ce chapitre est construit par le professeur sous forme de « documents » à partir desquels les notions du cours sont dégagées (démarche inductive), plutôt que sous forme d'un cours rédigé classique. Le plan complet annoncé par le professeur comporte trois chapitres (Systèmes physico-chimiques ; La réaction chimique et son avancement ; Évolution et équilibre), mais seuls les <strong>quatre documents ci-dessous</strong> ont été fournis dans le polycopié source disponible : ils couvrent le chapitre 1 et l'introduction du chapitre 2 (équation de réaction). Les notions de <strong>avancement</strong>, <strong>quotient de réaction</strong>, <strong>loi de Guldberg et Waage</strong> et <strong>critère d'évolution</strong>, annoncées dans le plan du cours, ne sont pas couvertes par ce document (probablement traitées à l'oral en classe ou dans un support non transmis) — elles ne sont donc <strong>pas transcrites ici</strong> pour éviter d'attribuer au professeur un contenu qu'il n'a pas lui-même rédigé.
+</div>
+
+<section id="s1">
+<h2>1. Vocabulaire des changements d'état physique</h2>
+<div class="block def">
+<span class="label">Définition 1</span>
+Un corps pur peut exister sous trois états physiques : solide, liquide, gaz. Le passage d'un état à un autre porte un nom spécifique selon le sens de la transformation.
+</div>
+<figure>
+<svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
+<circle cx="180" cy="60" r="45" fill="#e9f1fd" stroke="#3b6fd8" stroke-width="1.5"/><text x="180" y="65" text-anchor="middle" font-size="14">gaz</text>
+<circle cx="80" cy="200" r="45" fill="#f2ecfd" stroke="#7c4fd6" stroke-width="1.5"/><text x="80" y="205" text-anchor="middle" font-size="14">solide</text>
+<circle cx="280" cy="200" r="45" fill="#e9f8ee" stroke="#2fa365" stroke-width="1.5"/><text x="280" y="205" text-anchor="middle" font-size="14">liquide</text>
+<line x1="150" y1="90" x2="100" y2="165" stroke="#333" stroke-width="1.4" marker-end="url(aC1)"/><text x="95" y="130" font-size="10">sublimation</text>
+<line x1="105" y1="170" x2="155" y2="95" stroke="#333" stroke-width="1.4" marker-end="url(aC1)"/><text x="130" y="150" font-size="10">condensation</text>
+<line x1="120" y1="200" x2="235" y2="200" stroke="#333" stroke-width="1.4" marker-end="url(aC1)" transform="translate(0,-10)"/><text x="150" y="185" font-size="10">fusion</text>
+<line x1="235" y1="210" x2="120" y2="210" stroke="#333" stroke-width="1.4" marker-end="url(aC1)"/><text x="150" y="228" font-size="10">solidification</text>
+<line x1="210" y1="95" x2="260" y2="165" stroke="#333" stroke-width="1.4" marker-end="url(aC1)"/><text x="255" y="130" font-size="10">vaporisation</text>
+<line x1="265" y1="170" x2="215" y2="90" stroke="#333" stroke-width="1.4" marker-end="url(aC1)" transform="translate(-15,5)"/><text x="205" y="150" font-size="10">liquéfaction</text>
+<defs><marker id="aC1" markerWidth="6" markerHeight="6" refX="4" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4 Z" fill="#333"/></marker></defs>
+</svg>
+<figcaption>Fig. 1 — Vocabulaire des changements d'état physique (Définition 1).</figcaption>
+</figure>
+</section>
+
+<section id="s2">
+<h2>2. Types d'espèces chimiques</h2>
+<div class="block def">
+<span class="label">Définition 2</span>
+On distingue trois grands types d'espèces chimiques, définies par la nature de leurs entités constitutives à l'échelle microscopique :
+<table>
+<tr><th>Type d'espèce</th><th>Entités microscopiques</th><th>Exemples</th></tr>
+<tr><td>Atomique</td><td>Atomes</td><td>Fer (Fe), carbone (C, diamant)</td></tr>
+<tr><td>Moléculaire</td><td>Molécules</td><td>Eau (H<sub>2</sub>O)</td></tr>
+<tr><td>Ionique</td><td>Ions (solide ionique : cations + anions ; soluté ionique en solution)</td><td>Chlorure de sodium NaCl (solide) ; Na<sup>+</sup>, Cl<sup>−</sup> (ions) ; Na<sup>+</sup><sub>(aq)</sub> (ion solvaté en solution aqueuse)</td></tr>
+</table>
+</div>
+<div class="block remark">
+<span class="label">Remarque</span>
+En solution, la nature du solvant est indiquée entre parenthèses dans la notation de l'espèce physico-chimique (exemple pour l'eau : Na<sup>+</sup><sub>(aq)</sub>).
+</div>
+</section>
+
+<section id="s3">
+<h2>3. Aspect microscopique de la vaporisation</h2>
+<div class="block remark">
+<span class="label">Remarque — culture scientifique (d'après <em>La Recherche</em>, février 2016)</span>
+L'évaporation est un phénomène collectif : des simulations numériques et des expériences de spectroscopie femtoseconde (échelle de $10^{-15}\,\text{s}$) montrent que le départ d'une molécule d'eau de la surface liquide résulte de collisions successives entre molécules voisines, plutôt que d'un simple « saut » individuel indépendant. La molécule qui s'évapore n'est en général pas celle qui a initialement reçu le surcroît d'énergie thermique, mais une molécule voisine ayant hérité de cette énergie via une chaîne de collisions.
+</div>
+</section>
+
+<section id="s4">
+<h2>4. Équation de réaction et nombres stœchiométriques algébriques</h2>
+<div class="block def">
+<span class="label">Définition 3 — Réaction chimique et équation de réaction</span>
+Une <strong>réaction chimique</strong> est un phénomène par lequel des espèces physico-chimiques consommées et produites — les <strong>réactifs</strong> et les <strong>produits</strong> de la réaction — sont reliées par une <strong>équation de réaction</strong>, qui traduit la conservation de chaque élément chimique ainsi que la conservation de la charge électrique à travers les nombres stœchiométriques ajustés.
+</div>
+<div class="block remark">
+<span class="label">Exemple — réaction d'oxydoréduction en solution aqueuse</span>
+$$2\text{Hg}^{2+}_{(aq)} + 2\text{Fe}^{2+}_{(aq)} = \text{Hg}_2^{2+}_{(aq)} + 2\text{Fe}^{3+}_{(aq)}$$
+Les différents nombres figurant devant les constituants s'appellent les <strong>nombres stœchiométriques</strong>. On peut les noter $s_i$ : ici $s_{\text{Hg}^{2+}}=2$, $s_{\text{Fe}^{2+}}=2$, $s_{\text{Hg}_2^{2+}}=1$, $s_{\text{Fe}^{3+}}=2$.
+</div>
+<div class="block theorem">
+<span class="label">Théorème 1 — Orientation et nombres stœchiométriques algébriques</span>
+À une même réaction chimique correspondent <strong>deux écritures</strong>, selon le sens dans lequel on choisit d'écrire l'équation :
+$$2\text{Hg}^{2+} + 2\text{Fe}^{2+} = \text{Hg}_2^{2+} + 2\text{Fe}^{3+} \qquad \text{ou bien} \qquad \text{Hg}_2^{2+} + 2\text{Fe}^{3+} = 2\text{Hg}^{2+} + 2\text{Fe}^{2+}$$
+Ainsi, on définit un nombre stœchiométrique algébrique $\nu_i$ (« nu i »), positif ou négatif selon le sens choisi pour l'équation :
+<ul>
+<li>si l'espèce $A_i$ figure à <strong>droite</strong> de l'équation, son nombre stœchiométrique algébrique $\nu_i$ est égal à $s_i$ affecté du signe $+$ ;</li>
+<li>si l'espèce $A_i$ figure à <strong>gauche</strong> de l'équation, son nombre stœchiométrique algébrique $\nu_i$ est égal à $s_i$ affecté du signe $-$.</li>
+</ul>
+Ainsi, on peut écrire l'équation générale de la réaction chimique quelconque sous la forme :
+$$0 = \sum_i \nu_i A_i$$
+avec $\nu_i \in \mathbb{Q}$ les nombres stœchiométriques algébriques, et $A_i$ les espèces physico-chimiques.
+</div>
+<div class="block remark">
+<span class="label">Remarques importantes</span>
+<ul>
+<li>Les espèces sont a priori écrites à droite ou à gauche selon un choix arbitraire : la simple écriture de l'équation ne permet pas de savoir dans quel sens aura effectivement lieu la transformation ; cela dépendra en fait de l'état du système (voir le critère d'évolution, pour l'instant non traité dans ce document).</li>
+<li>Toutefois, la plupart du temps, on se place dans des conditions initiales telles que la transformation modélisée se déroule bien dans le sens indiqué. Par exemple, si on mélange une solution contenant des ions Fe$^{2+}_{(aq)}$ avec une solution contenant des ions Hg$^{2+}_{(aq)}$, alors sans présence initiale de Hg$_2^{2+}$ ni de Fe$^{3+}$, les premiers sont appelés les <strong>réactifs</strong>, les seconds les <strong>produits</strong>.</li>
+</ul>
+</div>
+<div class="block remark">
+<span class="label">Remarque — unicité de l'écriture</span>
+On s'assurera toujours que la même espèce physico-chimique $A_i$ n'apparaisse jamais plusieurs fois dans une même équation. Par exemple, l'équation $\text{N}_2\text{O}_{4(g)}=2\text{NO}_{2(g)}+\frac12\text{O}_{2(g)}$ n'est pas correcte, car il faut nécessairement simplifier pour que $\text{O}_{2(g)}$ n'apparaisse qu'une seule fois : $\text{N}_2\text{O}_{4(g)}=2\text{NO}_{2(g)}+\frac12\text{O}_{2(g)}$ (bien vérifier après simplification qu'aucune espèce n'apparaît de part et d'autre). De même, on ne modélise pas la dissolution du chlorure de sodium par $\text{NaCl}_{(s)}+\text{H}_2\text{O}_{(l)}\to\text{Na}^+_{(aq)}+\text{Cl}^-_{(aq)}+\text{H}_2\text{O}_{(l)}$, mais par $\text{NaCl}_{(s)}\to\text{Na}^+_{(aq)}+\text{Cl}^-_{(aq)}$, car il convient de lui attribuer le nombre stœchiométrique $\nu_i=0$ lorsqu'une espèce n'intervient pas réellement dans la transformation (ici l'eau, simple solvant).
+</div>
+</section>
+
+<section id="quiz">
+<h2>Quiz de fin de chapitre</h2>
+
+<div class="quiz-item">
+<div class="quiz-q">1. Nommer le changement d'état d'un solide vers un gaz, et celui d'un gaz vers un solide (Définition 1).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Solide → gaz : <strong>sublimation</strong>. Gaz → solide : <strong>condensation</strong> (Fig. 1).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">2. Donner un exemple d'espèce chimique atomique, un exemple moléculaire et un exemple ionique (Définition 2).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Atomique : le fer Fe (métal simple). Moléculaire : l'eau H$_2$O. Ionique : le chlorure de sodium NaCl (solide ionique), ou les ions Na$^+$ et Cl$^-$ pris séparément.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">3. Écrire les nombres stœchiométriques algébriques $\nu_i$ de chaque espèce dans l'équation $2\text{Hg}^{2+}+2\text{Fe}^{2+}=\text{Hg}_2^{2+}+2\text{Fe}^{3+}$ (Théorème 1).</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+$\nu_{\text{Hg}^{2+}}=-2$ ; $\nu_{\text{Fe}^{2+}}=-2$ ; $\nu_{\text{Hg}_2^{2+}}=+1$ ; $\nu_{\text{Fe}^{3+}}=+2$ (espèces à gauche = signe $-$, espèces à droite = signe $+$, Théorème 1).</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">4. On écrit l'équation dans l'autre sens : $\text{Hg}_2^{2+}+2\text{Fe}^{3+}=2\text{Hg}^{2+}+2\text{Fe}^{2+}$. Donner les nouveaux nombres stœchiométriques algébriques.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Tous les signes s'inversent (Théorème 1) : $\nu_{\text{Hg}_2^{2+}}=-1$ ; $\nu_{\text{Fe}^{3+}}=-2$ ; $\nu_{\text{Hg}^{2+}}=+2$ ; $\nu_{\text{Fe}^{2+}}=+2$.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">5. Pourquoi ne modélise-t-on pas la dissolution du chlorure de sodium en écrivant explicitement l'eau comme réactif et produit (Remarque du §4) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Parce que l'eau n'intervient pas réellement dans la transformation chimique : elle est seulement le solvant qui permet la dissolution, sa quantité ne varie pas au cours de la réaction. Il faut donc lui attribuer un nombre stœchiométrique algébrique nul ($\nu_{\text{H}_2\text{O}}=0$), ce qui revient à ne pas l'écrire dans l'équation.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">6. Que se passerait-il si l'on écrivait l'équation $\text{N}_2\text{O}_4=2\text{NO}_2+\frac12\text{O}_2$ sans remarquer que O$_2$ pourrait apparaître de façon incohérente dans un bilan plus complexe (Remarque du §4) ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Il faut vérifier qu'une même espèce physico-chimique n'apparaît jamais deux fois dans la même équation (une fois simplifiée) : si une espèce apparaissait à la fois à gauche et à droite sans simplification, l'équation ne serait pas correctement écrite et donnerait un bilan de matière erroné lors de son exploitation quantitative.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">7. Piège classique : le sens dans lequel on choisit d'écrire une équation de réaction (Théorème 1) déterminé-t-il le sens réel dans lequel la transformation va se produire ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Non — comme le précise la Remarque du §4, l'écriture de l'équation est un choix arbitraire d'orientation ; le sens réel de l'évolution du système dépend de l'état initial du système (comparaison entre quotient de réaction et constante d'équilibre, notion non couverte dans ce document) et non de la façon dont on a choisi d'écrire l'équation sur le papier.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">8. Piège classique : les nombres stœchiométriques usuels $s_i$ (toujours positifs) et les nombres stœchiométriques algébriques $\nu_i$ (positifs ou négatifs) désignent-ils la même chose ?</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Ce sont deux notations liées mais distinctes (Théorème 1) : $s_i$ est toujours positif et ne renseigne pas sur le côté (gauche/droite) où se trouve l'espèce, alors que $\nu_i=\pm s_i$ encode en plus, par son signe, si l'espèce est un réactif ($\nu_i<0$) ou un produit ($\nu_i>0$) dans l'écriture choisie de l'équation.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">9. Synthèse : reliez la Définition 2 (types d'espèces chimiques) à l'exemple du §4 (Hg$^{2+}$, Fe$^{2+}$, etc.) pour identifier le type d'espèces mis en jeu dans cette réaction, et expliquer pourquoi l'indice « (aq) » est important.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+Toutes les espèces de cette réaction (Hg$^{2+}$, Fe$^{2+}$, Hg$_2^{2+}$, Fe$^{3+}$) sont des espèces <strong>ioniques</strong> en solution (Définition 2) : ce sont des cations solvatés. L'indice « (aq) » précise que le solvant est l'eau (Remarque du §2) — une information indispensable, car les propriétés (réactivité, stabilité) d'un ion peuvent différer selon le solvant dans lequel il est dissous.</div>
+</div>
+
+<div class="quiz-item">
+<div class="quiz-q">10. Synthèse : à partir du Théorème 1 (écriture générale $0=\sum_i\nu_iA_i$), expliquer pourquoi cette écriture unique permet de traiter de façon symétrique les réactifs et les produits dans les calculs de bilan de matière (avancement de réaction), même si cette notion n'est pas encore formellement introduite dans ce document.</div>
+<div class="quiz-a"><span class="tag">Réponse</span><br>
+En écrivant $0=\sum_i\nu_iA_i$ avec des nombres stœchiométriques algébriques (positifs pour les produits, négatifs pour les réactifs), la variation de la quantité de matière de chaque espèce au cours de la réaction s'exprime de façon uniforme comme proportionnelle à $\nu_i$ (via un unique paramètre d'avancement, commun à toutes les espèces) : les réactifs voient leur quantité diminuer ($\nu_i<0$) et les produits voir leur quantité augmenter ($\nu_i>0$), sans qu'il soit nécessaire d'écrire deux formules de bilan différentes selon qu'on parle d'un réactif ou d'un produit — c'est cette symétrie algébrique qui rend l'écriture par nombres stœchiométriques algébriques particulièrement pratique pour les bilans de matière quantitatifs.</div>
+</div>
+
+</section>
+
+<section id="sources">
+<h2>Sources</h2>
+<ul class="sources">
+<li>Document source : « Transformations chimiques — Approche thermodynamique », Chapitre 1 et introduction du Chapitre 2 (résumé de cours, Lycée Janson de Sailly, Paris)</li>
+<li>Programme officiel de Chimie, CPGE 1<sup>re</sup> année (filière PCSI), bloc « I. Transformation de la matière » (arrêté du 5 janvier 2021) : <a href="https://cache.media.enseignementsup-recherche.gouv.fr/file/CPGE/65/7/Programme_Chimie_voie_PCSI_233657.pdf" target="_blank" rel="noopener">enseignementsup-recherche.gouv.fr</a></li>
+</ul>
+</section>
+
+</main>
+</div>
+</body>
+</html>
