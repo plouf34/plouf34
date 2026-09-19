@@ -99,24 +99,12 @@ Tout courant de charges électriques crée un champ magnétique $\vec B$ (les ai
 Une <strong>ligne de champ magnétique</strong> est une courbe le long de laquelle $\vec B$ est tangent en tout point, orientée dans le sens du champ. Les lignes de champ enlacent les courants qui leur ont donné naissance. Une <strong>carte de champ</strong> est un dessin de quelques lignes de champ associées à un dispositif.
 </div>
 <figure>
-<svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<g transform="translate(0,0)">
-<circle cx="90" cy="100" r="60" fill="none" stroke="#3b6fd8" stroke-width="1.4"/>
-<circle cx="90" cy="100" r="35" fill="none" stroke="#3b6fd8" stroke-width="1.4"/>
-<line x1="30" y1="100" x2="150" y2="100" stroke="#333" stroke-width="1"/>
-<ellipse cx="90" cy="100" rx="8" ry="30" fill="none" stroke="#888" stroke-width="1"/>
-<text x="70" y="40" font-size="10">Spire (courant)</text>
-</g>
-<g transform="translate(220,0)">
-<text x="10" y="20" font-size="11" font-weight="700">Règle de la main droite</text>
-<text x="10" y="40" font-size="10">pouce → sens de i</text>
-<text x="10" y="55" font-size="10">doigts repliés → sens de B</text>
-<path d="M40 100 Q 70 80 100 100" stroke="#c0392b" stroke-width="1.6" fill="none" marker-end="url(#aI1)"/>
-<line x1="40" y1="100" x2="40" y2="70" stroke="#2fa365" stroke-width="2" marker-end="url(#aI1)"/><text x="20" y="65" font-size="9" fill="#2fa365">i</text>
-</g>
-<defs><marker id="aI1" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
-</svg>
-<figcaption>Fig. 1 — Lignes de champ d'une spire, et règle de la main droite (tire-bouchon) : les lignes de champ sortent du nord magnétique, entrent dans le sud magnétique. Pour un solénoïde : $B=\mu_0 nI$ ($n$ = nombre de spires par mètre).</figcaption>
+<img src="./img/22-fig1-regle-main-droite.png" alt="Règle de la main droite (tire-bouchon) : pouce dans le sens du courant i, doigts repliés dans le sens des lignes de champ B">
+<figcaption>Fig. 1 — Règle de la main droite (tire-bouchon) : pouce dans le sens du courant $i$, doigts repliés dans le sens du champ $\vec B$ (ou inversement pour retrouver $i$ à partir d'une ligne de champ).</figcaption>
+</figure>
+<figure>
+<img src="./img/22-fig2-aimant-spire-solenoide.png" alt="Lignes de champ d'un aimant droit, d'une spire et d'un solénoïde : elles sortent du nord magnétique et rentrent dans le sud magnétique">
+<figcaption>Fig. 2 — Lignes de champ d'un aimant droit, d'une spire et d'un solénoïde : elles sortent toujours du nord magnétique et rentrent toujours dans le sud magnétique. Pour un solénoïde : $B=\mu_0 nI$ ($n$ = nombre de spires par mètre).</figcaption>
 </figure>
 </section>
 
@@ -127,6 +115,10 @@ Une <strong>ligne de champ magnétique</strong> est une courbe le long de laquel
 $$\vec m = iS\,\vec n$$
 avec $\vec n$ = vecteur unitaire normal, orienté selon la règle du tire-bouchon qui tourne selon $i$.
 </div>
+<figure>
+<img src="./img/22-fig3-carte-champ-dipole.png" alt="Carte de champ d'un moment magnétique : lignes de champ dipolaires autour du moment M, avec le champ B(M) en un point M">
+<figcaption>Fig. 3 — Carte de champ d'un moment magnétique $\vec{\mathcal M}$ (dipôle magnétique) : lignes de champ fermées, sortant du nord et rentrant dans le sud, avec le champ $\vec B(M)$ créé en un point $M$ de l'espace.</figcaption>
+</figure>
 <div class="block remark">
 <span class="label">Remarque — ordres de grandeur</span>
 Aimant usuel : $m\approx10\,\text{A·m}^2$ ; aiguille de boussole : $m\approx10\,\text{A·m}^2$ ; planète Terre : $m\approx8\times10^{22}\,\text{A·m}^2$.
@@ -170,7 +162,7 @@ Le couple magnétique exercé par un champ extérieur $\vec B_{ext}$ sur un aima
 <path d="M170 110 A 40 40 0 0 1 175 90" fill="none" stroke="#7c4fd6" stroke-width="1.2" marker-end="url(#aI2)"/><text x="180" y="105" font-size="9" fill="#7c4fd6">rotation</text>
 <defs><marker id="aI2" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
 </svg>
-<figcaption>Fig. 2 — La boussole ($\vec m$) tourne pour s'aligner sur le champ magnétique terrestre (Théorème 4).</figcaption>
+<figcaption>Fig. 4 — La boussole ($\vec m$) tourne pour s'aligner sur le champ magnétique terrestre (Théorème 4).</figcaption>
 </figure>
 <div class="block remark">
 <span class="label">Remarque — moteur synchrone</span>
