@@ -55,9 +55,11 @@
   nav#tabs {
     position: sticky; top: 0; z-index: 20;
     display: flex; gap: 4px; overflow-x: auto;
+    max-width: 760px; margin: 0 auto;
     padding: 6px 8px; backdrop-filter: blur(20px);
     background: var(--nav-bg);
     border-bottom: 1px solid var(--border);
+    border-radius: 0 0 14px 14px;
     -webkit-overflow-scrolling: touch;
   }
   nav#tabs a {
