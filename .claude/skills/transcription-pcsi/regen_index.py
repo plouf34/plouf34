@@ -57,21 +57,26 @@ SUBJECT_MANUALS = {
 
 # Ressources complémentaires libres (chaînes vidéo, sites tiers...) affichées
 # sous le manuel, sous forme de puces cliquables. Liste de (emoji, label, url).
+# Chaînes YouTube complémentaires par matière : (libellé court — nom de
+# l'école ou du site/chaîne YouTube —, url). Le logo YouTube est ajouté
+# automatiquement au rendu (cf. YOUTUBE_ICON).
 SUBJECT_EXTRA_LINKS = {
     "01_MATHS": [
-        ("▶", "Chaîne YouTube — Maths PCSI, Lycée du Parc (Giraud-Laignel)", "https://www.youtube.com/@Giraud-Laignel-hy9hb"),
+        ("Lycée du Parc", "https://www.youtube.com/@Giraud-Laignel-hy9hb"),
     ],
     "02_PHYSIQUE": [
-        ("▶", "Cours YouTube — Physique Chimie Prépa", "https://www.youtube.com/@physiquechimieprepa/featured"),
-        ("▶", "Cours YouTube — e-Learning Physique", "https://www.youtube.com/@e-learningphysique4910/featured"),
+        ("Physique Chimie Prépa", "https://www.youtube.com/@physiquechimieprepa/featured"),
+        ("e-Learning Physique", "https://www.youtube.com/@e-learningphysique4910/featured"),
     ],
     "03_CHIMIE": [
-        ("▶", "Cours YouTube — Prépa Chimie", "https://www.youtube.com/@Pr%C3%A9paChimie/videos"),
+        ("Prépa Chimie", "https://www.youtube.com/@Pr%C3%A9paChimie/videos"),
     ],
     "04_SI": [
-        ("▶", "Cours YouTube — Sciences de l'ingénieur", "https://www.youtube.com/@sciences-ingenieur0/courses"),
+        ("Sciences de l'ingénieur", "https://www.youtube.com/@sciences-ingenieur0/courses"),
     ],
 }
+
+YOUTUBE_ICON = "https://www.google.com/s2/favicons?domain=youtube.com&sz=32"
 
 
 def esc(s):
@@ -121,9 +126,9 @@ def manual_chip_html(folder):
 def extra_links_chips_html(folder):
     entries = SUBJECT_EXTRA_LINKS.get(folder, [])
     chips = ""
-    for emoji, label, url in entries:
+    for label, url in entries:
         chips += (f'<a class="manual-chip video-chip" href="{esc(url)}" target="_blank" rel="noopener">'
-                  f'{esc(emoji)} {esc(label)} <span class="arrow">↗</span></a>')
+                  f'<img src="{esc(YOUTUBE_ICON)}" class="source-icon" alt="">{esc(label)}</a>')
     return chips
 
 
