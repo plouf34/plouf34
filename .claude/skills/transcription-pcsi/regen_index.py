@@ -68,12 +68,14 @@ def source_chip_html(name, ville, url, icon, password=None):
     return f'<span class="source-chip-inline source-chip-static">{icon_html} {esc(name)} {pin}</span>'
 
 
-def table_row(num, titre, url):
+def table_row(num, titre, url, pdf_url=None):
     n_html = esc(num) if num else "—"
     if url:
         link_html = f'<a class="pill pill-sujet" href="{esc(url)}" target="_blank" rel="noopener">📄 Ouvrir</a>'
     else:
         link_html = '<span class="pill pill-off">—</span>'
+    if pdf_url:
+        link_html += f'<a class="pill pill-pdf" href="{esc(pdf_url)}" target="_blank" rel="noopener">📕 PDF</a>'
     return (f'<tr><td class="col-n">{n_html}</td><td class="col-titre">{esc(titre)}</td>'
             f'<td class="col-link">{link_html}</td></tr>')
 
@@ -97,6 +99,14 @@ def table_close():
     return '</tbody></table>'
 
 
+def pdf_url_for(dir_path, folder, f):
+    """Si un PDF source du même nom existe à côté du HTML, renvoie son URL."""
+    pdf_name = f[:-5] + ".pdf" if f.endswith(".html") else None
+    if pdf_name and os.path.isfile(os.path.join(dir_path, pdf_name)):
+        return f"{BASE_URL}/{folder}/{pdf_name}"
+    return None
+
+
 def build_subject_block(repo_root, folder, emoji, label, anchor):
     dir_path = os.path.join(repo_root, "Prepa_barthou", "1ere_annee", folder)
     files = []
@@ -112,7 +122,7 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
         for f in clarisse_files:
             num, titre = parse_number_and_title(f)
             url = f"{BASE_URL}/{folder}/{f}"
-            body += table_row(num, titre, url)
+            body += table_row(num, titre, url, pdf_url_for(dir_path, folder, f))
     else:
         body += empty_row()
 
@@ -130,7 +140,7 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
             for f in profs_files:
                 num, titre = parse_number_and_title(f)
                 url = f"{BASE_URL}/{folder}/{f}"
-                body += table_row(num, titre, url)
+                body += table_row(num, titre, url, pdf_url_for(dir_path, folder, f))
         else:
             body += empty_row()
     else:
@@ -153,7 +163,7 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
                 for f in matched:
                     num, titre = parse_number_and_title(f)
                     url = f"{BASE_URL}/{folder}/{f}"
-                    body += table_row(num, titre, url)
+                    body += table_row(num, titre, url, pdf_url_for(dir_path, folder, f))
             else:
                 body += empty_row()
         leftover = [f for f in profs_files if f not in assigned]
@@ -162,7 +172,7 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
             for f in leftover:
                 num, titre = parse_number_and_title(f)
                 url = f"{BASE_URL}/{folder}/{f}"
-                body += table_row(num, titre, url)
+                body += table_row(num, titre, url, pdf_url_for(dir_path, folder, f))
     body += table_close()
 
     return (f'<section id="{anchor}" class="subject">'
@@ -291,8 +301,9 @@ def main():
   .col-link {{ width: 1%; white-space: nowrap; text-align: center; }}
   .empty-cell {{ color: var(--sub); font-size: 12.5px; font-style: italic; text-align: center; }}
 
-  .pill {{ display: inline-block; font-size: 11px; font-weight: 700; text-decoration: none; padding: 4px 8px; border-radius: 8px; white-space: nowrap; }}
+  .pill {{ display: inline-block; font-size: 11px; font-weight: 700; text-decoration: none; padding: 4px 8px; border-radius: 8px; white-space: nowrap; margin: 2px; }}
   .pill-sujet {{ background: rgba(10,99,211,0.12); color: var(--accent); }}
+  .pill-pdf {{ background: rgba(138,20,20,0.10); color: #b83a3a; }}
   .pill-off {{ color: var(--sub); font-size: 12px; }}
 
   footer {{ text-align: center; padding: 16px; color: var(--sub); font-size: 10.5px; }}
