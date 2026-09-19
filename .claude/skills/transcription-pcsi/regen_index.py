@@ -25,13 +25,16 @@ BASE_URL = "https://plouf34.github.io/prepabarthou/Prepa_barthou/1ere_annee"
 # 5e élément = (num_min, num_max) des fichiers "Cours Profs" attribués à cette source
 # (None = source unique, capte tous les fichiers profs de la matière).
 SUBJECT_SOURCES = {
-    "01_MATHS": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png", None)],
-    "02_PHYSIQUE": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png", None)],
+    "01_MATHS": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png", None, None)],
+    "02_PHYSIQUE": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png", None, None)],
     "03_CHIMIE": [
-        ("Sainte-Geneviève — S. Falcou", "Versailles", "http://www.pcsi1.bginette.com/Chim/Polys.php", None, (1, 7)),
-        ("Janson de Sailly", "Paris", "http://chimie-pcsi-jds.net", None, (8, 11)),
+        ("Sainte-Geneviève — S. Falcou", "Versailles", "http://www.pcsi1.bginette.com/Chim/Polys.php", None, (1, 7), None),
+        ("Janson de Sailly", "Paris", "http://chimie-pcsi-jds.net", None, (8, 11), None),
     ],
-    "04_SI": [("Jean Perrin — N. Mesnier", "Lyon", "http://nmesnier.free.fr/SII-PCSI.html", None, None)],
+    "04_SI": [
+        ("Jean Perrin — N. Mesnier", "Lyon", "http://nmesnier.free.fr/SII-PCSI.html", None, (0, 8), None),
+        ("Gustave Eiffel — A. Roux", "Bordeaux", "https://aroux-sii.fr/", None, (9, 13), "psi*2627"),
+    ],
 }
 
 
@@ -59,9 +62,11 @@ def sources_bar(folder):
     if not items:
         return ""
     chips = ""
-    for name, ville, url, icon, _num_range in items:
+    for name, ville, url, icon, _num_range, password in items:
         icon_html = f'<img src="{esc(icon)}" class="source-icon" alt="">' if icon else "🏫"
         pin = f'<span class="source-pin">📍 {esc(ville)}</span>'
+        if password:
+            pin += f'<span class="source-pin">🔑 {esc(password)}</span>'
         if url:
             chips += (f'<div class="source-block">'
                       f'<a class="source-chip" href="{esc(url)}" target="_blank" rel="noopener">{icon_html} {esc(name)} {pin} <span class="arrow">↗</span></a>'
@@ -137,7 +142,7 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
         # les fichiers étant attribués selon leur numéro (num_range).
         assigned = set()
         section_idx = 2
-        for name, _ville, _url, _icon, num_range in sources:
+        for name, _ville, _url, _icon, num_range, _password in sources:
             short_name = name.split(" — ")[0]
             body += section_row(f"{section_idx}. Cours Profs — {short_name}")
             section_idx += 1
