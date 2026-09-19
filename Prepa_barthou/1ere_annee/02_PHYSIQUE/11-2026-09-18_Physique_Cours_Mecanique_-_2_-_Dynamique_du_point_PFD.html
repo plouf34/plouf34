@@ -53,6 +53,7 @@ p{margin:.6rem 0;}
 .retenir>.label{color:#cfe0f5;}
 figure{margin:1.2rem 0; text-align:center;}
 figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figure img{max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px;}
 figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
 .quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
 .quiz-q{font-weight:700;}
@@ -120,16 +121,6 @@ Pour deux points matériels isolés $M_1$ et $M_2$ en interaction, la force exer
 $$\vec F_{1\to2} + \vec F_{2\to1} = \vec 0$$
 </div>
 
-<figure>
-<svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<circle cx="120" cy="80" r="22" fill="#e9f1fd" stroke="#3b6fd8" stroke-width="1.5"/><text x="120" y="85" text-anchor="middle" font-size="13">M1</text>
-<circle cx="290" cy="80" r="22" fill="#f2ecfd" stroke="#7c4fd6" stroke-width="1.5"/><text x="290" y="85" text-anchor="middle" font-size="13">M2</text>
-<line x1="142" y1="72" x2="262" y2="72" stroke="#c0392b" stroke-width="1.8" marker-end="url(#aP1)"/><text x="200" y="60" text-anchor="middle" font-size="11" fill="#c0392b">F(1→2)</text>
-<line x1="262" y1="90" x2="142" y2="90" stroke="#2fa365" stroke-width="1.8" marker-end="url(#aP1)"/><text x="200" y="112" text-anchor="middle" font-size="11" fill="#2fa365">F(2→1)</text>
-<defs><marker id="aP1" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="context-fill"/></marker></defs>
-</svg>
-<figcaption>Fig. 1 — Paire action-réaction (Théorème 3) : les deux forces ont même norme, même droite d'action, et sont de sens opposés.</figcaption>
-</figure>
 </section>
 
 <section id="s2">
@@ -157,7 +148,7 @@ La limite $\|\vec R_T\|=f\|\vec R_N\|$ définit géométriquement un cône d'ang
 <path d="M160 150 A 30 30 0 0 1 175 156" fill="none" stroke="#7c4fd6" stroke-width="1.2"/><text x="180" y="150" font-size="10" fill="#7c4fd6">φ</text>
 <defs><marker id="aP2" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#c0392b"/></marker></defs>
 </svg>
-<figcaption>Fig. 2 — Cône de frottement : demi-angle au sommet $\varphi=\arctan f$. La réaction $\vec R$ reste dans le cône tant qu'il n'y a pas glissement.</figcaption>
+<figcaption>Fig. 1 — Cône de frottement : demi-angle au sommet $\varphi=\arctan f$. La réaction $\vec R$ reste dans le cône tant qu'il n'y a pas glissement.</figcaption>
 </figure>
 <div class="block remark">
 <span class="label">Remarque — ordres de grandeur</span>
@@ -242,9 +233,9 @@ On cherche $\alpha v^*=\beta v^{*2}$, soit $v^*=\alpha/\beta=1{,}88\times10^{-5}
 </div>
 
 <div class="quiz-item">
-<div class="quiz-q">10. Synthèse : reliez le cône de frottement (Fig. 2, §2) au PFD (Théorème 2) pour expliquer pourquoi un objet posé sur un plan incliné d'angle $\theta<\varphi=\arctan f$ ne glisse jamais, quelle que soit sa masse.</div>
+<div class="quiz-q">10. Synthèse : reliez le cône de frottement (Fig. 1, §2) au PFD (Théorème 2) pour expliquer pourquoi un objet posé sur un plan incliné d'angle $\theta<\varphi=\arctan f$ ne glisse jamais, quelle que soit sa masse.</div>
 <div class="quiz-a"><span class="tag">Réponse</span><br>
-À l'équilibre sur le plan incliné, le poids $m\vec g$ se décompose en une composante normale $mg\cos\theta$ et une composante tangentielle $mg\sin\theta$. Par le PFD (Théorème 2) à l'équilibre, $\vec R$ doit compenser exactement le poids, donc $R_N=mg\cos\theta$ et $R_T=mg\sin\theta$, d'où $R_T/R_N=\tan\theta$. Tant que $\tan\theta<f=\tan\varphi$ (Théorème 4, Fig. 2), on a $\theta<\varphi$ et la réaction $\vec R$ reste à l'intérieur du cône de frottement : il n'y a jamais glissement, et ce indépendamment de $m$ car la masse se factorise et s'annule dans le rapport $R_T/R_N=\tan\theta$.</div>
+À l'équilibre sur le plan incliné, le poids $m\vec g$ se décompose en une composante normale $mg\cos\theta$ et une composante tangentielle $mg\sin\theta$. Par le PFD (Théorème 2) à l'équilibre, $\vec R$ doit compenser exactement le poids, donc $R_N=mg\cos\theta$ et $R_T=mg\sin\theta$, d'où $R_T/R_N=\tan\theta$. Tant que $\tan\theta<f=\tan\varphi$ (Théorème 4, Fig. 1), on a $\theta<\varphi$ et la réaction $\vec R$ reste à l'intérieur du cône de frottement : il n'y a jamais glissement, et ce indépendamment de $m$ car la masse se factorise et s'annule dans le rapport $R_T/R_N=\tan\theta$.</div>
 </div>
 
 </section>
