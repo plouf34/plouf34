@@ -5,6 +5,16 @@ Usage: python3 regen_index.py <repo_root>
 Rendu aligné sur celui de Kit_Revision_PCSI.html : onglets sticky, bandeau
 "Sources" par matière, tableau N° / Intitulé / Lien avec lignes de section
 ("1. Cours de Clarisse" / "2. Cours Profs").
+
+⚠️ AVANT DE LANCER CE SCRIPT : faire un `git fetch` + `git merge` (ou pull)
+sur la branche courante. Une autre session travaille en parallèle sur ce
+dépôt et pousse régulièrement sur cette même branche ; lancer ce script
+depuis un checkout périmé régénère index.html en écrasant silencieusement
+les correctifs poussés entre-temps (libellés, favicons, liens...). Le
+fichier généré n'est JAMAIS à éditer à la main : toute modification passe
+par les constantes ci-dessous (SUBJECT_SOURCES / SUBJECT_MANUALS /
+SUBJECT_EXTRA_LINKS) ou par les fonctions de rendu, jamais par un patch
+direct sur Prepa_barthou/1ere_annee/index.html.
 """
 import sys
 import os
@@ -248,7 +258,13 @@ def main():
     nav_links = "".join(f'<a href="#{anchor}">{emoji} {esc(label)}</a>'
                          for _, emoji, label, anchor in SUBJECTS)
 
-    out = f"""<!DOCTYPE html>
+    out = f"""<!-- FICHIER GÉNÉRÉ AUTOMATIQUEMENT — NE PAS ÉDITER À LA MAIN.
+     Toute modification doit passer par .claude/skills/transcription-pcsi/regen_index.py
+     (constantes SUBJECT_SOURCES / SUBJECT_MANUALS / SUBJECT_EXTRA_LINKS, ou fonctions de rendu),
+     puis relancer : python3 .claude/skills/transcription-pcsi/regen_index.py <repo_root>
+     Faire un git fetch + merge AVANT de relancer ce script : une autre session
+     travaille en parallèle sur ce dépôt et pousse régulièrement sur cette branche. -->
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
