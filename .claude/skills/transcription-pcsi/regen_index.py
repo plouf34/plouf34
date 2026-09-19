@@ -28,12 +28,12 @@ SUBJECT_SOURCES = {
     "01_MATHS": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png", None, None)],
     "02_PHYSIQUE": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png", None, None)],
     "03_CHIMIE": [
-        ("Sainte-Geneviève — S. Falcou", "Versailles", "http://www.pcsi1.bginette.com/Chim/Polys.php", None, (1, 7), None),
-        ("Janson de Sailly", "Paris", "http://chimie-pcsi-jds.net", None, (8, 11), None),
+        ("Sainte-Geneviève — S. Falcou", "Versailles", "http://www.pcsi1.bginette.com/Chim/Polys.php", "https://www.google.com/s2/favicons?domain=bginette.com&sz=32", (1, 7), None),
+        ("Janson de Sailly", "Paris", "http://chimie-pcsi-jds.net", "https://www.janson-de-sailly.fr/wp-content/uploads/2025/05/favicon.png", (8, 11), None),
     ],
     "04_SI": [
-        ("Jean Perrin — N. Mesnier", "Lyon", "http://nmesnier.free.fr/SII-PCSI.html", None, (0, 8), None),
-        ("Gustave Eiffel — A. Roux", "Bordeaux", "https://aroux-sii.fr/", None, (9, 13), "psi*2627"),
+        ("Jean Perrin — N. Mesnier", "Lyon", "http://nmesnier.free.fr/SII-PCSI.html", "https://www.google.com/s2/favicons?domain=jperrin.fr&sz=32", (0, 8), None),
+        ("Gustave Eiffel — A. Roux", "Bordeaux", "https://aroux-sii.fr/", "https://www.eiffel-bordeaux.org/wp-content/themes/bootscore-child-main/img/favicon/favicon-32x32.png", (9, 13), "psi*2627"),
     ],
 }
 
