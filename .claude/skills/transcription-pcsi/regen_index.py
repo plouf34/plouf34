@@ -22,14 +22,16 @@ BASE_URL = "https://plouf34.github.io/prepabarthou/Prepa_barthou/1ere_annee"
 
 # Établissement(s) source des documents "Cours Profs" pour chaque matière
 # (ville affichée à titre indicatif, sans classement — ce n'est pas le Kit de révision).
+# 5e élément = (num_min, num_max) des fichiers "Cours Profs" attribués à cette source
+# (None = source unique, capte tous les fichiers profs de la matière).
 SUBJECT_SOURCES = {
-    "01_MATHS": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png")],
-    "02_PHYSIQUE": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png")],
+    "01_MATHS": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png", None)],
+    "02_PHYSIQUE": [("Lycée Louis Barthou", "Pau", "https://www.prepabarthou.fr/cours/my/courses.php", "../../logo-barthou.png", None)],
     "03_CHIMIE": [
-        ("Sainte-Geneviève — S. Falcou", "Versailles", None, None),
-        ("Janson de Sailly", "Paris", "http://chimie-pcsi-jds.net", None),
+        ("Sainte-Geneviève — S. Falcou", "Versailles", None, None, (1, 7)),
+        ("Janson de Sailly", "Paris", "http://chimie-pcsi-jds.net", None, (8, 11)),
     ],
-    "04_SI": [("Jean Perrin — N. Mesnier", "Lyon", "http://nmesnier.free.fr/SII-PCSI.html", None)],
+    "04_SI": [("Jean Perrin — N. Mesnier", "Lyon", "http://nmesnier.free.fr/SII-PCSI.html", None, None)],
 }
 
 
@@ -57,7 +59,7 @@ def sources_bar(folder):
     if not items:
         return ""
     chips = ""
-    for name, ville, url, icon in items:
+    for name, ville, url, icon, _num_range in items:
         icon_html = f'<img src="{esc(icon)}" class="source-icon" alt="">' if icon else "🏫"
         meta = f'<div class="source-meta">📍 {esc(ville)}</div>'
         if url:
@@ -118,14 +120,47 @@ def build_subject_block(repo_root, folder, emoji, label, anchor):
             body += table_row(num, titre, url)
     else:
         body += empty_row()
-    body += section_row("2. Cours Profs")
-    if profs_files:
-        for f in profs_files:
-            num, titre = parse_number_and_title(f)
-            url = f"{BASE_URL}/{folder}/{f}"
-            body += table_row(num, titre, url)
+
+    sources = SUBJECT_SOURCES.get(folder, [])
+    if len(sources) <= 1:
+        # Source unique (ou aucune) : un seul pavé "Cours Profs", comme avant.
+        body += section_row("2. Cours Profs")
+        if profs_files:
+            for f in profs_files:
+                num, titre = parse_number_and_title(f)
+                url = f"{BASE_URL}/{folder}/{f}"
+                body += table_row(num, titre, url)
+        else:
+            body += empty_row()
     else:
-        body += empty_row()
+        # Plusieurs sources : un pavé "Cours Profs — <source>" par source,
+        # les fichiers étant attribués selon leur numéro (num_range).
+        assigned = set()
+        section_idx = 2
+        for name, _ville, _url, _icon, num_range in sources:
+            short_name = name.split(" — ")[0]
+            body += section_row(f"{section_idx}. Cours Profs — {short_name}")
+            section_idx += 1
+            matched = []
+            for f in profs_files:
+                num, _titre = parse_number_and_title(f)
+                if num_range and num.isdigit() and num_range[0] <= int(num) <= num_range[1]:
+                    matched.append(f)
+                    assigned.add(f)
+            if matched:
+                for f in matched:
+                    num, titre = parse_number_and_title(f)
+                    url = f"{BASE_URL}/{folder}/{f}"
+                    body += table_row(num, titre, url)
+            else:
+                body += empty_row()
+        leftover = [f for f in profs_files if f not in assigned]
+        if leftover:
+            body += section_row(f"{section_idx}. Cours Profs — autres")
+            for f in leftover:
+                num, titre = parse_number_and_title(f)
+                url = f"{BASE_URL}/{folder}/{f}"
+                body += table_row(num, titre, url)
     body += table_close()
 
     return (f'<section id="{anchor}" class="subject">'
