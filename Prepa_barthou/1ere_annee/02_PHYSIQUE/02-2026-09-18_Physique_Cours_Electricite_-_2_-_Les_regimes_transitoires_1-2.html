@@ -57,6 +57,7 @@ p{margin:.6rem 0;}
 .chain .step .why{color:#7a7a72; font-size:.82rem; font-style:italic;}
 figure{margin:1.2rem 0; text-align:center;}
 figure svg{max-width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:8px;}
+figure img{max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px;}
 figcaption{font-size:.82rem; color:#7a7a72; margin-top:.4rem;}
 .quiz-item{border:1px solid var(--line); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; background:#fff;}
 .quiz-q{font-weight:700;}
@@ -121,44 +122,19 @@ $$W_{\text{dipôle 1}}(t_1\to t_2) + W_{\text{dipôle 2}}(t_1\to t_2) + \dots = 
 
 <section id="s3">
 <h2>3. Circuit RC série — Circuit RL série</h2>
-<figure>
-<svg viewBox="0 0 520 160" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<g transform="translate(0,0)">
-<text x="110" y="18" text-anchor="middle" font-size="12" font-weight="700">Circuit RC série</text>
-<line x1="30" y1="40" x2="30" y2="130" stroke="#333" stroke-width="1.6"/><circle cx="30" cy="85" r="16" fill="none" stroke="#333" stroke-width="1.3"/><text x="30" y="89" text-anchor="middle" font-size="10">E</text>
-<line x1="30" y1="40" x2="90" y2="40" stroke="#333" stroke-width="1.6"/>
-<rect x="80" y="28" width="45" height="24" fill="#eaf2fd" stroke="#3b6fd8"/><text x="102" y="45" text-anchor="middle" font-size="10">R</text>
-<line x1="125" y1="40" x2="180" y2="40" stroke="#333" stroke-width="1.6"/>
-<line x1="180" y1="40" x2="180" y2="70" stroke="#333" stroke-width="1.6"/>
-<line x1="160" y1="70" x2="160" y2="100" stroke="#3b6fd8" stroke-width="2"/><line x1="200" y1="70" x2="200" y2="100" stroke="#3b6fd8" stroke-width="2"/><text x="210" y="88" font-size="10">C</text>
-<line x1="180" y1="100" x2="180" y2="130" stroke="#333" stroke-width="1.6"/>
-<line x1="30" y1="130" x2="180" y2="130" stroke="#333" stroke-width="1.6"/>
-</g>
-<g transform="translate(280,0)">
-<text x="110" y="18" text-anchor="middle" font-size="12" font-weight="700">Circuit RL série</text>
-<line x1="30" y1="40" x2="30" y2="130" stroke="#333" stroke-width="1.6"/><circle cx="30" cy="85" r="16" fill="none" stroke="#333" stroke-width="1.3"/><text x="30" y="89" text-anchor="middle" font-size="10">E</text>
-<line x1="30" y1="40" x2="90" y2="40" stroke="#333" stroke-width="1.6"/>
-<rect x="80" y="28" width="45" height="24" fill="#eaf2fd" stroke="#3b6fd8"/><text x="102" y="45" text-anchor="middle" font-size="10">R</text>
-<line x1="125" y1="40" x2="180" y2="40" stroke="#333" stroke-width="1.6"/>
-<line x1="180" y1="40" x2="180" y2="70" stroke="#333" stroke-width="1.6"/>
-<path d="M160 85 q5 -15 10 0 q5 -15 10 0 q5 -15 10 0" stroke="#3b6fd8" stroke-width="1.8" fill="none" transform="rotate(90,180,85)"/>
-<text x="210" y="88" font-size="10">L</text>
-<line x1="180" y1="100" x2="180" y2="130" stroke="#333" stroke-width="1.6"/>
-<line x1="30" y1="130" x2="180" y2="130" stroke="#333" stroke-width="1.6"/>
-</g>
-</svg>
-<figcaption>Fig. 1 — Circuit RC série et circuit RL série, alimentés par un échelon de f.é.m. $E$.</figcaption>
-</figure>
-
 <div class="block theorem">
-<span class="label">Théorème 1 — circuit RC série</span>
-$$\frac{dq}{dt} + \frac{q}{\tau} = \frac{E}{R}, \qquad \tau = RC$$
-Solution : $q(t) = q_{\text{part}} + q_{\text{ssm}}(t) = EC + Ae^{-t/\tau}$ ($\tau$ = constante de temps ; $A$ se calcule avec $q(t=0)$).
+<span class="label">Circuit RC série</span>
+$$\frac{dq}{dt} + \frac{q}{\tau} = \frac{E}{R}$$
+$q(t) = q_{\text{part}} + q_{\text{ssm}}(t) = EC + Ae^{-t/\tau}$<br>
+$\tau = RC$ : temps caractéristique<br>
+$A$ se calcule avec $q(t=0)$
 </div>
 <div class="block theorem">
-<span class="label">Théorème 2 — circuit RL série</span>
-$$\frac{di}{dt} + \frac{i}{\tau} = \frac{E}{L}, \qquad \tau = \frac{L}{R}$$
-Solution : $i(t) = i_{\text{part}} + i_{\text{ssm}}(t) = \dfrac{E}{R} + Ae^{-t/\tau}$ ($A$ se calcule avec $i(t=0)=0$).
+<span class="label">Circuit RL série</span>
+$$\frac{di}{dt} + \frac{i}{\tau} = \frac{E}{L}$$
+$i(t) = i_{\text{part}} + i_{\text{ssm}}(t) = \dfrac{E}{R} + Ae^{-t/\tau}$<br>
+$\tau = L/R$ : temps caractéristique<br>
+$A$ se calcule avec $i(t=0)=0$
 </div>
 </section>
 
@@ -171,20 +147,12 @@ Le portrait de phase d'une grandeur $x(t)$ est le graphe de $\dot x$ en fonction
 <p><strong>Exemple — circuit RC série</strong> (cas $q(0)=0$) :
 $$\dot q + \frac{q}{\tau} = \frac{E}{R} \ \Longrightarrow\ \dot q = -\frac{q}{\tau}+\frac{E}{R} \ \Longrightarrow\ \dot q = f(q)\ \text{est une droite}$$</p>
 <figure>
-<svg viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, sans-serif">
-<line x1="40" y1="190" x2="300" y2="190" stroke="#333" stroke-width="1.3" marker-end="url(#aF1)"/><line x1="40" y1="190" x2="40" y2="20" stroke="#333" stroke-width="1.3" marker-end="url(#aF1)"/>
-<text x="300" y="205" font-size="12" text-anchor="middle">q</text><text x="25" y="20" font-size="12">$\dot q$</text>
-<line x1="40" y1="40" x2="240" y2="190" stroke="#3b6fd8" stroke-width="2.2"/>
-<text x="15" y="45" font-size="11" text-anchor="end">E/R</text>
-<text x="240" y="205" font-size="11" text-anchor="middle">EC = q(∞)</text>
-<line x1="240" y1="190" x2="240" y2="182" stroke="#333"/>
-<defs><marker id="aF1" markerWidth="7" markerHeight="7" refX="5" refY="2" orient="auto"><path d="M0,0 L5,2 L0,4 Z" fill="#333"/></marker></defs>
-</svg>
-<figcaption>Fig. 2 — Portrait de phase du circuit RC série ($q(0)=0$) : droite de $\dot q(0)=E/R$ à $q(\infty)=EC$ (où $\dot q=0$).</figcaption>
+<img src="./img/02-fig1-portrait-phase-rc.png" alt="Portrait de phase du circuit RC série">
+<figcaption>Fig. 1 — Portrait de phase du circuit RC série ($q(0)=0$) : droite de $\dot q(0)=E/R$ à $q(\infty)=EC$ (où $\dot q=0$).</figcaption>
 </figure>
 <div class="block remark">
 <span class="label">Remarque — vérification du schéma</span>
-Le portrait de phase relie une grandeur à sa dérivée temporelle. Si le lien est linéaire, le portrait est une droite (c'est le cas ici, cf. équation ci-dessus) ; si la grandeur admet une valeur asymptotique (ici $q(\infty)=EC$), le portrait converge vers le point correspondant sur l'axe des abscisses ($\dot q=0$) — ce que la Fig. 2 respecte bien.
+Le portrait de phase relie une grandeur à sa dérivée temporelle. Si le lien est linéaire, le portrait est une droite (c'est le cas ici, cf. équation ci-dessus) ; si la grandeur admet une valeur asymptotique (ici $q(\infty)=EC$), le portrait converge vers le point correspondant sur l'axe des abscisses ($\dot q=0$) — ce que la Fig. 1 respecte bien.
 </div>
 </section>
 
@@ -216,13 +184,13 @@ $\tau = L/R = 0{,}6/3 = 0{,}2\,\text{s}$ ; $i(\infty)=E/R=6/3=2\,\text{A}$ (Thé
 </div>
 
 <div class="quiz-item">
-<div class="quiz-q">5. Pourquoi la pente à l'origine du portrait de phase (Fig. 2) vaut-elle exactement $E/R$, sans avoir besoin de résoudre l'équation différentielle ?</div>
+<div class="quiz-q">5. Pourquoi la pente à l'origine du portrait de phase (Fig. 1) vaut-elle exactement $E/R$, sans avoir besoin de résoudre l'équation différentielle ?</div>
 <div class="quiz-a"><span class="tag">Réponse</span><br>
 Parce que le portrait de phase EST l'équation différentielle elle-même, réécrite sous forme $\dot q=f(q)$ : en $q=0$ (condition initiale $q(0)=0$), il suffit d'évaluer $\dot q = -q/\tau+E/R$ en $q=0$ pour obtenir directement $\dot q(0)=E/R$, sans intégrer quoi que ce soit.</div>
 </div>
 
 <div class="quiz-item">
-<div class="quiz-q">6. Que se passerait-il sur le portrait de phase (Fig. 2) si la condition initiale était $q(0)=EC$ (le condensateur déjà chargé à sa valeur finale) ?</div>
+<div class="quiz-q">6. Que se passerait-il sur le portrait de phase (Fig. 1) si la condition initiale était $q(0)=EC$ (le condensateur déjà chargé à sa valeur finale) ?</div>
 <div class="quiz-a"><span class="tag">Réponse</span><br>
 Le point de départ du portrait de phase coïnciderait avec le point d'arrivée $(EC,0)$ : $\dot q(0)=-EC/\tau+E/R=-E/R+E/R=0$ (puisque $EC/\tau=EC/(RC)=E/R$). Le système serait donc déjà à l'équilibre, $q(t)=EC$ pour tout $t$ — pas d'évolution transitoire.</div>
 </div>
@@ -246,7 +214,7 @@ Les deux équations ont la même forme $\dot x+x/\tau=\text{cte}$ (1<sup>er</sup
 </div>
 
 <div class="quiz-item">
-<div class="quiz-q">10. Synthèse : reliez la continuité de $q(t)$ (Propriété 1, §1) au choix de la condition initiale $q(0)=0$ utilisée dans le portrait de phase (Fig. 2) — que se passerait-il physiquement si $q$ pouvait être discontinue à $t=0$ ?</div>
+<div class="quiz-q">10. Synthèse : reliez la continuité de $q(t)$ (Propriété 1, §1) au choix de la condition initiale $q(0)=0$ utilisée dans le portrait de phase (Fig. 1) — que se passerait-il physiquement si $q$ pouvait être discontinue à $t=0$ ?</div>
 <div class="quiz-a"><span class="tag">Réponse</span><br>
 La continuité de $q(t)$ garantit que la valeur juste après la fermeture du circuit (à $t=0^+$) est identique à la valeur juste avant ($t=0^-$) : si le condensateur était initialement déchargé, $q(0^+)=q(0^-)=0$, ce qui justifie physiquement la condition initiale utilisée. Si $q$ pouvait être discontinue, un courant infini $i=dq/dt$ serait nécessaire à $t=0$ pour produire ce saut instantané de charge — physiquement impossible avec une puissance finie (cf. §1).</div>
 </div>
